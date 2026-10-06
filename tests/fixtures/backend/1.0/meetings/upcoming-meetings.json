@@ -1,0 +1,14 @@
+{
+	"success": true,
+	"data": [
+		{
+			"name": "2099 Youth Olympics",
+			"slug": "2099-youth-olympics",
+			"city": "Dakar",
+			"country_code": "SEN",
+			"start_date": "2099-10-30",
+			"end_date": "2099-11-15",
+			"champ": { "name": "Youth Olympics", "slug": "youth-olympics" }
+		}
+	]
+}

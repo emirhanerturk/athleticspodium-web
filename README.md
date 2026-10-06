@@ -1,56 +1,30 @@
-# sv
+# Athletics Podium
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+The public website of [athleticspodium.com](https://athleticspodium.com): every international athletics medal and medallist since 1873.
 
-## Creating a project
+Built with SvelteKit 3, Svelte 5 and Tailwind CSS 4. Pages are rendered on the server from the [athleticspodium-backend](https://github.com/emirhanerturk/athleticspodium-backend) API.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Development
 
-```sh
-# create a new project
-npx sv create my-app
+```bash
+cp .env.example .env
+npm install
+npm run dev        # http://localhost:4400
 ```
 
-To recreate this project with the same configuration:
+`.env.example` points `BACKEND_URL` at the production API, which only receives GET requests from this app. To use a local backend, set `BACKEND_URL=http://localhost:3001/1.0`.
 
-```sh
-# recreate this project
-npx sv@1.1.1 create --template minimal --types ts --add prettier eslint vitest="usages:unit" playwright="demo:no" tailwindcss="plugins:none" --install npm .
-```
+## Scripts
 
-## Adding features
+| Script                              | What it does                                                             |
+| ----------------------------------- | ------------------------------------------------------------------------ |
+| `npm run dev`                       | Dev server on port 4400                                                  |
+| `npm run build` / `npm run preview` | Production build and a local preview of it                               |
+| `npm run check`                     | Svelte and TypeScript checks                                             |
+| `npm run lint` / `npm run format`   | Prettier and ESLint                                                      |
+| `npm run test:unit`                 | Vitest, watching                                                         |
+| `npm run test:e2e`                  | Playwright against a build that talks to the fixture backend in `tests/` |
 
-Add features to your project with `sv add`:
+## Documentation
 
-```sh
-npx sv add
-```
-
-For example, to add Tailwind CSS:
-
-```sh
-npx sv add tailwindcss
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+The design and its decisions are in [`docs/superpowers/specs/2026-10-06-web-rewrite-design.md`](docs/superpowers/specs/2026-10-06-web-rewrite-design.md).

@@ -51,7 +51,7 @@ What the sample shows:
 ## 3. Decisions
 
 1. New repository `athleticspodium-web`. `athleticspodium-frontend` stays live until cutover and is archived a few weeks after.
-2. SvelteKit 2, Svelte 5 (runes), TypeScript in strict mode.
+2. SvelteKit 3, Svelte 5 (runes), TypeScript 6 in strict mode. Code imports `src/lib` as `#lib/...` (Node subpath imports), and configuration lives in `vite.config.ts`.
 3. Light theme only.
 4. Tailwind CSS v4, with the design tokens in `@theme`.
 5. Fonts are self-hosted through `@fontsource`.
@@ -195,12 +195,13 @@ athleticspodium-web/
 │   │   │   └── athlete/ champ/ meeting/ country/ calendar/ search/ article/ medal/
 │   │   ├── seo/                 pure builders: titles, canonical URLs, JSON-LD, sitemap XML
 │   │   ├── format/              Intl-based formatters for dates, numbers and marks
-│   │   ├── urls.ts              every internal URL (athleteUrl, meetingUrl, …)
+│   │   ├── routing/             urls.ts (every internal URL), redirects.ts (legacy forms), cache.ts (Cache-Control)
 │   │   └── utils/               small generic helpers, one function per file
 │   ├── styles/app.css           Tailwind import and @theme tokens
-│   ├── hooks.server.ts          redirects, cache headers, locals.backend, error logging
+│   ├── env.ts                   environment variables (defineEnvVars)
+│   ├── hooks.server.ts          redirects, cache headers, locals.backend, error mapping
 │   └── app.html
-├── static/                      favicon, logos, flags, ngsw-worker.js
+├── static/                      flags, ngsw-worker.js (logos and favicon are hashed imports from lib/assets)
 └── tests/
     ├── e2e/                     Playwright specs
     └── fixtures/backend/        JSON responses for the stub backend
@@ -210,7 +211,7 @@ The folders follow the principles in 6.1:
 
 | Layer                            | Folders                                                           | May import                        |
 | -------------------------------- | ----------------------------------------------------------------- | --------------------------------- |
-| Core (pure, no I/O, unit-tested) | `lib/domain`, `lib/format`, `lib/seo`, `lib/urls.ts`, `lib/utils` | only other core modules           |
+| Core (pure, no I/O, unit-tested) | `lib/domain`, `lib/format`, `lib/routing`, `lib/seo`, `lib/utils` | only other core modules           |
 | Shell (I/O)                      | `routes/`, `hooks.server.ts`, `lib/server/backend`                | core, and the shell's own modules |
 | View                             | `lib/components`                                                  | core and other components         |
 
@@ -258,7 +259,7 @@ Error handling:
 ### 6.5 Hosting constraints
 
 - Use only web-standard APIs: `fetch`, `Request`, `Response`, `URL`, `Intl`, `crypto.subtle`. Do not import Node built-ins.
-- Read configuration through `$env/dynamic/private` (`BACKEND_URL`) and `$env/dynamic/public` (`PUBLIC_SITE_ENV`, `PUBLIC_SITE_URL`).
+- Declare configuration in `src/env.ts` and read it at runtime from `$app/env/private` (`BACKEND_URL`) and `$app/env/public` (`PUBLIC_SITE_ENV`, `PUBLIC_SITE_URL`).
 - Switching hosts means changing the adapter in `svelte.config.js` and nothing else.
 
 Inputs for the hosting decision:
