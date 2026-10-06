@@ -6,8 +6,15 @@
 		title,
 		description,
 		path,
-		image
-	}: { title: string; description: string; path: string; image?: string } = $props();
+		image,
+		noindex = false
+	}: {
+		title: string;
+		description: string;
+		path: string;
+		image?: string;
+		noindex?: boolean;
+	} = $props();
 
 	const canonical = $derived(PUBLIC_SITE_URL + path);
 	const fullTitle = $derived(pageTitle(title));
@@ -17,6 +24,7 @@
 	<title>{fullTitle}</title>
 	<meta name="description" content={description} />
 	<link rel="canonical" href={canonical} />
+	{#if noindex}<meta name="robots" content="noindex, follow" />{/if}
 	<meta property="og:site_name" content="Athletics Podium" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content={fullTitle} />

@@ -1,0 +1,259 @@
+{
+	"success": true,
+	"data": {
+		"athletes": {
+			"count": 655,
+			"rows": [
+				{
+					"id": 28764,
+					"slug": "aminat-yusuf-jamal",
+					"first_name": "Aminat Yusuf",
+					"last_name": "Jamal",
+					"aka": ["Uwaseun Yusuf Jamal Odeyemi"],
+					"country_code": "BRN",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1997-06-27",
+					"date_of_death": null,
+					"events": ["Sprints", "400m hurdles"],
+					"image": {
+						"uri": "4e91efac-c335-43e6-ab6f-30e61e5636b6.jpeg",
+						"created_date": "2021-06-23T21:23:41.753Z"
+					},
+					"is_olympian": true,
+					"medals": {
+						"gold": 15,
+						"silver": 7,
+						"bronze": 4,
+						"total": 26
+					}
+				},
+				{
+					"id": 26798,
+					"slug": "jamaa-chnaik",
+					"first_name": "Jamaa",
+					"last_name": "Chnaik",
+					"aka": null,
+					"country_code": "MAR",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1984-07-28",
+					"date_of_death": null,
+					"events": null,
+					"image": {
+						"uri": "ce090d9f-c021-4963-8062-01881963d88a.jpeg",
+						"credit": "Source: African Athletics United",
+						"created_date": "2024-10-14T10:12:50.471Z"
+					},
+					"is_olympian": false,
+					"medals": {
+						"gold": 6,
+						"silver": 10,
+						"bronze": 9,
+						"total": 25
+					}
+				},
+				{
+					"id": 8819,
+					"slug": "jamie-baulch",
+					"first_name": "Jamie",
+					"last_name": "Baulch",
+					"aka": ["James Stephen Baulch"],
+					"country_code": "GBR",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1973-05-03",
+					"date_of_death": null,
+					"events": null,
+					"image": null,
+					"is_olympian": true,
+					"medals": {
+						"gold": 14,
+						"silver": 6,
+						"bronze": 3,
+						"total": 23
+					}
+				},
+				{
+					"id": 31021,
+					"slug": "tiffany-james",
+					"first_name": "Tiffany",
+					"last_name": "James",
+					"aka": null,
+					"country_code": "JAM",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1997-01-31",
+					"date_of_death": null,
+					"events": null,
+					"image": null,
+					"is_olympian": false,
+					"medals": {
+						"gold": 12,
+						"silver": 6,
+						"bronze": 5,
+						"total": 23
+					}
+				},
+				{
+					"id": 8973,
+					"slug": "kirani-james",
+					"first_name": "Kirani",
+					"last_name": "James",
+					"aka": ["Nicknamed as \"The Jaguar\""],
+					"country_code": "GRN",
+					"gender": true,
+					"olympic_mark": true,
+					"date_of_birth": "1992-09-01",
+					"date_of_death": null,
+					"events": ["400 metres"],
+					"image": {
+						"uri": "5f2d39e6-5b74-4d6e-8708-f39d9234018b.jpeg",
+						"credit": "Photo: Mustafa Yalçın",
+						"created_date": "2021-05-27T07:03:14.275Z"
+					},
+					"is_olympian": true,
+					"medals": {
+						"gold": 15,
+						"silver": 4,
+						"bronze": 3,
+						"total": 22
+					}
+				},
+				{
+					"id": 29124,
+					"slug": "maryam-yusuf-jamal",
+					"first_name": "Maryam Yusuf",
+					"last_name": "Jamal",
+					"aka": ["Born as Zenebech Tola"],
+					"country_code": "BRN",
+					"gender": false,
+					"olympic_mark": true,
+					"date_of_birth": "1984-09-16",
+					"date_of_death": null,
+					"events": ["Middle distances"],
+					"image": null,
+					"is_olympian": true,
+					"medals": {
+						"gold": 17,
+						"silver": 1,
+						"bronze": 2,
+						"total": 20
+					}
+				}
+			]
+		},
+		"champs": {
+			"count": 1,
+			"rows": [
+				{
+					"id": 185,
+					"name": "Jamaican Track & Field Championships",
+					"slug": "jamaican-track-and-field-championships",
+					"category": 7,
+					"years": [
+						1950, 1951, 1952, 1953, 1954, 1955, 1956, 1957, 1958, 1959, 1960, 1961, 1962, 1963,
+						1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977,
+						1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991,
+						1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
+						2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019,
+						2021, 2022, 2023, 2024, 2025
+					]
+				}
+			]
+		},
+		"countries": {
+			"count": 1,
+			"rows": [
+				{
+					"code": "JAM",
+					"name": "Jamaica",
+					"is_country": true
+				}
+			]
+		},
+		"articles": {
+			"count": 86,
+			"rows": [
+				{
+					"id": 353,
+					"title": "Ceh seals the title in Taranto",
+					"slug": "ceh-seals-the-title-in-taranto",
+					"description": "Slovenian giant grabbed gold in style at the Med Games.",
+					"image": {
+						"uri": "2026/09/75d8cd51-7b4d-41db-940c-86b256995d8a.jpeg",
+						"caption": "",
+						"credit": "Slovenian Olympic Committee",
+						"created_date": "2026-09-01T20:41:50.158Z"
+					},
+					"created_date": "2026-09-01T20:41:50.170Z"
+				},
+				{
+					"id": 344,
+					"title": "A celebration for youngsters",
+					"slug": "a-celebration-for-youngsters",
+					"description": "European youngsters shine at the continental stage during high-stakes four-day action.",
+					"image": {
+						"uri": "2026/07/e559c262-728c-4dca-ac7b-96d2ab4617f6.jpeg",
+						"caption": "Linda Botkova smashed the 400m European U20 record.",
+						"credit": "Getty for European Athletics",
+						"created_date": "2026-07-20T10:53:09.816Z"
+					},
+					"created_date": "2026-07-20T10:53:09.826Z"
+				},
+				{
+					"id": 343,
+					"title": "No records in Tlaxcala",
+					"slug": "no-records-in-tlaxcala",
+					"description": "Held over three days, the NACAC U23 produced no championship records.",
+					"image": {
+						"uri": "2026/07/236b10c3-a2a9-4490-ac71-15b91dae0ed6.jpeg",
+						"caption": "",
+						"credit": "",
+						"created_date": "2026-07-15T15:58:32.160Z"
+					},
+					"created_date": "2026-07-15T15:58:32.166Z"
+				},
+				{
+					"id": 338,
+					"title": "Volos 2026: Miltos or Mythos",
+					"slug": "volos-2026-miltos-or-mythos",
+					"description": "Greek star Miltiadis Tentoglou earned his fourth Balkan title on home soil.",
+					"image": {
+						"uri": "2026/06/a2bf26c5-b4ea-4645-bb5d-15090eaece5f.jpeg",
+						"caption": "Miltiadis Tentoglou broke the 47-year-old Balkan Championships record.",
+						"credit": "SEGAS",
+						"created_date": "2026-06-21T09:34:29.408Z"
+					},
+					"created_date": "2026-06-21T09:34:29.414Z"
+				},
+				{
+					"id": 330,
+					"title": "Epic ending in Gaborone",
+					"slug": "epic-ending-in-gaborone",
+					"description": "Botswana’s world champion quartet send the home crowd wild in Gaborone.",
+					"image": {
+						"uri": "2026/05/59ef2136-d8d4-421d-8527-73f9e2b769af.jpeg",
+						"caption": "Jubilant Botswana team celebrates their gold medal in 4x400 metres.",
+						"credit": "Christel Saneh for World Athletics",
+						"created_date": "2026-05-04T06:48:21.216Z"
+					},
+					"created_date": "2026-05-03T17:47:51.193Z"
+				},
+				{
+					"id": 326,
+					"title": "Shanoya makes history",
+					"slug": "shanoya-makes-history",
+					"description": "Shanoya Douglas stormed for the 200m title with a historic mark at the Carifta Games.",
+					"image": {
+						"uri": "2026/04/f430c185-ab30-4a7d-8a92-b2f5f1a53bf6.jpeg",
+						"caption": "",
+						"credit": "",
+						"created_date": "2026-04-06T23:16:02.256Z"
+					},
+					"created_date": "2026-04-06T23:16:02.262Z"
+				}
+			]
+		}
+	}
+}
