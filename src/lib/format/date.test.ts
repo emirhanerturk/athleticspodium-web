@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatDate, formatDateRange, formatDaysToGo } from './date.js';
+import { formatDate, formatDateRange, formatDaysToGo, formatYearSpan } from './date.js';
 
 describe('formatDate', () => {
 	it('writes day, short month and year', () => {
@@ -32,5 +32,19 @@ describe('formatDaysToGo', () => {
 
 	it('counts days otherwise', () => {
 		expect(formatDaysToGo(25)).toBe('in 25 days');
+	});
+});
+
+describe('formatYearSpan', () => {
+	it('writes one year for a single season', () => {
+		expect(formatYearSpan(2016, 2016)).toBe('2016');
+	});
+
+	it('shortens the last year inside one century', () => {
+		expect(formatYearSpan(2016, 2026)).toBe('2016–26');
+	});
+
+	it('writes both years in full across centuries', () => {
+		expect(formatYearSpan(1998, 2006)).toBe('1998–2006');
 	});
 });

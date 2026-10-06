@@ -45,11 +45,3 @@ export interface EditionEventDto {
 }
 
 export type EditionMedalsDto = Partial<Record<'0' | '1' | '2', EditionEventDto[]>>;
-
-export interface NationTallyDto {
-	gold: number;
-	silver: number;
-	bronze: number;
-	total: number;
-	country: { code: string; name: string };
-}

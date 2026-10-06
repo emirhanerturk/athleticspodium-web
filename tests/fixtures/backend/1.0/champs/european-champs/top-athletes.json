@@ -1,0 +1,165 @@
+{
+	"success": true,
+	"data": [
+		{
+			"athlete": {
+				"id": 33258,
+				"slug": "dina-asher-smith",
+				"first_name": "Dina",
+				"last_name": "Asher-Smith",
+				"country_code": "GBR"
+			},
+			"gold": 8,
+			"silver": 2,
+			"bronze": 1,
+			"total": 11,
+			"first_year": 2016,
+			"last_year": 2026,
+			"events": ["100m", "200m", "4x100m", "4x100m Mixed"]
+		},
+		{
+			"athlete": {
+				"id": 10400,
+				"slug": "jakob-ingebrigtsen",
+				"first_name": "Jakob",
+				"last_name": "Ingebrigtsen",
+				"country_code": "NOR"
+			},
+			"gold": 7,
+			"silver": 0,
+			"bronze": 0,
+			"total": 7,
+			"first_year": 2018,
+			"last_year": 2026,
+			"events": ["1500m", "5000m"]
+		},
+		{
+			"athlete": {
+				"id": 36003,
+				"slug": "sandra-perkovic-elkasevic",
+				"first_name": "Sandra",
+				"last_name": "Perkovic",
+				"country_code": "CRO"
+			},
+			"gold": 7,
+			"silver": 0,
+			"bronze": 0,
+			"total": 7,
+			"first_year": 2010,
+			"last_year": 2024,
+			"events": ["DT"]
+		},
+		{
+			"athlete": {
+				"id": 9018,
+				"slug": "zharnel-hughes",
+				"first_name": "Zharnel",
+				"last_name": "Hughes",
+				"country_code": "GBR"
+			},
+			"gold": 6,
+			"silver": 2,
+			"bronze": 0,
+			"total": 8,
+			"first_year": 2018,
+			"last_year": 2026,
+			"events": ["100m", "200m", "4x100m", "4x100m Mixed"]
+		},
+		{
+			"athlete": {
+				"id": 36331,
+				"slug": "femke-bol",
+				"first_name": "Femke",
+				"last_name": "Bol",
+				"country_code": "NED"
+			},
+			"gold": 6,
+			"silver": 0,
+			"bronze": 2,
+			"total": 8,
+			"first_year": 2022,
+			"last_year": 2026,
+			"events": ["400H", "400m", "4x400m", "4x400m Mixed", "800m"]
+		},
+		{
+			"athlete": {
+				"id": 33613,
+				"slug": "marita-koch",
+				"first_name": "Marita",
+				"last_name": "Koch",
+				"country_code": "GDR"
+			},
+			"gold": 6,
+			"silver": 0,
+			"bronze": 0,
+			"total": 6,
+			"first_year": 1978,
+			"last_year": 1986,
+			"events": ["400m", "4x400m"]
+		},
+		{
+			"athlete": {
+				"id": 8981,
+				"slug": "matthew-hudson-smith",
+				"first_name": "Matthew",
+				"last_name": "Hudson-Smith",
+				"country_code": "GBR"
+			},
+			"gold": 5,
+			"silver": 3,
+			"bronze": 1,
+			"total": 9,
+			"first_year": 2014,
+			"last_year": 2026,
+			"events": ["400m", "4x400m"]
+		},
+		{
+			"athlete": {
+				"id": 33455,
+				"slug": "irena-szewinska-kirszenstein",
+				"first_name": "Irena",
+				"last_name": "Szewinska",
+				"country_code": "POL"
+			},
+			"gold": 5,
+			"silver": 1,
+			"bronze": 4,
+			"total": 10,
+			"first_year": 1966,
+			"last_year": 1978,
+			"events": ["100m", "200m", "400m", "4x100m", "4x400m", "LJ"]
+		},
+		{
+			"athlete": {
+				"id": 33288,
+				"slug": "fanny-blankers-koen",
+				"first_name": "Fanny",
+				"last_name": "Blankers-Koen",
+				"country_code": "NED"
+			},
+			"gold": 5,
+			"silver": 1,
+			"bronze": 2,
+			"total": 8,
+			"first_year": 1938,
+			"last_year": 1950,
+			"events": ["100m", "200m", "4x100m", "80H"]
+		},
+		{
+			"athlete": {
+				"id": 33600,
+				"slug": "marlies-oelsner-gohr",
+				"first_name": "Marlies",
+				"last_name": "Göhr",
+				"country_code": "GDR"
+			},
+			"gold": 5,
+			"silver": 1,
+			"bronze": 1,
+			"total": 7,
+			"first_year": 1978,
+			"last_year": 1986,
+			"events": ["100m", "200m", "4x100m"]
+		}
+	]
+}

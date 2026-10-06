@@ -6,10 +6,13 @@ const PORT = Number(process.env.STUB_BACKEND_PORT ?? 4499);
 
 createServer(async (request, response) => {
 	const { pathname } = new URL(request.url ?? '/', 'http://localhost');
+	const isMedia = pathname.startsWith('/media/');
 
 	try {
-		const body = await readFile(new URL(`.${pathname}.json`, `${FIXTURES}/`));
-		response.writeHead(200, { 'content-type': 'application/json' }).end(body);
+		const body = await readFile(new URL(`.${pathname}${isMedia ? '' : '.json'}`, `${FIXTURES}/`));
+		response
+			.writeHead(200, { 'content-type': isMedia ? 'image/jpeg' : 'application/json' })
+			.end(body);
 	} catch {
 		response
 			.writeHead(404, { 'content-type': 'application/json' })

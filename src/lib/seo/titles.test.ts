@@ -1,9 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import type { AthleteProfile } from '#lib/domain/athlete.js';
 import type { EditionMeeting } from '#lib/domain/edition.js';
+import type { EditionRef } from '#lib/domain/championship.js';
 import {
 	athleteDescription,
 	athleteTitle,
+	championshipDescription,
+	championshipTitle,
 	editionDescription,
 	editionTitle,
 	pageTitle
@@ -88,5 +91,42 @@ describe('editionTitle and editionDescription', () => {
 		).toBe(
 			'2026 European Champs in Birmingham, Great Britain & NI, 10–16 Aug 2026: medallists and results of 52 events, the medal table and the records set.'
 		);
+	});
+});
+
+describe('championshipTitle and championshipDescription', () => {
+	const edition = (year: number): EditionRef => ({
+		name: `${year} European Championships`,
+		slug: `${year}-european-championships`,
+		year,
+		city: null,
+		countryCode: null,
+		startDate: null,
+		eventsCount: 0
+	});
+
+	it('name the championship with its editions and nations', () => {
+		expect(championshipTitle('European Championships')).toBe(
+			'European Championships – editions, medal table and history'
+		);
+		expect(
+			championshipDescription(
+				'European Championships',
+				{ first: edition(1934), latest: edition(2026), next: null, editionsHeld: 27 },
+				43
+			)
+		).toBe(
+			'European Championships: 27 editions since 1934, the all-time medal table of 43 nations and the most successful athletes.'
+		);
+	});
+
+	it('describe a championship that has not been held', () => {
+		expect(
+			championshipDescription(
+				'Grand Slam Track',
+				{ first: null, latest: null, next: edition(2027), editionsHeld: 0 },
+				0
+			)
+		).toBe('Grand Slam Track: editions, results and the programme.');
 	});
 });

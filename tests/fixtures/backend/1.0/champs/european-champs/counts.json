@@ -1,0 +1,435 @@
+{
+	"success": true,
+	"data": [
+		{
+			"gold": 137,
+			"silver": 108,
+			"bronze": 113,
+			"total": 358,
+			"country": {
+				"code": "GBR",
+				"name": "Great Britain & NI"
+			}
+		},
+		{
+			"gold": 120,
+			"silver": 110,
+			"bronze": 101,
+			"total": 331,
+			"country": {
+				"code": "URS",
+				"name": "Soviet Union"
+			}
+		},
+		{
+			"gold": 114,
+			"silver": 128,
+			"bronze": 126,
+			"total": 368,
+			"country": {
+				"code": "GER",
+				"name": "Germany"
+			}
+		},
+		{
+			"gold": 90,
+			"silver": 83,
+			"bronze": 66,
+			"total": 239,
+			"country": {
+				"code": "GDR",
+				"name": "Germany DR (1949-89)"
+			}
+		},
+		{
+			"gold": 73,
+			"silver": 77,
+			"bronze": 80,
+			"total": 230,
+			"country": {
+				"code": "FRA",
+				"name": "France"
+			}
+		},
+		{
+			"gold": 66,
+			"silver": 61,
+			"bronze": 63,
+			"total": 190,
+			"country": {
+				"code": "ITA",
+				"name": "Italy"
+			}
+		},
+		{
+			"gold": 59,
+			"silver": 66,
+			"bronze": 69,
+			"total": 194,
+			"country": {
+				"code": "POL",
+				"name": "Poland"
+			}
+		},
+		{
+			"gold": 49,
+			"silver": 51,
+			"bronze": 52,
+			"total": 152,
+			"country": {
+				"code": "RUS",
+				"name": "Russia"
+			}
+		},
+		{
+			"gold": 38,
+			"silver": 31,
+			"bronze": 35,
+			"total": 104,
+			"country": {
+				"code": "NED",
+				"name": "Netherlands"
+			}
+		},
+		{
+			"gold": 37,
+			"silver": 30,
+			"bronze": 42,
+			"total": 109,
+			"country": {
+				"code": "FIN",
+				"name": "Finland"
+			}
+		},
+		{
+			"gold": 36,
+			"silver": 33,
+			"bronze": 46,
+			"total": 115,
+			"country": {
+				"code": "ESP",
+				"name": "Spain"
+			}
+		},
+		{
+			"gold": 34,
+			"silver": 45,
+			"bronze": 43,
+			"total": 122,
+			"country": {
+				"code": "SWE",
+				"name": "Sweden"
+			}
+		},
+		{
+			"gold": 24,
+			"silver": 31,
+			"bronze": 26,
+			"total": 81,
+			"country": {
+				"code": "UKR",
+				"name": "Ukraine"
+			}
+		},
+		{
+			"gold": 24,
+			"silver": 30,
+			"bronze": 41,
+			"total": 95,
+			"country": {
+				"code": "CZE",
+				"name": "Czech Republic"
+			}
+		},
+		{
+			"gold": 24,
+			"silver": 17,
+			"bronze": 22,
+			"total": 63,
+			"country": {
+				"code": "NOR",
+				"name": "Norway"
+			}
+		},
+		{
+			"gold": 19,
+			"silver": 24,
+			"bronze": 25,
+			"total": 68,
+			"country": {
+				"code": "HUN",
+				"name": "Hungary"
+			}
+		},
+		{
+			"gold": 17,
+			"silver": 16,
+			"bronze": 12,
+			"total": 45,
+			"country": {
+				"code": "POR",
+				"name": "Portugal"
+			}
+		},
+		{
+			"gold": 17,
+			"silver": 11,
+			"bronze": 11,
+			"total": 39,
+			"country": {
+				"code": "GRE",
+				"name": "Greece"
+			}
+		},
+		{
+			"gold": 16,
+			"silver": 19,
+			"bronze": 20,
+			"total": 55,
+			"country": {
+				"code": "SUI",
+				"name": "Switzerland"
+			}
+		},
+		{
+			"gold": 16,
+			"silver": 16,
+			"bronze": 16,
+			"total": 48,
+			"country": {
+				"code": "BEL",
+				"name": "Belgium"
+			}
+		},
+		{
+			"gold": 12,
+			"silver": 16,
+			"bronze": 14,
+			"total": 42,
+			"country": {
+				"code": "BUL",
+				"name": "Bulgaria"
+			}
+		},
+		{
+			"gold": 12,
+			"silver": 10,
+			"bronze": 12,
+			"total": 34,
+			"country": {
+				"code": "TUR",
+				"name": "Turkey"
+			}
+		},
+		{
+			"gold": 11,
+			"silver": 13,
+			"bronze": 10,
+			"total": 34,
+			"country": {
+				"code": "BLR",
+				"name": "Belarus"
+			}
+		},
+		{
+			"gold": 10,
+			"silver": 4,
+			"bronze": 3,
+			"total": 17,
+			"country": {
+				"code": "CRO",
+				"name": "Croatia"
+			}
+		},
+		{
+			"gold": 8,
+			"silver": 22,
+			"bronze": 10,
+			"total": 40,
+			"country": {
+				"code": "ROU",
+				"name": "Romania"
+			}
+		},
+		{
+			"gold": 7,
+			"silver": 10,
+			"bronze": 8,
+			"total": 25,
+			"country": {
+				"code": "IRL",
+				"name": "Ireland"
+			}
+		},
+		{
+			"gold": 6,
+			"silver": 6,
+			"bronze": 3,
+			"total": 15,
+			"country": {
+				"code": "JUG",
+				"name": "Yugoslavia SR"
+			}
+		},
+		{
+			"gold": 5,
+			"silver": 3,
+			"bronze": 5,
+			"total": 13,
+			"country": {
+				"code": "ISR",
+				"name": "Israel"
+			}
+		},
+		{
+			"gold": 4,
+			"silver": 7,
+			"bronze": 4,
+			"total": 15,
+			"country": {
+				"code": "DEN",
+				"name": "Denmark"
+			}
+		},
+		{
+			"gold": 4,
+			"silver": 6,
+			"bronze": 5,
+			"total": 15,
+			"country": {
+				"code": "EST",
+				"name": "Estonia"
+			}
+		},
+		{
+			"gold": 4,
+			"silver": 3,
+			"bronze": 4,
+			"total": 11,
+			"country": {
+				"code": "LAT",
+				"name": "Latvia"
+			}
+		},
+		{
+			"gold": 4,
+			"silver": 2,
+			"bronze": 3,
+			"total": 9,
+			"country": {
+				"code": "SLO",
+				"name": "Slovenia"
+			}
+		},
+		{
+			"gold": 3,
+			"silver": 4,
+			"bronze": 5,
+			"total": 12,
+			"country": {
+				"code": "LTU",
+				"name": "Lithuania"
+			}
+		},
+		{
+			"gold": 3,
+			"silver": 2,
+			"bronze": 7,
+			"total": 12,
+			"country": {
+				"code": "AUT",
+				"name": "Austria"
+			}
+		},
+		{
+			"gold": 3,
+			"silver": 1,
+			"bronze": 1,
+			"total": 5,
+			"country": {
+				"code": "ISL",
+				"name": "Iceland"
+			}
+		},
+		{
+			"gold": 2,
+			"silver": 8,
+			"bronze": 4,
+			"total": 14,
+			"country": {
+				"code": "SRB",
+				"name": "Serbia"
+			}
+		},
+		{
+			"gold": 2,
+			"silver": 5,
+			"bronze": 1,
+			"total": 8,
+			"country": {
+				"code": "SVK",
+				"name": "Slovakia"
+			}
+		},
+		{
+			"gold": 1,
+			"silver": 3,
+			"bronze": 2,
+			"total": 6,
+			"country": {
+				"code": "ANA",
+				"name": "Authorized Neutral Athletes"
+			}
+		},
+		{
+			"gold": 1,
+			"silver": 1,
+			"bronze": 0,
+			"total": 2,
+			"country": {
+				"code": "ALB",
+				"name": "Albania"
+			}
+		},
+		{
+			"gold": 0,
+			"silver": 2,
+			"bronze": 2,
+			"total": 4,
+			"country": {
+				"code": "AZE",
+				"name": "Azerbaijan"
+			}
+		},
+		{
+			"gold": 0,
+			"silver": 2,
+			"bronze": 0,
+			"total": 2,
+			"country": {
+				"code": "LUX",
+				"name": "Luxembourg"
+			}
+		},
+		{
+			"gold": 0,
+			"silver": 1,
+			"bronze": 1,
+			"total": 2,
+			"country": {
+				"code": "MNE",
+				"name": "Montenegro"
+			}
+		},
+		{
+			"gold": 0,
+			"silver": 0,
+			"bronze": 1,
+			"total": 1,
+			"country": {
+				"code": "MDA",
+				"name": "Moldova"
+			}
+		}
+	]
+}

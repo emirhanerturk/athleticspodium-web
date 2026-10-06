@@ -183,8 +183,9 @@ athleticspodium-web/
 │   ├── lib/
 │   │   ├── server/backend/      the only code that talks to athleticspodium-backend
 │   │   │   ├── client.ts        fetch with base URL, timeout and error mapping
-│   │   │   ├── index.ts         createBackend(fetch, baseUrl)
-│   │   │   └── <resource>/      athletes, champs, meetings, countries, medals, articles, search, stats, pages, sitemap
+│   │   │   ├── index.ts         createBackend(fetch, baseUrl, mediaUrl)
+│   │   │   ├── nation-tally.ts  medal-table rows shared by champs and meetings
+│   │   │   └── <resource>/      athletes, champs, meetings, events, media, countries, medals, articles, search, stats, pages, sitemap
 │   │   │       ├── index.ts     the public surface: page-shaped functions such as getProfile(id)
 │   │   │       ├── dto.ts       response shapes as the backend sends them (private to the folder)
 │   │   │       └── parse.ts     DTO to domain, pure (private to the folder)
@@ -193,7 +194,7 @@ athleticspodium-web/
 │   │   │   ├── ui/              design-system primitives (MedalDisc, RecordBadge, Flag, Tabs, Button, icons/)
 │   │   │   ├── layout/          Header, Ticker, Footer, Breadcrumb, SearchOverlay
 │   │   │   ├── seo/             SeoHead, JsonLd
-│   │   │   └── athlete/ champ/ meeting/ country/ calendar/ search/ article/ medal/
+│   │   │   └── athlete/ championship/ meeting/ country/ calendar/ search/ article/ medal/
 │   │   ├── seo/                 pure builders: titles, canonical URLs, JSON-LD, sitemap XML
 │   │   ├── format/              Intl-based formatters for dates, numbers and marks
 │   │   ├── routing/             urls.ts (every internal URL), redirects.ts (legacy forms), cache.ts (Cache-Control)
@@ -227,7 +228,7 @@ Rules:
 
 ### 6.3 Request flow
 
-1. `hooks.server.ts` applies the redirects in 5.2. It then sets `event.locals.backend = createBackend(event.fetch, BACKEND_URL)`.
+1. `hooks.server.ts` applies the redirects in 5.2. It then sets `event.locals.backend = createBackend(event.fetch, BACKEND_URL, PUBLIC_MEDIA_URL)`.
 2. A route's `+page.server.ts` calls `locals.backend.<resource>.<function>()`. Independent requests run in parallel.
 3. The resource module sends its requests through `client.ts`. Its `parse.ts` turns the responses into domain types.
 4. `+page.svelte` composes components from the domain data and sets `SeoHead` and `JsonLd`.
@@ -283,7 +284,7 @@ Rules that still hold:
 
 - Use web-standard APIs where they exist, so the code stays portable.
 - Declare configuration in `src/env.ts` and read it from `$app/env/private` and `$app/env/public`.
-- Railway retires `railway.json` on 2026-12-01 in favour of `.railway/railway.ts`. That file describes a whole project and deletes what it omits, so the migration must use a named partial that owns only `athleticspodium-web`.
+- The service is declared in `.railway/railway.ts` (moved from `railway.json` on 2026-10-07). An IaC file describes a whole project and deletes what it omits, so it is a named partial that owns only `athleticspodium-web`; the backend and Postgres stay outside it.
 
 ## 7. Design system
 
@@ -428,7 +429,12 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 | History                     | `content`                               | —                                              |
 | Stories                     | `/articles?champ=`                      | —                                              |
 
-- **Dropped:** the frequency label ("every two years") and the "historic" nation badge.
+- **Hero photo:** `media/champs/<slug>.jpg`. The `image` column is never filled, and 23 of 212 championships have no file, so the server checks the file with a `HEAD` request and renders the hero without a photo when it is missing. The photo is also the Open Graph image.
+- **Facts:** an edition counts as held from its start date, or from its year when it has no dates. Two meetings in one year (Europeans 1938, men and women) count as one edition. The fourth figure is the next edition, or the latest one when none is scheduled.
+- **Editions strip:** newest first; the latest held edition is highlighted and upcoming ones are dashed.
+- **Event catalogue:** `/events` (names and ranks) is cached in memory for an hour. It orders the programme and each athlete's events.
+- **Links:** programme events and "Every medal in the tracker" go to `/medals/search` with the legacy parameters `champs`, `event` and `gender` (0 men, 1 women, 2 mixed); "Compare" goes to `/compare`.
+- **Dropped:** the frequency label ("every two years"), the "historic" nation badge, the area crumb in the breadcrumb and the "All N articles" link.
 
 ### Edition (`/champs/[champ]/[meeting]`)
 
@@ -656,9 +662,9 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    - CI, plus the repo's `CLAUDE.md` and README.
    - Staging on Railway at `next.athleticspodium.com` (done on 2026-10-06).
 2. **Pages, in order of SEO value.** Each page ships after the backend items it needs:
-   1. Athlete (B1, B11)
-   2. Edition (B11)
-   3. Championship (B4, B13)
+   1. Athlete (B1, B11), done on 2026-10-06
+   2. Edition (B11), done on 2026-10-07
+   3. Championship (B4, B13), done on 2026-10-07
    4. Championships
    5. Country (B2, B3, B5)
    6. Country athletes
@@ -692,13 +698,13 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
 
 ## 14. Risks
 
-| Risk                                        | Mitigation                                                                                    |
-| ------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `railway.json` stops working on 2026-12-01  | Migrate to `.railway/railway.ts` with a partial that owns only this service, before that date |
-| Backend scope grows with page work          | Every page lists its B-items; a page without its B-item ships with the documented fallback    |
-| Returning visitors keep the old Angular app | `/ngsw.json` returns 404 and a safety worker is served                                        |
-| Rankings dip after cutover                  | Same URLs, complete server HTML, sitemap, redirects; monitor for 4 weeks with rollback ready  |
-| Free-text records render inconsistently     | Known prefixes are mapped; unknown text renders unchanged in an outlined badge                |
+| Risk                                         | Mitigation                                                                                         |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| An IaC apply touches the backend or Postgres | `.railway/railway.ts` is a partial that owns only this service; review `railway config plan` first |
+| Backend scope grows with page work           | Every page lists its B-items; a page without its B-item ships with the documented fallback         |
+| Returning visitors keep the old Angular app  | `/ngsw.json` returns 404 and a safety worker is served                                             |
+| Rankings dip after cutover                   | Same URLs, complete server HTML, sitemap, redirects; monitor for 4 weeks with rollback ready       |
+| Free-text records render inconsistently      | Known prefixes are mapped; unknown text renders unchanged in an outlined badge                     |
 
 ## 15. Deferred
 

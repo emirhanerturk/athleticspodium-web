@@ -23,6 +23,12 @@ export const DISCIPLINE_LABELS: Record<Discipline, string> = {
 	'cross-country': 'Cross country'
 };
 
+export interface CatalogueEvent {
+	id: number;
+	name: string;
+	rank: number;
+}
+
 export interface EventInfo {
 	longName: string;
 	discipline: Discipline | null;
@@ -204,4 +210,10 @@ export function describeEvent(name: string): EventInfo {
 
 export function knownEventNames(): string[] {
 	return Object.keys(EVENTS);
+}
+
+export function inCatalogueOrder(names: string[], catalogue: CatalogueEvent[]): string[] {
+	const rankOf = new Map(catalogue.map((event) => [event.name, event.rank]));
+	const rank = (name: string) => rankOf.get(name) ?? Number.MAX_SAFE_INTEGER;
+	return [...names].sort((a, b) => rank(a) - rank(b));
 }

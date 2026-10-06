@@ -4,9 +4,9 @@
 	import Breadcrumb from '#lib/components/layout/Breadcrumb.svelte';
 	import EditionHero from '#lib/components/meeting/EditionHero.svelte';
 	import EditionSwitcher from '#lib/components/meeting/EditionSwitcher.svelte';
-	import NationTable from '#lib/components/meeting/NationTable.svelte';
 	import PodiumBoard from '#lib/components/meeting/PodiumBoard.svelte';
 	import RecordsSet from '#lib/components/meeting/RecordsSet.svelte';
+	import NationTable from '#lib/components/medal/NationTable.svelte';
 	import JsonLd from '#lib/components/seo/JsonLd.svelte';
 	import SeoHead from '#lib/components/seo/SeoHead.svelte';
 	import { editionStats, recordsSet } from '#lib/domain/edition.js';
@@ -66,7 +66,9 @@
 
 {#if data.nations.length || records.length}
 	<section class="border-y border-line bg-surface">
-		<div class="page-container grid gap-12 py-14 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+		<div
+			class="page-container grid grid-cols-1 gap-12 py-14 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]"
+		>
 			{#if data.nations.length}<NationTable nations={data.nations} medals={stats.medals} />{/if}
 			{#if records.length}<RecordsSet marks={records} />{/if}
 		</div>
