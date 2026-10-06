@@ -19,6 +19,17 @@ export interface ImageDto {
 	caption?: string | null;
 }
 
+export interface AthleteListingDto extends AthleteRowDto {
+	olympic_mark: boolean;
+	events: string[] | null;
+	image: ImageDto[] | null;
+}
+
+export interface AthleteLetterPageDto {
+	count: number;
+	rows: AthleteListingDto[];
+}
+
 export interface AthleteDetailDto extends AthleteRowDto {
 	aka: string[] | null;
 	olympic_mark: boolean;

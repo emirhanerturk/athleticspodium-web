@@ -477,9 +477,9 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 
 ### Athletes A–Z (`/athlete/letter/[letter]?page=n`)
 
-- **Data:** `/athletes/first-letter/:letter/:page`.
-- **Display:** A v2 table with letter tabs. The tabs and the pagination are plain `<a href>` links, so crawlers can follow them.
-- **Canonical:** It includes `page` when page > 1.
+- **Data:** `/athletes/first-letter/:letter/:page` (surname initial, 100 per page, with the total count).
+- **Display:** A v2 table (surname first, country, birth or life years, OG badge) with letter tabs. The tabs and the pagination are plain `<a href>` links, so crawlers can follow them.
+- **Canonical:** It includes `page` when page > 1. Capital letters and `?page=1` redirect (301) to the canonical address; a page past the last one answers 404.
 
 ### Athlete (`/athlete/[id]/[slug]`)
 
@@ -678,7 +678,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    5. Country (B2, B3, B5), done on 2026-10-07
    6. Country athletes, done on 2026-10-07
    7. Countries, done on 2026-10-07
-   8. Athletes A–Z
+   8. Athletes A–Z, done on 2026-10-07
    9. Athletes (B8)
    10. Home (B6, B10, B15)
    11. Calendar
