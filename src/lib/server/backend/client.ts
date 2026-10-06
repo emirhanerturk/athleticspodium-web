@@ -19,6 +19,7 @@ interface ErrorDetail {
 
 export interface BackendClient {
 	get<T>(path: string, query?: Query): Promise<T>;
+	post<T>(path: string, body: unknown, headers?: Record<string, string>): Promise<T>;
 }
 
 export function createClient(fetch: typeof globalThis.fetch, baseUrl: string): BackendClient {
@@ -36,6 +37,20 @@ export function createClient(fetch: typeof globalThis.fetch, baseUrl: string): B
 			}
 
 			return envelope.data as T;
+		},
+
+		async post<T>(path: string, body: unknown, headers: Record<string, string> = {}) {
+			const url = buildUrl(baseUrl, path, {});
+			const response = await send(fetch, url, {
+				method: 'POST',
+				headers: { 'content-type': 'application/json', ...headers },
+				body: JSON.stringify(body)
+			});
+			const envelope = await readEnvelope<T>(response, url);
+			if (!response.ok || !envelope.success) {
+				throw new BackendUnavailableError(`${url.pathname}: HTTP ${response.status}`);
+			}
+			return envelope.data as T;
 		}
 	};
 }
@@ -48,9 +63,13 @@ function buildUrl(baseUrl: string, path: string, query: Query): URL {
 	return url;
 }
 
-async function send(fetch: typeof globalThis.fetch, url: URL): Promise<Response> {
+async function send(
+	fetch: typeof globalThis.fetch,
+	url: URL,
+	init: RequestInit = {}
+): Promise<Response> {
 	try {
-		return await fetch(url, { signal: AbortSignal.timeout(TIMEOUT_MS) });
+		return await fetch(url, { ...init, signal: AbortSignal.timeout(TIMEOUT_MS) });
 	} catch (error) {
 		throw new BackendUnavailableError(`${url.pathname}: ${(error as Error).message}`);
 	}

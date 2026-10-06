@@ -580,7 +580,9 @@ Notes:
 - **Medals by country and championship** (`/medals/country-champs?country=&champ=`): editions newest first with gold, silver, bronze and total, a total row and a "Details →" link into the medal search for that year. Road races and national championships are left out of the select.
 - **Compare** (`/compare?a=&b=&gender=&event=`): the legacy page kept its state in memory; the new one reads it from the URL, so comparisons can be linked (the championship page links to `?a=<id>`). The server loads every medal of the event for both championships (up to 10 pages of 100), lines the podiums up by year and shows the winning mark of A minus B, formatted with the precision of the marks. Silver and bronze rows open per year.
 - Filters live in query strings.
-- The contact form uses a SvelteKit form action that posts to `/contacts`.
+- The contact form uses a SvelteKit form action that posts to `/contacts`. It works without JavaScript, validates name, email, subject and message (up to 1,000 characters) on the server, drops messages that fill a hidden honeypot field, and forwards the visitor's IP (`x-forwarded-for`) and user agent so the backend records them as before.
+- **Static pages:** `/about` (sections `main` and `box`, the two portraits now in `static/about/`, social links and the contact form), `/simple-notes`, and `/missing-information` with its four sections as `?tab=` links (`medallists`, `marks`, `names`, `relays`) and the contact form fixed to "Missing information".
+- Form posts are never cached (`Cache-Control: no-store` for any method other than GET and HEAD).
 
 ## 10. Backend prerequisites
 
@@ -698,7 +700,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    14. Medal search, done on 2026-10-07
    15. Medals by country and championship, done on 2026-10-07
    16. Compare, done on 2026-10-07
-   17. Static pages
+   17. Static pages, done on 2026-10-07
 3. **Pre-cutover QA:**
    - The URL check against every sitemap URL and the Search Console export.
    - Lighthouse on the main page types.

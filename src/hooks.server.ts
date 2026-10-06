@@ -18,7 +18,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event);
 
 	if (!response.headers.has('cache-control')) {
-		response.headers.set('cache-control', cacheControlFor(event.route.id, response.status));
+		response.headers.set('cache-control', cacheControlFor(event.route.id, response.status, event.request.method));
 	}
 	if (PUBLIC_SITE_ENV !== 'production') {
 		response.headers.set('x-robots-tag', 'noindex, nofollow');

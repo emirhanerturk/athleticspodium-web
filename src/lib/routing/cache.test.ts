@@ -32,4 +32,8 @@ describe('cacheControlFor', () => {
 		);
 		expect(cacheControlFor('/athlete/[id=integer]/[slug]', 503)).toBe('no-store');
 	});
+
+	it('never caches form posts', () => {
+		expect(cacheControlFor('/about', 200, 'POST')).toBe('no-store');
+	});
 });

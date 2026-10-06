@@ -50,4 +50,31 @@ describe('createClient', () => {
 			);
 		}
 	});
+
+	it('posts JSON with the given headers', async () => {
+		const fetch = respondWith({ success: true, data: true });
+
+		expect(
+			await createClient(fetch, BASE).post(
+				'/contacts',
+				{ name: 'Ana' },
+				{ 'x-forwarded-for': '1.2.3.4' }
+			)
+		).toBe(true);
+		const [url, init] = fetch.mock.calls[0];
+		expect(String(url)).toBe(`${BASE}/contacts`);
+		expect(init).toMatchObject({
+			method: 'POST',
+			body: '{"name":"Ana"}',
+			headers: { 'content-type': 'application/json', 'x-forwarded-for': '1.2.3.4' }
+		});
+	});
+
+	it('reports a failed post as unavailable', async () => {
+		const fetch = respondWith({ success: false, error: { code: 5001 } }, 500);
+
+		await expect(createClient(fetch, BASE).post('/contacts', {})).rejects.toBeInstanceOf(
+			BackendUnavailableError
+		);
+	});
 });
