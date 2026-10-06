@@ -1,7 +1,7 @@
 # athleticspodium-web: rewrite design
 
 - **Date:** 2026-10-06
-- **Status:** Draft, awaiting review
+- **Status:** Approved 2026-10-06
 - **Projects:** `athleticspodium-web` (new), `athleticspodium-backend` (prerequisites)
 - **Replaces:** `athleticspodium-frontend` (Angular 18 SPA)
 - **Design source:** Claude Design canvas "Athletics Podium Redesign", page "v2 · Feedback round": https://claude.ai/artifact/4oD3wVaMPNSRRPrWwyPd24
@@ -520,11 +520,10 @@ Notes:
 
 ## 10. Backend prerequisites
 
-Each item is a normal backend PR. It ships before the page that needs it (release order: backend, then web).
+Each item is a normal backend PR. It ships before the page that needs it (release order: backend, then web). `athleticspodium-frontend` is legacy from 2026-10-06 and gets no further fixes; backend changes only need to keep it working.
 
 | ID | Change | Needed by |
 |---|---|---|
-| B0 | Fix country search: `home.controller.ts:96` replaces spaces with dashes, so "united states" finds nothing. Ship now, independently. | current site, Search |
 | B1 | `/athletes/:id/medals`: add `city` and `country_code` to the meeting include. | Athlete |
 | B2 | `/countries/:code/medals`: add `category` to the champ include and grouping. | Country |
 | B3 | `/countries/:code/athletes`: return `image`, `date_of_birth` and `events`; add `gender`, `international` and `offset` parameters. | Country, Country athletes, Athletes |
@@ -550,6 +549,7 @@ B12 search rework:
 - Return `{rows, count}` per type, with `limit` and `offset`.
 - Add the filters `type`, `gender`, `born_from`, `born_to` and `olympian`.
 - Match `aka`.
+- Match country names as typed. Today `home.controller.ts` replaces spaces with dashes, so "united states" finds nothing.
 - Search article `content` and `related_athletes`.
 - Lower the minimum query length to 2.
 
@@ -601,7 +601,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
 
 ## 13. Delivery phases
 
-0. **Backend groundwork.** B0, B7, B9, B14, B17.
+0. **Backend groundwork.** B7, B9, B14, B17.
 1. **Skeleton:**
    - SvelteKit, Tailwind tokens, fonts.
    - Layout: header, ticker, footer, quick search shell.
