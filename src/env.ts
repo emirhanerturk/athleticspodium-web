@@ -21,6 +21,12 @@ export const variables = defineEnvVars({
 		schema: (value) =>
 			originWithPath('PUBLIC_MEDIA_URL', value ?? 'https://api.athleticspodium.com/media')
 	},
+	PUBLIC_GA_MEASUREMENT_ID: {
+		public: true,
+		description:
+			'Google Analytics 4 measurement id; analytics loads only in production when it is set',
+		schema: (value) => value || undefined
+	},
 	PUBLIC_SITE_ENV: {
 		public: true,
 		description: 'production, staging or development; anything but production is sent with noindex',
