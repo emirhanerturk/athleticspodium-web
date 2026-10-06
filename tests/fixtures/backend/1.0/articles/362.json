@@ -1,0 +1,110 @@
+{
+	"success": true,
+	"data": {
+		"id": 362,
+		"status": "ACTIVE",
+		"account_id": 5,
+		"title": "The numbers: Asian Games",
+		"slug": "the-numbers-asian-games",
+		"description": "Asian Games achievements underlined over the numbers.",
+		"spot": "Athletics Podium summarised the hidden numbers of this memorable Asian Games edition in Aichi prefecture, Japan.",
+		"image": {
+			"uri": "2026/09/81e0e054-6c32-4d34-9f23-582e409ea1f0.jpeg",
+			"caption": "Triple gold medallist Winfred Yavi and her bitter rival, Nozomi Tanaka of Japan.",
+			"credit": "Asian Athletics",
+			"created_date": "2026-09-29T16:27:46.849Z"
+		},
+		"content": "<p>The most important athletics meet on the most populous continent was over. In Aichi-Nagoya, the six-day, highly entertaining contest satisfied the athletics fans. Among the many historic achievements, two young sprinters came a step ahead: Thai speed king Puripol Boonson and Yujie Chen, the 17-year-old Chinese prodigy.</p><p>As Boonson equalled the 200 metres Asian record in a fascinating final on a rainy day, Chinese hammer thrower Jiale Zhang crushed the continental record with her monstrous 78.27 metres effort. Equally magical, yet another 17-year-old phenomenon, Yan Ziyi, avenged Olympic champion Haruka Kitaguchi from the Ultimate Championships in Budapest with a single throw that landed in a massive length: 70.46 metres.</p><p><br></p><p><strong>NATION SHORTNOTES</strong></p><p><strong>CHN:</strong> Same number of medals as 2023, but fewer golds. (32)</p><p><strong>JPN: </strong>Most titles since 1998. (10)</p><p><strong>BRN:</strong> Fourth straight games with 9+ titles; however, the fewest total (13).</p><p><strong>THA: </strong>Best achievement since 1978. Only the third time 3+ titles.</p><p><strong>UZB: </strong>Second time took 3 golds (First in their debut in 1994).</p><p><strong>IND: </strong>24 total medals but a single gold. Least titles since 2006.</p><p><strong>IRI:</strong> Six straight Games with a title. 4 total medals. (Most 8 in Tehran 1974)</p><p><strong>QAT: </strong>Least successful Games since 2002, but their gold streak hits 11 Games (since 1986)",
+		"related_champs": [7],
+		"related_meetings": [1454],
+		"related_athletes": [],
+		"related_countries": [
+			"CHN",
+			"THA",
+			"BRN",
+			"JPN",
+			"IRI",
+			"UZB",
+			"IND",
+			"PHI",
+			"SRI",
+			"VIE",
+			"QAT"
+		],
+		"redirect": null,
+		"views": 75,
+		"created_date": "2026-09-29T16:27:46.855Z",
+		"updated_date": null,
+		"related_champs_map": [
+			{
+				"id": 7,
+				"name": "Asian Games",
+				"slug": "asian-games",
+				"category": 2
+			}
+		],
+		"related_meetings_map": [
+			{
+				"id": 1454,
+				"short_name": null,
+				"name": "2026 Asian Games",
+				"slug": "2026-asian-games",
+				"year": 2026,
+				"city": "Aichi-Nagoya",
+				"champ": {
+					"id": 7,
+					"name": "Asian Games",
+					"slug": "asian-games",
+					"category": 2
+				}
+			}
+		],
+		"related_athletes_map": [],
+		"related_countries_map": [
+			{
+				"code": "VIE",
+				"name": "Vietnam"
+			},
+			{
+				"code": "BRN",
+				"name": "Bahrain"
+			},
+			{
+				"code": "CHN",
+				"name": "China PR"
+			},
+			{
+				"code": "IND",
+				"name": "India"
+			},
+			{
+				"code": "PHI",
+				"name": "Philippines"
+			},
+			{
+				"code": "IRI",
+				"name": "Iran IR"
+			},
+			{
+				"code": "JPN",
+				"name": "Japan"
+			},
+			{
+				"code": "QAT",
+				"name": "Qatar"
+			},
+			{
+				"code": "UZB",
+				"name": "Uzbekistan"
+			},
+			{
+				"code": "SRI",
+				"name": "Sri Lanka"
+			},
+			{
+				"code": "THA",
+				"name": "Thailand"
+			}
+		]
+	}
+}

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+	articleJsonLd,
 	breadcrumbJsonLd,
 	organizationJsonLd,
 	personJsonLd,
@@ -132,5 +133,35 @@ describe('websiteJsonLd and organizationJsonLd', () => {
 				'https://bsky.app/profile/athleticspodium.bsky.social'
 			])
 		).toMatchObject({ '@type': 'Organization', url: 'https://athleticspodium.com/' });
+	});
+});
+
+describe('articleJsonLd', () => {
+	it('describes the story and leaves unknown facts out', () => {
+		const article = articleJsonLd(
+			SITE,
+			{
+				id: 362,
+				slug: 'the-numbers-asian-games',
+				title: 'The numbers: Asian Games',
+				description: null,
+				publishedOn: '2026-09-29',
+				image: { path: 'articles/2026/09/a.jpeg', caption: null, credit: null },
+				standfirst: null,
+				content: null,
+				updatedOn: null,
+				related: { champs: [], meetings: [], countries: [], athletes: [] }
+			},
+			'/article/362/the-numbers-asian-games'
+		);
+
+		expect(article).toMatchObject({
+			'@type': 'Article',
+			headline: 'The numbers: Asian Games',
+			image: 'https://api.athleticspodium.com/media/articles/2026/09/a.jpeg',
+			datePublished: '2026-09-29'
+		});
+		expect(article).not.toHaveProperty('description');
+		expect(article).not.toHaveProperty('dateModified');
 	});
 });

@@ -1,3 +1,4 @@
+import type { ArticleDetail } from '#lib/domain/article.js';
 import { fullName, type AthleteProfile } from '#lib/domain/athlete.js';
 import type { EditionMeeting } from '#lib/domain/edition.js';
 
@@ -62,6 +63,25 @@ export function sportsEventJsonLd(siteUrl: string, meeting: EditionMeeting, path
 }
 
 const SITE_NAME = 'Athletics Podium';
+
+export function articleJsonLd(
+	{ siteUrl, mediaUrl }: { siteUrl: string; mediaUrl: string },
+	article: ArticleDetail,
+	path: string
+) {
+	return withoutEmpty({
+		'@context': 'https://schema.org',
+		'@type': 'Article',
+		headline: article.title,
+		description: article.description ?? undefined,
+		image: article.image ? `${mediaUrl}/${article.image.path}` : undefined,
+		datePublished: article.publishedOn,
+		dateModified: article.updatedOn ?? undefined,
+		url: siteUrl + path,
+		author: { '@type': 'Organization', name: SITE_NAME, url: `${siteUrl}/` },
+		publisher: { '@type': 'Organization', name: SITE_NAME, url: `${siteUrl}/` }
+	});
+}
 
 export function websiteJsonLd(siteUrl: string, searchPath: string) {
 	return {
