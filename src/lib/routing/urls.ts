@@ -70,3 +70,7 @@ export const SOCIAL_LINKS = {
 	facebook: 'https://www.facebook.com/athleticspodium',
 	instagram: 'https://www.instagram.com/athleticspodium'
 } as const;
+
+export function athleteLetterUrl(letter: string, page = 1): string {
+	return `${PAGES.athletes}/letter/${letter.toLowerCase()}${page > 1 ? `?page=${page}` : ''}`;
+}

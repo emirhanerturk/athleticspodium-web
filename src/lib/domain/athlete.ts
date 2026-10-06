@@ -10,6 +10,14 @@ export interface AthleteRef {
 	countryCode: string | null;
 }
 
+export interface AthleteListing extends AthleteRef, AthleteLifespan {
+	olympicChampion: boolean;
+	events: string[];
+	image: Image | null;
+}
+
+export const LETTERS = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
 export interface AthleteLifespan {
 	birthDate: IsoDate | null;
 	deathDate: IsoDate | null;

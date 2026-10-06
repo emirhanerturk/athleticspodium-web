@@ -1,6 +1,7 @@
 import {
 	relationName,
 	type AthleteLifespan,
+	type AthleteListing,
 	type AthleteProfile,
 	type AthleteRef,
 	type AthleteSummary,
@@ -12,6 +13,7 @@ import type { Result } from '#lib/domain/result.js';
 import type {
 	AthleteDetailDto,
 	AthleteListDto,
+	AthleteListingDto,
 	AthleteRowDto,
 	AthleteSummaryDto,
 	OlympicMeetingDto,
@@ -28,6 +30,18 @@ export function parseAthleteWithLifespan(dto: AthleteRowDto): AthleteRef & Athle
 		countryCode: dto.country_code,
 		birthDate: dto.date_of_birth,
 		deathDate: dto.date_of_death
+	};
+}
+
+export function parseAthleteListing(dto: AthleteListingDto): AthleteListing {
+	const image = dto.image?.[0];
+	return {
+		...parseAthleteWithLifespan(dto),
+		olympicChampion: dto.olympic_mark,
+		events: dto.events ?? [],
+		image: image
+			? { path: `athletes/${dto.id}/${image.uri}`, credit: image.credit ?? null, caption: null }
+			: null
 	};
 }
 

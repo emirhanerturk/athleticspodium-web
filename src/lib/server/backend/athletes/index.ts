@@ -2,6 +2,7 @@ import { monthDayOf, type IsoDate } from '#lib/domain/date.js';
 import { BackendNotFoundError, type BackendClient } from '../client.js';
 import type {
 	AthleteDetailDto,
+	AthleteLetterPageDto,
 	AthleteListDto,
 	AthleteSummaryDto,
 	OlympicMeetingDto,
@@ -9,6 +10,7 @@ import type {
 	ResultDto
 } from './dto.js';
 import {
+	parseAthleteListing,
 	parseAthleteProfile,
 	parseAthleteSummary,
 	parseBirthdaysToday,
@@ -36,6 +38,13 @@ export function createAthletes(client: BackendClient) {
 				olympics: parseOlympicGames(olympics),
 				relatives: parseRelatives(id, relations)
 			};
+		},
+
+		async byLetter(letter: string, page: number) {
+			const list = await client.get<AthleteLetterPageDto>(
+				`/athletes/first-letter/${letter}/${page}`
+			);
+			return { count: list.count, athletes: list.rows.map(parseAthleteListing) };
 		},
 
 		async getSummary(id: number) {
