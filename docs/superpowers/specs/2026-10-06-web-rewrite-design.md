@@ -578,6 +578,7 @@ Notes:
 - **Articles:** `/article?page=n` lists 12 per page (the legacy page kept the page in memory). `/article/[id]/[slug]` shows the standfirst (`spot`), the photo with caption and credit, the content, the related championships, editions, athletes and countries, and three more stories, with `Article` JSON-LD. A wrong slug redirects (301); a missing id is a 404 (the backend now answers `data: null` instead of a 500).
 - **Medal search** (`/medals/search`): the legacy parameters `champs`, `country`, `event`, `year`, `gender` (0–2), `medal` (1–3), `order` and `page` (100 per page). A championship or a country is required. Choosing one narrows the other select, the years and the events, as on the legacy form. Column headers are sort links. The filter lists (championships, countries, events) are cached for an hour.
 - **Medals by country and championship** (`/medals/country-champs?country=&champ=`): editions newest first with gold, silver, bronze and total, a total row and a "Details →" link into the medal search for that year. Road races and national championships are left out of the select.
+- **Compare** (`/compare?a=&b=&gender=&event=`): the legacy page kept its state in memory; the new one reads it from the URL, so comparisons can be linked (the championship page links to `?a=<id>`). The server loads every medal of the event for both championships (up to 10 pages of 100), lines the podiums up by year and shows the winning mark of A minus B, formatted with the precision of the marks. Silver and bronze rows open per year.
 - Filters live in query strings.
 - The contact form uses a SvelteKit form action that posts to `/contacts`.
 
@@ -696,7 +697,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    13. Articles, done on 2026-10-07
    14. Medal search, done on 2026-10-07
    15. Medals by country and championship, done on 2026-10-07
-   16. Compare
+   16. Compare, done on 2026-10-07
    17. Static pages
 3. **Pre-cutover QA:**
    - The URL check against every sitemap URL and the Search Console export.
