@@ -29,11 +29,13 @@ test('switches the greatest athletes by nation', async ({ page }) => {
 	).toHaveAttribute('aria-pressed', 'true');
 });
 
-test('sends the hero search to the search page', async ({ page }) => {
+test('suggests athletes in the hero search and opens the full results', async ({ page }) => {
 	await page.goto('/athlete', { waitUntil: 'networkidle' });
 
-	await page.getByRole('searchbox', { name: 'Search athletes' }).fill('bolt');
-	await page.getByRole('button', { name: 'Search', exact: true }).click();
+	const box = page.getByRole('combobox', { name: 'Search athletes' });
+	await box.fill('jam');
+	await expect(page.getByRole('option', { name: /Aminat Yusuf/ })).toBeVisible();
 
-	await expect(page).toHaveURL(/\/search\?type=athletes&q=bolt$/);
+	await box.press('Shift+Enter');
+	await expect(page).toHaveURL(/\/search\?q=jam$/);
 });

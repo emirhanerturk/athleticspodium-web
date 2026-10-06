@@ -1,4 +1,5 @@
 import type { Gender } from '#lib/domain/edition.js';
+import type { SearchRequest } from '#lib/domain/search.js';
 
 export const PAGES = {
 	home: '/',
@@ -73,4 +74,16 @@ export const SOCIAL_LINKS = {
 
 export function athleteLetterUrl(letter: string, page = 1): string {
 	return `${PAGES.athletes}/letter/${letter.toLowerCase()}${page > 1 ? `?page=${page}` : ''}`;
+}
+
+export function searchUrl(request: Partial<SearchRequest> & { query: string }): string {
+	const params = new URLSearchParams({ q: request.query });
+	if (request.scope && request.scope !== 'all') params.set('type', request.scope);
+	const filters = request.filters;
+	if (filters?.gender) params.set('gender', filters.gender);
+	if (filters?.bornFrom) params.set('born_from', String(filters.bornFrom));
+	if (filters?.bornTo) params.set('born_to', String(filters.bornTo));
+	if (filters?.olympian) params.set('olympian', '1');
+	if (request.page && request.page > 1) params.set('page', String(request.page));
+	return `${PAGES.search}?${params}`;
 }

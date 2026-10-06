@@ -553,14 +553,15 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 
 ### Search (`/search`)
 
-- **Data:** the backend search (B12, B16).
-- **URL parameters:** `q`, `type`, `gender`, `born_from`, `born_to`, `olympian`, `page`.
+- **Data:** `GET /search/v2` (B12, B16). The legacy `/search` stays for the old frontend. Every request also asks for the overview (6 per type) so the scope tabs always show counts.
+- **URL parameters:** `q`, `type` (`athletes`, `champs`, `countries`, `articles`), `gender` (`men`, `women`), `born_from`, `born_to`, `olympian`, `page` (20 per page, single types only). Every filter, tab and page is a plain link, so the page works without JavaScript.
 - **Display:**
   - Scope tabs with counts.
   - Athlete rows with photo, Olympian label and international gold/silver/bronze.
   - Championship, country and story results.
 - **Top result:** Shown only for an exact match: an IOC code, a full championship name or a full athlete name.
 - **Indexing:** `noindex, follow`.
+- **Quick search:** `/internal/search?q=` returns up to 5 athletes and 3 championships and countries plus the total. `QuickSearchBox` serves the header overlay and the athletes hero: suggestions after 2 characters (150 ms debounce), the match highlighted without regard to case or accents, ↑↓ to move, ↵ to open, ⇧↵ for all results. Recent searches stay in `localStorage`.
 
 ### Articles, medal search, medals by country and championship, compare, static pages
 
@@ -594,7 +595,7 @@ Each item is a normal backend PR. It ships before the page that needs it (releas
 | B9  | Athlete, meeting and article lists accept column names in `fields`, which narrows each row to the default scope plus those columns. Association names in `fields` keep working as includes. Requests without column names still return full rows for the legacy clients; the web always passes `fields`. | all list pages                      |
 | B10 | Article lists and featured articles return the related meeting or championship name, as `context` when `context=1` is passed.                                                                                                                                                                            | Home                                |
 | B11 | Athlete summary: `GET /athletes/:id/summary` and `GET /athletes/summaries?ids=` return identity, first image, events, `olympic_mark`, birth and death dates, and international gold/silver/bronze.                                                                                                       | hover card, Search                  |
-| B12 | Search rework (details below).                                                                                                                                                                                                                                                                           | Search, quick search                |
+| B12 | Search rework (details below), as `GET /search/v2`.                                                                                                                                                                                                                                                      | Search, quick search                |
 | B13 | `GET /champs/:id/top-athletes?limit=`: gold/silver/bronze, first and last year, and events per athlete within the championship.                                                                                                                                                                          | Championship                        |
 | B14 | `GET /stats`: medal, placing, athlete, championship and season meeting counts, plus the last addition.                                                                                                                                                                                                   | Footer, Home                        |
 | B15 | `/meetings/last-meetings?summary=1&limit=`: the top three nations or the winners per meeting.                                                                                                                                                                                                            | Home                                |
@@ -688,7 +689,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    9. Athletes (B8), done on 2026-10-07
    10. Home (B6, B10, B15), done on 2026-10-07
    11. Calendar, done on 2026-10-07
-   12. Search and quick search (B12, B16)
+   12. Search and quick search (B12, B16), done on 2026-10-07
    13. Articles
    14. Medal search
    15. Medals by country and championship

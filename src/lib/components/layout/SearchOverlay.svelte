@@ -1,12 +1,10 @@
 <script lang="ts">
-	import SearchIcon from '#lib/components/ui/icons/SearchIcon.svelte';
+	import QuickSearchBox from '#lib/components/search/QuickSearchBox.svelte';
+	import { readRecentSearches, rememberSearch } from '#lib/components/search/RecentSearches.svelte';
 	import type { MeetingSummary } from '#lib/domain/meeting.js';
-	import { calendarUrl, meetingUrl, PAGES } from '#lib/routing/urls.js';
+	import { calendarUrl, meetingUrl, PAGES, searchUrl } from '#lib/routing/urls.js';
 
 	let { year, nextMeeting }: { year: number; nextMeeting: MeetingSummary | null } = $props();
-
-	const RECENT_KEY = 'athleticspodium:recent-searches';
-	const RECENT_LIMIT = 5;
 
 	let dialog: HTMLDialogElement;
 	let recent = $state<string[]>([]);
@@ -27,34 +25,14 @@
 
 	export function open() {
 		if (dialog.open) return;
-		recent = readRecent();
+		recent = readRecentSearches();
 		dialog.showModal();
 	}
 
-	function rememberQuery(event: SubmitEvent) {
-		const query = new FormData(event.currentTarget as HTMLFormElement).get('q')?.toString().trim();
-		if (!query) return;
-		writeRecent([query, ...recent.filter((item) => item !== query)].slice(0, RECENT_LIMIT));
+	function rememberQuery(query: string) {
+		rememberSearch(query);
 		dialog.close();
 	}
-
-	function readRecent(): string[] {
-		try {
-			return JSON.parse(localStorage.getItem(RECENT_KEY) ?? '[]');
-		} catch {
-			return [];
-		}
-	}
-
-	function writeRecent(items: string[]) {
-		try {
-			localStorage.setItem(RECENT_KEY, JSON.stringify(items));
-		} catch {
-			return;
-		}
-	}
-
-	const searchUrl = (query: string) => `${PAGES.search}?q=${encodeURIComponent(query)}`;
 </script>
 
 {#snippet group(title: string, items: { label: string; note: string; href: string }[])}
@@ -82,37 +60,29 @@
 	aria-label="Search"
 	class="mx-auto mt-20 w-[calc(100%-32px)] max-w-[640px] overflow-hidden rounded-[22px] bg-surface p-0 text-ink shadow-[0_30px_80px_rgba(0,0,0,.35)] backdrop:bg-ink/55"
 >
-	<form method="get" action={PAGES.search} role="search" onsubmit={rememberQuery}>
-		<label class="flex h-[68px] items-center gap-3.5 border-b border-line px-5">
-			<SearchIcon class="size-[22px] shrink-0" />
-			<span class="sr-only">Search the archive</span>
-			<input
-				name="q"
-				type="search"
-				minlength="2"
-				required
-				autocomplete="off"
-				placeholder="Search athletes, championships, countries…"
-				class="min-w-0 flex-1 bg-transparent text-[19px] font-medium outline-none placeholder:text-ink-3"
-			/>
+	<QuickSearchBox onnavigate={rememberQuery}>
+		{#snippet trailing()}
 			<kbd class="rounded-[7px] border border-line-2 px-2 py-0.5 font-data text-xs text-ink-3"
 				>esc</kbd
 			>
-		</label>
-	</form>
-
-	{#if recent.length}
-		{@render group(
-			'Recent',
-			recent.map((query) => ({ label: query, note: 'Search', href: searchUrl(query) }))
-		)}
-	{/if}
-	{@render group('Jump to', jumpLinks)}
+		{/snippet}
+		{#snippet idle()}
+			{#if recent.length}
+				{@render group(
+					'Recent',
+					recent.map((query) => ({ label: query, note: 'Search', href: searchUrl({ query }) }))
+				)}
+			{/if}
+			{@render group('Jump to', jumpLinks)}
+		{/snippet}
+	</QuickSearchBox>
 
 	<div
 		class="mt-1.5 flex flex-wrap gap-4 border-t border-line bg-surface-2 px-5 py-3 text-[12.5px] text-ink-3"
 	>
-		<span><strong class="font-data text-ink-2">↵</strong> search</span>
+		<span><strong class="font-data text-ink-2">↑ ↓</strong> move</span>
+		<span><strong class="font-data text-ink-2">↵</strong> open</span>
+		<span><strong class="font-data text-ink-2">⇧ ↵</strong> all results</span>
 		<span><strong class="font-data text-ink-2">esc</strong> close</span>
 		<span><strong class="font-data text-ink-2">/</strong> open search anywhere</span>
 	</div>

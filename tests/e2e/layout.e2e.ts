@@ -22,7 +22,7 @@ test('opens the quick search with the slash key and closes it with Escape', asyn
 
 	await page.keyboard.press('/');
 	await expect(search).toBeVisible();
-	await expect(search.getByRole('searchbox')).toBeFocused();
+	await expect(search.getByRole('combobox')).toBeFocused();
 
 	await page.keyboard.press('Escape');
 	await expect(search).toBeHidden();
