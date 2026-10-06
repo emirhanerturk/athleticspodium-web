@@ -24,3 +24,21 @@ export interface ArticleListDto {
 	count: number;
 	rows: ArticleTeaserDto[];
 }
+
+export interface ArticleDetailDto extends ArticleRowDto {
+	spot: string | null;
+	content: string | null;
+	updated_date: string | null;
+	related_champs_map: { name: string; slug: string }[] | null;
+	related_meetings_map: { name: string; slug: string; champ: { slug: string } | null }[] | null;
+	related_countries_map: { code: string; name: string }[] | null;
+	related_athletes_map:
+		| {
+				id: number;
+				slug: string;
+				first_name: string | null;
+				last_name: string | null;
+				country_code: string | null;
+		  }[]
+		| null;
+}

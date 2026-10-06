@@ -575,6 +575,7 @@ These are built with the v2 components on the existing endpoints:
 
 Notes:
 
+- **Articles:** `/article?page=n` lists 12 per page (the legacy page kept the page in memory). `/article/[id]/[slug]` shows the standfirst (`spot`), the photo with caption and credit, the content, the related championships, editions, athletes and countries, and three more stories, with `Article` JSON-LD. A wrong slug redirects (301); a missing id is a 404 (the backend now answers `data: null` instead of a 500).
 - Filters live in query strings.
 - The contact form uses a SvelteKit form action that posts to `/contacts`.
 
@@ -690,7 +691,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    10. Home (B6, B10, B15), done on 2026-10-07
    11. Calendar, done on 2026-10-07
    12. Search and quick search (B12, B16), done on 2026-10-07
-   13. Articles
+   13. Articles, done on 2026-10-07
    14. Medal search
    15. Medals by country and championship
    16. Compare

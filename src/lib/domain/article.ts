@@ -1,3 +1,4 @@
+import type { AthleteRef } from './athlete.js';
 import type { IsoDate } from './date.js';
 import type { Image } from './image.js';
 
@@ -16,4 +17,16 @@ export type ArticleContext =
 
 export interface ArticleTeaser extends ArticleSummary {
 	context: ArticleContext | null;
+}
+
+export interface ArticleDetail extends ArticleSummary {
+	standfirst: string | null;
+	content: string | null;
+	updatedOn: IsoDate | null;
+	related: {
+		champs: { name: string; slug: string }[];
+		meetings: { name: string; slug: string; champSlug: string }[];
+		countries: { code: string; name: string }[];
+		athletes: AthleteRef[];
+	};
 }

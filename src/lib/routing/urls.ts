@@ -41,6 +41,10 @@ export function articleUrl(article: { id: number; slug: string }): string {
 	return `/article/${article.id}/${article.slug}`;
 }
 
+export function articlesUrl(page = 1): string {
+	return page > 1 ? `${PAGES.articles}?page=${page}` : PAGES.articles;
+}
+
 export function calendarUrl(year: number): string {
 	return `/calendar/${year}`;
 }
