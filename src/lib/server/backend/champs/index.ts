@@ -1,10 +1,11 @@
 import { BackendNotFoundError, type BackendClient } from '../client.js';
 import { parseNationTallies, type NationTallyDto } from '../nation-tally.js';
-import type { ChampDetailDto, ChampionshipLeaderDto } from './dto.js';
+import type { ChampDetailDto, ChampionshipLeaderDto, ChampListDto } from './dto.js';
 import {
 	parseChampionshipEditions,
 	parseChampionshipLeaders,
-	parseChampionshipProfile
+	parseChampionshipProfile,
+	parseChampionshipSummaries
 } from './parse.js';
 
 export function createChamps(client: BackendClient) {
@@ -15,6 +16,12 @@ export function createChamps(client: BackendClient) {
 	}
 
 	return {
+		async list() {
+			return parseChampionshipSummaries(
+				await client.get<ChampListDto>('/champs', { fields: 'years' })
+			);
+		},
+
 		async getEditions(slug: string) {
 			return parseChampionshipEditions(await getDetail(slug));
 		},

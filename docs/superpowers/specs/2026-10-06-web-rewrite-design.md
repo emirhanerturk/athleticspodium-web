@@ -413,9 +413,14 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 
 ### Championships (`/champs`)
 
-- **Data:** `/champs?fields=years` with `name`, `slug`, `category` and `rank`.
-- **Client-side features:** the name filter, category tabs, sorts and the edition timeline.
-- **Status pill:** "Held" is derived from `years`, so an edition later in the current year counts as held.
+- **Data:** `/champs?fields=years` with `name`, `slug`, `category` and `years`. The list does not return `rank`, but it is sorted by it, so the position is the rank.
+- **Category tabs:** links to `/champs?category=<slug>` (`global`, `africa`, `asia`, `europe`, `americas`, `oceania`, `multi-region`, `national`, `road`). The server renders the chosen tab, and in the browser a tab switch runs no new load because only the page reads the parameter. The canonical URL stays `/champs`.
+- **Client-side features:** the name filter (case and accents ignored; the tab badges count the matches) and the sorts (importance, A–Z, oldest first, most editions).
+- **Status pill:**
+  - "Next" when a year after the current one exists.
+  - "Held" for this year or last year; an edition later in the current year counts as held.
+  - "Last held" for older years, "No editions yet" without years.
+- **Timeline:** one dot per edition year on a shared scale from the oldest to the newest edition, rounded out to five years.
 - **Link:** "Send missing information" goes to `/missing-information`.
 
 ### Championship (`/champs/[champ]`)
@@ -665,7 +670,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    1. Athlete (B1, B11), done on 2026-10-06
    2. Edition (B11), done on 2026-10-07
    3. Championship (B4, B13), done on 2026-10-07
-   4. Championships
+   4. Championships, done on 2026-10-07
    5. Country (B2, B3, B5)
    6. Country athletes
    7. Countries

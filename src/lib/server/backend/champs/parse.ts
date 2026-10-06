@@ -2,9 +2,21 @@ import type {
 	ChampionshipEditions,
 	ChampionshipLeader,
 	ChampionshipProfile,
+	ChampionshipSummary,
 	EditionRef
 } from '#lib/domain/championship.js';
-import type { ChampDetailDto, ChampionshipLeaderDto, EditionDto } from './dto.js';
+import type { ChampDetailDto, ChampionshipLeaderDto, ChampListDto, EditionDto } from './dto.js';
+
+export function parseChampionshipSummaries(dto: ChampListDto): ChampionshipSummary[] {
+	return dto.rows.map(({ id, name, slug, category, years }, rank) => ({
+		id,
+		name,
+		slug,
+		category,
+		rank,
+		years: [...new Set(years)].sort((a, b) => a - b)
+	}));
+}
 
 export function parseChampionshipEditions(dto: ChampDetailDto): ChampionshipEditions {
 	const years = dto.years ?? [];
