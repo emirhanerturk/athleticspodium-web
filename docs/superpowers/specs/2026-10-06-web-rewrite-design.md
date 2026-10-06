@@ -55,7 +55,7 @@ What the sample shows:
 3. Light theme only.
 4. Tailwind CSS v4, with the design tokens in `@theme`.
 5. Fonts are self-hosted through `@fontsource`.
-6. Hosting is undecided: Cloudflare Workers or Railway (`adapter-node`). The code must run on both (section 6.5). The decision is due before the first staging deploy.
+6. Hosting is Railway (`adapter-node`), decided on 2026-10-06 (section 6.5). The service `athleticspodium-web` runs in the backend's project and region and reaches the API over the private network.
 7. All page data loads in server `load` functions. The browser never calls the backend. Client-side features (hover card, quick search, contact form) call this app's own endpoints and form actions.
 8. Existing URLs do not change. Legacy forms redirect with 301 (section 5.2).
 9. Pages the design does not cover are still built in the v2 visual language, so no indexed page is lost.
@@ -255,20 +255,35 @@ Error handling:
 
 - **Layout data** (ticker and footer stats) is needed on every server render. It is memoised in process for 10 minutes by `lib/utils/memoize-with-ttl.ts`.
 - **Pages that show "today"** (home, ticker) keep `s-maxage` at 1 hour or less. That way, stale data never lasts more than an hour past midnight UTC.
-- **Shared cache depends on hosting.** On Workers, `hooks.server.ts` also stores responses in the Cache API according to `s-maxage`. On Railway the headers alone apply, and nothing provides a shared cache.
+- **Shared cache:** Railway's CDN is switched on at cutover with HTML caching that follows `Cache-Control`, stale-while-revalidate and a purge on every deploy (`railway cdn`). Until then the headers apply to browsers only.
 
-### 6.5 Hosting constraints
+### 6.5 Hosting
 
-- Use only web-standard APIs: `fetch`, `Request`, `Response`, `URL`, `Intl`, `crypto.subtle`. Do not import Node built-ins.
-- Declare configuration in `src/env.ts` and read it at runtime from `$app/env/private` (`BACKEND_URL`) and `$app/env/public` (`PUBLIC_SITE_ENV`, `PUBLIC_SITE_URL`).
-- Switching hosts means changing the adapter in `svelte.config.js` and nothing else.
+Railway was chosen because every uncached page has to read from the API in EU West, so rendering next to it wins:
 
-Inputs for the hosting decision:
+- **Measured from Istanbul:**
+  - Each API request costs 30–70 ms on the server.
+  - On staging, the athlete page, with four backend calls in parallel, renders in about 50–130 ms.
+- **Where else it could run:**
+  - Cloudflare Workers would render at the visitor's edge and pay a public-internet round trip to Europe for every call.
+  - With Smart Placement, Workers would land next to the API anyway, but without the private network.
+- **Edge caching** comes from Railway's own CDN, so it needs no second platform.
 
-|              | Cloudflare Workers                                                                                                    | Railway (`adapter-node`)                                 |
-| ------------ | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| **Pros**     | edge cache and CDN; DNS is already on Cloudflare                                                                      | private network to the API; same platform as the backend |
-| **Concerns** | needs the Paid plan for CPU time and Smart Placement to sit near the API; the API is reached over the public internet | no CDN; single region                                    |
+Setup:
+
+| Item            | Value                                                                                                                                                                                    |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Service         | `athleticspodium-web` in project `athletics-podium`, environment `production`                                                                                                            |
+| Region          | `europe-west4-drams3a`, one replica. Set with `railway scale`; the first deploy ignored `multiRegionConfig` in `railway.json`                                                            |
+| Build and start | Railpack, `npm run build`, `npm start` (`node build`); health check `/robots.txt`                                                                                                        |
+| Domains         | `athleticspodium-web-production.up.railway.app`, `next.athleticspodium.com` (DNS only)                                                                                                   |
+| Variables       | `BACKEND_URL=http://${{athleticspodium-backend.RAILWAY_PRIVATE_DOMAIN}}:8080/1.0`, `PROTOCOL_HEADER=x-forwarded-proto`, `PUBLIC_SITE_URL`, `PUBLIC_SITE_ENV`, `PUBLIC_GA_MEASUREMENT_ID` |
+
+Rules that still hold:
+
+- Use web-standard APIs where they exist, so the code stays portable.
+- Declare configuration in `src/env.ts` and read it from `$app/env/private` and `$app/env/public`.
+- Railway retires `railway.json` on 2026-12-01 in favour of `.railway/railway.ts`. That file describes a whole project and deletes what it omits, so the migration must use a named partial that owns only `athleticspodium-web`.
 
 ## 7. Design system
 
@@ -639,7 +654,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    - Hooks: redirects, caching, locals.
    - The error page, sitemap, robots and the safety worker.
    - CI, plus the repo's `CLAUDE.md` and README.
-   - The hosting decision, then a staging deploy at `next.athleticspodium.com`.
+   - Staging on Railway at `next.athleticspodium.com` (done on 2026-10-06).
 2. **Pages, in order of SEO value.** Each page ships after the backend items it needs:
    1. Athlete (B1, B11)
    2. Edition (B11, B18)
@@ -664,7 +679,9 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    - Google's Rich Results Test.
    - Content spot checks against the old site.
 4. **Cutover:**
-   - Point the apex and `www` to the new host.
+   - Set `PUBLIC_SITE_ENV=production` and `PUBLIC_SITE_URL=https://athleticspodium.com` on the service.
+   - Turn on Railway's CDN (HTML caching that follows `Cache-Control`, stale-while-revalidate, purge on deploy).
+   - Add `athleticspodium.com` and `www.athleticspodium.com` as Railway custom domains, then point the DNS records to Railway, DNS only.
    - Submit the sitemap.
    - Watch Search Console coverage and 404s for 4 weeks.
    - Keep the Firebase site deployable for rollback.
@@ -675,17 +692,16 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
 
 ## 14. Risks
 
-| Risk                                        | Mitigation                                                                                   |
-| ------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| The hosting decision delays staging         | Code stays host-agnostic; the decision is a phase 1 exit criterion                           |
-| Backend scope grows with page work          | Every page lists its B-items; a page without its B-item ships with the documented fallback   |
-| Returning visitors keep the old Angular app | `/ngsw.json` returns 404 and a safety worker is served                                       |
-| Rankings dip after cutover                  | Same URLs, complete server HTML, sitemap, redirects; monitor for 4 weeks with rollback ready |
-| Free-text records render inconsistently     | Known prefixes are mapped; unknown text renders unchanged in an outlined badge               |
+| Risk                                        | Mitigation                                                                                    |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `railway.json` stops working on 2026-12-01  | Migrate to `.railway/railway.ts` with a partial that owns only this service, before that date |
+| Backend scope grows with page work          | Every page lists its B-items; a page without its B-item ships with the documented fallback    |
+| Returning visitors keep the old Angular app | `/ngsw.json` returns 404 and a safety worker is served                                        |
+| Rankings dip after cutover                  | Same URLs, complete server HTML, sitemap, redirects; monitor for 4 weeks with rollback ready  |
+| Free-text records render inconsistently     | Known prefixes are mapped; unknown text renders unchanged in an outlined badge                |
 
 ## 15. Deferred
 
-- Hosting choice, due in phase 1.
 - Image optimisation.
 - `.ics` calendar feed.
 - Athletics families.
