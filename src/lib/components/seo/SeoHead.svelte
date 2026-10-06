@@ -2,7 +2,12 @@
 	import { PUBLIC_SITE_URL } from '$app/env/public';
 	import { pageTitle } from '#lib/seo/titles.js';
 
-	let { title, description, path }: { title: string; description: string; path: string } = $props();
+	let {
+		title,
+		description,
+		path,
+		image
+	}: { title: string; description: string; path: string; image?: string } = $props();
 
 	const canonical = $derived(PUBLIC_SITE_URL + path);
 	const fullTitle = $derived(pageTitle(title));
@@ -17,5 +22,10 @@
 	<meta property="og:title" content={fullTitle} />
 	<meta property="og:description" content={description} />
 	<meta property="og:url" content={canonical} />
-	<meta name="twitter:card" content="summary" />
+	{#if image}
+		<meta property="og:image" content={image} />
+		<meta name="twitter:card" content="summary_large_image" />
+	{:else}
+		<meta name="twitter:card" content="summary" />
+	{/if}
 </svelte:head>

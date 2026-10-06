@@ -1,4 +1,5 @@
 import type { IsoDate } from './date.js';
+import type { Image } from './image.js';
 
 export interface AthleteRef {
 	id: number;
@@ -26,4 +27,39 @@ export function ageOn(birthDate: IsoDate, today: IsoDate): number {
 	const years = Number(today.slice(0, 4)) - Number(birthDate.slice(0, 4));
 	const birthdayPassed = today.slice(5) >= birthDate.slice(5);
 	return birthdayPassed ? years : years - 1;
+}
+
+export interface AthleteProfile extends AthleteRef, AthleteLifespan {
+	aka: string[];
+	olympicChampion: boolean;
+	birthPlace: string | null;
+	events: string[];
+	country: { code: string; name: string } | null;
+	image: Image | null;
+	biography: string | null;
+}
+
+export interface Relative extends AthleteRef {
+	relation: string;
+}
+
+const RELATIONS = [
+	'Father',
+	'Mother',
+	'Son',
+	'Daughter',
+	'Wife',
+	'Husband',
+	'Ex-wife',
+	'Ex-husband',
+	'Sister',
+	'Brother',
+	'Grandfather',
+	'Grandmother',
+	'Grandson',
+	'Granddaughter'
+];
+
+export function relationName(code: number): string {
+	return RELATIONS[code] ?? 'Relative';
 }

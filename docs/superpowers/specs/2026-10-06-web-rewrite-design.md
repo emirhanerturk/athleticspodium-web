@@ -471,7 +471,9 @@ For each page: what it shows, where the data comes from, and the backend prerequ
   - It keeps the event column, wind, notes and DQ.
   - "Show places 4–8" adds placings, with a "Place" column.
 - **Chart:** For an athlete with several events, the chart shows the event with the most medals.
-- **Dropped:** the indoor marker and the age-group chip.
+- **Mark notes:** `medal.info` is shown after the mark; `(i)` renders as the indoor "i".
+- **Layout until B18:** the chart's place in the "By championship" band holds the national championships list.
+- **Dropped:** the age-group chip.
 
 ### Countries (`/country`)
 

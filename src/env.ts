@@ -15,6 +15,12 @@ export const variables = defineEnvVars({
 		description: 'Origin of this site, used for canonical URLs and the sitemap',
 		schema: (value) => originWithPath('PUBLIC_SITE_URL', value ?? 'https://athleticspodium.com')
 	},
+	PUBLIC_MEDIA_URL: {
+		public: true,
+		description: 'Base URL of uploaded images served by the backend',
+		schema: (value) =>
+			originWithPath('PUBLIC_MEDIA_URL', value ?? 'https://api.athleticspodium.com/media')
+	},
 	PUBLIC_SITE_ENV: {
 		public: true,
 		description: 'production, staging or development; anything but production is sent with noindex',
