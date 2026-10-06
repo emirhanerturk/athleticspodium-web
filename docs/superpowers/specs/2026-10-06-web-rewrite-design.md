@@ -73,6 +73,7 @@ What the sample shows:
 18. "Today" is computed in UTC.
 19. Dependencies stay minimal. There is no date library, no memoisation library, no UI kit and no icon package.
 20. Docs are in English. Code is self-documenting and has almost no comments.
+21. Analytics stays on Google Analytics 4 with the legacy property (`G-7EDH9146FP`, set as `PUBLIC_GA_MEASUREMENT_ID`). It loads only in production and sends a `page_view` on the first load and on every client-side navigation. Like the legacy site, there is no consent banner.
 
 ## 4. Scope
 

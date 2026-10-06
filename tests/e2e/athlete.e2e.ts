@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures.js';
 
 const PROFILE = '/athlete/35017/yaroslava-mahuchikh';
 

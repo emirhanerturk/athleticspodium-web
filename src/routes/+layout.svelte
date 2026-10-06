@@ -1,5 +1,7 @@
 <script lang="ts">
 	import '../styles/app.css';
+	import { PUBLIC_GA_MEASUREMENT_ID, PUBLIC_SITE_ENV } from '$app/env/public';
+	import GoogleAnalytics from '#lib/components/analytics/GoogleAnalytics.svelte';
 	import favicon from '#lib/assets/favicon.svg';
 	import Footer from '#lib/components/layout/Footer.svelte';
 	import Header from '#lib/components/layout/Header.svelte';
@@ -44,3 +46,7 @@
 </div>
 
 <SearchOverlay bind:this={searchOverlay} year={data.year} nextMeeting={data.nextMeeting} />
+
+{#if PUBLIC_GA_MEASUREMENT_ID && PUBLIC_SITE_ENV === 'production'}
+	<GoogleAnalytics measurementId={PUBLIC_GA_MEASUREMENT_ID} />
+{/if}

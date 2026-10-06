@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures.js';
 
 test('renders the ticker, the navigation and the footer on the server', async ({ page }) => {
 	const response = await page.goto('/');
