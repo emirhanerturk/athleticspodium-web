@@ -1,0 +1,1586 @@
+{
+	"success": true,
+	"data": {
+		"count": 263,
+		"rows": [
+			{
+				"code": "AFG",
+				"name": "Afghanistan",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "AFR",
+				"name": "African Team",
+				"categories": [1],
+				"is_country": false
+			},
+			{
+				"code": "ALB",
+				"name": "Albania",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "ALG",
+				"name": "Algeria",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "AME",
+				"name": "American Continent Team",
+				"categories": [4],
+				"is_country": false
+			},
+			{
+				"code": "ASA",
+				"name": "American Samoa",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "AND",
+				"name": "Andorra",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "ANG",
+				"name": "Angola",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "AIA",
+				"name": "Anguilla",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "ANT",
+				"name": "Antigua & Barbuda",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "ARG",
+				"name": "Argentina",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "ARM",
+				"name": "Armenia",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "ARU",
+				"name": "Aruba",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "ASI",
+				"name": "Asian Team",
+				"categories": [2],
+				"is_country": false
+			},
+			{
+				"code": "AUS",
+				"name": "Australia",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "AUT",
+				"name": "Austria",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "ANA",
+				"name": "Authorized Neutral Athletes",
+				"categories": [3],
+				"is_country": false
+			},
+			{
+				"code": "AZE",
+				"name": "Azerbaijan",
+				"categories": [3, 2],
+				"is_country": true
+			},
+			{
+				"code": "BAH",
+				"name": "Bahamas",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "BRN",
+				"name": "Bahrain",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "BAN",
+				"name": "Bangladesh",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "BAR",
+				"name": "Barbados",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "BLR",
+				"name": "Belarus",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "BEL",
+				"name": "Belgium",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "BIZ",
+				"name": "Belize",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "BEN",
+				"name": "Benin",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "BER",
+				"name": "Bermuda",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "BHU",
+				"name": "Bhutan",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "BOH",
+				"name": "Bohemia",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "BOL",
+				"name": "Bolivia",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "BIH",
+				"name": "Bosnia-Herzegovina",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "BOT",
+				"name": "Botswana",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "BRA",
+				"name": "Brazil",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "IVB",
+				"name": "British Virgin Islands",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "BWI",
+				"name": "British West Indies",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "BRU",
+				"name": "Brunei Darussalam",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "BUL",
+				"name": "Bulgaria",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "BUR",
+				"name": "Burkina Faso",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "BDI",
+				"name": "Burundi",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "CAM",
+				"name": "Cambodia",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "CMR",
+				"name": "Cameroon",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "CAN",
+				"name": "Canada",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "CPV",
+				"name": "Cape Verde",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "CAY",
+				"name": "Cayman Islands",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "CAF",
+				"name": "Central African Republic",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "CHA",
+				"name": "Chad",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "CHI",
+				"name": "Chile",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "CHN",
+				"name": "China PR",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "TPE",
+				"name": "Chinese Taipei",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "CHU",
+				"name": "Chuuk",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "COL",
+				"name": "Colombia",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "COM",
+				"name": "Comoros",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "CGO",
+				"name": "Congo",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "COK",
+				"name": "Cook Islands",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "CRC",
+				"name": "Costa Rica",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "CRO",
+				"name": "Croatia",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "CUB",
+				"name": "Cuba",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "CUW",
+				"name": "Curaçao",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "CYP",
+				"name": "Cyprus",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "CZE",
+				"name": "Czech Republic",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "DEN",
+				"name": "Denmark",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "DJI",
+				"name": "Djibouti",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "DMA",
+				"name": "Dominica",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "DOM",
+				"name": "Dominican Republic",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "PRK",
+				"name": "DPR of Korea",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "COD",
+				"name": "DR of Congo",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "TLS",
+				"name": "East Timor",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "ECU",
+				"name": "Ecuador",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "EGY",
+				"name": "Egypt",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "ESA",
+				"name": "El Salvador",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "ENG",
+				"name": "England",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "GEQ",
+				"name": "Equatorial Guinea",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "ERI",
+				"name": "Eritrea",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "EST",
+				"name": "Estonia",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "ETH",
+				"name": "Ethiopia",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "EUR",
+				"name": "European Team",
+				"categories": [3],
+				"is_country": false
+			},
+			{
+				"code": "FLK",
+				"name": "Falkland Islands",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "FAR",
+				"name": "Faroe Islands",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "FSM",
+				"name": "Federated States of Micronesia",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "FIJ",
+				"name": "Fiji",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "FIN",
+				"name": "Finland",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "FRA",
+				"name": "France",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "GUF",
+				"name": "French Guiana",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "PYF",
+				"name": "French Polynesia",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "GAB",
+				"name": "Gabon",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "GAM",
+				"name": "Gambia",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "GEO",
+				"name": "Georgia",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "GER",
+				"name": "Germany",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "GDR",
+				"name": "Germany DR (1949-89)",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "GHA",
+				"name": "Ghana",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "GIB",
+				"name": "Gibraltar",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "GEI",
+				"name": "Gilbert & Ellice Islands",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "GBR",
+				"name": "Great Britain & NI",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "GRE",
+				"name": "Greece",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "GRL",
+				"name": "Greenland",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "GRN",
+				"name": "Grenada",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "GUD",
+				"name": "Guadeloupe",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "GUM",
+				"name": "Guam",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "GUA",
+				"name": "Guatemala",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "GUE",
+				"name": "Guernsey & Dependencies",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "GUI",
+				"name": "Guinea",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "GBS",
+				"name": "Guinea-Bissau",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "GUY",
+				"name": "Guyana",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "HAI",
+				"name": "Haiti",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "HAW",
+				"name": "Hawai'i",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "HON",
+				"name": "Honduras",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "HKG",
+				"name": "Hong Kong",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "HUN",
+				"name": "Hungary",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "ISL",
+				"name": "Iceland",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "IND",
+				"name": "India",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "IEP",
+				"name": "Individual European Participants",
+				"categories": [3],
+				"is_country": false
+			},
+			{
+				"code": "IOP",
+				"name": "Individual Olympic Participants",
+				"categories": [3],
+				"is_country": false
+			},
+			{
+				"code": "INA",
+				"name": "Indonesia",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "IRI",
+				"name": "Iran IR",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "IRQ",
+				"name": "Iraq",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "IRL",
+				"name": "Ireland",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "IOM",
+				"name": "Isle of Man",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "ISR",
+				"name": "Israel",
+				"categories": [3, 2],
+				"is_country": true
+			},
+			{
+				"code": "ITA",
+				"name": "Italy",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "CIV",
+				"name": "Ivory Coast",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "JAM",
+				"name": "Jamaica",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "JPN",
+				"name": "Japan",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "JER",
+				"name": "Jersey",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "JOR",
+				"name": "Jordan",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "KAZ",
+				"name": "Kazakhstan",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "KEN",
+				"name": "Kenya",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "KIR",
+				"name": "Kiribati",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "KOS",
+				"name": "Kosovo",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "KUW",
+				"name": "Kuwait",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "KGZ",
+				"name": "Kyrgyzstan",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "LAO",
+				"name": "Laos",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "LAT",
+				"name": "Latvia",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "LBN",
+				"name": "Lebanon",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "LES",
+				"name": "Lesotho",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "LBR",
+				"name": "Liberia",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "LBA",
+				"name": "Libya",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "LIE",
+				"name": "Liechtenstein",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "LTU",
+				"name": "Lithuania",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "LUX",
+				"name": "Luxembourg",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "MAC",
+				"name": "Macao",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "MAD",
+				"name": "Madagascar",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "MAW",
+				"name": "Malawi",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "MAS",
+				"name": "Malaysia",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "MDV",
+				"name": "Maldives",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "MLI",
+				"name": "Mali",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "MLT",
+				"name": "Malta",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "MHL",
+				"name": "Marshall Islands",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "MRT",
+				"name": "Martinique",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "MTN",
+				"name": "Mauritania",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "MRI",
+				"name": "Mauritius",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "MYT",
+				"name": "Mayotte",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "MEX",
+				"name": "Mexico",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "MIX",
+				"name": "Mixing Team",
+				"categories": [0],
+				"is_country": false
+			},
+			{
+				"code": "MDA",
+				"name": "Moldova",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "MON",
+				"name": "Monaco",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "MGL",
+				"name": "Mongolia",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "MNE",
+				"name": "Montenegro",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "MNT",
+				"name": "Montserrat",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "MAR",
+				"name": "Morocco",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "MOZ",
+				"name": "Mozambique",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "MYA",
+				"name": "Myanmar",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "NAM",
+				"name": "Namibia",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "NRU",
+				"name": "Nauru",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "NEP",
+				"name": "Nepal",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "NED",
+				"name": "Netherlands",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "AHO",
+				"name": "Netherlands Antilles",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "NCL",
+				"name": "New Caledonia",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "NWF",
+				"name": "Newfoundland",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "NZL",
+				"name": "New Zealand",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "NCA",
+				"name": "Nicaragua",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "NIG",
+				"name": "Niger",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "NGR",
+				"name": "Nigeria",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "NIU",
+				"name": "Niue",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "NFI",
+				"name": "Norfolk Island",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "NBO",
+				"name": "North Borneo",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "TFK",
+				"name": "Northern Cyprus",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "NIR",
+				"name": "Northern Ireland",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "NMI",
+				"name": "Northern Mariana Islands",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "MKD",
+				"name": "North Macedonia",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "NOR",
+				"name": "Norway",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "OCE",
+				"name": "Oceania Team",
+				"categories": [5],
+				"is_country": false
+			},
+			{
+				"code": "OMA",
+				"name": "Oman",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "PAK",
+				"name": "Pakistan",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "PLW",
+				"name": "Palau",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "PLE",
+				"name": "Palestine",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "PAN",
+				"name": "Panama",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "PNG",
+				"name": "Papua New Guinea",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "PAR",
+				"name": "Paraguay",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "PER",
+				"name": "Peru",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "PHI",
+				"name": "Philippines",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "POH",
+				"name": "Pohnpei",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "POL",
+				"name": "Poland",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "POR",
+				"name": "Portugal",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "PUR",
+				"name": "Puerto Rico",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "QAT",
+				"name": "Qatar",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "KOR",
+				"name": "Republic of Korea",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "RSA",
+				"name": "Republic of South Africa",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "REU",
+				"name": "Reunion",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "ROU",
+				"name": "Romania",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "RUS",
+				"name": "Russia",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "RWA",
+				"name": "Rwanda",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "SAM",
+				"name": "Samoa",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "SMR",
+				"name": "San Marino",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "STP",
+				"name": "Sao Tome & Principe",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "SAW",
+				"name": "Sarawak",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "KSA",
+				"name": "Saudi Arabia",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "SCO",
+				"name": "Scotland",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "SEN",
+				"name": "Senegal",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "SRB",
+				"name": "Serbia",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "SEY",
+				"name": "Seychelles",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "SLE",
+				"name": "Sierra Leone",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "SIN",
+				"name": "Singapore",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "SVK",
+				"name": "Slovakia",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "SLO",
+				"name": "Slovenia",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "SOL",
+				"name": "Solomon Islands",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "SOM",
+				"name": "Somalia",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "SSD",
+				"name": "South Sudan",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "URS",
+				"name": "Soviet Union",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "ESP",
+				"name": "Spain",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "SRI",
+				"name": "Sri Lanka",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "SHN",
+				"name": "St. Helena & Dependencies",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "SKN",
+				"name": "St. Kitts & Nevis",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "LCA",
+				"name": "St. Lucia",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "VIN",
+				"name": "St. Vincent & The Grenadines",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "SUD",
+				"name": "Sudan",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "SUR",
+				"name": "Surinam",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "SWZ",
+				"name": "Swaziland",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "SWE",
+				"name": "Sweden",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "SUI",
+				"name": "Switzerland",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "SYR",
+				"name": "Syria",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "TAH",
+				"name": "Tahiti",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "TJK",
+				"name": "Tajikistan",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "TAN",
+				"name": "Tanzania",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "THA",
+				"name": "Thailand",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "TOG",
+				"name": "Togo",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "TKL",
+				"name": "Tokelau",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "TGA",
+				"name": "Tonga",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "TTO",
+				"name": "Trinidad & Tobago",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "TUN",
+				"name": "Tunisia",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "TUR",
+				"name": "Turkey",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "TKM",
+				"name": "Turkmenistan",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "TKS",
+				"name": "Turks & Caicos Islands",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "TUV",
+				"name": "Tuvalu",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "UGA",
+				"name": "Uganda",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "UKR",
+				"name": "Ukraine",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "UAE",
+				"name": "United Arab Emirates",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "USA",
+				"name": "United States of America",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "URU",
+				"name": "Uruguay",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "ISV",
+				"name": "US Virgin Islands",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "UZB",
+				"name": "Uzbekistan",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "VAN",
+				"name": "Vanuatu",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "VEN",
+				"name": "Venezuela",
+				"categories": [4],
+				"is_country": true
+			},
+			{
+				"code": "VIE",
+				"name": "Vietnam",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "WAL",
+				"name": "Wales",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "WLF",
+				"name": "Wallis & Futuna",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "WSE",
+				"name": "World Selection",
+				"categories": [0],
+				"is_country": false
+			},
+			{
+				"code": "YAP",
+				"name": "Yap",
+				"categories": [5],
+				"is_country": true
+			},
+			{
+				"code": "YEM",
+				"name": "Yemen",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "PRY",
+				"name": "Yemen PDR (1967-90)",
+				"categories": [2],
+				"is_country": true
+			},
+			{
+				"code": "YUG",
+				"name": "Yugoslavia (1993-2004)",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "JUG",
+				"name": "Yugoslavia SR",
+				"categories": [3],
+				"is_country": true
+			},
+			{
+				"code": "ZAM",
+				"name": "Zambia",
+				"categories": [1],
+				"is_country": true
+			},
+			{
+				"code": "ZIM",
+				"name": "Zimbabwe",
+				"categories": [1],
+				"is_country": true
+			}
+		]
+	}
+}

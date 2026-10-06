@@ -1,0 +1,184 @@
+{
+	"success": true,
+	"data": {
+		"count": 112,
+		"rows": [
+			{
+				"id": 4765,
+				"short_name": null,
+				"name": "2027 European Games",
+				"slug": "2027-european-games",
+				"year": 2027,
+				"city": "Istanbul",
+				"country_code": "TUR",
+				"start_date": "2027-06-16",
+				"end_date": "2027-06-27",
+				"has_results": false,
+				"champ": {
+					"id": 138,
+					"name": "European Games",
+					"slug": "european-games",
+					"category": 3
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				}
+			},
+			{
+				"id": 6776,
+				"short_name": null,
+				"name": "2026 Balkan Race Walking Champs",
+				"slug": "2026-balkan-race-walking-champs",
+				"year": 2026,
+				"city": "Izmir",
+				"country_code": "TUR",
+				"start_date": "2026-03-14",
+				"end_date": null,
+				"has_results": true,
+				"champ": {
+					"id": 110,
+					"name": "Balkan Race Walking Champs",
+					"slug": "balkan-race-walking-champs",
+					"category": 6
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				}
+			},
+			{
+				"id": 6007,
+				"short_name": null,
+				"name": "2025 Istanbul Marathon",
+				"slug": "2025-istanbul-marathon",
+				"year": 2025,
+				"city": "Istanbul",
+				"country_code": "TUR",
+				"start_date": "2025-11-02",
+				"end_date": null,
+				"has_results": true,
+				"champ": {
+					"id": 142,
+					"name": "Istanbul Marathon",
+					"slug": "istanbul-marathon",
+					"category": 8
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				}
+			},
+			{
+				"id": 2224,
+				"short_name": null,
+				"name": "2024 European XC",
+				"slug": "2024-european-xc",
+				"year": 2024,
+				"city": "Antalya",
+				"country_code": "TUR",
+				"start_date": "2024-12-08",
+				"end_date": null,
+				"has_results": true,
+				"champ": {
+					"id": 23,
+					"name": "European XC",
+					"slug": "european-xc",
+					"category": 3
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				}
+			},
+			{
+				"id": 5197,
+				"short_name": null,
+				"name": "2024 Istanbul Marathon",
+				"slug": "2024-istanbul-marathon",
+				"year": 2024,
+				"city": "Istanbul",
+				"country_code": "TUR",
+				"start_date": "2024-11-03",
+				"end_date": null,
+				"has_results": true,
+				"champ": {
+					"id": 142,
+					"name": "Istanbul Marathon",
+					"slug": "istanbul-marathon",
+					"category": 8
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				}
+			},
+			{
+				"id": 4056,
+				"short_name": null,
+				"name": "2024 Balkan Athletics Championships",
+				"slug": "2024-balkan-athletics-championships",
+				"year": 2024,
+				"city": "Izmir",
+				"country_code": "TUR",
+				"start_date": "2024-05-25",
+				"end_date": "2024-05-26",
+				"has_results": true,
+				"champ": {
+					"id": 60,
+					"name": "Balkan Athletics Championships",
+					"slug": "balkan-champs",
+					"category": 6
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				}
+			},
+			{
+				"id": 2813,
+				"short_name": null,
+				"name": "2024 World Race Walking Cup",
+				"slug": "2024-world-race-walking-cup",
+				"year": 2024,
+				"city": "Antalya",
+				"country_code": "TUR",
+				"start_date": "2024-04-21",
+				"end_date": "2024-04-22",
+				"has_results": true,
+				"champ": {
+					"id": 66,
+					"name": "World Race Walking Cup",
+					"slug": "world-race-walking-cup",
+					"category": 0
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				}
+			},
+			{
+				"id": 4058,
+				"short_name": null,
+				"name": "2024 Balkan Race Walking Champs",
+				"slug": "2024-balkan-race-walking-champs",
+				"year": 2024,
+				"city": "Antalya",
+				"country_code": "TUR",
+				"start_date": "2024-03-09",
+				"end_date": null,
+				"has_results": true,
+				"champ": {
+					"id": 110,
+					"name": "Balkan Race Walking Champs",
+					"slug": "balkan-race-walking-champs",
+					"category": 6
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				}
+			}
+		]
+	}
+}

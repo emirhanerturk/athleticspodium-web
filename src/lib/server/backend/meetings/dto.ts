@@ -8,6 +8,11 @@ export interface MeetingDto {
 	champ: { name: string; slug: string } | null;
 }
 
+export interface MeetingListDto {
+	count: number;
+	rows: (MeetingDto & { year: number; has_results?: boolean })[];
+}
+
 export interface MeetingDetailDto extends MeetingDto {
 	id: number;
 	year: number;

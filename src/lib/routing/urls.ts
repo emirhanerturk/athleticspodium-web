@@ -32,8 +32,8 @@ export function countryUrl(code: string): string {
 	return `/country/${code.toUpperCase()}`;
 }
 
-export function countryAthletesUrl(code: string): string {
-	return `${countryUrl(code)}/athletes`;
+export function countryAthletesUrl(code: string, page = 1): string {
+	return `${countryUrl(code)}/athletes${page > 1 ? `?page=${page}` : ''}`;
 }
 
 export function articleUrl(article: { id: number; slug: string }): string {
@@ -51,6 +51,14 @@ export function medalSearchUrl(filter: { champ: number; event?: number; gender?:
 	if (filter.event !== undefined) query.set('event', String(filter.event));
 	if (filter.gender) query.set('gender', String(GENDER_PARAMS[filter.gender]));
 	return `${PAGES.medalSearch}?${query}`;
+}
+
+export function countryChampsUrl(countryCode: string, champId: number): string {
+	return `${PAGES.countryChamps}?country=${countryCode.toUpperCase()}&champ=${champId}`;
+}
+
+export function countriesUrl(areaSlug?: string): string {
+	return areaSlug ? `${PAGES.countries}?area=${areaSlug}` : PAGES.countries;
 }
 
 export function flagUrl(countryCode: string): string {

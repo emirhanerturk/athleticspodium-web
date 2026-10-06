@@ -1,0 +1,12 @@
+{
+	"success": true,
+	"data": {
+		"code": "TUR",
+		"name": "Turkey",
+		"content": "<p><strong><span style=\"font-size: 14px;\">TAF<br></span></strong><span style=\"font-size: 14px;\">T&uuml;rkiye Atletizm Federasyonu<br><br></span><span style=\"font-size: 14px;\"><strong>Affiliates</strong><br>World Athletics<br>European Athletics<br>Balkan Athletics<br>Mediterranean Athletics Union</span><br><br><span style=\"font-size: 14px;\"><strong><span style=\"font-size: 14px;\"><strong>Foundation:&nbsp;</strong></span></strong><span style=\"font-size: 14px;\">1922</span><strong><span style=\"font-size: 14px;\"><br></span>National CH start:&nbsp;</strong>1924<br><strong>Olympics debut:&nbsp;</strong>1912 (as Ottoman Empire)</span><br><br><br><span style=\"font-size: 14px;\"><strong>Official Web site</strong><br></span><a data-fr-linked=\"true\" href=\"//www.taf.org.tr\"><span style=\"font-size: 14px;\">www.taf.org.tr</span></a></p>",
+		"categories": [3],
+		"is_country": true,
+		"created_date": "2020-03-28T09:09:10.262Z",
+		"updated_date": "2021-01-16T19:29:04.400Z"
+	}
+}
