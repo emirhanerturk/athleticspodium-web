@@ -576,6 +576,8 @@ These are built with the v2 components on the existing endpoints:
 Notes:
 
 - **Articles:** `/article?page=n` lists 12 per page (the legacy page kept the page in memory). `/article/[id]/[slug]` shows the standfirst (`spot`), the photo with caption and credit, the content, the related championships, editions, athletes and countries, and three more stories, with `Article` JSON-LD. A wrong slug redirects (301); a missing id is a 404 (the backend now answers `data: null` instead of a 500).
+- **Medal search** (`/medals/search`): the legacy parameters `champs`, `country`, `event`, `year`, `gender` (0–2), `medal` (1–3), `order` and `page` (100 per page). A championship or a country is required. Choosing one narrows the other select, the years and the events, as on the legacy form. Column headers are sort links. The filter lists (championships, countries, events) are cached for an hour.
+- **Medals by country and championship** (`/medals/country-champs?country=&champ=`): editions newest first with gold, silver, bronze and total, a total row and a "Details →" link into the medal search for that year. Road races and national championships are left out of the select.
 - Filters live in query strings.
 - The contact form uses a SvelteKit form action that posts to `/contacts`.
 
@@ -692,8 +694,8 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    11. Calendar, done on 2026-10-07
    12. Search and quick search (B12, B16), done on 2026-10-07
    13. Articles, done on 2026-10-07
-   14. Medal search
-   15. Medals by country and championship
+   14. Medal search, done on 2026-10-07
+   15. Medals by country and championship, done on 2026-10-07
    16. Compare
    17. Static pages
 3. **Pre-cutover QA:**
