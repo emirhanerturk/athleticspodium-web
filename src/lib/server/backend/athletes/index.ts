@@ -1,3 +1,4 @@
+import { byMedals, type OnThisDay } from '#lib/domain/athlete.js';
 import { monthDayOf, type IsoDate } from '#lib/domain/date.js';
 import { BackendNotFoundError, type BackendClient } from '../client.js';
 import type {
@@ -5,6 +6,7 @@ import type {
 	AthleteLetterPageDto,
 	AthleteListDto,
 	AthleteSummaryDto,
+	FeaturedAthleteDto,
 	OlympicMeetingDto,
 	RelationDto,
 	ResultDto
@@ -14,12 +16,14 @@ import {
 	parseAthleteProfile,
 	parseAthleteSummary,
 	parseBirthdaysToday,
+	parseFeaturedAthletes,
 	parseOlympicGames,
 	parseRelatives,
 	parseResult
 } from './parse.js';
 
 const BIRTHDAY_CANDIDATES = 10;
+const ON_THIS_DAY_CANDIDATES = 50;
 
 export function createAthletes(client: BackendClient) {
 	return {
@@ -45,6 +49,29 @@ export function createAthletes(client: BackendClient) {
 				`/athletes/first-letter/${letter}/${page}`
 			);
 			return { count: list.count, athletes: list.rows.map(parseAthleteListing) };
+		},
+
+		async featured() {
+			return parseFeaturedAthletes(await client.get<FeaturedAthleteDto[]>('/featured-athletes'));
+		},
+
+		async onThisDay(date: IsoDate, kind: 'born' | 'died', limit: number): Promise<OnThisDay> {
+			const field = kind === 'born' ? 'date_of_birth' : 'date_of_death';
+			const list = await client.get<AthleteListDto>('/athletes', {
+				[field]: monthDayOf(date),
+				order: field,
+				limit: ON_THIS_DAY_CANDIDATES,
+				fields: 'country_code,date_of_death'
+			});
+			if (!list.rows.length) return { count: list.count, athletes: [] };
+
+			const summaries = await client.get<AthleteSummaryDto[]>('/athletes/summaries', {
+				ids: list.rows.map((row) => row.id).join(',')
+			});
+			return {
+				count: list.count,
+				athletes: summaries.map(parseAthleteSummary).sort(byMedals).slice(0, limit)
+			};
 		},
 
 		async getSummary(id: number) {

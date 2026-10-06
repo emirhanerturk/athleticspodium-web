@@ -1,0 +1,26 @@
+{
+	"success": true,
+	"data": [
+		{
+			"id": 33167,
+			"slug": "valerie-adams-vili",
+			"first_name": "Valerie",
+			"last_name": "Adams",
+			"country_code": "NZL",
+			"events": ["Shot put"],
+			"olympic_mark": true,
+			"date_of_birth": "1984-10-06",
+			"date_of_death": null,
+			"image": {
+				"uri": "49505ed9-8908-4833-9f16-93c09becd7bf.jpeg",
+				"created_date": "2021-07-22T02:30:15.108Z"
+			},
+			"medals": {
+				"gold": 17,
+				"silver": 4,
+				"bronze": 2,
+				"total": 23
+			}
+		}
+	]
+}

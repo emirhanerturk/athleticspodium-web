@@ -465,10 +465,10 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 
 ### Athletes (`/athlete`)
 
-- **Total athletes:** `/athletes?limit=1`.
-- **Hero search:** the quick search endpoint.
+- **Total athletes:** the `athletes` figure of `/stats` (B14), already loaded by the layout.
+- **Hero search:** a `GET /search?type=athletes&q=` form, so it works without JavaScript; the quick search suggestions are added with the search work (B12).
 - **Featured cards:** from `/featured-athletes` (B8).
-- **Born today:** `†` and life years mark deceased athletes (B9).
+- **Born today:** up to 50 candidates from `/athletes?date_of_birth=` are ranked by international medals through `/athletes/summaries` (B11); the first six are shown. `†` and life years mark deceased athletes (B9).
 - **Greatest by nation:**
   - Top 5 per nation, from `/countries/:code/athletes?limit=5&international=1` (B3).
   - The nation chips come from a fixed list in `lib/domain/featured-nations.ts`.
@@ -582,11 +582,11 @@ Each item is a normal backend PR. It ships before the page that needs it (releas
 | B3  | `/countries/:code/athletes`: return `image`, `date_of_birth` and `events`; add `gender`, `international` and `offset` parameters.                                                                                                                                                                        | Country, Country athletes, Athletes |
 | B4  | `/champs/:slug`: include meetings with `country_code`, `start_date`, `end_date` and an events count per edition.                                                                                                                                                                                         | Championship                        |
 | B5  | `/meetings`: add a `country` filter, an `international` filter and a `has_results` flag; leave `content` out of the list.                                                                                                                                                                                | Country, Calendar                   |
-| B6  | `/meetings/upcoming-meetings`: add `limit` and `days`; include running meetings (`end_date` ≥ today); add `category` to the champ include.                                                                                                                                                               | Header, Home, Calendar              |
+| B6  | `/meetings/upcoming-meetings`: add `limit` and `days`; include running meetings (`end_date` ≥ today) when either is given; add `category` to the champ include.                                                                                                                                          | Header, Home, Calendar              |
 | B7  | Accept slugs on `/meetings/:id/medals`, `/meetings/:id/counts` and `/champs/:id/counts`.                                                                                                                                                                                                                 | Edition, Championship, Countries    |
 | B8  | `/featured-athletes`: add international medal counts.                                                                                                                                                                                                                                                    | Home, Athletes                      |
 | B9  | Athlete, meeting and article lists accept column names in `fields`, which narrows each row to the default scope plus those columns. Association names in `fields` keep working as includes. Requests without column names still return full rows for the legacy clients; the web always passes `fields`. | all list pages                      |
-| B10 | Article lists and featured articles return the related meeting or championship name.                                                                                                                                                                                                                     | Home                                |
+| B10 | Article lists and featured articles return the related meeting or championship name, as `context` when `context=1` is passed.                                                                                                                                                                            | Home                                |
 | B11 | Athlete summary: `GET /athletes/:id/summary` and `GET /athletes/summaries?ids=` return identity, first image, events, `olympic_mark`, birth and death dates, and international gold/silver/bronze.                                                                                                       | hover card, Search                  |
 | B12 | Search rework (details below).                                                                                                                                                                                                                                                                           | Search, quick search                |
 | B13 | `GET /champs/:id/top-athletes?limit=`: gold/silver/bronze, first and last year, and events per athlete within the championship.                                                                                                                                                                          | Championship                        |
@@ -679,7 +679,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    6. Country athletes, done on 2026-10-07
    7. Countries, done on 2026-10-07
    8. Athletes A–Z, done on 2026-10-07
-   9. Athletes (B8)
+   9. Athletes (B8), done on 2026-10-07
    10. Home (B6, B10, B15)
    11. Calendar
    12. Search and quick search (B12, B16)

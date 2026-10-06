@@ -1,0 +1,101 @@
+{
+	"success": true,
+	"data": [
+		{
+			"gold": "20",
+			"silver": "5",
+			"bronze": "1",
+			"total": "26",
+			"athlete": {
+				"id": 27911,
+				"first_name": "Faith",
+				"last_name": "Kipyegon",
+				"slug": "faith-kipyegon",
+				"gender": false,
+				"olympic_mark": true,
+				"image": [
+					{
+						"uri": "9d03da47-621b-4034-bbcd-095c7bc89215.jpeg",
+						"created_date": "2022-01-10T09:41:54.638Z"
+					}
+				],
+				"date_of_birth": "1994-01-10",
+				"events": ["1500 metres"]
+			}
+		},
+		{
+			"gold": "17",
+			"silver": "7",
+			"bronze": "3",
+			"total": "27",
+			"athlete": {
+				"id": 18795,
+				"first_name": "Paul",
+				"last_name": "Tergat",
+				"slug": "paul-tergat",
+				"gender": true,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1969-06-17",
+				"events": ["Long distances"]
+			}
+		},
+		{
+			"gold": "17",
+			"silver": "6",
+			"bronze": "2",
+			"total": "25",
+			"athlete": {
+				"id": 8949,
+				"first_name": "Eliud",
+				"last_name": "Kipchoge",
+				"slug": "eliud-kipchoge",
+				"gender": true,
+				"olympic_mark": true,
+				"image": [
+					{
+						"uri": "0d3463c6-9158-4f6e-80d4-d5828e186b4e.jpeg",
+						"credit": "Bob Ramsak",
+						"created_date": "2021-01-10T18:54:04.453Z"
+					}
+				],
+				"date_of_birth": "1984-11-05",
+				"events": ["Long distances", "Marathon"]
+			}
+		},
+		{
+			"gold": "17",
+			"silver": "1",
+			"bronze": "2",
+			"total": "20",
+			"athlete": {
+				"id": 164,
+				"first_name": "John",
+				"last_name": "Ngugi",
+				"slug": "john-ngugi",
+				"gender": true,
+				"olympic_mark": true,
+				"image": null,
+				"date_of_birth": "1962-05-10",
+				"events": ["XC", "5000m", "10", "0000m"]
+			}
+		},
+		{
+			"gold": "14",
+			"silver": "13",
+			"bronze": "7",
+			"total": "34",
+			"athlete": {
+				"id": 26787,
+				"first_name": "Vivian",
+				"last_name": "Cheruiyot",
+				"slug": "vivian-cheruiyot",
+				"gender": false,
+				"olympic_mark": true,
+				"image": null,
+				"date_of_birth": "1983-09-11",
+				"events": ["Long distances"]
+			}
+		}
+	]
+}

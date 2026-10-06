@@ -1,0 +1,218 @@
+{
+	"success": true,
+	"data": [
+		{
+			"id": 61,
+			"athlete_id": 18060,
+			"rank": 1,
+			"created_date": "2026-02-15T20:37:47.062Z",
+			"athlete": {
+				"id": 18060,
+				"first_name": "Geo",
+				"last_name": "Andre",
+				"aka": ["Georges Yvan Andre"],
+				"slug": "geo-andre",
+				"country_code": "FRA",
+				"gender": true,
+				"olympic_mark": false,
+				"date_of_birth": "1889-08-13",
+				"date_of_death": "1943-05-04",
+				"place_of_birth": "Paris, France",
+				"events": ["Sprints", "decathlon"],
+				"image": [
+					{
+						"uri": "0a2fa485-a73e-45ad-997e-b2062ede0f44.jpeg",
+						"credit": "Source: Agence Rol - Gallica Archive",
+						"created_date": "2022-05-03T21:17:18.877Z"
+					}
+				],
+				"biography": "<p>Olympic medallist and athlete. Rugby player. </p><p>Attended five Olympics as he took the Olympic Oath during Paris 1924 Games. Represented Stade Français and Racing Club de Paris (from 1909) during his active years. Between 1907 and 1922, he won 20 national titles, mostly in high jump and hurdli",
+				"created_date": "2020-03-28T14:15:11.049Z",
+				"updated_date": "2026-02-15T20:34:24.431Z",
+				"medals": {
+					"gold": 0,
+					"silver": 3,
+					"bronze": 1,
+					"total": 4
+				}
+			}
+		},
+		{
+			"id": 59,
+			"athlete_id": 9591,
+			"rank": 2,
+			"created_date": "2024-06-24T13:48:09.231Z",
+			"athlete": {
+				"id": 9591,
+				"first_name": "Viktor",
+				"last_name": "Saneyev",
+				"aka": ["Viktor Danilovich Saneyev"],
+				"slug": "viktor-saneyev",
+				"country_code": "URS",
+				"gender": true,
+				"olympic_mark": true,
+				"date_of_birth": "1945-10-03",
+				"date_of_death": "2022-01-03",
+				"place_of_birth": "Sukhumi, Georgia",
+				"events": ["Triple jump"],
+				"image": [
+					{
+						"uri": "160a8353-88e0-461e-ad6b-1a7d3f48e83d.jpeg",
+						"credit": "Source: msy.gov.ge",
+						"created_date": "2021-10-05T19:58:32.303Z"
+					}
+				],
+				"biography": "",
+				"created_date": "2020-03-28T11:24:18.729Z",
+				"updated_date": "2022-01-03T10:52:56.095Z",
+				"medals": {
+					"gold": 24,
+					"silver": 10,
+					"bronze": 0,
+					"total": 34
+				}
+			}
+		},
+		{
+			"id": 48,
+			"athlete_id": 33600,
+			"rank": 3,
+			"created_date": "2022-05-20T15:51:40.280Z",
+			"athlete": {
+				"id": 33600,
+				"first_name": "Marlies",
+				"last_name": "Göhr",
+				"aka": ["Marlies Oelsner"],
+				"slug": "marlies-oelsner-gohr",
+				"country_code": "GDR",
+				"gender": false,
+				"olympic_mark": true,
+				"date_of_birth": "1958-03-21",
+				"date_of_death": null,
+				"place_of_birth": "Gera, Germany DR",
+				"events": ["Sprints"],
+				"image": [
+					{
+						"uri": "e37be573-86ad-427d-b36b-51491daae9d8.jpeg",
+						"created_date": "2021-01-28T20:24:30.168Z"
+					}
+				],
+				"biography": "<p>East German sprint great. Born as Marlies Oelsner, then used her name as Marlies G&ouml;hr after marriage to footballer Ulrich G&ouml;hr. <span style=\"color: rgb(255, 255, 255);\"><span style=\"background-color: rgb(226, 80, 65);\"><br></span></span><br>She has two Olympics and World Champs golds an",
+				"created_date": "2020-03-28T22:20:08.607Z",
+				"updated_date": "2021-01-28T20:24:30.167Z",
+				"medals": {
+					"gold": 32,
+					"silver": 11,
+					"bronze": 4,
+					"total": 47
+				}
+			}
+		},
+		{
+			"id": 58,
+			"athlete_id": 33214,
+			"rank": 4,
+			"created_date": "2024-06-24T13:47:55.618Z",
+			"athlete": {
+				"id": 33214,
+				"first_name": "Veronica",
+				"last_name": "Campbell-Brown",
+				"aka": ["Veronica Angella Campbell-Brown"],
+				"slug": "veronica-campbell-brown",
+				"country_code": "JAM",
+				"gender": false,
+				"olympic_mark": true,
+				"date_of_birth": "1982-05-15",
+				"date_of_death": null,
+				"place_of_birth": "Trelawny, Jamaica",
+				"events": ["Sprints"],
+				"image": [
+					{
+						"uri": "c0ebe9ec-8b71-4028-9bda-522133185c96.jpeg",
+						"created_date": "2020-10-03T20:23:52.612Z"
+					}
+				],
+				"biography": "",
+				"created_date": "2020-03-28T22:16:01.064Z",
+				"updated_date": "2022-05-14T21:43:38.116Z",
+				"medals": {
+					"gold": 26,
+					"silver": 18,
+					"bronze": 4,
+					"total": 48
+				}
+			}
+		},
+		{
+			"id": 44,
+			"athlete_id": 10352,
+			"rank": 5,
+			"created_date": "2021-12-15T20:01:28.467Z",
+			"athlete": {
+				"id": 10352,
+				"first_name": "Ramil",
+				"last_name": "Guliyev",
+				"aka": null,
+				"slug": "ramil-guliyev",
+				"country_code": "TUR",
+				"gender": true,
+				"olympic_mark": false,
+				"date_of_birth": "1990-05-29",
+				"date_of_death": null,
+				"place_of_birth": "Baku, Azerbaijan",
+				"events": ["Sprints"],
+				"image": [
+					{
+						"uri": "89e0fb51-a071-4fc7-abdc-bbbb87832622.jpeg",
+						"created_date": "2021-09-10T09:05:35.093Z"
+					}
+				],
+				"biography": "<p>Turkey&#39;s first (and only) world champion in seniors level. Born and raised in Azerbaijani capital Baku.<br><br>Started athletics in guidance of his father, Eldar, who was a scholar in State University. Quickly gained confidence in international scene became World U18 silver medallist in 2007,",
+				"created_date": "2020-03-28T11:31:57.194Z",
+				"updated_date": "2022-05-29T22:33:42.427Z",
+				"medals": {
+					"gold": 21,
+					"silver": 15,
+					"bronze": 3,
+					"total": 39
+				}
+			}
+		},
+		{
+			"id": 57,
+			"athlete_id": 35017,
+			"rank": 6,
+			"created_date": "2024-06-24T13:47:33.676Z",
+			"athlete": {
+				"id": 35017,
+				"first_name": "Yaroslava",
+				"last_name": "Mahuchikh",
+				"aka": ["Yaroslava Oleksiivna Mahuchikh"],
+				"slug": "yaroslava-mahuchikh",
+				"country_code": "UKR",
+				"gender": false,
+				"olympic_mark": true,
+				"date_of_birth": "2001-09-19",
+				"date_of_death": null,
+				"place_of_birth": "Dnipropetrovsk, Ukraine",
+				"events": ["High jump"],
+				"image": [
+					{
+						"uri": "fcaa7ef2-7ab4-4c6e-ad70-f51f65a7c897.jpeg",
+						"credit": "Photo by Evren Kalinbacak for Istanbul 2023 LOC",
+						"created_date": "2023-03-11T13:46:23.957Z"
+					}
+				],
+				"biography": "<p>High jump world record holder. World and Olympic champion.</p><p>Mahuchikh discovered at age 11 by former 400H runner and coach Tetiana Stepanova. She won every single age-group global events including Youth Olympics. Broke 2-meter barrier first time on 30th June 2019 during Diamond League meet i",
+				"created_date": "2020-03-28T22:37:32.689Z",
+				"updated_date": "2024-12-01T21:18:55.343Z",
+				"medals": {
+					"gold": 19,
+					"silver": 3,
+					"bronze": 3,
+					"total": 25
+				}
+			}
+		}
+	]
+}

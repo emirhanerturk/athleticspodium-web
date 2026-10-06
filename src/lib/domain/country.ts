@@ -28,6 +28,7 @@ export interface ChampionshipMedals {
 export interface CountryAthlete {
 	athlete: AthleteRef & {
 		men: boolean;
+		olympicChampion: boolean;
 		image: Image | null;
 		birthDate: IsoDate | null;
 		events: string[];

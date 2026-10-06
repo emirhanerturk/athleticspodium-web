@@ -1,0 +1,113 @@
+{
+	"success": true,
+	"data": [
+		{
+			"gold": "31",
+			"silver": "3",
+			"bronze": "4",
+			"total": "38",
+			"athlete": {
+				"id": 13897,
+				"first_name": "Carl",
+				"last_name": "Lewis",
+				"slug": "carl-lewis",
+				"gender": true,
+				"olympic_mark": true,
+				"image": [
+					{
+						"uri": "adf87b31-0b8b-4927-ab03-91b053a18b3f.jpeg",
+						"created_date": "2020-08-15T11:06:49.494Z"
+					}
+				],
+				"date_of_birth": "1962-07-01",
+				"events": ["Sprints", "long jump"]
+			}
+		},
+		{
+			"gold": "24",
+			"silver": "7",
+			"bronze": "5",
+			"total": "36",
+			"athlete": {
+				"id": 40337,
+				"first_name": "Allyson",
+				"last_name": "Felix",
+				"slug": "allyson-felix",
+				"gender": false,
+				"olympic_mark": true,
+				"image": [
+					{
+						"uri": "acd5d6fb-f7f4-4c14-a0d9-036ecdd6a918.jpeg",
+						"credit": "Source: USATF",
+						"created_date": "2021-06-21T17:38:04.871Z"
+					}
+				],
+				"date_of_birth": "1985-11-18",
+				"events": ["Sprints"]
+			}
+		},
+		{
+			"gold": "21",
+			"silver": "3",
+			"bronze": "1",
+			"total": "25",
+			"athlete": {
+				"id": 38537,
+				"first_name": "Natasha",
+				"last_name": "Hastings",
+				"slug": "natasha-hastings",
+				"gender": false,
+				"olympic_mark": true,
+				"image": null,
+				"date_of_birth": "1986-07-23",
+				"events": ["Sprints"]
+			}
+		},
+		{
+			"gold": "20",
+			"silver": "3",
+			"bronze": "1",
+			"total": "24",
+			"athlete": {
+				"id": 18845,
+				"first_name": "LaShawn",
+				"last_name": "Merritt",
+				"slug": "lashawn-merritt",
+				"gender": true,
+				"olympic_mark": true,
+				"image": [
+					{
+						"uri": "de595334-fb98-4622-bafd-322c23ea1b7d.jpeg",
+						"credit": "Photo: Mustafa Yalçın",
+						"created_date": "2021-05-27T06:59:18.413Z"
+					}
+				],
+				"date_of_birth": "1986-06-27",
+				"events": ["400 metres"]
+			}
+		},
+		{
+			"gold": "17",
+			"silver": "6",
+			"bronze": "2",
+			"total": "25",
+			"athlete": {
+				"id": 37220,
+				"first_name": "Gwen",
+				"last_name": "Torrence",
+				"slug": "gwen-torrence",
+				"gender": false,
+				"olympic_mark": true,
+				"image": [
+					{
+						"uri": "d8fd36b3-b42b-43df-a108-4f7f6933af65.jpeg",
+						"credit": "Source: Sporting-Heroes.net",
+						"created_date": "2025-06-11T21:12:46.661Z"
+					}
+				],
+				"date_of_birth": "1965-06-12",
+				"events": ["Sprints"]
+			}
+		}
+	]
+}

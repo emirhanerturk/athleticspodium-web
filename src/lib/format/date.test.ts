@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { formatDate, formatDateRange, formatDaysToGo, formatYearSpan } from './date.js';
+import {
+	formatDate,
+	formatDateRange,
+	formatDayMonth,
+	formatDaysToGo,
+	formatYearSpan
+} from './date.js';
 
 describe('formatDate', () => {
 	it('writes day, short month and year', () => {
@@ -46,5 +52,11 @@ describe('formatYearSpan', () => {
 
 	it('writes both years in full across centuries', () => {
 		expect(formatYearSpan(1998, 2006)).toBe('1998–2006');
+	});
+});
+
+describe('formatDayMonth', () => {
+	it('writes the day and short month', () => {
+		expect(formatDayMonth('2026-10-07')).toBe('7 Oct');
 	});
 });

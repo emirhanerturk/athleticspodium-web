@@ -79,3 +79,16 @@ export interface AthleteSummary extends AthleteRef, AthleteLifespan {
 	image: Image | null;
 	medals: MedalTally;
 }
+
+export interface FeaturedAthlete extends AthleteSummary {
+	biography: string | null;
+}
+
+export interface OnThisDay {
+	count: number;
+	athletes: AthleteSummary[];
+}
+
+export function byMedals(a: { medals: MedalTally }, b: { medals: MedalTally }): number {
+	return b.medals.total - a.medals.total || b.medals.gold - a.medals.gold;
+}

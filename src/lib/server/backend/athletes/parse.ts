@@ -6,6 +6,7 @@ import {
 	type AthleteRef,
 	type AthleteSummary,
 	type BirthdaysToday,
+	type FeaturedAthlete,
 	type Relative
 } from '#lib/domain/athlete.js';
 import type { OlympicGames } from '#lib/domain/career.js';
@@ -16,6 +17,7 @@ import type {
 	AthleteListingDto,
 	AthleteRowDto,
 	AthleteSummaryDto,
+	FeaturedAthleteDto,
 	OlympicMeetingDto,
 	RelationDto,
 	ResultDto
@@ -143,4 +145,27 @@ export function parseAthleteSummary(dto: AthleteSummaryDto): AthleteSummary {
 			: null,
 		medals: dto.medals
 	};
+}
+
+export function parseFeaturedAthletes(dtos: FeaturedAthleteDto[]): FeaturedAthlete[] {
+	return dtos.flatMap(({ athlete }) => {
+		if (!athlete) return [];
+		const image = athlete.image?.[0];
+		return [
+			{
+				...parseAthleteWithLifespan(athlete),
+				events: athlete.events ?? [],
+				olympicChampion: athlete.olympic_mark,
+				image: image
+					? {
+							path: `athletes/${athlete.id}/${image.uri}`,
+							credit: image.credit ?? null,
+							caption: null
+						}
+					: null,
+				medals: athlete.medals ?? { gold: 0, silver: 0, bronze: 0, total: 0 },
+				biography: athlete.biography?.trim() || null
+			}
+		];
+	});
 }
