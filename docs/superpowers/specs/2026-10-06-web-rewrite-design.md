@@ -94,7 +94,7 @@ What the sample shows:
 - A calendar `.ics` feed.
 - The "Athletics families" section.
 - Trending-athlete tracking.
-- New editorial data fields other than event discipline and long name (B18).
+- New editorial data fields.
 
 ## 5. Pages and URLs
 
@@ -364,7 +364,7 @@ These live in `lib/domain` and match the backend:
 
 - **OG badge** (Olympic champion) comes from `athlete.olympic_mark`. **"Olympian"** (took part in the Olympics) comes from `olympian_athlete`, via B16.
 - **Today** is the UTC date. Ages and countdowns are computed from it.
-- **Events.** Long names and disciplines come from the backend once B18 ships. Until then the short name is shown and discipline-dependent features are hidden.
+- **Events.** Long names and disciplines come from `lib/domain/event.ts`, a map of all 168 events in the database. A unit test fails when that list changes without the map.
 
 ## 9. Pages
 
@@ -424,7 +424,7 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 | Hero, facts, editions strip | `/champs/:slug` with meetings           | B4 for host country, dates, events per edition |
 | All-time medal table        | `/champs/:slug/counts`                  | B7                                             |
 | Most golds                  | `/champs/:id/top-athletes`              | B13                                            |
-| Programme                   | `events_men/women/mixed` with `/events` | B18 for long names                             |
+| Programme                   | `events_men/women/mixed` with `/events` | `lib/domain/event.ts` for long names           |
 | History                     | `content`                               | —                                              |
 | Stories                     | `/articles?champ=`                      | —                                              |
 
@@ -432,25 +432,25 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 
 ### Edition (`/champs/[champ]/[meeting]`)
 
-| Block                                          | Data                                         | Prerequisite           |
-| ---------------------------------------------- | -------------------------------------------- | ---------------------- |
-| Header, host, dates                            | `/meetings/:slug`                            | —                      |
-| Edition switcher                               | champ meetings from `/champs/:slug`          | —                      |
-| Stats (events, medals, nations, world records) | derived from medals; relay rows deduplicated | —                      |
-| Men / Women / Mixed tabs, event cards, rows    | `/meetings/:slug/medals`                     | B7                     |
-| Discipline chips, long event names             | event data                                   | B18; hidden until then |
-| Medal table                                    | `/meetings/:slug/counts`                     | B7                     |
-| Records set                                    | medal rows with `records`, NR left out       | —                      |
-| About this edition                             | meeting `content` and meeting notes          | —                      |
-| Stories                                        | `/articles?meeting=`                         | —                      |
-| Hover cards                                    | `/internal/athlete-card/[id]`                | B11                    |
+| Block                                          | Data                                         | Prerequisite |
+| ---------------------------------------------- | -------------------------------------------- | ------------ |
+| Header, host, dates                            | `/meetings/:slug`                            | —            |
+| Edition switcher                               | champ meetings from `/champs/:slug`          | —            |
+| Stats (events, medals, nations, world records) | derived from medals; relay rows deduplicated | —            |
+| Men / Women / Mixed tabs, event cards, rows    | `/meetings/:slug/medals`                     | B7           |
+| Discipline chips, long event names             | `lib/domain/event.ts`                        | —            |
+| Medal table                                    | `/meetings/:slug/counts`                     | B7           |
+| Records set                                    | medal rows with `records`, NR left out       | —            |
+| About this edition                             | meeting `content` and meeting notes          | —            |
+| Stories                                        | `/articles?meeting=`                         | —            |
+| Hover cards                                    | `/internal/athlete-card/[id]`                | B11          |
 
 - **Rows:**
   - Each row shows its own wind next to the mark.
   - `medal.notes` and `info` appear as footnote markers.
   - Cancelled results use the DQ style.
 - **"Show places 4–8"** toggles placings.
-- **Hero image:** The championship image stands in, because meetings have no image yet.
+- **Hero image:** Meetings have no image yet, so the hero runs full width without one.
 
 ### Athletes (`/athlete`)
 
@@ -472,23 +472,23 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 
 ### Athlete (`/athlete/[id]/[slug]`)
 
-| Block                                                                    | Data                                            | Prerequisite           |
-| ------------------------------------------------------------------------ | ----------------------------------------------- | ---------------------- |
-| Identity, photo with credit, aka, birth details, biography               | `/athletes/:id`                                 | —                      |
-| Podium counts, "on the podium" span, by-championship totals, level chips | derived from `/athletes/:id/medals` (section 8) | —                      |
-| Olympian line, Olympic cards                                             | `/athletes/:id/olympians` with medal rows       | B1 for city            |
-| Results table with Venue column                                          | `/athletes/:id/medals`                          | B1                     |
-| National titles box                                                      | the same, category 7                            | B1                     |
-| Family                                                                   | `/athletes/:id/relateds`                        | —                      |
-| Stories                                                                  | `/articles?athlete=`                            | —                      |
-| "Heights on the podium" chart                                            | numeric marks by year                           | B18; hidden until then |
+| Block                                                                    | Data                                            | Prerequisite                                     |
+| ------------------------------------------------------------------------ | ----------------------------------------------- | ------------------------------------------------ |
+| Identity, photo with credit, aka, birth details, biography               | `/athletes/:id`                                 | —                                                |
+| Podium counts, "on the podium" span, by-championship totals, level chips | derived from `/athletes/:id/medals` (section 8) | —                                                |
+| Olympian line, Olympic cards                                             | `/athletes/:id/olympians` with medal rows       | B1 for city                                      |
+| Results table with Venue column                                          | `/athletes/:id/medals`                          | B1                                               |
+| National titles box                                                      | the same, category 7                            | B1                                               |
+| Family                                                                   | `/athletes/:id/relateds`                        | —                                                |
+| Stories                                                                  | `/articles?athlete=`                            | —                                                |
+| "Heights on the podium" chart                                            | numeric marks by year                           | follow-up; discipline from `lib/domain/event.ts` |
 
 - **Results table:**
   - It keeps the event column, wind, notes and DQ.
   - "Show places 4–8" adds placings, with a "Place" column.
 - **Chart:** For an athlete with several events, the chart shows the event with the most medals.
 - **Mark notes:** `medal.info` is shown after the mark; `(i)` renders as the indoor "i".
-- **Layout until B18:** the chart's place in the "By championship" band holds the national championships list.
+- **Layout until the chart is built:** the chart's place in the "By championship" band holds the national championships list.
 - **Dropped:** the age-group chip.
 
 ### Countries (`/country`)
@@ -560,28 +560,28 @@ Notes:
 
 Each item is a normal backend PR. It ships before the page that needs it (release order: backend, then web). `athleticspodium-frontend` is legacy from 2026-10-06 and gets no further fixes; backend changes only need to keep it working.
 
-| ID  | Change                                                                                                                                                                                                                                                                                                   | Needed by                            |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| B1  | `/athletes/:id/medals`: add `city` and `country_code` to the meeting include.                                                                                                                                                                                                                            | Athlete                              |
-| B2  | `/countries/:code/medals`: add `category` to the champ include and grouping.                                                                                                                                                                                                                             | Country                              |
-| B3  | `/countries/:code/athletes`: return `image`, `date_of_birth` and `events`; add `gender`, `international` and `offset` parameters.                                                                                                                                                                        | Country, Country athletes, Athletes  |
-| B4  | `/champs/:slug`: include meetings with `country_code`, `start_date`, `end_date` and an events count per edition.                                                                                                                                                                                         | Championship                         |
-| B5  | `/meetings`: add a `country` filter and a `has_results` flag; leave `content` out of the list.                                                                                                                                                                                                           | Country, Calendar                    |
-| B6  | `/meetings/upcoming-meetings`: add `limit` and `days`; include running meetings (`end_date` ≥ today); add `category` to the champ include.                                                                                                                                                               | Header, Home, Calendar               |
-| B7  | Accept slugs on `/meetings/:id/medals`, `/meetings/:id/counts` and `/champs/:id/counts`.                                                                                                                                                                                                                 | Edition, Championship, Countries     |
-| B8  | `/featured-athletes`: add international medal counts.                                                                                                                                                                                                                                                    | Home, Athletes                       |
-| B9  | Athlete, meeting and article lists accept column names in `fields`, which narrows each row to the default scope plus those columns. Association names in `fields` keep working as includes. Requests without column names still return full rows for the legacy clients; the web always passes `fields`. | all list pages                       |
-| B10 | Article lists and featured articles return the related meeting or championship name.                                                                                                                                                                                                                     | Home                                 |
-| B11 | Athlete summary: `GET /athletes/:id/summary` and `GET /athletes/summaries?ids=` return identity, first image, events, `olympic_mark`, birth and death dates, and international gold/silver/bronze.                                                                                                       | hover card, Search                   |
-| B12 | Search rework (details below).                                                                                                                                                                                                                                                                           | Search, quick search                 |
-| B13 | `GET /champs/:id/top-athletes?limit=`: gold/silver/bronze, first and last year, and events per athlete within the championship.                                                                                                                                                                          | Championship                         |
-| B14 | `GET /stats`: medal, placing, athlete, championship and season meeting counts, plus the last addition.                                                                                                                                                                                                   | Footer, Home                         |
-| B15 | `/meetings/last-meetings?summary=1&limit=`: the top three nations or the winners per meeting.                                                                                                                                                                                                            | Home                                 |
-| B16 | `is_olympian` on search and athlete list results, from `olympian_athlete`.                                                                                                                                                                                                                               | Search                               |
-| B17 | Sitemap feed: `GET /sitemap/:type?page=` for athletes, champs, meetings, countries and articles. Pages of 10,000 rows with the URL parts and `updated_date`.                                                                                                                                             | sitemap                              |
-| B18 | `event.long_name` and `event.discipline` columns, filled by a one-off data migration.                                                                                                                                                                                                                    | Edition, Championship, Athlete chart |
-| B19 | Error responses carry the matching HTTP status: 400, 401, 403, 404, 500. The `{success, error}` body and its codes stay. The CMS `api.service` reads the error body of non-2xx responses, so the 4010 logout keeps working.                                                                              | all pages, monitoring                |
-| B20 | After cutover, detail lookups answer 404 instead of `success: true, data: null`. The legacy frontend only detects missing records through the null data, so this waits until it is retired.                                                                                                              | all detail pages                     |
+| ID  | Change                                                                                                                                                                                                                                                                                                   | Needed by                           |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| B1  | `/athletes/:id/medals`: add `city` and `country_code` to the meeting include.                                                                                                                                                                                                                            | Athlete                             |
+| B2  | `/countries/:code/medals`: add `category` to the champ include and grouping.                                                                                                                                                                                                                             | Country                             |
+| B3  | `/countries/:code/athletes`: return `image`, `date_of_birth` and `events`; add `gender`, `international` and `offset` parameters.                                                                                                                                                                        | Country, Country athletes, Athletes |
+| B4  | `/champs/:slug`: include meetings with `country_code`, `start_date`, `end_date` and an events count per edition.                                                                                                                                                                                         | Championship                        |
+| B5  | `/meetings`: add a `country` filter and a `has_results` flag; leave `content` out of the list.                                                                                                                                                                                                           | Country, Calendar                   |
+| B6  | `/meetings/upcoming-meetings`: add `limit` and `days`; include running meetings (`end_date` ≥ today); add `category` to the champ include.                                                                                                                                                               | Header, Home, Calendar              |
+| B7  | Accept slugs on `/meetings/:id/medals`, `/meetings/:id/counts` and `/champs/:id/counts`.                                                                                                                                                                                                                 | Edition, Championship, Countries    |
+| B8  | `/featured-athletes`: add international medal counts.                                                                                                                                                                                                                                                    | Home, Athletes                      |
+| B9  | Athlete, meeting and article lists accept column names in `fields`, which narrows each row to the default scope plus those columns. Association names in `fields` keep working as includes. Requests without column names still return full rows for the legacy clients; the web always passes `fields`. | all list pages                      |
+| B10 | Article lists and featured articles return the related meeting or championship name.                                                                                                                                                                                                                     | Home                                |
+| B11 | Athlete summary: `GET /athletes/:id/summary` and `GET /athletes/summaries?ids=` return identity, first image, events, `olympic_mark`, birth and death dates, and international gold/silver/bronze.                                                                                                       | hover card, Search                  |
+| B12 | Search rework (details below).                                                                                                                                                                                                                                                                           | Search, quick search                |
+| B13 | `GET /champs/:id/top-athletes?limit=`: gold/silver/bronze, first and last year, and events per athlete within the championship.                                                                                                                                                                          | Championship                        |
+| B14 | `GET /stats`: medal, placing, athlete, championship and season meeting counts, plus the last addition.                                                                                                                                                                                                   | Footer, Home                        |
+| B15 | `/meetings/last-meetings?summary=1&limit=`: the top three nations or the winners per meeting.                                                                                                                                                                                                            | Home                                |
+| B16 | `is_olympian` on search and athlete list results, from `olympian_athlete`.                                                                                                                                                                                                                               | Search                              |
+| B17 | Sitemap feed: `GET /sitemap/:type?page=` for athletes, champs, meetings, countries and articles. Pages of 10,000 rows with the URL parts and `updated_date`.                                                                                                                                             | sitemap                             |
+| B18 | Replaced on 2026-10-07 by `lib/domain/event.ts` in the web app. Only the new site uses long names and disciplines, and the backend has no migration tooling. Move the map into `event` columns if the CMS ever needs to edit it.                                                                         | —                                   |
+| B19 | Error responses carry the matching HTTP status: 400, 401, 403, 404, 500. The `{success, error}` body and its codes stay. The CMS `api.service` reads the error body of non-2xx responses, so the 4010 logout keeps working.                                                                              | all pages, monitoring               |
+| B20 | After cutover, detail lookups answer 404 instead of `success: true, data: null`. The legacy frontend only detects missing records through the null data, so this waits until it is retired.                                                                                                              | all detail pages                    |
 
 B12 search rework:
 
@@ -657,7 +657,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    - Staging on Railway at `next.athleticspodium.com` (done on 2026-10-06).
 2. **Pages, in order of SEO value.** Each page ships after the backend items it needs:
    1. Athlete (B1, B11)
-   2. Edition (B11, B18)
+   2. Edition (B11)
    3. Championship (B4, B13)
    4. Championships
    5. Country (B2, B3, B5)

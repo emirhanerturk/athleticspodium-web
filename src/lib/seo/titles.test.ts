@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import type { AthleteProfile } from '#lib/domain/athlete.js';
-import { athleteDescription, athleteTitle, pageTitle } from './titles.js';
+import type { EditionMeeting } from '#lib/domain/edition.js';
+import {
+	athleteDescription,
+	athleteTitle,
+	editionDescription,
+	editionTitle,
+	pageTitle
+} from './titles.js';
 
 const athlete: AthleteProfile = {
 	id: 35017,
@@ -56,6 +63,30 @@ describe('athleteDescription', () => {
 			})
 		).toBe(
 			'Yaroslava Mahuchikh, Ukraine, high jump: international results, records and biography.'
+		);
+	});
+});
+
+const meeting: EditionMeeting = {
+	id: 2219,
+	name: '2026 European Champs',
+	slug: '2026-european-championships',
+	year: 2026,
+	city: 'Birmingham',
+	country: { code: 'GBR', name: 'Great Britain & NI' },
+	startDate: '2026-08-10',
+	endDate: '2026-08-16',
+	note: null,
+	champ: { id: 18, name: 'European Championships', slug: 'european-champs', category: 3 }
+};
+
+describe('editionTitle and editionDescription', () => {
+	it('name the edition with its place, dates and size', () => {
+		expect(editionTitle(meeting)).toBe('2026 European Champs – medallists and results');
+		expect(
+			editionDescription(meeting, { events: 52, medals: 157, nations: 28, worldRecords: 2 })
+		).toBe(
+			'2026 European Champs in Birmingham, Great Britain & NI, 10–16 Aug 2026: medallists and results of 52 events, the medal table and the records set.'
 		);
 	});
 });

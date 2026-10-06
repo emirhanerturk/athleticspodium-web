@@ -5,7 +5,7 @@
 	import { LEVEL_LABELS, levelOf, type Level } from '#lib/domain/championship.js';
 	import { isPlacing, type Result } from '#lib/domain/result.js';
 	import { champUrl, meetingUrl } from '#lib/routing/urls.js';
-	import ResultMark from './ResultMark.svelte';
+	import ResultMark from '#lib/components/medal/ResultMark.svelte';
 
 	let { results }: { results: Result[] } = $props();
 

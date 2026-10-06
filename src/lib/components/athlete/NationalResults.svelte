@@ -2,7 +2,7 @@
 	import MedalDisc from '#lib/components/ui/MedalDisc.svelte';
 	import type { Result } from '#lib/domain/result.js';
 	import { meetingUrl } from '#lib/routing/urls.js';
-	import ResultMark from './ResultMark.svelte';
+	import ResultMark from '#lib/components/medal/ResultMark.svelte';
 
 	let { results }: { results: Result[] } = $props();
 </script>
