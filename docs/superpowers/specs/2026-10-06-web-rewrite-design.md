@@ -220,7 +220,10 @@ Rules:
 
 Error handling:
 
-- `http-client.ts` throws `BackendNotFoundError` for a backend 404 and `BackendUnavailableError` for a timeout (8 s), a 5xx response or a network failure.
+- `http-client.ts` throws `BackendNotFoundError` when a record is missing and `BackendUnavailableError` for a timeout (8 s), a server error or a network failure.
+- Until B19 ships, the backend answers HTTP 200 for everything. So the client reads the body as well:
+  - `success: false` with code `4040` means not found; any other code is an error.
+  - `success: true` with `data: null` on a detail endpoint also means not found.
 - Load functions turn these into `error(404)` or `error(503)`.
 - `+error.svelte` renders the v2 error page.
 - `handleError` logs unexpected errors with the request path.
@@ -532,7 +535,7 @@ Each item is a normal backend PR. It ships before the page that needs it (releas
 | B6 | `/meetings/upcoming-meetings`: add `limit` and `days`; include running meetings (`end_date` ≥ today); add `category` to the champ include. | Header, Home, Calendar |
 | B7 | Accept slugs on `/meetings/:id/medals`, `/meetings/:id/counts` and `/champs/:id/counts`. | Edition, Championship, Countries |
 | B8 | `/featured-athletes`: add international medal counts. | Home, Athletes |
-| B9 | List endpoints select explicit attributes instead of `attributes: null` full rows; athlete lists include `date_of_death`. | all list pages |
+| B9 | Athlete, meeting and article lists accept column names in `fields`, which narrows each row to the default scope plus those columns. Association names in `fields` keep working as includes. Requests without column names still return full rows for the legacy clients; the web always passes `fields`. | all list pages |
 | B10 | Article lists and featured articles return the related meeting or championship name. | Home |
 | B11 | Athlete summary: `GET /athletes/:id/summary` and `GET /athletes/summaries?ids=` return identity, first image, events, `olympic_mark`, birth and death dates, and international gold/silver/bronze. | hover card, Search |
 | B12 | Search rework (details below). | Search, quick search |
@@ -542,6 +545,7 @@ Each item is a normal backend PR. It ships before the page that needs it (releas
 | B16 | `is_olympian` on search and athlete list results, from `olympian_athlete`. | Search |
 | B17 | Sitemap feed: `GET /sitemap/:type?page=` for athletes, champs, meetings, countries and articles. Pages of 10,000 rows with the URL parts and `updated_date`. | sitemap |
 | B18 | `event.long_name` and `event.discipline` columns, filled by a one-off data migration. | Edition, Championship, Athlete chart |
+| B19 | Real HTTP status codes: 400, 401, 403, 404, 500. The `{success, error}` body and its codes stay. Detail lookups answer 404 instead of `success: true, data: null`. The CMS `api.service` reads the error body of non-2xx responses so the 4010 logout keeps working. | all pages, monitoring |
 
 B12 search rework:
 - Rank results: exact name, then prefix, then contains, then international medals.
@@ -601,7 +605,9 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
 
 ## 13. Delivery phases
 
-0. **Backend groundwork.** B7, B9, B14, B17.
+0. **Backend groundwork:**
+   - B7, B9, B14 and B17, together with a fix that stops database error details from reaching clients. Done on 2026-10-06 in branch `feat/web-groundwork`.
+   - Then B19.
 1. **Skeleton:**
    - SvelteKit, Tailwind tokens, fonts.
    - Layout: header, ticker, footer, quick search shell.
