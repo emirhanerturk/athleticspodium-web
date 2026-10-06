@@ -1,0 +1,250 @@
+{
+	"success": true,
+	"data": [
+		{
+			"mark_display": "2.00",
+			"id": 302422,
+			"champ_id": 40,
+			"meeting_id": 948,
+			"event_id": 111,
+			"medal": 1,
+			"athlete_id": 35017,
+			"athlete_name": null,
+			"country_code": "UKR",
+			"gender": 1,
+			"mark": 200,
+			"mark_format": "0.00",
+			"order": null,
+			"wind": null,
+			"info": null,
+			"records": null,
+			"is_team": false,
+			"is_canceled": false,
+			"notes": "Tie-breaker: 2.00 o",
+			"created_date": "2024-08-04T20:30:49.597Z",
+			"updated_date": "2024-08-10T20:09:41.158Z",
+			"champ": {
+				"id": 40,
+				"name": "Olympic Games",
+				"slug": "olympic-games",
+				"category": 0,
+				"rank": 1
+			},
+			"meeting": {
+				"id": 948,
+				"name": "2024 Olympic Games",
+				"short_name": null,
+				"slug": "2024-olympic-games",
+				"year": 2024,
+				"start_date": "2024-07-26",
+				"city": "Paris",
+				"country_code": "FRA"
+			},
+			"event": {
+				"id": 111,
+				"name": "HJ",
+				"rank": 70
+			},
+			"country": {
+				"code": "UKR",
+				"name": "Ukraine"
+			}
+		},
+		{
+			"mark_display": "2.00",
+			"id": 144284,
+			"champ_id": 40,
+			"meeting_id": 922,
+			"event_id": 111,
+			"medal": 3,
+			"athlete_id": 35017,
+			"athlete_name": null,
+			"country_code": "UKR",
+			"gender": 1,
+			"mark": 200,
+			"mark_format": "0.00",
+			"order": null,
+			"wind": null,
+			"info": null,
+			"records": null,
+			"is_team": false,
+			"is_canceled": false,
+			"notes": null,
+			"created_date": "2021-08-07T15:36:10.817Z",
+			"updated_date": "2026-10-06T11:15:52.203Z",
+			"champ": {
+				"id": 40,
+				"name": "Olympic Games",
+				"slug": "olympic-games",
+				"category": 0,
+				"rank": 1
+			},
+			"meeting": {
+				"id": 922,
+				"name": "2020 Olympic Games",
+				"short_name": null,
+				"slug": "2020-olympic-games",
+				"year": 2021,
+				"start_date": "2021-07-30",
+				"city": "Tokyo",
+				"country_code": "JPN"
+			},
+			"event": {
+				"id": 111,
+				"name": "HJ",
+				"rank": 70
+			},
+			"country": {
+				"code": "UKR",
+				"name": "Ukraine"
+			}
+		},
+		{
+			"mark_display": "2.01",
+			"id": 386575,
+			"champ_id": 55,
+			"meeting_id": 2812,
+			"event_id": 111,
+			"medal": 1,
+			"athlete_id": 35017,
+			"athlete_name": null,
+			"country_code": "UKR",
+			"gender": 1,
+			"mark": 201,
+			"mark_format": "0.00",
+			"order": null,
+			"wind": null,
+			"info": "(i)",
+			"records": null,
+			"is_team": false,
+			"is_canceled": false,
+			"notes": null,
+			"created_date": "2026-03-20T12:28:37.016Z",
+			"updated_date": "2026-03-22T20:52:59.026Z",
+			"champ": {
+				"id": 55,
+				"name": "World Indoor Championships",
+				"slug": "world-indoor",
+				"category": 0,
+				"rank": 3
+			},
+			"meeting": {
+				"id": 2812,
+				"name": "2026 World Indoor",
+				"short_name": null,
+				"slug": "2026-world-indoor",
+				"year": 2026,
+				"start_date": "2026-03-20",
+				"city": "Torun",
+				"country_code": "POL"
+			},
+			"event": {
+				"id": 111,
+				"name": "HJ",
+				"rank": 70
+			},
+			"country": {
+				"code": "UKR",
+				"name": "Ukraine"
+			}
+		},
+		{
+			"mark_display": "2.00",
+			"id": 142905,
+			"champ_id": 22,
+			"meeting_id": 360,
+			"event_id": 111,
+			"medal": 1,
+			"athlete_id": 35017,
+			"athlete_name": null,
+			"country_code": "UKR",
+			"gender": 1,
+			"mark": 200,
+			"mark_format": "0.00",
+			"order": null,
+			"wind": null,
+			"info": null,
+			"records": ["CR"],
+			"is_team": false,
+			"is_canceled": false,
+			"notes": null,
+			"created_date": "2021-07-10T17:04:23.148Z",
+			"updated_date": "2021-07-11T18:34:17.625Z",
+			"champ": {
+				"id": 22,
+				"name": "European U23 Athletics Championships",
+				"slug": "european-u23-ch",
+				"category": 3,
+				"rank": 39
+			},
+			"meeting": {
+				"id": 360,
+				"name": "2021 European U23 CH",
+				"short_name": null,
+				"slug": "2021-european-u23-ch",
+				"year": 2021,
+				"start_date": "2021-07-08",
+				"city": "Tallinn",
+				"country_code": "EST"
+			},
+			"event": {
+				"id": 111,
+				"name": "HJ",
+				"rank": 70
+			},
+			"country": {
+				"code": "UKR",
+				"name": "Ukraine"
+			}
+		},
+		{
+			"mark_display": "2.00",
+			"id": 385820,
+			"champ_id": 199,
+			"meeting_id": 6514,
+			"event_id": 111,
+			"medal": 1,
+			"athlete_id": 35017,
+			"athlete_name": null,
+			"country_code": "UKR",
+			"gender": 1,
+			"mark": 200,
+			"mark_format": "0.00",
+			"order": null,
+			"wind": null,
+			"info": null,
+			"records": null,
+			"is_team": false,
+			"is_canceled": false,
+			"notes": null,
+			"created_date": "2026-03-07T10:49:52.735Z",
+			"updated_date": "2026-03-07T18:51:57.285Z",
+			"champ": {
+				"id": 199,
+				"name": "Ukrainian Athletics Championships",
+				"slug": "ukrainian-athletics-championships",
+				"category": 7,
+				"rank": 303
+			},
+			"meeting": {
+				"id": 6514,
+				"name": "2021 Ukrainian Athletics Championships",
+				"short_name": null,
+				"slug": "2021-ukrainian-athletics-championships",
+				"year": 2021,
+				"start_date": "2021-06-18",
+				"city": "Lutsk",
+				"country_code": "UKR"
+			},
+			"event": {
+				"id": 111,
+				"name": "HJ",
+				"rank": 70
+			},
+			"country": {
+				"code": "UKR",
+				"name": "Ukraine"
+			}
+		}
+	]
+}

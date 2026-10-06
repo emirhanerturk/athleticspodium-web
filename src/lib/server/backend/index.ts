@@ -1,3 +1,4 @@
+import { createArticles } from './articles/index.js';
 import { createAthletes } from './athletes/index.js';
 import { createClient } from './client.js';
 import { createMeetings } from './meetings/index.js';
@@ -10,6 +11,7 @@ export function createBackend(fetch: typeof globalThis.fetch, baseUrl: string) {
 	const client = createClient(fetch, baseUrl);
 
 	return {
+		articles: createArticles(client),
 		athletes: createAthletes(client),
 		meetings: createMeetings(client),
 		sitemap: createSitemap(client),

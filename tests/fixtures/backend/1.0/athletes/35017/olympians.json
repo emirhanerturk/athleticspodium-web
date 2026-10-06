@@ -1,0 +1,33 @@
+{
+	"success": true,
+	"data": [
+		{
+			"id": 948,
+			"short_name": null,
+			"name": "2024 Olympic Games",
+			"slug": "2024-olympic-games",
+			"year": 2024,
+			"city": "Paris",
+			"champ": {
+				"id": 40,
+				"name": "Olympic Games",
+				"slug": "olympic-games",
+				"category": 0
+			}
+		},
+		{
+			"id": 922,
+			"short_name": null,
+			"name": "2020 Olympic Games",
+			"slug": "2020-olympic-games",
+			"year": 2021,
+			"city": "Tokyo",
+			"champ": {
+				"id": 40,
+				"name": "Olympic Games",
+				"slug": "olympic-games",
+				"category": 0
+			}
+		}
+	]
+}

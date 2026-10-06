@@ -1,0 +1,47 @@
+{
+	"success": true,
+	"data": {
+		"count": 6,
+		"rows": [
+			{
+				"id": 243,
+				"title": "The Dutch reign at home",
+				"slug": "the-dutch-reign-at-home",
+				"description": "Team Netherlands won five gold medals on the closing day of the European Indoors.",
+				"image": {
+					"uri": "2025/03/109d1a5c-f36b-4f5f-8ae7-eaa1fb9eac75.jpeg",
+					"caption": "The Dutch Team has won all three relay races in Apeldoorn.",
+					"credit": "European Athletics",
+					"created_date": "2025-03-10T08:47:25.903Z"
+				},
+				"created_date": "2025-03-10T08:47:25.913Z"
+			},
+			{
+				"id": 240,
+				"title": "The Twelve defenders",
+				"slug": "the-twelve-defenders",
+				"description": "An overview of the quests for title defense in Apeldoorn.",
+				"image": {
+					"uri": "2025/03/7c364cc0-ed98-496d-92c8-a52842e9aeef.jpeg",
+					"caption": "",
+					"credit": "",
+					"created_date": "2025-03-04T21:32:24.615Z"
+				},
+				"created_date": "2025-03-04T21:32:24.621Z"
+			},
+			{
+				"id": 209,
+				"title": "Day 4: Blink and you’ll miss it",
+				"slug": "day-4-blink-and-youll-miss-it",
+				"description": "The men’s 100m Olympic final was as close as a race can be.",
+				"image": {
+					"uri": "2024/08/99c22ec6-f4fc-4414-b32b-78e650d4d14b.jpeg",
+					"caption": "",
+					"credit": "",
+					"created_date": "2024-08-05T08:07:51.231Z"
+				},
+				"created_date": "2024-08-05T08:07:51.237Z"
+			}
+		]
+	}
+}
