@@ -1,13 +1,15 @@
 import type { HostedMeeting } from '#lib/domain/country.js';
 import type { EditionEntry, EditionEvent, EditionMeeting, Gender } from '#lib/domain/edition.js';
 import { describeEvent } from '#lib/domain/event.js';
-import type { MeetingSummary } from '#lib/domain/meeting.js';
+import type { MeetingSummary, ResultsDeskEntry } from '#lib/domain/meeting.js';
+import { parseNationTallies } from '../nation-tally.js';
 import type {
 	EditionEntryDto,
 	EditionMedalsDto,
 	MeetingDetailDto,
 	MeetingDto,
-	MeetingListDto
+	MeetingListDto,
+	RecentResultDto
 } from './dto.js';
 
 export function parseMeetingSummaries(dtos: MeetingDto[]): MeetingSummary[] {
@@ -45,6 +47,37 @@ export function parseHostedMeetings(dto: MeetingListDto): HostedMeeting[] {
 				]
 			: []
 	);
+}
+
+export function parseResultsDesk(dtos: RecentResultDto[]): ResultsDeskEntry[] {
+	return dtos.flatMap((dto): ResultsDeskEntry[] => {
+		const [meeting] = parseMeetingSummaries([dto]);
+		if (!meeting) return [];
+		if (dto.summary.type === 'nations') {
+			return [
+				{ meeting, summary: { kind: 'nations', nations: parseNationTallies(dto.summary.nations) } }
+			];
+		}
+		const winners = dto.summary.winners.map((winner) => {
+			const athlete = winner.athlete && {
+				id: winner.athlete.id,
+				slug: winner.athlete.slug,
+				firstName: winner.athlete.first_name ?? '',
+				lastName: winner.athlete.last_name ?? '',
+				countryCode: winner.country_code
+			};
+			return {
+				athlete,
+				name: athlete
+					? `${athlete.firstName} ${athlete.lastName}`.trim()
+					: (winner.athlete_name ?? ''),
+				countryCode: winner.country_code,
+				event: describeEvent(winner.event?.name ?? '').longName,
+				mark: winner.mark_display
+			};
+		});
+		return [{ meeting, summary: { kind: 'winners', winners } }];
+	});
 }
 
 const GENDERS: [keyof EditionMedalsDto, Gender][] = [

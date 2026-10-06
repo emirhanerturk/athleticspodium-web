@@ -409,6 +409,10 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 | Portraits                                                | `/featured-athletes`, with an excerpt of `biography` | B8                     |
 
 - **Results desk rule.** Road races (category 8) show the winners. Other meetings show the top three nations. Meetings are the most recently ended ones that have results.
+- **Lead and latest:** the first featured article leads (the newest article when none is featured); the latest five follow without it.
+- **On this day:** up to 50 candidates per list ranked by international medals (B11), 7 born and 6 remembered.
+- **Headings:** a visually hidden `h1` names the site; the lead title is an `h2`.
+- **JSON-LD:** `WebSite` with a `SearchAction` to `/search?q=` and `Organization` with the logo and the social profiles.
 - **Dropped:** the article kicker ("Analysis").
 
 ### Championships (`/champs`)
@@ -680,7 +684,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    7. Countries, done on 2026-10-07
    8. Athletes A–Z, done on 2026-10-07
    9. Athletes (B8), done on 2026-10-07
-   10. Home (B6, B10, B15)
+   10. Home (B6, B10, B15), done on 2026-10-07
    11. Calendar
    12. Search and quick search (B12, B16)
    13. Articles
