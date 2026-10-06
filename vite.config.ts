@@ -19,6 +19,7 @@ export default defineConfig({
 			adapter: adapter()
 		})
 	],
+	server: { port: 4400, strictPort: true },
 	test: {
 		expect: { requireAssertions: true },
 		projects: [

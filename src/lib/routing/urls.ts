@@ -45,3 +45,9 @@ export function calendarUrl(year: number): string {
 export function flagUrl(countryCode: string): string {
 	return `/flags/${countryCode.toLowerCase()}.svg`;
 }
+
+export const SOCIAL_LINKS = {
+	bluesky: 'https://bsky.app/profile/athleticspodium.bsky.social',
+	facebook: 'https://www.facebook.com/athleticspodium',
+	instagram: 'https://www.instagram.com/athleticspodium'
+} as const;
