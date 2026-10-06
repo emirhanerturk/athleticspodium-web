@@ -1,3 +1,4 @@
+import type { CalendarMeeting } from '#lib/domain/calendar.js';
 import type { HostedMeeting } from '#lib/domain/country.js';
 import type { EditionEntry, EditionEvent, EditionMeeting, Gender } from '#lib/domain/edition.js';
 import { describeEvent } from '#lib/domain/event.js';
@@ -24,6 +25,25 @@ export function parseMeetingSummaries(dtos: MeetingDto[]): MeetingSummary[] {
 						countryCode: dto.country_code,
 						startDate: dto.start_date,
 						endDate: dto.end_date
+					}
+				]
+			: []
+	);
+}
+
+export function parseCalendarMeetings(dto: MeetingListDto): CalendarMeeting[] {
+	return dto.rows.flatMap((row) =>
+		row.champ
+			? [
+					{
+						name: row.name,
+						slug: row.slug,
+						champ: row.champ,
+						city: row.city,
+						countryCode: row.country_code,
+						startDate: row.start_date,
+						endDate: row.end_date,
+						hasResults: row.has_results ?? false
 					}
 				]
 			: []

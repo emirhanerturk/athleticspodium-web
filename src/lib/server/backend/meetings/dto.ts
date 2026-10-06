@@ -12,7 +12,11 @@ export interface MeetingDto {
 
 export interface MeetingListDto {
 	count: number;
-	rows: (MeetingDto & { year: number; has_results?: boolean })[];
+	rows: (Omit<MeetingDto, 'champ'> & {
+		year: number;
+		has_results?: boolean;
+		champ: { name: string; slug: string; category: number } | null;
+	})[];
 }
 
 export interface MeetingDetailDto extends MeetingDto {

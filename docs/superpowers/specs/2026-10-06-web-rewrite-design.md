@@ -545,8 +545,10 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 | Year grid, month strip, rows, TBA group | `/meetings?year=` (lean, with `has_results`) | B5, B9       |
 | Up next card                            | `upcoming-meetings`                          | B6           |
 
-- **Client-side features:** the level chips, the national toggle and the TODAY marker (UTC).
-- **"Results →"** appears when `has_results` is true.
+- **Client-side features:** the level chips, the national toggle (off by default) and the TODAY marker (UTC). The month strip, the counts and the list follow the filters.
+- **"Results →"** appears when `has_results` is true; ended meetings without results say "No results yet".
+- **URLs:** `/calendar` redirects (302) to the current season. Seasons from 1860 to five years ahead exist; other years answer 404. Previous and next seasons are plain links.
+- **Up next:** the next three meetings within a year (B6), with a countdown.
 - **Dropped:** the `.ics` and Google Calendar buttons.
 
 ### Search (`/search`)
@@ -685,7 +687,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    8. Athletes A–Z, done on 2026-10-07
    9. Athletes (B8), done on 2026-10-07
    10. Home (B6, B10, B15), done on 2026-10-07
-   11. Calendar
+   11. Calendar, done on 2026-10-07
    12. Search and quick search (B12, B16)
    13. Articles
    14. Medal search
