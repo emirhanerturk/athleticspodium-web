@@ -6,6 +6,8 @@ import {
 	athleteDescription,
 	athleteTitle,
 	championshipDescription,
+	championshipsDescription,
+	championshipsTitle,
 	championshipTitle,
 	editionDescription,
 	editionTitle,
@@ -128,5 +130,19 @@ describe('championshipTitle and championshipDescription', () => {
 				0
 			)
 		).toBe('Grand Slam Track: editions, results and the programme.');
+	});
+});
+
+describe('championshipsTitle and championshipsDescription', () => {
+	it('describe the whole archive', () => {
+		expect(championshipsTitle()).toBe('Athletics championships – the complete archive');
+		expect(
+			championshipsDescription(212, {
+				first: { year: 1873, name: 'Irish Championships' },
+				last: { year: 2031, name: 'World Championships' }
+			})
+		).toBe(
+			'212 athletics championships from 1873 to 2031: global, continental, multi-region and national championships and road races, with every edition and medallist.'
+		);
 	});
 });

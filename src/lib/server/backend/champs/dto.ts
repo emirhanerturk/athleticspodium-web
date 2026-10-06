@@ -37,3 +37,8 @@ export interface ChampionshipLeaderDto {
 	last_year: number;
 	events: string[] | null;
 }
+
+export interface ChampListDto {
+	count: number;
+	rows: { id: number; name: string; slug: string; category: number; years: number[] | null }[];
+}

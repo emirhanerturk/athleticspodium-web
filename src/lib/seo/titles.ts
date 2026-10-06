@@ -1,6 +1,6 @@
 import { fullName, type AthleteProfile } from '#lib/domain/athlete.js';
 import type { CareerSummary } from '#lib/domain/career.js';
-import type { ChampionshipFacts } from '#lib/domain/championship.js';
+import type { ArchiveExtent, ChampionshipFacts } from '#lib/domain/championship.js';
 import { yearOf } from '#lib/domain/date.js';
 import type { EditionMeeting, EditionStats } from '#lib/domain/edition.js';
 import { formatDateRange } from '#lib/format/date.js';
@@ -69,4 +69,13 @@ export function championshipDescription(
 	const table = nations ? `the all-time medal table of ${nations} nations` : 'the medal table';
 
 	return `${name}: ${editions}, ${table} and the most successful athletes.`;
+}
+
+export function championshipsTitle(): string {
+	return 'Athletics championships – the complete archive';
+}
+
+export function championshipsDescription(count: number, extent: ArchiveExtent | null): string {
+	const span = extent ? ` from ${extent.first.year} to ${extent.last.year}` : '';
+	return `${count} athletics championships${span}: global, continental, multi-region and national championships and road races, with every edition and medallist.`;
 }
