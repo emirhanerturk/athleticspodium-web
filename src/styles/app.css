@@ -1,0 +1,97 @@
+@import 'tailwindcss';
+
+@import '@fontsource/saira-condensed/500.css';
+@import '@fontsource/saira-condensed/600.css';
+@import '@fontsource/saira-condensed/700.css';
+@import '@fontsource/saira-condensed/800.css';
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/500.css';
+@import '@fontsource/ibm-plex-sans/600.css';
+@import '@fontsource/ibm-plex-sans/700.css';
+@import '@fontsource/barlow-semi-condensed/400.css';
+@import '@fontsource/barlow-semi-condensed/500.css';
+@import '@fontsource/barlow-semi-condensed/600.css';
+@import '@fontsource/barlow-semi-condensed/700.css';
+
+@theme {
+	--color-*: initial;
+	--color-transparent: transparent;
+	--color-current: currentColor;
+
+	--color-bg: #f5f4f0;
+	--color-surface: #ffffff;
+	--color-surface-2: #eeece6;
+	--color-surface-3: #e4e1d9;
+	--color-ink: #121316;
+	--color-ink-2: #474a52;
+	--color-ink-3: #686c75;
+	--color-line: #e3e0d8;
+	--color-line-2: #d2cec4;
+	--color-brand: #f9ba0f;
+	--color-brand-hover: #ffc83a;
+	--color-brand-ink: #7a4f00;
+	--color-brand-soft: #fdf1cc;
+	--color-info: #2f5bd3;
+	--color-info-soft: #e9eefb;
+	--color-up: #15724a;
+	--color-gold: #f9ba0f;
+	--color-silver: #bfc6cf;
+	--color-bronze: #c9844f;
+	--color-dq: #d7262e;
+
+	--color-night: #0e0f12;
+	--color-night-surface: #23262c;
+	--color-night-line: #262930;
+	--color-night-line-2: #363941;
+	--color-night-ink: #f3f2ee;
+	--color-night-ink-2: #d9d9dd;
+	--color-night-ink-3: #bdbfc6;
+	--color-night-ink-4: #8e929b;
+	--color-night-up: #4cc38a;
+
+	--font-*: initial;
+	--font-display: 'Saira Condensed', 'Arial Narrow', sans-serif;
+	--font-text: 'IBM Plex Sans', system-ui, sans-serif;
+	--font-data: 'Barlow Semi Condensed', 'Arial Narrow', sans-serif;
+
+	--breakpoint-*: initial;
+	--breakpoint-sm: 640px;
+	--breakpoint-md: 900px;
+	--breakpoint-lg: 1100px;
+
+	--container-page: 1344px;
+}
+
+@layer base {
+	html {
+		background-color: var(--color-bg);
+		color: var(--color-ink);
+		font-family: var(--font-text);
+		-webkit-font-smoothing: antialiased;
+	}
+
+	::selection {
+		background-color: var(--color-brand);
+		color: var(--color-ink);
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-brand-ink);
+		outline-offset: 2px;
+	}
+}
+
+@utility page-container {
+	margin-inline: auto;
+	width: 100%;
+	max-width: var(--container-page);
+	padding-inline: 16px;
+
+	@media (width >= 640px) {
+		padding-inline: 32px;
+	}
+}
+
+@utility tabular {
+	font-variant-numeric: tabular-nums;
+}

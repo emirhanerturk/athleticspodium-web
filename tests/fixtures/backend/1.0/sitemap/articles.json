@@ -1,0 +1,14 @@
+{
+	"success": true,
+	"data": {
+		"count": 1,
+		"page_size": 10000,
+		"rows": [
+			{
+				"id": 14,
+				"slug": "from-sportsman-to-a-myth-zatopek",
+				"last_modified": "2021-07-06T13:16:13.295Z"
+			}
+		]
+	}
+}

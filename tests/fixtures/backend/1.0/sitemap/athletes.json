@@ -1,0 +1,8 @@
+{
+	"success": true,
+	"data": {
+		"count": 1,
+		"page_size": 10000,
+		"rows": [{ "id": 1, "slug": "miruts-yifter", "last_modified": "2021-12-22T07:00:42.514Z" }]
+	}
+}

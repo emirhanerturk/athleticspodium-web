@@ -1,0 +1,17 @@
+{
+	"success": true,
+	"data": {
+		"count": 134,
+		"rows": [
+			{
+				"id": 33167,
+				"slug": "valerie-adams-vili",
+				"first_name": "Valerie",
+				"last_name": "Adams",
+				"country_code": "NZL",
+				"date_of_birth": "1984-10-06",
+				"date_of_death": null
+			}
+		]
+	}
+}

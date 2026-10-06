@@ -1,0 +1,17 @@
+{
+	"success": true,
+	"data": {
+		"medals": 395929,
+		"placings": 301,
+		"athletes": 80289,
+		"championships": 212,
+		"countries": 253,
+		"season_meetings": 64,
+		"last_addition": {
+			"name": "2026 Sydney Marathon",
+			"slug": "2026-sydney-marathon",
+			"created_date": "2026-09-27T13:28:14.261Z",
+			"champ": { "name": "Sydney Marathon", "slug": "sydney-marathon" }
+		}
+	}
+}

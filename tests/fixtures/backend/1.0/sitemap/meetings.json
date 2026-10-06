@@ -1,0 +1,14 @@
+{
+	"success": true,
+	"data": {
+		"count": 1,
+		"page_size": 10000,
+		"rows": [
+			{
+				"slug": "2026-sydney-marathon",
+				"last_modified": "2026-09-27T13:28:14.261Z",
+				"champ": { "slug": "sydney-marathon" }
+			}
+		]
+	}
+}
