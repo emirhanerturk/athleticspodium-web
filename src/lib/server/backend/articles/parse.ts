@@ -1,5 +1,5 @@
-import type { ArticleSummary } from '#lib/domain/article.js';
-import type { ArticleRowDto } from './dto.js';
+import type { ArticleContext, ArticleSummary, ArticleTeaser } from '#lib/domain/article.js';
+import type { ArticleContextDto, ArticleRowDto, ArticleTeaserDto } from './dto.js';
 
 export function parseArticleSummary(dto: ArticleRowDto): ArticleSummary {
 	return {
@@ -16,4 +16,16 @@ export function parseArticleSummary(dto: ArticleRowDto): ArticleSummary {
 				}
 			: null
 	};
+}
+
+export function parseArticleTeaser(dto: ArticleTeaserDto): ArticleTeaser {
+	return { ...parseArticleSummary(dto), context: parseContext(dto.context ?? null) };
+}
+
+function parseContext(dto: ArticleContextDto): ArticleContext | null {
+	if (!dto) return null;
+	if (dto.type === 'champ') return { kind: 'champ', name: dto.name, slug: dto.slug };
+	return dto.champ
+		? { kind: 'meeting', name: dto.name, slug: dto.slug, champSlug: dto.champ.slug }
+		: null;
 }

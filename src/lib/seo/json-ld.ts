@@ -61,6 +61,36 @@ export function sportsEventJsonLd(siteUrl: string, meeting: EditionMeeting, path
 	});
 }
 
+const SITE_NAME = 'Athletics Podium';
+
+export function websiteJsonLd(siteUrl: string, searchPath: string) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: SITE_NAME,
+		url: `${siteUrl}/`,
+		potentialAction: {
+			'@type': 'SearchAction',
+			target: {
+				'@type': 'EntryPoint',
+				urlTemplate: `${siteUrl}${searchPath}?q={search_term_string}`
+			},
+			'query-input': 'required name=search_term_string'
+		}
+	};
+}
+
+export function organizationJsonLd(siteUrl: string, logoUrl: string, profiles: string[]) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'Organization',
+		name: SITE_NAME,
+		url: `${siteUrl}/`,
+		logo: logoUrl,
+		sameAs: profiles
+	};
+}
+
 export function serializeJsonLd(data: unknown): string {
 	return JSON.stringify(data).replaceAll('<', '\\u003c');
 }

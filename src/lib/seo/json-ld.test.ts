@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { breadcrumbJsonLd, personJsonLd, serializeJsonLd, sportsEventJsonLd } from './json-ld.js';
+import {
+	breadcrumbJsonLd,
+	organizationJsonLd,
+	personJsonLd,
+	serializeJsonLd,
+	sportsEventJsonLd,
+	websiteJsonLd
+} from './json-ld.js';
 
 const SITE = {
 	siteUrl: 'https://athleticspodium.com',
@@ -111,5 +118,19 @@ describe('sportsEventJsonLd', () => {
 				}
 			}
 		});
+	});
+});
+
+describe('websiteJsonLd and organizationJsonLd', () => {
+	it('describe the site with its search and profiles', () => {
+		expect(websiteJsonLd('https://athleticspodium.com', '/search').potentialAction.target).toEqual({
+			'@type': 'EntryPoint',
+			urlTemplate: 'https://athleticspodium.com/search?q={search_term_string}'
+		});
+		expect(
+			organizationJsonLd('https://athleticspodium.com', 'https://athleticspodium.com/logo.svg', [
+				'https://bsky.app/profile/athleticspodium.bsky.social'
+			])
+		).toMatchObject({ '@type': 'Organization', url: 'https://athleticspodium.com/' });
 	});
 });

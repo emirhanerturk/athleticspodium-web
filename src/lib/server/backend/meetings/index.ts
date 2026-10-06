@@ -1,11 +1,18 @@
 import { BackendNotFoundError, type BackendClient } from '../client.js';
 import { parseNationTallies, type NationTallyDto } from '../nation-tally.js';
-import type { EditionMedalsDto, MeetingDetailDto, MeetingDto, MeetingListDto } from './dto.js';
+import type {
+	EditionMedalsDto,
+	MeetingDetailDto,
+	MeetingDto,
+	MeetingListDto,
+	RecentResultDto
+} from './dto.js';
 import {
 	parseEditionEvents,
 	parseEditionMeeting,
 	parseHostedMeetings,
-	parseMeetingSummaries
+	parseMeetingSummaries,
+	parseResultsDesk
 } from './parse.js';
 
 export function createMeetings(client: BackendClient) {
@@ -37,8 +44,16 @@ export function createMeetings(client: BackendClient) {
 			return parseHostedMeetings(list);
 		},
 
-		async upcoming() {
-			return parseMeetingSummaries(await client.get<MeetingDto[]>('/meetings/upcoming-meetings'));
+		async upcoming(window?: { days: number; limit: number }) {
+			return parseMeetingSummaries(
+				await client.get<MeetingDto[]>('/meetings/upcoming-meetings', { ...window })
+			);
+		},
+
+		async recentResults(limit: number) {
+			return parseResultsDesk(
+				await client.get<RecentResultDto[]>('/meetings/last-meetings', { summary: 1, limit })
+			);
 		}
 	};
 }

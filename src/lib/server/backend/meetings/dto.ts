@@ -1,3 +1,5 @@
+import type { NationTallyDto } from '../nation-tally.js';
+
 export interface MeetingDto {
 	name: string;
 	slug: string;
@@ -50,3 +52,24 @@ export interface EditionEventDto {
 }
 
 export type EditionMedalsDto = Partial<Record<'0' | '1' | '2', EditionEventDto[]>>;
+
+export interface RecentResultDto extends MeetingDto {
+	summary:
+		| { type: 'nations'; nations: NationTallyDto[] }
+		| {
+				type: 'winners';
+				winners: {
+					gender: number;
+					mark_display: string | null;
+					country_code: string | null;
+					athlete_name: string | null;
+					athlete: {
+						id: number;
+						slug: string;
+						first_name: string | null;
+						last_name: string | null;
+					} | null;
+					event: { name: string } | null;
+				}[];
+		  };
+}

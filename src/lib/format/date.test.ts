@@ -4,6 +4,7 @@ import {
 	formatDateRange,
 	formatDayMonth,
 	formatDaysToGo,
+	formatLongDate,
 	formatYearSpan
 } from './date.js';
 
@@ -58,5 +59,11 @@ describe('formatYearSpan', () => {
 describe('formatDayMonth', () => {
 	it('writes the day and short month', () => {
 		expect(formatDayMonth('2026-10-07')).toBe('7 Oct');
+	});
+});
+
+describe('formatLongDate', () => {
+	it('writes the weekday and the full month', () => {
+		expect(formatLongDate('2026-10-07')).toBe('Wednesday 7 October 2026');
 	});
 });

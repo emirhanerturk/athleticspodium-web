@@ -1,5 +1,21 @@
 import type { IsoDate } from '#lib/domain/date.js';
 
+const WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const LONG_MONTHS = [
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December'
+];
+
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 function partsOf(date: IsoDate) {
@@ -39,4 +55,9 @@ export function formatYearSpan(first: number, last: number): string {
 	if (first === last) return String(first);
 	const sameCentury = Math.floor(first / 100) === Math.floor(last / 100);
 	return `${first}–${sameCentury ? String(last).slice(2) : last}`;
+}
+
+export function formatLongDate(date: IsoDate): string {
+	const weekday = WEEKDAYS[new Date(`${date}T00:00:00Z`).getUTCDay()];
+	return `${weekday} ${Number(date.slice(8, 10))} ${LONG_MONTHS[Number(date.slice(5, 7)) - 1]} ${date.slice(0, 4)}`;
 }

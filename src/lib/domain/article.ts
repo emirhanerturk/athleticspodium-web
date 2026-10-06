@@ -9,3 +9,11 @@ export interface ArticleSummary {
 	publishedOn: IsoDate;
 	image: Image | null;
 }
+
+export type ArticleContext =
+	| { kind: 'meeting'; name: string; slug: string; champSlug: string }
+	| { kind: 'champ'; name: string; slug: string };
+
+export interface ArticleTeaser extends ArticleSummary {
+	context: ArticleContext | null;
+}

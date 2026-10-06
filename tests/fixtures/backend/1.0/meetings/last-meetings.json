@@ -1,0 +1,219 @@
+{
+	"success": true,
+	"data": [
+		{
+			"id": 1454,
+			"name": "2026 Asian Games",
+			"short_name": null,
+			"slug": "2026-asian-games",
+			"year": 2026,
+			"city": "Aichi-Nagoya",
+			"country_code": "JPN",
+			"start_date": "2026-09-19",
+			"end_date": "2026-10-04",
+			"champ": {
+				"id": 7,
+				"name": "Asian Games",
+				"slug": "asian-games",
+				"category": 2
+			},
+			"summary": {
+				"type": "nations",
+				"nations": [
+					{
+						"gold": 17,
+						"silver": 14,
+						"bronze": 8,
+						"total": 39,
+						"country": {
+							"code": "CHN",
+							"name": "China PR"
+						}
+					},
+					{
+						"gold": 10,
+						"silver": 12,
+						"bronze": 10,
+						"total": 32,
+						"country": {
+							"code": "JPN",
+							"name": "Japan"
+						}
+					},
+					{
+						"gold": 9,
+						"silver": 2,
+						"bronze": 2,
+						"total": 13,
+						"country": {
+							"code": "BRN",
+							"name": "Bahrain"
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 7213,
+			"name": "2026 Berlin Marathon",
+			"short_name": null,
+			"slug": "2026-berlin-marathon",
+			"year": 2026,
+			"city": "Berlin",
+			"country_code": "GER",
+			"start_date": "2026-09-27",
+			"end_date": null,
+			"champ": {
+				"id": 140,
+				"name": "Berlin Marathon",
+				"slug": "berlin-marathon",
+				"category": 8
+			},
+			"summary": {
+				"type": "winners",
+				"winners": [
+					{
+						"mark_display": "2:02:50",
+						"gender": 0,
+						"mark": 20250,
+						"mark_format": "0:00:00",
+						"country_code": "ETH",
+						"athlete_name": null,
+						"athlete": {
+							"id": 57344,
+							"slug": "guye-adola",
+							"first_name": "Guye",
+							"last_name": "Adola"
+						},
+						"event": {
+							"name": "Marathon",
+							"rank": 28
+						}
+					},
+					{
+						"mark_display": "2:11:04",
+						"gender": 1,
+						"mark": 21104,
+						"mark_format": "0:00:00",
+						"country_code": "ETH",
+						"athlete_name": null,
+						"athlete": {
+							"id": 27750,
+							"slug": "tigst-assefa",
+							"first_name": "Tigst",
+							"last_name": "Assefa"
+						},
+						"event": {
+							"name": "Marathon",
+							"rank": 28
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 4770,
+			"name": "2026 South American Games",
+			"short_name": null,
+			"slug": "2026-south-american-games",
+			"year": 2026,
+			"city": "Santa Fe",
+			"country_code": "ARG",
+			"start_date": "2026-09-12",
+			"end_date": "2026-09-26",
+			"champ": {
+				"id": 95,
+				"name": "South American Games",
+				"slug": "south-american-games",
+				"category": 4
+			},
+			"summary": {
+				"type": "nations",
+				"nations": [
+					{
+						"gold": 14,
+						"silver": 15,
+						"bronze": 9,
+						"total": 38,
+						"country": {
+							"code": "BRA",
+							"name": "Brazil"
+						}
+					},
+					{
+						"gold": 8,
+						"silver": 5,
+						"bronze": 7,
+						"total": 20,
+						"country": {
+							"code": "COL",
+							"name": "Colombia"
+						}
+					},
+					{
+						"gold": 4,
+						"silver": 6,
+						"bronze": 5,
+						"total": 15,
+						"country": {
+							"code": "VEN",
+							"name": "Venezuela"
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 7209,
+			"name": "2026 Ultimate Championships",
+			"short_name": null,
+			"slug": "2026-ultimate-championships",
+			"year": 2026,
+			"city": "Budapest",
+			"country_code": "HUN",
+			"start_date": "2026-09-11",
+			"end_date": "2026-09-13",
+			"champ": {
+				"id": 213,
+				"name": "Ultimate Championships",
+				"slug": "ultimate-championships",
+				"category": 0
+			},
+			"summary": {
+				"type": "nations",
+				"nations": [
+					{
+						"gold": 9,
+						"silver": 6,
+						"bronze": 9,
+						"total": 24,
+						"country": {
+							"code": "USA",
+							"name": "United States of America"
+						}
+					},
+					{
+						"gold": 2,
+						"silver": 0,
+						"bronze": 0,
+						"total": 2,
+						"country": {
+							"code": "ITA",
+							"name": "Italy"
+						}
+					},
+					{
+						"gold": 1,
+						"silver": 4,
+						"bronze": 1,
+						"total": 6,
+						"country": {
+							"code": "GBR",
+							"name": "Great Britain & NI"
+						}
+					}
+				]
+			}
+		}
+	]
+}

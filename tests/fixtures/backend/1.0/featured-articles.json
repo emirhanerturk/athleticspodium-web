@@ -1,0 +1,197 @@
+{
+	"success": true,
+	"data": [
+		{
+			"id": 2326,
+			"article_id": 362,
+			"rank": 1,
+			"created_date": "2026-09-29T16:27:58.034Z",
+			"article": {
+				"id": 362,
+				"title": "The numbers: Asian Games",
+				"slug": "the-numbers-asian-games",
+				"description": "Asian Games achievements underlined over the numbers.",
+				"image": {
+					"uri": "2026/09/81e0e054-6c32-4d34-9f23-582e409ea1f0.jpeg",
+					"caption": "Triple gold medallist Winfred Yavi and her bitter rival, Nozomi Tanaka of Japan.",
+					"credit": "Asian Athletics",
+					"created_date": "2026-09-29T16:27:46.849Z"
+				},
+				"created_date": "2026-09-29T16:27:46.855Z",
+				"context": {
+					"type": "meeting",
+					"name": "2026 Asian Games",
+					"slug": "2026-asian-games",
+					"champ": {
+						"name": "Asian Games",
+						"slug": "asian-games"
+					}
+				}
+			}
+		},
+		{
+			"id": 2327,
+			"article_id": 361,
+			"rank": 2,
+			"created_date": "2026-09-29T16:27:59.417Z",
+			"article": {
+				"id": 361,
+				"title": "Tragically historic",
+				"slug": "tragically-historic",
+				"description": "Tigst Assefa missed the world record reclaim in Berlin because of last kilometre cramps.",
+				"image": {
+					"uri": "2026/09/8c381461-1243-4b9f-83f3-ed924fa068ff.jpeg",
+					"caption": "",
+					"credit": "",
+					"created_date": "2026-09-27T14:25:56.780Z"
+				},
+				"created_date": "2026-09-27T14:25:56.784Z",
+				"context": {
+					"type": "meeting",
+					"name": "2026 Berlin Marathon",
+					"slug": "2026-berlin-marathon",
+					"champ": {
+						"name": "Berlin Marathon",
+						"slug": "berlin-marathon"
+					}
+				}
+			}
+		},
+		{
+			"id": 2330,
+			"article_id": 357,
+			"rank": 4,
+			"created_date": "2026-09-29T16:28:13.567Z",
+			"article": {
+				"id": 357,
+				"title": "The groundbreaker",
+				"slug": "the-groundbreaker",
+				"description": "Florence Niyonkuru put her nation on the map with a historic bronze at the World Road Running.",
+				"image": {
+					"uri": "2026/09/c329bc4a-cf2e-4294-b972-d07466bbf998.jpeg",
+					"caption": "",
+					"credit": "",
+					"created_date": "2026-09-22T12:51:40.474Z"
+				},
+				"created_date": "2026-09-22T12:51:40.480Z",
+				"context": {
+					"type": "meeting",
+					"name": "2026 World Road Running Championships",
+					"slug": "2026-world-road-running-championships",
+					"champ": {
+						"name": "World Half Marathon CH",
+						"slug": "world-half-marathon-ch"
+					}
+				}
+			}
+		},
+		{
+			"id": 2331,
+			"article_id": 356,
+			"rank": 5,
+			"created_date": "2026-09-29T16:28:16.323Z",
+			"article": {
+				"id": 356,
+				"title": "Can the Ultimate revolutionize athletics?",
+				"slug": "can-the-ultimate-revolutionize-athletics?",
+				"description": "Takeaways from the newest experiment of World Athletics, the Ultimate Championships.",
+				"image": {
+					"uri": "2026/09/4af8d77e-e4ae-4b66-8e4a-035a977139d1.jpeg",
+					"caption": "Kenny Bednarek wins double sprint in Budapest.",
+					"credit": "Mattia Ozbot for World Athletics",
+					"created_date": "2026-09-16T08:36:07.892Z"
+				},
+				"created_date": "2026-09-16T08:36:07.898Z",
+				"context": {
+					"type": "champ",
+					"name": "Ultimate Championships",
+					"slug": "ultimate-championships"
+				}
+			}
+		},
+		{
+			"id": 2332,
+			"article_id": 355,
+			"rank": 6,
+			"created_date": "2026-09-29T16:28:20.347Z",
+			"article": {
+				"id": 355,
+				"title": "Italians concluded the chapter",
+				"slug": "italians-concluded-the-chapter",
+				"description": "The hosting nation rules Mediterranean Games athletics.",
+				"image": {
+					"uri": "2026/09/589c49e8-7c4e-48f9-a660-d6169599051e.jpeg",
+					"caption": "",
+					"credit": "FIDAL",
+					"created_date": "2026-09-03T14:08:30.693Z"
+				},
+				"created_date": "2026-09-03T14:08:30.699Z",
+				"context": {
+					"type": "meeting",
+					"name": "2026 Mediterranean Games",
+					"slug": "2026-mediterranean-games",
+					"champ": {
+						"name": "Mediterranean Games",
+						"slug": "mediterranean-games"
+					}
+				}
+			}
+		},
+		{
+			"id": 2333,
+			"article_id": 351,
+			"rank": 7,
+			"created_date": "2026-09-29T16:28:22.521Z",
+			"article": {
+				"id": 351,
+				"title": "The approval of greatness",
+				"slug": "the-approval-of-greatness",
+				"description": "Amy Hunt went down in history as the standout athlete of the Europeans.",
+				"image": {
+					"uri": "2026/08/7b694088-fa77-4d4d-abd6-2f8908e7ec2d.jpeg",
+					"caption": "Amy Hunt wins 100 metres final in Birmingham.",
+					"credit": "Maja Hitij - Getty Images for European Athletics",
+					"created_date": "2026-08-18T15:42:42.697Z"
+				},
+				"created_date": "2026-08-18T15:42:42.706Z",
+				"context": {
+					"type": "meeting",
+					"name": "2026 European Champs",
+					"slug": "2026-european-championships",
+					"champ": {
+						"name": "European Championships",
+						"slug": "european-champs"
+					}
+				}
+			}
+		},
+		{
+			"id": 2334,
+			"article_id": 360,
+			"rank": 8,
+			"created_date": "2026-09-29T16:29:15.020Z",
+			"article": {
+				"id": 360,
+				"title": "19 records broken in four days",
+				"slug": "19-records-broken-in-four-days",
+				"description": "The athletics competition sees 19 games records during four-day programme. ",
+				"image": {
+					"uri": "2026/09/c23ff0f8-f0de-4263-a61d-8eec32ca8ce5.jpeg",
+					"caption": "Venezuelans grabbed 4x400 metres gold over Argentina. ",
+					"credit": "Santa Fe 2026 Official",
+					"created_date": "2026-09-26T09:40:00.208Z"
+				},
+				"created_date": "2026-09-26T09:40:00.216Z",
+				"context": {
+					"type": "meeting",
+					"name": "2026 South American Games",
+					"slug": "2026-south-american-games",
+					"champ": {
+						"name": "South American Games",
+						"slug": "south-american-games"
+					}
+				}
+			}
+		}
+	]
+}
