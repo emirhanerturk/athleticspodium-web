@@ -43,13 +43,27 @@ test('switches to the women’s podiums', async ({ page }) => {
 	await expect(page.getByRole('heading', { name: '100m' })).toBeHidden();
 });
 
-test('opens the athlete card when hovering a name', async ({ page }) => {
+test('opens the athlete card at once and fills it when the summary arrives', async ({ page }) => {
+	let releaseSummary = () => {};
+	const summaryHeld = new Promise<void>((resolve) => (releaseSummary = resolve));
+	await page.route('**/internal/athlete-card/**', async (route) => {
+		await summaryHeld;
+		await route.continue();
+	});
 	await page.goto(EDITION, { waitUntil: 'networkidle' });
 
 	await page.getByRole('link', { name: 'Romell Glave' }).hover();
+	const card = page.locator('[aria-busy]');
 
-	await expect(page.getByText('Gold here · 100m · 10.09')).toBeVisible();
-	await expect(page.getByRole('link', { name: 'Profile →' })).toHaveAttribute(
+	await expect(card).toHaveAttribute('aria-busy', 'true');
+	await expect(card.getByText('Gold here · 100m · 10.09')).toBeVisible();
+	await expect(card.getByText('Romell Glave')).toBeVisible();
+
+	releaseSummary();
+
+	await expect(card).toHaveAttribute('aria-busy', 'false');
+	await expect(card.getByText('11 Nov 1999')).toBeVisible();
+	await expect(card.getByRole('link', { name: 'Profile →' })).toHaveAttribute(
 		'href',
 		'/athlete/75442/romell-glave'
 	);
