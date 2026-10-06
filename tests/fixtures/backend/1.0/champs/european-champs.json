@@ -1,0 +1,113 @@
+{
+	"success": true,
+	"data": {
+		"id": 18,
+		"name": "European Championships",
+		"slug": "european-champs",
+		"category": 3,
+		"countries": [
+			"ALB",
+			"AND",
+			"ARM",
+			"AUT",
+			"ANA",
+			"AZE",
+			"BLR",
+			"BEL",
+			"BIH",
+			"BUL",
+			"CRO",
+			"CYP",
+			"CZE",
+			"DEN",
+			"EST",
+			"FAR",
+			"FIN",
+			"FRA",
+			"GEO",
+			"GER",
+			"GDR",
+			"GIB",
+			"GBR",
+			"GRE",
+			"HUN",
+			"ISL",
+			"IEP",
+			"IRL",
+			"ISR",
+			"ITA",
+			"KOS",
+			"LAT",
+			"LIE",
+			"LTU",
+			"LUX",
+			"MLT",
+			"MDA",
+			"MON",
+			"MNE",
+			"NED",
+			"MKD",
+			"NOR",
+			"POL",
+			"POR",
+			"ROU",
+			"RUS",
+			"SMR",
+			"SRB",
+			"SVK",
+			"SLO",
+			"URS",
+			"ESP",
+			"SWE",
+			"SUI",
+			"TUR",
+			"UKR",
+			"YUG",
+			"JUG"
+		],
+		"years": [
+			1934, 1938, 1946, 1950, 1954, 1958, 1962, 1966, 1969, 1971, 1974, 1978, 1982, 1986, 1990,
+			1994, 1998, 2002, 2006, 2010, 2012, 2014, 2016, 2018, 2022, 2024, 2026, 2028
+		],
+		"events_men": [
+			10, 30, 55, 86, 20, 73, 3, 105, 106, 125, 126, 43, 15, 53, 60, 68, 111, 136, 122, 152, 144,
+			99, 113, 117, 95, 13, 31, 77, 85, 129
+		],
+		"events_women": [
+			78, 10, 30, 55, 86, 20, 39, 73, 3, 105, 106, 125, 126, 43, 88, 7, 53, 111, 136, 122, 152, 144,
+			99, 113, 117, 60, 68, 107, 133, 13, 31, 77, 85, 129
+		],
+		"events_mixed": [123, 69],
+		"image": null,
+		"content": "",
+		"rank": 30,
+		"created_date": "2020-03-28T09:10:00.254Z",
+		"updated_date": "2026-08-18T15:13:06.644Z",
+		"meetings": [
+			{
+				"id": 6752,
+				"short_name": null,
+				"name": "2028 European Championships",
+				"slug": "2028-european-championships",
+				"year": 2028,
+				"city": "Chorzow"
+			},
+			{
+				"id": 2219,
+				"short_name": null,
+				"name": "2026 European Champs",
+				"slug": "2026-european-championships",
+				"year": 2026,
+				"city": "Birmingham"
+			},
+			{
+				"id": 958,
+				"short_name": null,
+				"name": "2024 European Champs",
+				"slug": "2024-european-champs",
+				"year": 2024,
+				"city": "Rome"
+			}
+		]
+	}
+}

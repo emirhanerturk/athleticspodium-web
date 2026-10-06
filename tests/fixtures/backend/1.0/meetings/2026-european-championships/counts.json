@@ -1,0 +1,35 @@
+{
+	"success": true,
+	"data": [
+		{
+			"gold": 10,
+			"silver": 6,
+			"bronze": 6,
+			"total": 22,
+			"country": {
+				"code": "ITA",
+				"name": "Italy"
+			}
+		},
+		{
+			"gold": 9,
+			"silver": 8,
+			"bronze": 2,
+			"total": 19,
+			"country": {
+				"code": "GBR",
+				"name": "Great Britain & NI"
+			}
+		},
+		{
+			"gold": 6,
+			"silver": 10,
+			"bronze": 5,
+			"total": 21,
+			"country": {
+				"code": "GER",
+				"name": "Germany"
+			}
+		}
+	]
+}

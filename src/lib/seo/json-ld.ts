@@ -1,4 +1,5 @@
 import { fullName, type AthleteProfile } from '#lib/domain/athlete.js';
+import type { EditionMeeting } from '#lib/domain/edition.js';
 
 export interface Crumb {
 	name: string;
@@ -34,6 +35,29 @@ export function personJsonLd(
 		deathDate: athlete.deathDate ?? undefined,
 		birthPlace: athlete.birthPlace ? { '@type': 'Place', name: athlete.birthPlace } : undefined,
 		nationality: athlete.country ? { '@type': 'Country', name: athlete.country.name } : undefined
+	});
+}
+
+export function sportsEventJsonLd(siteUrl: string, meeting: EditionMeeting, path: string) {
+	return withoutEmpty({
+		'@context': 'https://schema.org',
+		'@type': 'SportsEvent',
+		name: meeting.name,
+		url: siteUrl + path,
+		sport: 'Athletics',
+		startDate: meeting.startDate ?? undefined,
+		endDate: meeting.endDate ?? undefined,
+		location: meeting.city
+			? {
+					'@type': 'Place',
+					name: meeting.city,
+					address: withoutEmpty({
+						'@type': 'PostalAddress',
+						addressLocality: meeting.city,
+						addressCountry: meeting.country?.name
+					})
+				}
+			: undefined
 	});
 }
 

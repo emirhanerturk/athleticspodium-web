@@ -2,7 +2,11 @@
 	import type { Result } from '#lib/domain/result.js';
 	import { formatWind } from '#lib/format/mark.js';
 
-	let { result }: { result: Result } = $props();
+	let {
+		result,
+		showWind = true
+	}: { result: Pick<Result, 'mark' | 'markNote' | 'wind' | 'canceled'>; showWind?: boolean } =
+		$props();
 
 	const indoor = $derived(result.markNote === '(i)');
 </script>
@@ -16,9 +20,9 @@
 	{:else if result.markNote}
 		<span class="ml-1 text-xs font-medium text-ink-3">{result.markNote}</span>
 	{/if}
-	{#if result.wind !== null}
-		<span title="Wind (m/s)" class="ml-1 text-xs font-medium text-ink-3"
-			>{formatWind(result.wind)}</span
-		>
+	{#if showWind && result.wind !== null}
+		<span title="Wind (m/s)" class="ml-1 text-xs font-medium text-ink-3">
+			{formatWind(result.wind)}
+		</span>
 	{/if}
 </span>

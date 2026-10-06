@@ -1,5 +1,6 @@
 import type { IsoDate } from './date.js';
 import type { Image } from './image.js';
+import type { MedalTally } from './result.js';
 
 export interface AthleteRef {
 	id: number;
@@ -62,4 +63,11 @@ const RELATIONS = [
 
 export function relationName(code: number): string {
 	return RELATIONS[code] ?? 'Relative';
+}
+
+export interface AthleteSummary extends AthleteRef, AthleteLifespan {
+	events: string[];
+	olympicChampion: boolean;
+	image: Image | null;
+	medals: MedalTally;
 }

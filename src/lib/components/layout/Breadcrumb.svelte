@@ -1,8 +1,11 @@
 <script lang="ts">
-	let { items }: { items: { label: string; href?: string }[] } = $props();
+	let {
+		items,
+		class: className = 'page-container pt-5'
+	}: { items: { label: string; href?: string }[]; class?: string } = $props();
 </script>
 
-<nav aria-label="Breadcrumb" class="page-container pt-5 text-[13.5px] text-ink-3">
+<nav aria-label="Breadcrumb" class="{className} text-[13.5px] text-ink-3">
 	<ol class="flex flex-wrap items-center gap-2">
 		{#each items as item, index (index)}
 			<li class="flex items-center gap-2">

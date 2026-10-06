@@ -75,3 +75,10 @@ export interface RelationDto {
 	athlete_from: RelatedAthleteDto;
 	athlete_to: RelatedAthleteDto;
 }
+
+export interface AthleteSummaryDto extends AthleteRowDto {
+	events: string[] | null;
+	olympic_mark: boolean;
+	image: ImageDto | null;
+	medals: { gold: number; silver: number; bronze: number; total: number };
+}

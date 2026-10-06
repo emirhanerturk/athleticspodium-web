@@ -1,0 +1,611 @@
+{
+	"success": true,
+	"data": {
+		"0": [
+			{
+				"id": 10,
+				"name": "100m",
+				"rank": 3,
+				"notes": null,
+				"medals": [
+					{
+						"mark_display": "10.09",
+						"id": 395029,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 10,
+						"medal": 1,
+						"athlete_id": 75442,
+						"athlete_name": null,
+						"country_code": "GBR",
+						"gender": 0,
+						"mark": 1009,
+						"mark_format": "00.00",
+						"order": null,
+						"wind": -0.4,
+						"info": null,
+						"records": null,
+						"is_team": false,
+						"is_canceled": false,
+						"notes": "Reax: 0.134",
+						"created_date": "2026-08-12T16:53:06.674Z",
+						"updated_date": "2026-08-17T20:23:53.669Z",
+						"event": {
+							"id": 10,
+							"name": "100m",
+							"rank": 3,
+							"notes": null
+						},
+						"athlete": {
+							"id": 75442,
+							"first_name": "Romell",
+							"last_name": "Glave",
+							"slug": "romell-glave",
+							"gender": true,
+							"olympic_mark": false,
+							"date_of_birth": "1999-11-11"
+						},
+						"country": {
+							"code": "GBR",
+							"name": "Great Britain & NI"
+						}
+					},
+					{
+						"mark_display": "10.16",
+						"id": 395030,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 10,
+						"medal": 2,
+						"athlete_id": 54365,
+						"athlete_name": null,
+						"country_code": "GBR",
+						"gender": 0,
+						"mark": 1016,
+						"mark_format": "00.00",
+						"order": null,
+						"wind": -0.4,
+						"info": null,
+						"records": null,
+						"is_team": false,
+						"is_canceled": false,
+						"notes": "Reax: 0.138",
+						"created_date": "2026-08-12T16:53:06.674Z",
+						"updated_date": "2026-08-17T20:23:53.669Z",
+						"event": {
+							"id": 10,
+							"name": "100m",
+							"rank": 3
+						},
+						"athlete": {
+							"id": 54365,
+							"first_name": "Jeremiah",
+							"last_name": "Azu",
+							"slug": "jeremiah-azu",
+							"gender": true,
+							"olympic_mark": false,
+							"date_of_birth": "2001-05-15"
+						},
+						"country": {
+							"code": "GBR",
+							"name": "Great Britain & NI"
+						}
+					},
+					{
+						"mark_display": "10.19",
+						"id": 395031,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 10,
+						"medal": 3,
+						"athlete_id": 52697,
+						"athlete_name": null,
+						"country_code": "GER",
+						"gender": 0,
+						"mark": 1019,
+						"mark_format": "00.00",
+						"order": null,
+						"wind": -0.4,
+						"info": null,
+						"records": null,
+						"is_team": false,
+						"is_canceled": false,
+						"notes": "Reax: 0.165",
+						"created_date": "2026-08-12T16:53:06.674Z",
+						"updated_date": "2026-08-17T20:23:53.669Z",
+						"event": {
+							"id": 10,
+							"name": "100m",
+							"rank": 3
+						},
+						"athlete": {
+							"id": 52697,
+							"first_name": "Owen",
+							"last_name": "Ansah",
+							"slug": "owen-ansah",
+							"gender": true,
+							"olympic_mark": false,
+							"date_of_birth": "2000-11-28"
+						},
+						"country": {
+							"code": "GER",
+							"name": "Germany"
+						}
+					}
+				]
+			},
+			{
+				"id": 60,
+				"name": "4x100m",
+				"rank": 160,
+				"notes": null,
+				"medals": [
+					{
+						"mark_display": "38.45",
+						"id": 395126,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 60,
+						"medal": 1,
+						"athlete_id": 54365,
+						"athlete_name": null,
+						"country_code": "GBR",
+						"gender": 0,
+						"mark": 3845,
+						"mark_format": "00.00",
+						"order": "1",
+						"wind": null,
+						"info": null,
+						"records": null,
+						"is_team": true,
+						"is_canceled": false,
+						"notes": null,
+						"created_date": "2026-08-16T10:02:33.503Z",
+						"updated_date": "2026-08-17T20:23:53.685Z",
+						"event": {
+							"id": 60,
+							"name": "4x100m",
+							"rank": 160,
+							"notes": null
+						},
+						"athlete": {
+							"id": 54365,
+							"first_name": "Jeremiah",
+							"last_name": "Azu",
+							"slug": "jeremiah-azu",
+							"gender": true,
+							"olympic_mark": false,
+							"date_of_birth": "2001-05-15"
+						},
+						"country": {
+							"code": "GBR",
+							"name": "Great Britain & NI"
+						}
+					},
+					{
+						"mark_display": "38.45",
+						"id": 395127,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 60,
+						"medal": 1,
+						"athlete_id": 75888,
+						"athlete_name": null,
+						"country_code": "GBR",
+						"gender": 0,
+						"mark": 3845,
+						"mark_format": "00.00",
+						"order": "2",
+						"wind": null,
+						"info": null,
+						"records": null,
+						"is_team": true,
+						"is_canceled": false,
+						"notes": null,
+						"created_date": "2026-08-16T10:02:33.503Z",
+						"updated_date": "2026-08-17T20:23:53.686Z",
+						"event": {
+							"id": 60,
+							"name": "4x100m",
+							"rank": 160
+						},
+						"athlete": {
+							"id": 75888,
+							"first_name": "Louie",
+							"last_name": "Hinchliffe",
+							"slug": "louie-hinchliffe",
+							"gender": true,
+							"olympic_mark": false,
+							"date_of_birth": "2002-07-18"
+						},
+						"country": {
+							"code": "GBR",
+							"name": "Great Britain & NI"
+						}
+					},
+					{
+						"mark_display": "38.45",
+						"id": 395128,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 60,
+						"medal": 1,
+						"athlete_id": 9018,
+						"athlete_name": null,
+						"country_code": "GBR",
+						"gender": 0,
+						"mark": 3845,
+						"mark_format": "00.00",
+						"order": "3",
+						"wind": null,
+						"info": null,
+						"records": null,
+						"is_team": true,
+						"is_canceled": false,
+						"notes": null,
+						"created_date": "2026-08-16T10:02:33.503Z",
+						"updated_date": "2026-08-17T20:23:53.686Z",
+						"event": {
+							"id": 60,
+							"name": "4x100m",
+							"rank": 160
+						},
+						"athlete": {
+							"id": 9018,
+							"first_name": "Zharnel",
+							"last_name": "Hughes",
+							"slug": "zharnel-hughes",
+							"gender": true,
+							"olympic_mark": false,
+							"date_of_birth": "1995-07-13"
+						},
+						"country": {
+							"code": "GBR",
+							"name": "Great Britain & NI"
+						}
+					},
+					{
+						"mark_display": "38.45",
+						"id": 395129,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 60,
+						"medal": 1,
+						"athlete_id": 75442,
+						"athlete_name": null,
+						"country_code": "GBR",
+						"gender": 0,
+						"mark": 3845,
+						"mark_format": "00.00",
+						"order": "4",
+						"wind": null,
+						"info": null,
+						"records": null,
+						"is_team": true,
+						"is_canceled": false,
+						"notes": null,
+						"created_date": "2026-08-16T10:02:33.503Z",
+						"updated_date": "2026-08-17T20:23:53.686Z",
+						"event": {
+							"id": 60,
+							"name": "4x100m",
+							"rank": 160
+						},
+						"athlete": {
+							"id": 75442,
+							"first_name": "Romell",
+							"last_name": "Glave",
+							"slug": "romell-glave",
+							"gender": true,
+							"olympic_mark": false,
+							"date_of_birth": "1999-11-11"
+						},
+						"country": {
+							"code": "GBR",
+							"name": "Great Britain & NI"
+						}
+					},
+					{
+						"mark_display": "38.64",
+						"id": 395130,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 60,
+						"medal": 2,
+						"athlete_id": 13487,
+						"athlete_name": null,
+						"country_code": "GER",
+						"gender": 0,
+						"mark": 3864,
+						"mark_format": "00.00",
+						"order": "1",
+						"wind": null,
+						"info": null,
+						"records": null,
+						"is_team": true,
+						"is_canceled": false,
+						"notes": null,
+						"created_date": "2026-08-16T10:02:33.503Z",
+						"updated_date": "2026-08-17T20:23:53.686Z",
+						"event": {
+							"id": 60,
+							"name": "4x100m",
+							"rank": 160
+						},
+						"athlete": {
+							"id": 13487,
+							"first_name": "Kevin",
+							"last_name": "Kranz",
+							"slug": "kevin-kranz",
+							"gender": true,
+							"olympic_mark": false,
+							"date_of_birth": "1998-06-20"
+						},
+						"country": {
+							"code": "GER",
+							"name": "Germany"
+						}
+					},
+					{
+						"mark_display": "38.64",
+						"id": 395131,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 60,
+						"medal": 2,
+						"athlete_id": 11211,
+						"athlete_name": null,
+						"country_code": "GER",
+						"gender": 0,
+						"mark": 3864,
+						"mark_format": "00.00",
+						"order": "2",
+						"wind": null,
+						"info": null,
+						"records": null,
+						"is_team": true,
+						"is_canceled": false,
+						"notes": null,
+						"created_date": "2026-08-16T10:02:33.503Z",
+						"updated_date": "2026-08-17T20:23:53.686Z",
+						"event": {
+							"id": 60,
+							"name": "4x100m",
+							"rank": 160
+						},
+						"athlete": {
+							"id": 11211,
+							"first_name": "Marvin",
+							"last_name": "Schulte",
+							"slug": "marvin-schulte",
+							"gender": true,
+							"olympic_mark": false,
+							"date_of_birth": "1999-02-19"
+						},
+						"country": {
+							"code": "GER",
+							"name": "Germany"
+						}
+					},
+					{
+						"mark_display": "38.64",
+						"id": 395132,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 60,
+						"medal": 2,
+						"athlete_id": 73448,
+						"athlete_name": null,
+						"country_code": "GER",
+						"gender": 0,
+						"mark": 3864,
+						"mark_format": "00.00",
+						"order": "3",
+						"wind": null,
+						"info": null,
+						"records": null,
+						"is_team": true,
+						"is_canceled": false,
+						"notes": null,
+						"created_date": "2026-08-16T10:02:33.512Z",
+						"updated_date": "2026-08-17T20:23:53.686Z",
+						"event": {
+							"id": 60,
+							"name": "4x100m",
+							"rank": 160
+						},
+						"athlete": {
+							"id": 73448,
+							"first_name": "Heiko",
+							"last_name": "Gussmann",
+							"slug": "heiko-gussmann",
+							"gender": true,
+							"olympic_mark": false,
+							"date_of_birth": "2004-03-11"
+						},
+						"country": {
+							"code": "GER",
+							"name": "Germany"
+						}
+					},
+					{
+						"mark_display": "38.64",
+						"id": 395134,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 60,
+						"medal": 2,
+						"athlete_id": 12956,
+						"athlete_name": null,
+						"country_code": "GER",
+						"gender": 0,
+						"mark": 3864,
+						"mark_format": "00.00",
+						"order": "4",
+						"wind": null,
+						"info": null,
+						"records": null,
+						"is_team": true,
+						"is_canceled": false,
+						"notes": null,
+						"created_date": "2026-08-16T10:02:33.513Z",
+						"updated_date": "2026-08-17T20:23:53.686Z",
+						"event": {
+							"id": 60,
+							"name": "4x100m",
+							"rank": 160
+						},
+						"athlete": {
+							"id": 12956,
+							"first_name": "Lucas",
+							"last_name": "Ansah-Peprah",
+							"slug": "lucas-ansah-peprah",
+							"gender": true,
+							"olympic_mark": false,
+							"date_of_birth": "2000-01-16"
+						},
+						"country": {
+							"code": "GER",
+							"name": "Germany"
+						}
+					}
+				]
+			}
+		],
+		"1": [
+			{
+				"id": 111,
+				"name": "HJ",
+				"rank": 70,
+				"notes": null,
+				"medals": [
+					{
+						"mark_display": "1.97",
+						"id": 395149,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 111,
+						"medal": 1,
+						"athlete_id": 35017,
+						"athlete_name": null,
+						"country_code": "UKR",
+						"gender": 1,
+						"mark": 197,
+						"mark_format": "0.00",
+						"order": null,
+						"wind": null,
+						"info": null,
+						"records": null,
+						"is_team": false,
+						"is_canceled": false,
+						"notes": null,
+						"created_date": "2026-08-16T10:11:07.379Z",
+						"updated_date": "2026-08-17T20:38:24.918Z",
+						"event": {
+							"id": 111,
+							"name": "HJ",
+							"rank": 70,
+							"notes": null
+						},
+						"athlete": {
+							"id": 35017,
+							"first_name": "Yaroslava",
+							"last_name": "Mahuchikh",
+							"slug": "yaroslava-mahuchikh",
+							"gender": false,
+							"olympic_mark": true,
+							"date_of_birth": "2001-09-19"
+						},
+						"country": {
+							"code": "UKR",
+							"name": "Ukraine"
+						}
+					},
+					{
+						"mark_display": "1.95",
+						"id": 395150,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 111,
+						"medal": 2,
+						"athlete_id": 79300,
+						"athlete_name": null,
+						"country_code": "POL",
+						"gender": 1,
+						"mark": 195,
+						"mark_format": "0.00",
+						"order": null,
+						"wind": null,
+						"info": null,
+						"records": null,
+						"is_team": false,
+						"is_canceled": false,
+						"notes": null,
+						"created_date": "2026-08-16T10:11:07.379Z",
+						"updated_date": "2026-08-17T20:38:24.918Z",
+						"event": {
+							"id": 111,
+							"name": "HJ",
+							"rank": 70
+						},
+						"athlete": {
+							"id": 79300,
+							"first_name": "Maria",
+							"last_name": "Zodzik",
+							"slug": "maria-zodzik",
+							"gender": false,
+							"olympic_mark": false,
+							"date_of_birth": "1997-01-19"
+						},
+						"country": {
+							"code": "POL",
+							"name": "Poland"
+						}
+					},
+					{
+						"mark_display": "1.95",
+						"id": 395153,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 111,
+						"medal": 3,
+						"athlete_id": 36060,
+						"athlete_name": null,
+						"country_code": "MNE",
+						"gender": 1,
+						"mark": 195,
+						"mark_format": "0.00",
+						"order": null,
+						"wind": null,
+						"info": null,
+						"records": null,
+						"is_team": false,
+						"is_canceled": false,
+						"notes": null,
+						"created_date": "2026-08-16T10:11:07.380Z",
+						"updated_date": "2026-08-17T20:38:24.918Z",
+						"event": {
+							"id": 111,
+							"name": "HJ",
+							"rank": 70
+						},
+						"athlete": {
+							"id": 36060,
+							"first_name": "Marija",
+							"last_name": "Vukovic",
+							"slug": "marija-vukovic",
+							"gender": false,
+							"olympic_mark": false,
+							"date_of_birth": "1992-01-21"
+						},
+						"country": {
+							"code": "MNE",
+							"name": "Montenegro"
+						}
+					}
+				]
+			}
+		],
+		"2": []
+	}
+}

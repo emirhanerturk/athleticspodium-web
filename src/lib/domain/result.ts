@@ -55,3 +55,10 @@ export function tallyOf(results: Pick<Result, 'place' | 'canceled'>[]): MedalTal
 	tally.total = tally.gold + tally.silver + tally.bronze;
 	return tally;
 }
+
+const MEDAL_NAMES: Record<number, string> = { 1: 'Gold', 2: 'Silver', 3: 'Bronze' };
+
+export function placeName(place: number | null): string {
+	if (place === null) return 'Medal';
+	return MEDAL_NAMES[place] ?? `${place}th`;
+}

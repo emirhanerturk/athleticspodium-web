@@ -1,0 +1,21 @@
+{
+	"success": true,
+	"data": {
+		"id": 75442,
+		"slug": "romell-glave",
+		"first_name": "Romell",
+		"last_name": "Glave",
+		"country_code": "GBR",
+		"events": null,
+		"olympic_mark": false,
+		"date_of_birth": "1999-11-11",
+		"date_of_death": null,
+		"image": null,
+		"medals": {
+			"gold": 2,
+			"silver": 0,
+			"bronze": 3,
+			"total": 5
+		}
+	}
+}

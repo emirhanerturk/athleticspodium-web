@@ -3,6 +3,7 @@ import {
 	type AthleteLifespan,
 	type AthleteProfile,
 	type AthleteRef,
+	type AthleteSummary,
 	type BirthdaysToday,
 	type Relative
 } from '#lib/domain/athlete.js';
@@ -12,6 +13,7 @@ import type {
 	AthleteDetailDto,
 	AthleteListDto,
 	AthleteRowDto,
+	AthleteSummaryDto,
 	OlympicMeetingDto,
 	RelationDto,
 	ResultDto
@@ -111,4 +113,20 @@ export function parseRelatives(athleteId: number, dtos: RelationDto[]): Relative
 			relation: relationName(viewedFromSide ? dto.relation_from : dto.relation_to)
 		};
 	});
+}
+
+export function parseAthleteSummary(dto: AthleteSummaryDto): AthleteSummary {
+	return {
+		...parseAthleteWithLifespan(dto),
+		events: dto.events ?? [],
+		olympicChampion: dto.olympic_mark,
+		image: dto.image
+			? {
+					path: `athletes/${dto.id}/${dto.image.uri}`,
+					credit: dto.image.credit ?? null,
+					caption: null
+				}
+			: null,
+		medals: dto.medals
+	};
 }

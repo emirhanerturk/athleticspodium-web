@@ -3,12 +3,14 @@ import { BackendNotFoundError, type BackendClient } from '../client.js';
 import type {
 	AthleteDetailDto,
 	AthleteListDto,
+	AthleteSummaryDto,
 	OlympicMeetingDto,
 	RelationDto,
 	ResultDto
 } from './dto.js';
 import {
 	parseAthleteProfile,
+	parseAthleteSummary,
 	parseBirthdaysToday,
 	parseOlympicGames,
 	parseRelatives,
@@ -34,6 +36,10 @@ export function createAthletes(client: BackendClient) {
 				olympics: parseOlympicGames(olympics),
 				relatives: parseRelatives(id, relations)
 			};
+		},
+
+		async getSummary(id: number) {
+			return parseAthleteSummary(await client.get<AthleteSummaryDto>(`/athletes/${id}/summary`));
 		},
 
 		async bornOn(date: IsoDate) {
