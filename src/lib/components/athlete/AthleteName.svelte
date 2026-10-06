@@ -38,9 +38,10 @@
 		children: Snippet;
 	} = $props();
 
-	const OPEN_DELAY_MS = 150;
+	const OPEN_DELAY_MS = 100;
 
 	let summary = $state<AthleteSummary | null>(null);
+	let loading = $state(false);
 	let open = $state(false);
 	let timer: ReturnType<typeof setTimeout> | undefined;
 
@@ -48,11 +49,16 @@
 		const canHover = matchMedia('(hover: hover)').matches;
 		if (event.type !== 'focus' && !canHover) return;
 
+		void fetchSummary();
 		clearTimeout(timer);
-		timer = setTimeout(async () => {
-			summary = await loadSummary(athlete.id);
-			open = summary !== null;
-		}, OPEN_DELAY_MS);
+		timer = setTimeout(() => (open = true), OPEN_DELAY_MS);
+	}
+
+	async function fetchSummary() {
+		if (summary || loading) return;
+		loading = true;
+		summary = await loadSummary(athlete.id);
+		loading = false;
 	}
 
 	function hide() {
@@ -77,9 +83,9 @@
 	>
 		{@render children()}
 	</a>
-	{#if open && summary}
+	{#if open}
 		<div class="absolute top-full left-0 z-50 pt-2">
-			<AthleteCard athlete={summary} {today} {result} />
+			<AthleteCard {athlete} {summary} {loading} {today} {result} />
 		</div>
 	{/if}
 </span>
