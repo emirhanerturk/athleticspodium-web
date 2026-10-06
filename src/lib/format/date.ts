@@ -15,6 +15,11 @@ export function formatDate(date: IsoDate): string {
 	return `${day} ${month} ${year}`;
 }
 
+export function formatDayMonth(date: IsoDate): string {
+	const { day, month } = partsOf(date);
+	return `${day} ${month}`;
+}
+
 export function formatDateRange(start: IsoDate, end: IsoDate | null): string {
 	const from = partsOf(start);
 	if (!end || end === start) return `${from.day} ${from.month}`;

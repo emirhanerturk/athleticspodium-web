@@ -93,3 +93,16 @@ export interface AthleteSummaryDto extends AthleteRowDto {
 	image: ImageDto | null;
 	medals: { gold: number; silver: number; bronze: number; total: number };
 }
+
+export interface FeaturedAthleteDto {
+	athlete_id: number;
+	athlete:
+		| (AthleteRowDto & {
+				olympic_mark: boolean;
+				events: string[] | null;
+				image: ImageDto[] | null;
+				biography: string | null;
+				medals: { gold: number; silver: number; bronze: number; total: number } | null;
+		  })
+		| null;
+}

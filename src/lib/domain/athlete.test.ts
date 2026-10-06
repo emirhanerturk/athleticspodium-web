@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ageOn, fullName } from './athlete.js';
+import { ageOn, byMedals, fullName } from './athlete.js';
 
 describe('ageOn', () => {
 	it('counts full years', () => {
@@ -22,5 +22,20 @@ describe('fullName', () => {
 
 	it('copes with a missing first name', () => {
 		expect(fullName({ firstName: '', lastName: 'Pelé' })).toBe('Pelé');
+	});
+});
+
+describe('byMedals', () => {
+	const medals = (gold: number, total: number) => ({
+		medals: { gold, silver: 0, bronze: total - gold, total }
+	});
+
+	it('puts more medals first, then more golds', () => {
+		const sorted = [medals(1, 2), medals(3, 5), medals(2, 5)].sort(byMedals);
+		expect(sorted.map((item) => [item.medals.gold, item.medals.total])).toEqual([
+			[3, 5],
+			[2, 5],
+			[1, 2]
+		]);
 	});
 });

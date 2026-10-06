@@ -1,0 +1,124 @@
+{
+	"success": true,
+	"data": [
+		{
+			"gold": "39",
+			"silver": "9",
+			"bronze": "1",
+			"total": "49",
+			"athlete": {
+				"id": 7894,
+				"first_name": "Usain",
+				"last_name": "Bolt",
+				"slug": "usain-bolt",
+				"gender": true,
+				"olympic_mark": true,
+				"image": [
+					{
+						"uri": "74deb5d4-9bf8-4f4f-bf09-19a6f7f173ed.jpeg",
+						"credit": "Source: Atletizm Dünyası Archive",
+						"created_date": "2020-12-26T20:51:14.890Z"
+					},
+					{
+						"uri": "987385bc-e454-45e0-811e-066f6ff408f7.jpeg",
+						"credit": "Source: Atletizm Dünyası Archive",
+						"created_date": "2021-06-27T14:03:20.968Z"
+					}
+				],
+				"date_of_birth": "1986-08-21",
+				"events": ["Sprints"]
+			}
+		},
+		{
+			"gold": "26",
+			"silver": "14",
+			"bronze": "11",
+			"total": "51",
+			"athlete": {
+				"id": 31584,
+				"first_name": "Shericka",
+				"last_name": "Jackson",
+				"slug": "shericka-jackson",
+				"gender": false,
+				"olympic_mark": true,
+				"image": [
+					{
+						"uri": "b515c890-b83b-49cb-8759-5ab711c1e182.jpeg",
+						"credit": "Source: Personal Twitter",
+						"created_date": "2021-03-25T20:52:42.461Z"
+					}
+				],
+				"date_of_birth": "1994-07-16",
+				"events": ["Sprints"]
+			}
+		},
+		{
+			"gold": "24",
+			"silver": "18",
+			"bronze": "4",
+			"total": "46",
+			"athlete": {
+				"id": 33214,
+				"first_name": "Veronica",
+				"last_name": "Campbell-Brown",
+				"slug": "veronica-campbell-brown",
+				"gender": false,
+				"olympic_mark": true,
+				"image": [
+					{
+						"uri": "c0ebe9ec-8b71-4028-9bda-522133185c96.jpeg",
+						"created_date": "2020-10-03T20:23:52.612Z"
+					}
+				],
+				"date_of_birth": "1982-05-15",
+				"events": ["Sprints"]
+			}
+		},
+		{
+			"gold": "22",
+			"silver": "5",
+			"bronze": "5",
+			"total": "32",
+			"athlete": {
+				"id": 31535,
+				"first_name": "Natoya",
+				"last_name": "Goule",
+				"slug": "natoya-goule",
+				"gender": false,
+				"olympic_mark": false,
+				"image": [
+					{
+						"uri": "c69e411b-5572-47b4-a575-905b69c37444.jpeg",
+						"credit": "Source: Personal Facebook",
+						"created_date": "2022-04-09T12:41:54.523Z"
+					}
+				],
+				"date_of_birth": "1991-03-30",
+				"events": ["800 metres"]
+			}
+		},
+		{
+			"gold": "20",
+			"silver": "11",
+			"bronze": "4",
+			"total": "35",
+			"athlete": {
+				"id": 40402,
+				"first_name": "Anneisha",
+				"last_name": "McLaughlin-Whilby",
+				"slug": "anneisha-mclaughlin-whilby",
+				"gender": false,
+				"olympic_mark": false,
+				"image": [
+					{
+						"uri": "d260dbdb-58cb-4875-80ae-6b9064218f89.jpeg",
+						"credit": "Source: Jamaica Gleaner",
+						"created_date": "2021-03-25T20:49:45.272Z"
+					}
+				],
+				"date_of_birth": "1986-01-06",
+				"events": ["Sprints"]
+			}
+		}
+	]
+}

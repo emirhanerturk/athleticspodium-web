@@ -1,0 +1,101 @@
+{
+	"success": true,
+	"data": [
+		{
+			"gold": "19",
+			"silver": "3",
+			"bronze": "3",
+			"total": "25",
+			"athlete": {
+				"id": 35017,
+				"first_name": "Yaroslava",
+				"last_name": "Mahuchikh",
+				"slug": "yaroslava-mahuchikh",
+				"gender": false,
+				"olympic_mark": true,
+				"image": [
+					{
+						"uri": "fcaa7ef2-7ab4-4c6e-ad70-f51f65a7c897.jpeg",
+						"credit": "Photo by Evren Kalinbacak for Istanbul 2023 LOC",
+						"created_date": "2023-03-11T13:46:23.957Z"
+					}
+				],
+				"date_of_birth": "2001-09-19",
+				"events": ["High jump"]
+			}
+		},
+		{
+			"gold": "14",
+			"silver": "2",
+			"bronze": "4",
+			"total": "20",
+			"athlete": {
+				"id": 11312,
+				"first_name": "Mykhaylo",
+				"last_name": "Kokhan",
+				"slug": "mykhaylo-kokhan",
+				"gender": true,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "2001-01-22",
+				"events": null
+			}
+		},
+		{
+			"gold": "13",
+			"silver": "4",
+			"bronze": "6",
+			"total": "23",
+			"athlete": {
+				"id": 10098,
+				"first_name": "Sergey",
+				"last_name": "Lebid",
+				"slug": "sergey-lebid",
+				"gender": true,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1975-07-15",
+				"events": null
+			}
+		},
+		{
+			"gold": "11",
+			"silver": "3",
+			"bronze": "3",
+			"total": "17",
+			"athlete": {
+				"id": 34103,
+				"first_name": "Olha",
+				"last_name": "Saladukha",
+				"slug": "olha-saladukha",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1983-06-04",
+				"events": null
+			}
+		},
+		{
+			"gold": "9",
+			"silver": "9",
+			"bronze": "2",
+			"total": "20",
+			"athlete": {
+				"id": 34126,
+				"first_name": "Hanna",
+				"last_name": "Ryzyhkova-Yaroshchuk",
+				"slug": "hanna-ryzyhkova-yaroshchuk",
+				"gender": false,
+				"olympic_mark": false,
+				"image": [
+					{
+						"uri": "2f45f2a0-32a9-43a4-8571-cd5719fb6362.jpeg",
+						"created_date": "2021-03-25T10:34:53.931Z"
+					}
+				],
+				"date_of_birth": "1989-11-24",
+				"events": null
+			}
+		}
+	]
+}

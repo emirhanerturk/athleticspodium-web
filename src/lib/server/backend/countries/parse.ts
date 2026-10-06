@@ -42,6 +42,7 @@ export function parseCountryAthletes(
 					lastName: athlete.last_name ?? '',
 					countryCode,
 					men: athlete.gender,
+					olympicChampion: athlete.olympic_mark,
 					image: image
 						? {
 								path: `athletes/${athlete.id}/${image.uri}`,

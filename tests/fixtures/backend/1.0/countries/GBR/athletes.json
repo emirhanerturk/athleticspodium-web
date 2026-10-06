@@ -1,0 +1,95 @@
+{
+	"success": true,
+	"data": [
+		{
+			"gold": "29",
+			"silver": "8",
+			"bronze": "5",
+			"total": "42",
+			"athlete": {
+				"id": 8647,
+				"first_name": "Linford",
+				"last_name": "Christie",
+				"slug": "linford-christie",
+				"gender": true,
+				"olympic_mark": true,
+				"image": null,
+				"date_of_birth": "1960-04-02",
+				"events": ["Sprints"]
+			}
+		},
+		{
+			"gold": "27",
+			"silver": "12",
+			"bronze": "4",
+			"total": "43",
+			"athlete": {
+				"id": 10155,
+				"first_name": "Mohamed",
+				"last_name": "Farah",
+				"slug": "mohamed-farah",
+				"gender": true,
+				"olympic_mark": true,
+				"image": null,
+				"date_of_birth": "1983-03-23",
+				"events": null
+			}
+		},
+		{
+			"gold": "23",
+			"silver": "7",
+			"bronze": "4",
+			"total": "34",
+			"athlete": {
+				"id": 33112,
+				"first_name": "Paula",
+				"last_name": "Radcliffe",
+				"slug": "paula-radcliffe",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1973-12-17",
+				"events": null
+			}
+		},
+		{
+			"gold": "19",
+			"silver": "13",
+			"bronze": "2",
+			"total": "34",
+			"athlete": {
+				"id": 8648,
+				"first_name": "Colin",
+				"last_name": "Jackson",
+				"slug": "colin-jackson",
+				"gender": true,
+				"olympic_mark": false,
+				"image": [
+					{
+						"uri": "4ecfd238-f09c-4a25-bbb9-2757fe2d3522.jpeg",
+						"created_date": "2022-06-01T20:38:26.215Z"
+					}
+				],
+				"date_of_birth": "1967-02-18",
+				"events": null
+			}
+		},
+		{
+			"gold": "19",
+			"silver": "6",
+			"bronze": "5",
+			"total": "30",
+			"athlete": {
+				"id": 8803,
+				"first_name": "Dwain",
+				"last_name": "Chambers",
+				"slug": "dwain-chambers",
+				"gender": true,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1978-04-05",
+				"events": null
+			}
+		}
+	]
+}

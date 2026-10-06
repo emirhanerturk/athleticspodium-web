@@ -30,6 +30,7 @@ export interface CountryAthleteDto {
 		first_name: string | null;
 		last_name: string | null;
 		gender: boolean;
+		olympic_mark: boolean;
 		image: { uri: string; credit?: string | null }[] | null;
 		date_of_birth: string | null;
 		events: string[] | null;
