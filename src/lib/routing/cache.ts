@@ -12,8 +12,8 @@ const POLICY_BY_ROUTE_PREFIX: [string, string][] = [
 	['/robots.txt', DAILY]
 ];
 
-export function cacheControlFor(routeId: string | null, status: number): string {
-	if (status >= 500) return NEVER;
+export function cacheControlFor(routeId: string | null, status: number, method = 'GET'): string {
+	if (status >= 500 || (method !== 'GET' && method !== 'HEAD')) return NEVER;
 	if (routeId === null || status === 404) return SHORT;
 
 	const match = POLICY_BY_ROUTE_PREFIX.find(([prefix]) => routeId.startsWith(prefix));
