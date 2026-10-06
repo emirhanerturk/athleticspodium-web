@@ -1,0 +1,671 @@
+# athleticspodium-web: rewrite design
+
+- **Date:** 2026-10-06
+- **Status:** Draft, awaiting review
+- **Projects:** `athleticspodium-web` (new), `athleticspodium-backend` (prerequisites)
+- **Replaces:** `athleticspodium-frontend` (Angular 18 SPA)
+- **Design source:** Claude Design canvas "Athletics Podium Redesign", page "v2 · Feedback round": https://claude.ai/artifact/4oD3wVaMPNSRRPrWwyPd24
+
+## 1. Goal
+
+Replace the Angular SPA at athleticspodium.com with a server-rendered SvelteKit site. The new site implements the v2 design, keeps every indexed URL working and improves SEO.
+
+Success criteria:
+
+- Every URL in the indexed set (section 2) returns 200, or a single 301 to its canonical URL.
+- The server HTML of every page is complete: content, title, description, canonical, Open Graph and JSON-LD.
+- Unknown URLs return HTTP 404.
+- The indexed page count in Search Console does not drop during the 4 weeks after cutover.
+- On mobile, athlete and edition pages reach "good" Core Web Vitals: LCP under 2.5 s, CLS under 0.1.
+
+## 2. Baseline
+
+The current site:
+
+- It is an Angular 18 SPA on Firebase Hosting and has no SSR.
+- In `index.html` the `<title>` and description are empty and the canonical tag is commented out.
+- There is no sitemap.
+- Unknown URLs redirect on the client to `/404`, and Firebase answers every path with 200. Search engines see these as soft 404s.
+- The Angular service worker (`ngsw-worker.js`) is registered.
+- The A–Z athlete index keeps the letter and page in component state, so crawlers cannot reach it.
+- Medal search and country-championship pages put filters in Angular matrix parameters (`/medals/search;country=TUR;page=2`).
+
+Search Console "Indexed pages" export (2026-10-06). The UI caps exports at 1000 rows, so this is a sample:
+
+| Pattern | Count |
+|---|---|
+| `/athlete/:id/:slug` | 812 (3 on `www.`) |
+| `/champs/:champ/:meeting` | 140 |
+| `/champs/:champ` | 18 |
+| `/article/:id/:slug` | 15 |
+| `/country/:CODE/athletes` | 8 |
+| `/country/:CODE` | 6 |
+| `/` | 1 |
+
+What the sample shows:
+
+- Both hosts are indexed, so the same content appears twice.
+- Country codes are indexed in upper case.
+- The complete URL set comes from the database (section 11).
+
+## 3. Decisions
+
+1. New repository `athleticspodium-web`. `athleticspodium-frontend` stays live until cutover and is archived a few weeks after.
+2. SvelteKit 2, Svelte 5 (runes), TypeScript in strict mode.
+3. Light theme only.
+4. Tailwind CSS v4, with the design tokens in `@theme`.
+5. Fonts are self-hosted through `@fontsource`.
+6. Hosting is undecided: Cloudflare Workers or Railway (`adapter-node`). The code must run on both (section 6.5). The decision is due before the first staging deploy.
+7. All page data loads in server `load` functions. The browser never calls the backend. Client-side features (hover card, quick search, contact form) call this app's own endpoints and form actions.
+8. Existing URLs do not change. Legacy forms redirect with 301 (section 5.2).
+9. Pages the design does not cover are still built in the v2 visual language, so no indexed page is lost.
+10. No PWA. A safety worker unregisters the old Angular service worker.
+11. The athlete hover card uses the single compact variant. It loads lazily on hover or focus. On touch devices the name is a plain link.
+12. `/search` is `noindex`. The quick search shows featured athletes instead of "trending". Recent searches stay in `localStorage`. Search starts at 2 characters.
+13. Medal counts follow one definition (section 8).
+14. `/country/:code/athletes` stays as a v2 list page.
+15. The A–Z athlete directory stays, now with crawlable URLs.
+16. Placings 4–8 appear on the athlete profile behind a "Show places 4–8" toggle.
+17. Content the design omits stays:
+    - meeting `content` and meeting notes
+    - medal `notes`, `info` and wind
+    - related athletes
+18. "Today" is computed in UTC.
+19. Dependencies stay minimal. There is no date library, no memoisation library, no UI kit and no icon package.
+20. Docs are in English. Code is self-documenting and has almost no comments.
+
+## 4. Scope
+
+**In scope:**
+- Every page in section 5.
+- The design system.
+- SEO.
+- The backend prerequisites in section 10.
+- Cutover from Firebase.
+
+**Out of scope:**
+- The CMS, which stays Angular 14.
+- Image optimisation: resizing, formats, CDN transforms.
+- Dark mode.
+- PWA.
+- A calendar `.ics` feed.
+- The "Athletics families" section.
+- Trending-athlete tracking.
+- New editorial data fields other than event discipline and long name (B18).
+
+## 5. Pages and URLs
+
+### 5.1 Routes
+
+| Page | URL | Design source | Indexable |
+|---|---|---|---|
+| Home | `/` | `V2-Home` → `Home-B` (`v2=true`) | yes |
+| Championships | `/champs` | `V2-Champs` → `Champs-A` | yes |
+| Championship | `/champs/[champ]` | `V2-Champ` → `ChampDetail` | yes |
+| Edition | `/champs/[champ]/[meeting]` | `V2-Edition` → `Meeting-A` (`cards=true`) | yes |
+| Athletes | `/athlete` | `V2-Athletes` → `Athletes-B` | yes |
+| Athletes A–Z | `/athlete/letter/[letter]?page=n` | v2 components | yes |
+| Athlete | `/athlete/[id=integer]/[slug]` | `V2-Athlete` → `Athlete-A` (`v2=true`) | yes |
+| Countries | `/country` | `V2-Countries` | yes |
+| Country | `/country/[code]` | `V2-Country` | yes |
+| Country athletes | `/country/[code]/athletes?page=n` | v2 components | yes |
+| Calendar | `/calendar`, `/calendar/[year=integer]` | `V2-Calendar` | yes |
+| Search | `/search?q=&type=&gender=&born_from=&born_to=&olympian=` | `V2-Search` | no |
+| Articles | `/article`, `/article/[id=integer]/[slug]` | v2 components | yes |
+| Medal search | `/medals/search?…` | v2 components | yes |
+| Medals by country and championship | `/medals/country-champs?…` | v2 components | yes |
+| Compare | `/compare` | v2 components | yes |
+| About, Simple notes, Missing information | `/about`, `/simple-notes`, `/missing-information` | v2 components | yes |
+
+Shared parts:
+- header: `Header`, ticker variant
+- footer: `Footer`, ink variant
+- athlete hover card: `AthleteCard`
+- quick search overlay: `V2-SearchOverlay`
+- building blocks: `V2-Blocks`, with places, DQ and record badges
+
+`Foundations` (`Main`) supplies the logo files and the colour palette. The v2 page supplies the fonts.
+
+Endpoints served by this app:
+
+| Path | Purpose |
+|---|---|
+| `/sitemap.xml`, `/sitemaps/[type]-[n].xml` | sitemap index and files |
+| `/robots.txt` | crawler rules |
+| `/ngsw-worker.js` | safety worker for old visitors |
+| `/internal/athlete-card/[id]` | hover card JSON |
+| `/internal/search?q=` | quick search JSON |
+
+### 5.2 Redirects and status codes
+
+All redirects are single-hop 301s, handled in `hooks.server.ts`:
+
+| Request | Response |
+|---|---|
+| `www.athleticspodium.com/*` | apex host, same path |
+| trailing slash (`/champs/`) | path without the slash |
+| lower-case country code (`/country/tur`) | upper-case code |
+| athlete or article with a wrong slug | canonical slug |
+| matrix parameters (`/medals/search;country=TUR;page=2`) | the same filters as a query string |
+| `/404`, `/ngsw.json`, any unknown path | HTTP 404 with the v2 error page |
+
+The Angular service worker deletes its caches and unregisters itself when `/ngsw.json` returns 404. The safety worker at `/ngsw-worker.js` covers browsers that load the worker script first.
+
+## 6. Architecture
+
+### 6.1 Principles
+
+These replace SOLID as the working rules:
+
+- **Functional core, imperative shell.** Pure modules hold the logic: `domain`, `format`, `seo`, `urls` and the mappers. Routes, hooks and backend API modules do the I/O and stay thin.
+- **Deep modules.** A module exposes a few functions with simple signatures and hides its details. For example, `backend.athletes.getProfile(id)` hides several requests and the mapping.
+- **Parse, don't validate.** Backend responses become domain types once, at the boundary. Nothing outside `lib/server/backend` sees a DTO.
+- **YAGNI.** An abstraction appears with its second real use, not before.
+- **Functions over classes.** Use factory functions. There is no inheritance and no DI container. Dependencies arrive as parameters.
+- **Self-documenting code.** Names carry the meaning. A comment is written only for a reason the code cannot show.
+- **Few dependencies.** Anything a few lines of code can do is written here, in `lib/utils`.
+
+### 6.2 Folder structure
+
+```
+athleticspodium-web/
+├── docs/                        specs, plans, decisions
+├── scripts/                     maintenance scripts (check-urls)
+├── src/
+│   ├── routes/                  one folder per URL; only load functions and page composition
+│   │   ├── internal/            JSON endpoints for client-side features
+│   │   ├── sitemap.xml/  sitemaps/  robots.txt/
+│   │   └── (page folders as in 5.1)
+│   ├── lib/
+│   │   ├── server/backend/      the only code that talks to athleticspodium-backend
+│   │   │   ├── http-client.ts   base URL, timeout, errors
+│   │   │   ├── index.ts         createBackend(fetch, baseUrl)
+│   │   │   └── <resource>/      athletes, champs, meetings, countries, medals, articles, search, stats, pages
+│   │   │       ├── <resource>.api.ts      requests
+│   │   │       ├── <resource>.dto.ts      response shapes as the backend sends them
+│   │   │       └── <resource>.mapper.ts   DTO to domain
+│   │   ├── domain/              types and pure rules (athlete, medal, champ, meeting, country, record)
+│   │   ├── components/
+│   │   │   ├── ui/              design-system primitives (MedalDisc, RecordBadge, Flag, Tabs, Button, icons/)
+│   │   │   ├── layout/          Header, Ticker, Footer, Breadcrumb, SearchOverlay
+│   │   │   ├── seo/             SeoHead, JsonLd
+│   │   │   └── athlete/ champ/ meeting/ country/ calendar/ search/ article/ medal/
+│   │   ├── seo/                 pure builders: titles, canonical URLs, JSON-LD, sitemap XML
+│   │   ├── format/              Intl-based formatters for dates, numbers and marks
+│   │   ├── urls.ts              every internal URL (athleteUrl, meetingUrl, …)
+│   │   └── utils/               small generic helpers, one function per file
+│   ├── styles/app.css           Tailwind import and @theme tokens
+│   ├── hooks.server.ts          redirects, cache headers, locals.backend, error logging
+│   └── app.html
+├── static/                      favicon, logos, flags, ngsw-worker.js
+└── tests/
+    ├── e2e/                     Playwright specs
+    └── fixtures/backend/        JSON responses for the stub backend
+```
+
+Rules:
+
+- Unit tests sit next to the file they test (`*.test.ts`).
+- Components live only under `lib/components/<area>/`, one component per file, named in PascalCase. Route folders hold no components.
+- Components and routes import domain types, never DTOs. ESLint enforces this with `no-restricted-imports` on `**/*.dto`.
+- `lib/server/**` is server-only. SvelteKit refuses to bundle it for the browser.
+
+### 6.3 Request flow
+
+1. `hooks.server.ts` applies the redirects in 5.2. It then sets `event.locals.backend = createBackend(event.fetch, BACKEND_URL)`.
+2. A route's `+page.server.ts` calls `locals.backend.<resource>.<function>()`. Independent requests run in parallel.
+3. The API module sends the request through `http-client.ts`. The mapper turns the response into domain types.
+4. `+page.svelte` composes components from the domain data and sets `SeoHead` and `JsonLd`.
+5. `hooks.server.ts` adds `Cache-Control` according to the route type (6.4).
+
+Error handling:
+
+- `http-client.ts` throws `BackendNotFoundError` for a backend 404 and `BackendUnavailableError` for a timeout (8 s), a 5xx response or a network failure.
+- Load functions turn these into `error(404)` or `error(503)`.
+- `+error.svelte` renders the v2 error page.
+- `handleError` logs unexpected errors with the request path.
+
+### 6.4 Caching
+
+| Response | Cache-Control |
+|---|---|
+| content pages | `public, max-age=0, s-maxage=3600, stale-while-revalidate=86400` |
+| `/internal/athlete-card/*` | `public, max-age=3600, s-maxage=86400` |
+| `/internal/search`, `/search` | `public, max-age=0, s-maxage=300` |
+| sitemap files | `public, s-maxage=86400` |
+| hashed static assets | `public, max-age=31536000, immutable` |
+
+- **Layout data** (ticker and footer stats) is needed on every server render. It is memoised in process for 10 minutes by `lib/utils/memoize-with-ttl.ts`.
+- **Pages that show "today"** (home, ticker) keep `s-maxage` at 1 hour or less. That way, stale data never lasts more than an hour past midnight UTC.
+- **Shared cache depends on hosting.** On Workers, `hooks.server.ts` also stores responses in the Cache API according to `s-maxage`. On Railway the headers alone apply, and nothing provides a shared cache.
+
+### 6.5 Hosting constraints
+
+- Use only web-standard APIs: `fetch`, `Request`, `Response`, `URL`, `Intl`, `crypto.subtle`. Do not import Node built-ins.
+- Read configuration through `$env/dynamic/private` (`BACKEND_URL`) and `$env/dynamic/public` (`PUBLIC_SITE_ENV`, `PUBLIC_SITE_URL`).
+- Switching hosts means changing the adapter in `svelte.config.js` and nothing else.
+
+Inputs for the hosting decision:
+
+| | Cloudflare Workers | Railway (`adapter-node`) |
+|---|---|---|
+| **Pros** | edge cache and CDN; DNS is already on Cloudflare | private network to the API; same platform as the backend |
+| **Concerns** | needs the Paid plan for CPU time and Smart Placement to sit near the API; the API is reached over the public internet | no CDN; single region |
+
+## 7. Design system
+
+### 7.1 Tokens
+
+| Token | Value | Use |
+|---|---|---|
+| `bg` | `#F5F4F0` | page background |
+| `surface` | `#FFFFFF` | cards, panels |
+| `surface-2` | `#EEECE6` | inputs, chips, neutral discs |
+| `surface-3` | `#E4E1D9` | pressed states |
+| `ink` | `#121316` | primary text, ticker bar, footer |
+| `ink-2` | `#474A52` | secondary text |
+| `ink-3` | `#686C75` | captions |
+| `line` | `#E3E0D8` | borders |
+| `line-2` | `#D2CEC4` | strong borders |
+| `brand` | `#F9BA0F` | Podium Gold, primary actions |
+| `brand-ink` | `#7A4F00` | links, accents on light surfaces |
+| `brand-soft` | `#FDF1CC` | highlights |
+| `info` / `info-soft` | `#2F5BD3` / `#E9EEFB` | informational chips |
+| `up` | `#15724A` | "live", countdowns |
+| `gold` / `silver` / `bronze` | `#F9BA0F` / `#BFC6CF` / `#C9844F` | medal discs |
+| `dq` | `#D7262E` | disqualified results |
+
+- **Fonts:**
+  - Saira Condensed 500–800 for display
+  - IBM Plex Sans 400–700 for text
+  - Barlow Semi Condensed 400–700 with tabular numerals for data
+- **Layout:**
+  - Container: max width 1344 px.
+  - Side padding: 32 px, or 16 px at 640 px and below.
+  - Breakpoints: 640, 900 and 1100 px.
+  - The header collapses to search and menu buttons at 900 px.
+
+### 7.2 Building blocks
+
+- **Medal disc.** Places 1–3 use the medal colours. Places 4–8 use a neutral disc (`surface-2` with `ink-2`).
+- **DQ.** A cancelled result shows a red DQ disc, and its mark is struck through in `dq`. The original mark stays readable.
+- **Record badge.** `WR` uses `ink` with `brand` text. Area and championship records (`AR`, `ER`, `CR`, …) use `brand-soft` with `brand-ink`. `NR` and any unknown text use an outlined badge. Records are free text in the database, so the mapping matches known prefixes and shows unknown values unchanged.
+- **Athlete hover card.** The compact variant, 256 px wide:
+  - photo or initials
+  - name
+  - country code and events
+  - OG badge
+  - birth date and age
+  - an optional result line from the host page
+  - international gold/silver/bronze
+  - "Profile →" link
+
+  It opens on hover or keyboard focus after 150 ms and closes on leave, blur or Escape.
+- **Icons.** Inline stroke SVG components in `components/ui/icons/`.
+- **Accessibility.**
+  - Interactive elements are real `<a>` and `<button>` elements.
+  - Focus is visible.
+  - Text contrast is at least 4.5:1.
+  - Icon-only buttons have an `aria-label`.
+
+## 8. Data rules
+
+These live in `lib/domain` and match the backend:
+
+- **Medal or placing.** `medal` values 1–3 and null are medal rows. Values 4–8 are placings. Placings are shown but never counted.
+- **International medal count.**
+  - Medal rows that are not cancelled, in championships whose `category` is not 7 (national).
+  - Relay medals count once for each team member.
+  - This one definition is used for athletes everywhere: profile, hover card, search, featured athletes, country lists.
+- **National titles.** Gold medals in championships of category 7. They are shown separately and never added to the international count.
+- **Championship categories:**
+
+  | Value | Category |
+  |---|---|
+  | 0 | Global |
+  | 1–5 | Continental |
+  | 6 | Regional |
+  | 7 | National |
+  | 8 | Road |
+
+- **OG badge** (Olympic champion) comes from `athlete.olympic_mark`. **"Olympian"** (took part in the Olympics) comes from `olympian_athlete`, via B16.
+- **Today** is the UTC date. Ages and countdowns are computed from it.
+- **Events.** Long names and disciplines come from the backend once B18 ships. Until then the short name is shown and discipline-dependent features are hidden.
+
+## 9. Pages
+
+For each page: what it shows, where the data comes from, and the backend prerequisites (B-numbers, section 10).
+
+### Header (ticker)
+
+- **Up next:** The first meeting from `upcoming-meetings` that is running or still to come, with a countdown (B6).
+- **Born today:** The top living athlete born today, then "+N more". It reuses the athletes list ordering: Olympic champions first, then youngest.
+- **Search field:** Opens the quick search. `/` and `⌘K` also open it.
+- **Links:**
+  - "Medal Tracker" goes to `/medals/search`.
+  - Nav: Championships, Athletes, Countries, Calendar, Tools, Articles. The Tools menu holds Medal search, Medals by country and championship, and Compare.
+  - Social links: Bluesky, Facebook, Instagram, and About.
+
+### Footer (ink)
+
+- **Totals from `/stats`** (B14): medals, placings, athletes, championships and the last addition. Medals and placings are shown separately.
+- **Link columns** follow the design. The Tools column lists only existing tools.
+
+### Quick search overlay
+
+- **Launcher**, before the user types:
+  - recent searches from `localStorage`
+  - jump links: Medal search, the current year's calendar, the next upcoming meeting
+  - featured athletes
+- **Results**, from 2 characters with a 150 ms debounce: `/internal/search` proxies the backend search (B12). Results are grouped by type, with the match highlighted and the first row preselected.
+- **Keys:** ↑ ↓ move, ↵ opens, ⇧↵ opens `/search`, Esc closes.
+
+### Home (`/`)
+
+| Block | Data | Prerequisite |
+|---|---|---|
+| Dateline totals, season meeting count | `/stats` | B14 |
+| Lead story | `/featured-articles` | — |
+| Latest 5 | `/articles` | — |
+| Context tag on stories | related meeting or championship name | B10; no tag without it |
+| Results desk (4) | `last-meetings` summary | B15 |
+| Next six months timeline | `upcoming-meetings?days=183` | B6 |
+| On this day counts, Born today (7), Remembered today (6) | `/athletes?date_of_birth=` and `?date_of_death=` | B9 for `date_of_death` |
+| Portraits | `/featured-athletes`, with an excerpt of `biography` | B8 |
+
+- **Results desk rule.** Road races (category 8) show the winners. Other meetings show the top three nations. Meetings are the most recently ended ones that have results.
+- **Dropped:** the article kicker ("Analysis").
+
+### Championships (`/champs`)
+
+- **Data:** `/champs?fields=years` with `name`, `slug`, `category` and `rank`.
+- **Client-side features:** the name filter, category tabs, sorts and the edition timeline.
+- **Status pill:** "Held" is derived from `years`, so an edition later in the current year counts as held.
+- **Link:** "Send missing information" goes to `/missing-information`.
+
+### Championship (`/champs/[champ]`)
+
+| Block | Data | Prerequisite |
+|---|---|---|
+| Hero, facts, editions strip | `/champs/:slug` with meetings | B4 for host country, dates, events per edition |
+| All-time medal table | `/champs/:slug/counts` | B7 |
+| Most golds | `/champs/:id/top-athletes` | B13 |
+| Programme | `events_men/women/mixed` with `/events` | B18 for long names |
+| History | `content` | — |
+| Stories | `/articles?champ=` | — |
+
+- **Dropped:** the frequency label ("every two years") and the "historic" nation badge.
+
+### Edition (`/champs/[champ]/[meeting]`)
+
+| Block | Data | Prerequisite |
+|---|---|---|
+| Header, host, dates | `/meetings/:slug` | — |
+| Edition switcher | champ meetings from `/champs/:slug` | — |
+| Stats (events, medals, nations, world records) | derived from medals; relay rows deduplicated | — |
+| Men / Women / Mixed tabs, event cards, rows | `/meetings/:slug/medals` | B7 |
+| Discipline chips, long event names | event data | B18; hidden until then |
+| Medal table | `/meetings/:slug/counts` | B7 |
+| Records set | medal rows with `records`, NR left out | — |
+| About this edition | meeting `content` and meeting notes | — |
+| Stories | `/articles?meeting=` | — |
+| Hover cards | `/internal/athlete-card/[id]` | B11 |
+
+- **Rows:**
+  - Each row shows its own wind next to the mark.
+  - `medal.notes` and `info` appear as footnote markers.
+  - Cancelled results use the DQ style.
+- **"Show places 4–8"** toggles placings.
+- **Hero image:** The championship image stands in, because meetings have no image yet.
+
+### Athletes (`/athlete`)
+
+- **Total athletes:** `/athletes?limit=1`.
+- **Hero search:** the quick search endpoint.
+- **Featured cards:** from `/featured-athletes` (B8).
+- **Born today:** `†` and life years mark deceased athletes (B9).
+- **Greatest by nation:**
+  - Top 5 per nation, from `/countries/:code/athletes?limit=5&international=1` (B3).
+  - The nation chips come from a fixed list in `lib/domain/featured-nations.ts`.
+- **"Browse A–Z"** links to `/athlete/letter/a`.
+- **Dropped:** "Athletics families".
+
+### Athletes A–Z (`/athlete/letter/[letter]?page=n`)
+
+- **Data:** `/athletes/first-letter/:letter/:page`.
+- **Display:** A v2 table with letter tabs. The tabs and the pagination are plain `<a href>` links, so crawlers can follow them.
+- **Canonical:** It includes `page` when page > 1.
+
+### Athlete (`/athlete/[id]/[slug]`)
+
+| Block | Data | Prerequisite |
+|---|---|---|
+| Identity, photo with credit, aka, birth details, biography | `/athletes/:id` | — |
+| Podium counts, "on the podium" span, by-championship totals, level chips | derived from `/athletes/:id/medals` (section 8) | — |
+| Olympian line, Olympic cards | `/athletes/:id/olympians` with medal rows | B1 for city |
+| Results table with Venue column | `/athletes/:id/medals` | B1 |
+| National titles box | the same, category 7 | B1 |
+| Family | `/athletes/:id/relateds` | — |
+| Stories | `/articles?athlete=` | — |
+| "Heights on the podium" chart | numeric marks by year | B18; hidden until then |
+
+- **Results table:**
+  - It keeps the event column, wind, notes and DQ.
+  - "Show places 4–8" adds placings, with a "Place" column.
+- **Chart:** For an athlete with several events, the chart shows the event with the most medals.
+- **Dropped:** the indoor marker and the age-group chip.
+
+### Countries (`/country`)
+
+- **Data:**
+  - `/countries?fields=code,name,categories,is_country&order=name`.
+  - Olympic medal totals from the Olympic Games counts (`/champs/:slug/counts`, B7).
+- **Client-side features:** letter groups, area tabs and search.
+- **"Teams & neutral entries"** lists countries with `is_country = false`.
+- **Dropped:** the "Former nations" group.
+
+### Country (`/country/[code]`)
+
+| Block | Data | Prerequisite |
+|---|---|---|
+| Header, area, about | `/countries/:code` (`content` shown as is) | — |
+| Totals, by-level bars, grouped championship table | `/countries/:code/medals` | B2 |
+| Most decorated (12), All / Men / Women | `/countries/:code/athletes?limit=12&international=1&gender=` | B3 |
+| Hosted meetings | `/meetings?country=:code` | B5 |
+| Stories | `/articles?country=` | — |
+
+- **Link:** "All athletes" goes to `/country/[code]/athletes`.
+- **Dropped:** the structured facts strip.
+
+### Country athletes (`/country/[code]/athletes?page=n`)
+
+- **Display:** A v2 table of the country's athletes, sorted by international medals.
+- **Data:** `/countries/:code/athletes?international=1&limit=100&offset=` (B3).
+- **Pagination:** It uses `<a href>` links.
+
+### Calendar (`/calendar`, `/calendar/[year]`)
+
+| Block | Data | Prerequisite |
+|---|---|---|
+| Year grid, month strip, rows, TBA group | `/meetings?year=` (lean, with `has_results`) | B5, B9 |
+| Up next card | `upcoming-meetings` | B6 |
+
+- **Client-side features:** the level chips, the national toggle and the TODAY marker (UTC).
+- **"Results →"** appears when `has_results` is true.
+- **Dropped:** the `.ics` and Google Calendar buttons.
+
+### Search (`/search`)
+
+- **Data:** the backend search (B12, B16).
+- **URL parameters:** `q`, `type`, `gender`, `born_from`, `born_to`, `olympian`, `page`.
+- **Display:**
+  - Scope tabs with counts.
+  - Athlete rows with photo, Olympian label and international gold/silver/bronze.
+  - Championship, country and story results.
+- **Top result:** Shown only for an exact match: an IOC code, a full championship name or a full athlete name.
+- **Indexing:** `noindex, follow`.
+
+### Articles, medal search, medals by country and championship, compare, static pages
+
+These are built with the v2 components on the existing endpoints:
+- `/articles`, `/articles/:id`
+- `/medals`
+- `/medals/country-champs`
+- compare: `/champs`, `/events`, and `/medals` filtered by championship, event and gender
+- `/pages/:slug?section=`
+
+Notes:
+- Filters live in query strings.
+- The contact form uses a SvelteKit form action that posts to `/contacts`.
+
+## 10. Backend prerequisites
+
+Each item is a normal backend PR. It ships before the page that needs it (release order: backend, then web).
+
+| ID | Change | Needed by |
+|---|---|---|
+| B0 | Fix country search: `home.controller.ts:96` replaces spaces with dashes, so "united states" finds nothing. Ship now, independently. | current site, Search |
+| B1 | `/athletes/:id/medals`: add `city` and `country_code` to the meeting include. | Athlete |
+| B2 | `/countries/:code/medals`: add `category` to the champ include and grouping. | Country |
+| B3 | `/countries/:code/athletes`: return `image`, `date_of_birth` and `events`; add `gender`, `international` and `offset` parameters. | Country, Country athletes, Athletes |
+| B4 | `/champs/:slug`: include meetings with `country_code`, `start_date`, `end_date` and an events count per edition. | Championship |
+| B5 | `/meetings`: add a `country` filter and a `has_results` flag; leave `content` out of the list. | Country, Calendar |
+| B6 | `/meetings/upcoming-meetings`: add `limit` and `days`; include running meetings (`end_date` ≥ today); add `category` to the champ include. | Header, Home, Calendar |
+| B7 | Accept slugs on `/meetings/:id/medals`, `/meetings/:id/counts` and `/champs/:id/counts`. | Edition, Championship, Countries |
+| B8 | `/featured-athletes`: add international medal counts. | Home, Athletes |
+| B9 | List endpoints select explicit attributes instead of `attributes: null` full rows; athlete lists include `date_of_death`. | all list pages |
+| B10 | Article lists and featured articles return the related meeting or championship name. | Home |
+| B11 | Athlete summary: `GET /athletes/:id/summary` and `GET /athletes/summaries?ids=` return identity, first image, events, `olympic_mark`, birth and death dates, and international gold/silver/bronze. | hover card, Search |
+| B12 | Search rework (details below). | Search, quick search |
+| B13 | `GET /champs/:id/top-athletes?limit=`: gold/silver/bronze, first and last year, and events per athlete within the championship. | Championship |
+| B14 | `GET /stats`: medal, placing, athlete, championship and season meeting counts, plus the last addition. | Footer, Home |
+| B15 | `/meetings/last-meetings?summary=1&limit=`: the top three nations or the winners per meeting. | Home |
+| B16 | `is_olympian` on search and athlete list results, from `olympian_athlete`. | Search |
+| B17 | Sitemap feed: `GET /sitemap/:type?page=` for athletes, champs, meetings, countries and articles. Pages of 10,000 rows with the URL parts and `updated_date`. | sitemap |
+| B18 | `event.long_name` and `event.discipline` columns, filled by a one-off data migration. | Edition, Championship, Athlete chart |
+
+B12 search rework:
+- Rank results: exact name, then prefix, then contains, then international medals.
+- Return the image and international gold/silver/bronze.
+- Return `{rows, count}` per type, with `limit` and `offset`.
+- Add the filters `type`, `gender`, `born_from`, `born_to` and `olympian`.
+- Match `aka`.
+- Search article `content` and `related_athletes`.
+- Lower the minimum query length to 2.
+
+The CMS gets no changes in this project. Editing the new event columns in the CMS is follow-up work.
+
+## 11. SEO
+
+- **Titles** follow `<subject> – <page purpose> | Athletics Podium`. Examples:
+  - `Armand Duplantis (SWE) – medals and results | Athletics Podium`
+  - `2026 European Championships – medallists and results | Athletics Podium`
+
+  Descriptions come from the page data. The templates live in `lib/seo/titles.ts`.
+- **Canonical URLs** use the apex host, no trailing slash, the canonical slug and the `page` parameter when page > 1.
+- **JSON-LD:**
+
+  | Page | Types |
+  |---|---|
+  | every page | `BreadcrumbList` |
+  | athlete | `Person` (name, birth and death dates, nationality, image, URL) |
+  | edition | `SportsEvent` (dates, location) |
+  | article | `Article` |
+  | home | `WebSite` and `Organization` |
+
+- **Open Graph** uses the athlete or article image when there is one, otherwise the default social image.
+- **Sitemap:**
+  - `/sitemap.xml` is an index of per-type files. Each file holds at most 50,000 URLs.
+  - The files are built from the B17 feed, with `lastmod` from `updated_date`.
+  - They are submitted in Search Console at cutover.
+- **`robots.txt`** allows everything except `/search` and `/internal/`, and points to the sitemap.
+- **Staging** sends `X-Robots-Tag: noindex, nofollow` on every response unless `PUBLIC_SITE_ENV=production`.
+- **No `hreflang`**: the site has one language.
+
+## 12. Testing
+
+- **Unit (Vitest):** Every pure module has tests next to it: domain rules, formatters, mappers, URL builders, SEO builders and redirect resolution.
+- **End-to-end (Playwright):**
+  - Setup: The tests run against the built app. `BACKEND_URL` points to a stub server that serves JSON fixtures captured from the local backend.
+  - Coverage, for every route type:
+    - status codes and redirects
+    - title, canonical and JSON-LD
+    - key content in the server HTML
+    - hover card and quick search behaviour
+- **URL check:** `scripts/check-urls.ts` takes a list of URLs and a base URL. It reports each status and redirect chain. It runs against staging with the Search Console export and with every sitemap URL.
+- **CI (GitHub Actions on pull requests):**
+  - lint and format
+  - `svelte-check`
+  - unit tests
+  - end-to-end tests
+
+## 13. Delivery phases
+
+0. **Backend groundwork.** B0, B7, B9, B14, B17.
+1. **Skeleton:**
+   - SvelteKit, Tailwind tokens, fonts.
+   - Layout: header, ticker, footer, quick search shell.
+   - `lib/server/backend`.
+   - Hooks: redirects, caching, locals.
+   - The error page, sitemap, robots and the safety worker.
+   - CI, plus the repo's `CLAUDE.md` and README.
+   - The hosting decision, then a staging deploy at `next.athleticspodium.com`.
+2. **Pages, in order of SEO value.** Each page ships after the backend items it needs:
+   1. Athlete (B1, B11)
+   2. Edition (B11, B18)
+   3. Championship (B4, B13)
+   4. Championships
+   5. Country (B2, B3, B5)
+   6. Country athletes
+   7. Countries
+   8. Athletes A–Z
+   9. Athletes (B8)
+   10. Home (B6, B10, B15)
+   11. Calendar
+   12. Search and quick search (B12, B16)
+   13. Articles
+   14. Medal search
+   15. Medals by country and championship
+   16. Compare
+   17. Static pages
+3. **Pre-cutover QA:**
+   - The URL check against every sitemap URL and the Search Console export.
+   - Lighthouse on the main page types.
+   - Google's Rich Results Test.
+   - Content spot checks against the old site.
+4. **Cutover:**
+   - Point the apex and `www` to the new host.
+   - Submit the sitemap.
+   - Watch Search Console coverage and 404s for 4 weeks.
+   - Keep the Firebase site deployable for rollback.
+5. **Cleanup:**
+   - Archive `athleticspodium-frontend`.
+   - Update the workspace `CLAUDE.md`, `dev.sh` and the VS Code workspace.
+
+## 14. Risks
+
+| Risk | Mitigation |
+|---|---|
+| The hosting decision delays staging | Code stays host-agnostic; the decision is a phase 1 exit criterion |
+| Backend scope grows with page work | Every page lists its B-items; a page without its B-item ships with the documented fallback |
+| Returning visitors keep the old Angular app | `/ngsw.json` returns 404 and a safety worker is served |
+| Rankings dip after cutover | Same URLs, complete server HTML, sitemap, redirects; monitor for 4 weeks with rollback ready |
+| Free-text records render inconsistently | Known prefixes are mapped; unknown text renders unchanged in an outlined badge |
+
+## 15. Deferred
+
+- Hosting choice, due in phase 1.
+- Image optimisation.
+- `.ics` calendar feed.
+- Athletics families.
+- Trending athletes.
+- New editorial data:
+  - meeting images
+  - structured country facts
+  - former-nation flag
+  - championship frequency
+  - indoor flag
+  - age-group level
+  - article type
+  - photo focal point
+- CMS fields for `event.long_name` and `event.discipline`.
