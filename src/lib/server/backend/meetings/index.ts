@@ -8,12 +8,15 @@ import type {
 	RecentResultDto
 } from './dto.js';
 import {
+	parseCalendarMeetings,
 	parseEditionEvents,
 	parseEditionMeeting,
 	parseHostedMeetings,
 	parseMeetingSummaries,
 	parseResultsDesk
 } from './parse.js';
+
+const SEASON_LIMIT = 1000;
 
 export function createMeetings(client: BackendClient) {
 	return {
@@ -31,6 +34,16 @@ export function createMeetings(client: BackendClient) {
 				events: parseEditionEvents(medals),
 				nations: parseNationTallies(nations)
 			};
+		},
+
+		async season(year: number) {
+			const list = await client.get<MeetingListDto>('/meetings', {
+				year,
+				has_results: 1,
+				fields: 'country_code,start_date,end_date',
+				limit: SEASON_LIMIT
+			});
+			return parseCalendarMeetings(list);
 		},
 
 		async hostedIn(countryCode: string, limit: number) {
