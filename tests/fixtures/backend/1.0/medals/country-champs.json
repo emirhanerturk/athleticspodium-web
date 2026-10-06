@@ -1,0 +1,159 @@
+{
+	"success": true,
+	"data": [
+		{
+			"gold": 0,
+			"silver": 0,
+			"bronze": 1,
+			"total": 1,
+			"meeting": {
+				"id": 2219,
+				"name": "2026 European Champs",
+				"year": 2026,
+				"slug": "2026-european-championships",
+				"short_name": null,
+				"city": "Birmingham"
+			}
+		},
+		{
+			"gold": 0,
+			"silver": 1,
+			"bronze": 1,
+			"total": 2,
+			"meeting": {
+				"id": 958,
+				"name": "2024 European Champs",
+				"year": 2024,
+				"slug": "2024-european-champs",
+				"short_name": null,
+				"city": "Rome"
+			}
+		},
+		{
+			"gold": 1,
+			"silver": 1,
+			"bronze": 1,
+			"total": 3,
+			"meeting": {
+				"id": 916,
+				"name": "2022 European Champs",
+				"year": 2022,
+				"slug": "2022-european-champs",
+				"short_name": null,
+				"city": "Munich"
+			}
+		},
+		{
+			"gold": 1,
+			"silver": 2,
+			"bronze": 2,
+			"total": 5,
+			"meeting": {
+				"id": 277,
+				"name": "2018 European Champs",
+				"year": 2018,
+				"slug": "2018-european-champs",
+				"short_name": null,
+				"city": "Berlin"
+			}
+		},
+		{
+			"gold": 4,
+			"silver": 5,
+			"bronze": 3,
+			"total": 12,
+			"meeting": {
+				"id": 276,
+				"name": "2016 European Champs",
+				"year": 2016,
+				"slug": "2016-european-champs",
+				"short_name": null,
+				"city": "Amsterdam"
+			}
+		},
+		{
+			"gold": 0,
+			"silver": 0,
+			"bronze": 1,
+			"total": 1,
+			"meeting": {
+				"id": 275,
+				"name": "2014 European Champs",
+				"year": 2014,
+				"slug": "2014-european-champs",
+				"short_name": null,
+				"city": "Zürich"
+			}
+		},
+		{
+			"gold": 2,
+			"silver": 1,
+			"bronze": 1,
+			"total": 4,
+			"meeting": {
+				"id": 274,
+				"name": "2012 European Champs",
+				"year": 2012,
+				"slug": "2012-european-champs",
+				"short_name": null,
+				"city": "Helsinki"
+			}
+		},
+		{
+			"gold": 3,
+			"silver": 0,
+			"bronze": 0,
+			"total": 3,
+			"meeting": {
+				"id": 273,
+				"name": "2010 European Champs",
+				"year": 2010,
+				"slug": "2010-european-champs",
+				"short_name": null,
+				"city": "Barcelona"
+			}
+		},
+		{
+			"gold": 0,
+			"silver": 0,
+			"bronze": 1,
+			"total": 1,
+			"meeting": {
+				"id": 272,
+				"name": "2006 European Champs",
+				"year": 2006,
+				"slug": "2006-european-champs",
+				"short_name": null,
+				"city": "Gothenburg"
+			}
+		},
+		{
+			"gold": 1,
+			"silver": 0,
+			"bronze": 0,
+			"total": 1,
+			"meeting": {
+				"id": 271,
+				"name": "2002 European Champs",
+				"year": 2002,
+				"slug": "2002-european-champs",
+				"short_name": null,
+				"city": "Munich"
+			}
+		},
+		{
+			"gold": 0,
+			"silver": 0,
+			"bronze": 1,
+			"total": 1,
+			"meeting": {
+				"id": 257,
+				"name": "1950 European Champs",
+				"year": 1950,
+				"slug": "1950-european-champs",
+				"short_name": null,
+				"city": "Brussels"
+			}
+		}
+	]
+}

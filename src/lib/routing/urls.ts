@@ -1,4 +1,4 @@
-import type { Gender } from '#lib/domain/edition.js';
+import { GENDER_CODES, type MedalQuery } from '#lib/domain/medal-search.js';
 import type { SearchRequest } from '#lib/domain/search.js';
 
 export const PAGES = {
@@ -49,13 +49,18 @@ export function calendarUrl(year: number): string {
 	return `/calendar/${year}`;
 }
 
-const GENDER_PARAMS: Record<Gender, number> = { men: 0, women: 1, mixed: 2 };
-
-export function medalSearchUrl(filter: { champ: number; event?: number; gender?: Gender }): string {
-	const query = new URLSearchParams({ champs: String(filter.champ) });
-	if (filter.event !== undefined) query.set('event', String(filter.event));
-	if (filter.gender) query.set('gender', String(GENDER_PARAMS[filter.gender]));
-	return `${PAGES.medalSearch}?${query}`;
+export function medalSearchUrl(query: Partial<MedalQuery>): string {
+	const params = new URLSearchParams();
+	if (query.champ) params.set('champs', String(query.champ));
+	if (query.country) params.set('country', query.country);
+	if (query.event) params.set('event', String(query.event));
+	if (query.year) params.set('year', String(query.year));
+	if (query.gender) params.set('gender', String(GENDER_CODES[query.gender]));
+	if (query.medal) params.set('medal', String(query.medal));
+	if (query.order && query.order !== 'year') params.set('order', query.order);
+	if (query.page && query.page > 1) params.set('page', String(query.page));
+	const search = params.toString();
+	return search ? `${PAGES.medalSearch}?${search}` : PAGES.medalSearch;
 }
 
 export function countryChampsUrl(countryCode: string, champId: number): string {

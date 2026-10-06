@@ -5,6 +5,7 @@ import { createClient } from './client.js';
 import { createCountries } from './countries/index.js';
 import { createEvents } from './events/index.js';
 import { createMedia } from './media/index.js';
+import { createMedals } from './medals/index.js';
 import { createMeetings } from './meetings/index.js';
 import { createSearch } from './search/index.js';
 import { createSitemap } from './sitemap/index.js';
@@ -22,6 +23,7 @@ export function createBackend(fetch: typeof globalThis.fetch, baseUrl: string, m
 		countries: createCountries(client),
 		events: createEvents(client),
 		media: createMedia(fetch, mediaUrl),
+		medals: createMedals(client),
 		meetings: createMeetings(client),
 		search: createSearch(client),
 		sitemap: createSitemap(client),

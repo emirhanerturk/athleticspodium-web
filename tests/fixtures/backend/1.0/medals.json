@@ -1,0 +1,2260 @@
+{
+	"success": true,
+	"data": {
+		"count": 41,
+		"rows": [
+			{
+				"mark_display": "48.26",
+				"id": 395098,
+				"champ_id": 18,
+				"meeting_id": 2219,
+				"event_id": 53,
+				"medal": 3,
+				"athlete_id": 55699,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 4826,
+				"mark_format": "00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2026-08-15T16:32:57.660Z",
+				"updated_date": "2026-08-17T20:23:53.679Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 55699,
+					"first_name": "Ismail",
+					"last_name": "Nezir",
+					"slug": "ismail-nezir",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "2003-02-22"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 53,
+					"name": "400H",
+					"rank": 59
+				},
+				"meeting": {
+					"id": 2219,
+					"short_name": null,
+					"name": "2026 European Champs",
+					"slug": "2026-european-championships",
+					"year": 2026,
+					"city": "Birmingham"
+				}
+			},
+			{
+				"mark_display": "5.82",
+				"id": 294531,
+				"champ_id": 18,
+				"meeting_id": 958,
+				"event_id": 136,
+				"medal": 3,
+				"athlete_id": 48424,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 582,
+				"mark_format": "0.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2024-06-13T05:45:23.101Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 48424,
+					"first_name": "Ersu",
+					"last_name": "Şaşma",
+					"slug": "ersu-sasma",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1999-09-30"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 136,
+					"name": "PV",
+					"rank": 71
+				},
+				"meeting": {
+					"id": 958,
+					"short_name": null,
+					"name": "2024 European Champs",
+					"slug": "2024-european-champs",
+					"year": 2024,
+					"city": "Rome"
+				}
+			},
+			{
+				"mark_display": "14.57",
+				"id": 294473,
+				"champ_id": 18,
+				"meeting_id": 958,
+				"event_id": 152,
+				"medal": 2,
+				"athlete_id": 36821,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 1457,
+				"mark_format": "00.00",
+				"order": null,
+				"wind": -0.8,
+				"info": null,
+				"records": ["NR"],
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2024-06-09T21:45:53.273Z",
+				"updated_date": "2024-06-13T06:36:04.056Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 36821,
+					"first_name": "Tuğba",
+					"last_name": "Danışmaz",
+					"slug": "tugba-danismaz",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1999-09-01"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 152,
+					"name": "TJ",
+					"rank": 73
+				},
+				"meeting": {
+					"id": 958,
+					"short_name": null,
+					"name": "2024 European Champs",
+					"slug": "2024-european-champs",
+					"year": 2024,
+					"city": "Rome"
+				}
+			},
+			{
+				"mark_display": "14:56.91",
+				"id": 202077,
+				"champ_id": 18,
+				"meeting_id": 916,
+				"event_id": 73,
+				"medal": 2,
+				"athlete_id": 34226,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 145691,
+				"mark_format": "00:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2022-08-18T21:02:23.511Z",
+				"updated_date": "2022-08-21T19:40:42.863Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34226,
+					"first_name": "Yasemin",
+					"last_name": "Can",
+					"slug": "yasemin-can",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1996-12-11"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 73,
+					"name": "5000m",
+					"rank": 18
+				},
+				"meeting": {
+					"id": 916,
+					"short_name": null,
+					"name": "2022 European Champs",
+					"slug": "2022-european-champs",
+					"year": 2022,
+					"city": "Munich"
+				}
+			},
+			{
+				"mark_display": "30:32.57",
+				"id": 202014,
+				"champ_id": 18,
+				"meeting_id": 916,
+				"event_id": 3,
+				"medal": 1,
+				"athlete_id": 34226,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 303257,
+				"mark_format": "00:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2022-08-16T03:41:12.661Z",
+				"updated_date": "2022-08-21T19:40:42.863Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34226,
+					"first_name": "Yasemin",
+					"last_name": "Can",
+					"slug": "yasemin-can",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1996-12-11"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 3,
+					"name": "10,000m",
+					"rank": 25
+				},
+				"meeting": {
+					"id": 916,
+					"short_name": null,
+					"name": "2022 European Champs",
+					"slug": "2022-european-champs",
+					"year": 2022,
+					"city": "Munich"
+				}
+			},
+			{
+				"mark_display": "48.78",
+				"id": 202123,
+				"champ_id": 18,
+				"meeting_id": 916,
+				"event_id": 53,
+				"medal": 3,
+				"athlete_id": 10354,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 4878,
+				"mark_format": "00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2022-08-20T16:34:57.900Z",
+				"updated_date": "2022-08-21T19:37:37.073Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10354,
+					"first_name": "Yasmani",
+					"last_name": "Copello Escobar",
+					"slug": "yasmani-copello-escobar",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1987-04-15"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 53,
+					"name": "400H",
+					"rank": 59
+				},
+				"meeting": {
+					"id": 916,
+					"short_name": null,
+					"name": "2022 European Champs",
+					"slug": "2022-european-champs",
+					"year": 2022,
+					"city": "Munich"
+				}
+			},
+			{
+				"mark_display": "10.01",
+				"id": 19908,
+				"champ_id": 18,
+				"meeting_id": 277,
+				"event_id": 10,
+				"medal": 3,
+				"athlete_id": 10346,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 1001,
+				"mark_format": "00.00",
+				"order": null,
+				"wind": 0,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": "Reax: 0.161",
+				"created_date": "2020-03-28T12:33:56.218Z",
+				"updated_date": "2020-05-01T12:06:56.054Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10346,
+					"first_name": "Jak Ali",
+					"last_name": "Harvey",
+					"slug": "jak-ali-harvey",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1989-05-04"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 10,
+					"name": "100m",
+					"rank": 3
+				},
+				"meeting": {
+					"id": 277,
+					"short_name": null,
+					"name": "2018 European Champs",
+					"slug": "2018-european-champs",
+					"year": 2018,
+					"city": "Berlin"
+				}
+			},
+			{
+				"mark_display": "19.76",
+				"id": 19915,
+				"champ_id": 18,
+				"meeting_id": 277,
+				"event_id": 30,
+				"medal": 1,
+				"athlete_id": 10352,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 1976,
+				"mark_format": "00.00",
+				"order": null,
+				"wind": 0.7,
+				"info": null,
+				"records": ["CR", "NR"],
+				"is_team": false,
+				"is_canceled": false,
+				"notes": "Reax: 0.182",
+				"created_date": "2020-03-28T12:33:58.806Z",
+				"updated_date": "2020-04-26T18:40:35.902Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10352,
+					"first_name": "Ramil",
+					"last_name": "Guliyev",
+					"slug": "ramil-guliyev",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1990-05-29"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 30,
+					"name": "200m",
+					"rank": 5
+				},
+				"meeting": {
+					"id": 277,
+					"short_name": null,
+					"name": "2018 European Champs",
+					"slug": "2018-european-champs",
+					"year": 2018,
+					"city": "Berlin"
+				}
+			},
+			{
+				"mark_display": "14:57.63",
+				"id": 78302,
+				"champ_id": 18,
+				"meeting_id": 277,
+				"event_id": 73,
+				"medal": 3,
+				"athlete_id": 34226,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 145763,
+				"mark_format": "00:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T22:27:02.067Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34226,
+					"first_name": "Yasemin",
+					"last_name": "Can",
+					"slug": "yasemin-can",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1996-12-11"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 73,
+					"name": "5000m",
+					"rank": 18
+				},
+				"meeting": {
+					"id": 277,
+					"short_name": null,
+					"name": "2018 European Champs",
+					"slug": "2018-european-champs",
+					"year": 2018,
+					"city": "Berlin"
+				}
+			},
+			{
+				"mark_display": "47.81",
+				"id": 19925,
+				"champ_id": 18,
+				"meeting_id": 277,
+				"event_id": 53,
+				"medal": 2,
+				"athlete_id": 10354,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 4781,
+				"mark_format": "00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": ["NR"],
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T12:34:02.711Z",
+				"updated_date": "2020-04-26T18:45:46.985Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10354,
+					"first_name": "Yasmani",
+					"last_name": "Copello Escobar",
+					"slug": "yasmani-copello-escobar",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1987-04-15"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 53,
+					"name": "400H",
+					"rank": 59
+				},
+				"meeting": {
+					"id": 277,
+					"short_name": null,
+					"name": "2018 European Champs",
+					"slug": "2018-european-champs",
+					"year": 2018,
+					"city": "Berlin"
+				}
+			},
+			{
+				"mark_display": "37.98",
+				"id": 19934,
+				"champ_id": 18,
+				"meeting_id": 277,
+				"event_id": 60,
+				"medal": 2,
+				"athlete_id": 10411,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 3798,
+				"mark_format": "00.00",
+				"order": "1",
+				"wind": null,
+				"info": null,
+				"records": ["NR"],
+				"is_team": true,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T12:34:05.781Z",
+				"updated_date": "2020-04-26T18:49:06.822Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10411,
+					"first_name": "Emre Zafer",
+					"last_name": "Barnes",
+					"slug": "emre-zafer-barnes",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1988-11-07"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 60,
+					"name": "4x100m",
+					"rank": 160
+				},
+				"meeting": {
+					"id": 277,
+					"short_name": null,
+					"name": "2018 European Champs",
+					"slug": "2018-european-champs",
+					"year": 2018,
+					"city": "Berlin"
+				}
+			},
+			{
+				"mark_display": "37.98",
+				"id": 19935,
+				"champ_id": 18,
+				"meeting_id": 277,
+				"event_id": 60,
+				"medal": 2,
+				"athlete_id": 10346,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 3798,
+				"mark_format": "00.00",
+				"order": "2",
+				"wind": null,
+				"info": null,
+				"records": ["NR"],
+				"is_team": true,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T12:34:06.102Z",
+				"updated_date": "2020-04-26T18:49:11.456Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10346,
+					"first_name": "Jak Ali",
+					"last_name": "Harvey",
+					"slug": "jak-ali-harvey",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1989-05-04"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 60,
+					"name": "4x100m",
+					"rank": 160
+				},
+				"meeting": {
+					"id": 277,
+					"short_name": null,
+					"name": "2018 European Champs",
+					"slug": "2018-european-champs",
+					"year": 2018,
+					"city": "Berlin"
+				}
+			},
+			{
+				"mark_display": "37.98",
+				"id": 19937,
+				"champ_id": 18,
+				"meeting_id": 277,
+				"event_id": 60,
+				"medal": 2,
+				"athlete_id": 10412,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 3798,
+				"mark_format": "00.00",
+				"order": "3",
+				"wind": null,
+				"info": null,
+				"records": ["NR"],
+				"is_team": true,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T12:34:06.852Z",
+				"updated_date": "2020-04-26T18:49:17.115Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10412,
+					"first_name": "Yigitcan",
+					"last_name": "Hekimoglu",
+					"slug": "yigitcan-hekimoglu",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1992-04-27"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 60,
+					"name": "4x100m",
+					"rank": 160
+				},
+				"meeting": {
+					"id": 277,
+					"short_name": null,
+					"name": "2018 European Champs",
+					"slug": "2018-european-champs",
+					"year": 2018,
+					"city": "Berlin"
+				}
+			},
+			{
+				"mark_display": "37.98",
+				"id": 19936,
+				"champ_id": 18,
+				"meeting_id": 277,
+				"event_id": 60,
+				"medal": 2,
+				"athlete_id": 10352,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 3798,
+				"mark_format": "00.00",
+				"order": "4",
+				"wind": null,
+				"info": null,
+				"records": ["NR"],
+				"is_team": true,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T12:34:06.440Z",
+				"updated_date": "2020-04-26T18:49:20.691Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10352,
+					"first_name": "Ramil",
+					"last_name": "Guliyev",
+					"slug": "ramil-guliyev",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1990-05-29"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 60,
+					"name": "4x100m",
+					"rank": 160
+				},
+				"meeting": {
+					"id": 277,
+					"short_name": null,
+					"name": "2018 European Champs",
+					"slug": "2018-european-champs",
+					"year": 2018,
+					"city": "Berlin"
+				}
+			},
+			{
+				"mark_display": "10.07",
+				"id": 19819,
+				"champ_id": 18,
+				"meeting_id": 276,
+				"event_id": 10,
+				"medal": 2,
+				"athlete_id": 10346,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 1007,
+				"mark_format": "00.00",
+				"order": null,
+				"wind": 0,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": "Reax: 0.137 / Tie-breaker 0.067",
+				"created_date": "2020-03-28T11:31:53.745Z",
+				"updated_date": "2020-05-01T12:17:05.093Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10346,
+					"first_name": "Jak Ali",
+					"last_name": "Harvey",
+					"slug": "jak-ali-harvey",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1989-05-04"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 10,
+					"name": "100m",
+					"rank": 3
+				},
+				"meeting": {
+					"id": 276,
+					"short_name": null,
+					"name": "2016 European Champs",
+					"slug": "2016-european-champs",
+					"year": 2016,
+					"city": "Amsterdam"
+				}
+			},
+			{
+				"mark_display": "20.51",
+				"id": 19828,
+				"champ_id": 18,
+				"meeting_id": 276,
+				"event_id": 30,
+				"medal": 2,
+				"athlete_id": 10352,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 2051,
+				"mark_format": "00.00",
+				"order": null,
+				"wind": -0.9,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": "Reax: 0.150",
+				"created_date": "2020-03-28T11:31:57.330Z",
+				"updated_date": "2020-04-26T19:01:41.578Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10352,
+					"first_name": "Ramil",
+					"last_name": "Guliyev",
+					"slug": "ramil-guliyev",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1990-05-29"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 30,
+					"name": "200m",
+					"rank": 5
+				},
+				"meeting": {
+					"id": 276,
+					"short_name": null,
+					"name": "2016 European Champs",
+					"slug": "2016-european-champs",
+					"year": 2016,
+					"city": "Amsterdam"
+				}
+			},
+			{
+				"mark_display": "15:18.15",
+				"id": 78211,
+				"champ_id": 18,
+				"meeting_id": 276,
+				"event_id": 73,
+				"medal": 1,
+				"athlete_id": 34226,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 151815,
+				"mark_format": "00:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T22:26:27.934Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34226,
+					"first_name": "Yasemin",
+					"last_name": "Can",
+					"slug": "yasemin-can",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1996-12-11"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 73,
+					"name": "5000m",
+					"rank": 18
+				},
+				"meeting": {
+					"id": 276,
+					"short_name": null,
+					"name": "2016 European Champs",
+					"slug": "2016-european-champs",
+					"year": 2016,
+					"city": "Amsterdam"
+				}
+			},
+			{
+				"mark_display": "31:12.86",
+				"id": 78163,
+				"champ_id": 18,
+				"meeting_id": 276,
+				"event_id": 3,
+				"medal": 1,
+				"athlete_id": 34226,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 311286,
+				"mark_format": "00:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": ["EU23R"],
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T22:26:09.282Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34226,
+					"first_name": "Yasemin",
+					"last_name": "Can",
+					"slug": "yasemin-can",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1996-12-11"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 3,
+					"name": "10,000m",
+					"rank": 25
+				},
+				"meeting": {
+					"id": 276,
+					"short_name": null,
+					"name": "2016 European Champs",
+					"slug": "2016-european-champs",
+					"year": 2016,
+					"city": "Amsterdam"
+				}
+			},
+			{
+				"mark_display": "28:12.52",
+				"id": 19815,
+				"champ_id": 18,
+				"meeting_id": 276,
+				"event_id": 3,
+				"medal": 1,
+				"athlete_id": 10241,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 281252,
+				"mark_format": "00:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T11:31:52.233Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10241,
+					"first_name": "Polat Kemboi",
+					"last_name": "Arıkan",
+					"slug": "polat-kemboi-arikan",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1990-12-12"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 3,
+					"name": "10,000m",
+					"rank": 25
+				},
+				"meeting": {
+					"id": 276,
+					"short_name": null,
+					"name": "2016 European Champs",
+					"slug": "2016-european-champs",
+					"year": 2016,
+					"city": "Amsterdam"
+				}
+			},
+			{
+				"mark_display": "28:21.42",
+				"id": 19816,
+				"champ_id": 18,
+				"meeting_id": 276,
+				"event_id": 3,
+				"medal": 2,
+				"athlete_id": 10296,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 282142,
+				"mark_format": "00:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T11:31:52.572Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10296,
+					"first_name": "Ali",
+					"last_name": "Kaya",
+					"slug": "ali-kaya",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1994-04-20"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 3,
+					"name": "10,000m",
+					"rank": 25
+				},
+				"meeting": {
+					"id": 276,
+					"short_name": null,
+					"name": "2016 European Champs",
+					"slug": "2016-european-champs",
+					"year": 2016,
+					"city": "Amsterdam"
+				}
+			},
+			{
+				"mark_display": "1:02:27",
+				"id": 19876,
+				"champ_id": 18,
+				"meeting_id": 276,
+				"event_id": 105,
+				"medal": 2,
+				"athlete_id": 10377,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 10227,
+				"mark_format": "0:00:00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T12:33:43.339Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10377,
+					"first_name": "Kaan Kigen",
+					"last_name": "Ozbilen",
+					"slug": "kaan-kigen-ozbilen",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1986-01-15"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 105,
+					"name": "Half Mar",
+					"rank": 26
+				},
+				"meeting": {
+					"id": 276,
+					"short_name": null,
+					"name": "2016 European Champs",
+					"slug": "2016-european-champs",
+					"year": 2016,
+					"city": "Amsterdam"
+				}
+			},
+			{
+				"mark_display": "3:39:59",
+				"id": 78225,
+				"champ_id": 18,
+				"meeting_id": 276,
+				"event_id": 106,
+				"medal": 3,
+				"athlete_id": null,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 33959,
+				"mark_format": "0:00:00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": "Best three finishers total",
+				"created_date": "2020-03-28T22:26:32.351Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": null,
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 106,
+					"name": "Half Mar Team",
+					"rank": 27
+				},
+				"meeting": {
+					"id": 276,
+					"short_name": null,
+					"name": "2016 European Champs",
+					"slug": "2016-european-champs",
+					"year": 2016,
+					"city": "Amsterdam"
+				}
+			},
+			{
+				"mark_display": "8:29.91",
+				"id": 19831,
+				"champ_id": 18,
+				"meeting_id": 276,
+				"event_id": 43,
+				"medal": 2,
+				"athlete_id": 10353,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 82991,
+				"mark_format": "0:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T11:31:58.404Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10353,
+					"first_name": "Aras",
+					"last_name": "Kaya",
+					"slug": "aras-kaya",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1994-04-04"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 43,
+					"name": "3000SC",
+					"rank": 40
+				},
+				"meeting": {
+					"id": 276,
+					"short_name": null,
+					"name": "2016 European Champs",
+					"slug": "2016-european-champs",
+					"year": 2016,
+					"city": "Amsterdam"
+				}
+			},
+			{
+				"mark_display": "9:35.05",
+				"id": 78180,
+				"champ_id": 18,
+				"meeting_id": 276,
+				"event_id": 43,
+				"medal": 3,
+				"athlete_id": 34234,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 93505,
+				"mark_format": "0:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T22:26:16.083Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34234,
+					"first_name": "Ozlem",
+					"last_name": "Kaya",
+					"slug": "ozlem-kaya-alici",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1990-04-20"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 43,
+					"name": "3000SC",
+					"rank": 40
+				},
+				"meeting": {
+					"id": 276,
+					"short_name": null,
+					"name": "2016 European Champs",
+					"slug": "2016-european-champs",
+					"year": 2016,
+					"city": "Amsterdam"
+				}
+			},
+			{
+				"mark_display": "48.98",
+				"id": 19833,
+				"champ_id": 18,
+				"meeting_id": 276,
+				"event_id": 53,
+				"medal": 1,
+				"athlete_id": 10354,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 4898,
+				"mark_format": "00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T11:31:59.147Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10354,
+					"first_name": "Yasmani",
+					"last_name": "Copello Escobar",
+					"slug": "yasmani-copello-escobar",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1987-04-15"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 53,
+					"name": "400H",
+					"rank": 59
+				},
+				"meeting": {
+					"id": 276,
+					"short_name": null,
+					"name": "2016 European Champs",
+					"slug": "2016-european-champs",
+					"year": 2016,
+					"city": "Amsterdam"
+				}
+			},
+			{
+				"mark_display": "18.22",
+				"id": 78246,
+				"champ_id": 18,
+				"meeting_id": 276,
+				"event_id": 144,
+				"medal": 3,
+				"athlete_id": 34262,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 1822,
+				"mark_format": "00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T22:26:40.138Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34262,
+					"first_name": "Emel",
+					"last_name": "Dereli",
+					"slug": "emel-dereli",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1996-02-25"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 144,
+					"name": "SP",
+					"rank": 74
+				},
+				"meeting": {
+					"id": 276,
+					"short_name": null,
+					"name": "2016 European Champs",
+					"slug": "2016-european-champs",
+					"year": 2016,
+					"city": "Amsterdam"
+				}
+			},
+			{
+				"mark_display": "28:08.72",
+				"id": 19725,
+				"champ_id": 18,
+				"meeting_id": 275,
+				"event_id": 3,
+				"medal": 3,
+				"athlete_id": 10296,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 280872,
+				"mark_format": "00:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T11:31:18.710Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10296,
+					"first_name": "Ali",
+					"last_name": "Kaya",
+					"slug": "ali-kaya",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1994-04-20"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 3,
+					"name": "10,000m",
+					"rank": 25
+				},
+				"meeting": {
+					"id": 275,
+					"short_name": null,
+					"name": "2014 European Champs",
+					"slug": "2014-european-champs",
+					"year": 2014,
+					"city": "Zürich"
+				}
+			},
+			{
+				"mark_display": "4:05.31",
+				"id": 77997,
+				"champ_id": 18,
+				"meeting_id": 274,
+				"event_id": 20,
+				"medal": 1,
+				"athlete_id": 34116,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 40531,
+				"mark_format": "0:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": true,
+				"is_canceled": true,
+				"notes": "DQ FOR DOPING",
+				"created_date": "2020-03-28T22:25:03.601Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34116,
+					"first_name": "Aslı",
+					"last_name": "Çakır",
+					"slug": "asli-cakir",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1985-08-20"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 20,
+					"name": "1500m",
+					"rank": 14
+				},
+				"meeting": {
+					"id": 274,
+					"short_name": null,
+					"name": "2012 European Champs",
+					"slug": "2012-european-champs",
+					"year": 2012,
+					"city": "Helsinki"
+				}
+			},
+			{
+				"mark_display": "4:06.04",
+				"id": 77998,
+				"champ_id": 18,
+				"meeting_id": 274,
+				"event_id": 20,
+				"medal": 2,
+				"athlete_id": 34117,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 40604,
+				"mark_format": "0:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": true,
+				"is_canceled": true,
+				"notes": "DQ FOR DOPING",
+				"created_date": "2020-03-28T22:25:04.009Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34117,
+					"first_name": "Gamze",
+					"last_name": "Bulut",
+					"slug": "gamze-bulut",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1992-08-03"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 20,
+					"name": "1500m",
+					"rank": 14
+				},
+				"meeting": {
+					"id": 274,
+					"short_name": null,
+					"name": "2012 European Champs",
+					"slug": "2012-european-champs",
+					"year": 2012,
+					"city": "Helsinki"
+				}
+			},
+			{
+				"mark_display": "13:32.63",
+				"id": 19691,
+				"champ_id": 18,
+				"meeting_id": 274,
+				"event_id": 73,
+				"medal": 3,
+				"athlete_id": 10241,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 133263,
+				"mark_format": "00:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T11:31:05.303Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10241,
+					"first_name": "Polat Kemboi",
+					"last_name": "Arıkan",
+					"slug": "polat-kemboi-arikan",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1990-12-12"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 73,
+					"name": "5000m",
+					"rank": 18
+				},
+				"meeting": {
+					"id": 274,
+					"short_name": null,
+					"name": "2012 European Champs",
+					"slug": "2012-european-champs",
+					"year": 2012,
+					"city": "Helsinki"
+				}
+			},
+			{
+				"mark_display": "28:22.27",
+				"id": 19641,
+				"champ_id": 18,
+				"meeting_id": 274,
+				"event_id": 3,
+				"medal": 1,
+				"athlete_id": 10241,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 282227,
+				"mark_format": "00:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T11:30:46.439Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10241,
+					"first_name": "Polat Kemboi",
+					"last_name": "Arıkan",
+					"slug": "polat-kemboi-arikan",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1990-12-12"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 3,
+					"name": "10,000m",
+					"rank": 25
+				},
+				"meeting": {
+					"id": 274,
+					"short_name": null,
+					"name": "2012 European Champs",
+					"slug": "2012-european-champs",
+					"year": 2012,
+					"city": "Helsinki"
+				}
+			},
+			{
+				"mark_display": "9:32.96",
+				"id": 78003,
+				"champ_id": 18,
+				"meeting_id": 274,
+				"event_id": 43,
+				"medal": 1,
+				"athlete_id": 34120,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 93296,
+				"mark_format": "0:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T22:25:05.908Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34120,
+					"first_name": "Gülcan",
+					"last_name": "Mingir",
+					"slug": "gulcan-mingir",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1989-05-21"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 43,
+					"name": "3000SC",
+					"rank": 40
+				},
+				"meeting": {
+					"id": 274,
+					"short_name": null,
+					"name": "2012 European Champs",
+					"slug": "2012-european-champs",
+					"year": 2012,
+					"city": "Helsinki"
+				}
+			},
+			{
+				"mark_display": "8:35.24",
+				"id": 19657,
+				"champ_id": 18,
+				"meeting_id": 274,
+				"event_id": 43,
+				"medal": 2,
+				"athlete_id": 10252,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 83524,
+				"mark_format": "0:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T11:30:52.569Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 10252,
+					"first_name": "Tarik Langat",
+					"last_name": "Akdag",
+					"slug": "tarik-langat-akdag",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1988-07-16"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 43,
+					"name": "3000SC",
+					"rank": 40
+				},
+				"meeting": {
+					"id": 274,
+					"short_name": null,
+					"name": "2012 European Champs",
+					"slug": "2012-european-champs",
+					"year": 2012,
+					"city": "Helsinki"
+				}
+			},
+			{
+				"mark_display": "12.81",
+				"id": 77989,
+				"champ_id": 18,
+				"meeting_id": 274,
+				"event_id": 7,
+				"medal": 1,
+				"athlete_id": 34033,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 1281,
+				"mark_format": "00.00",
+				"order": null,
+				"wind": -1.4,
+				"info": null,
+				"records": null,
+				"is_team": true,
+				"is_canceled": true,
+				"notes": "DQ FOR DOPING",
+				"created_date": "2020-03-28T22:25:00.494Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34033,
+					"first_name": "Nevin",
+					"last_name": "Yanıt",
+					"slug": "nevin-yanit",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1986-02-16"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 7,
+					"name": "100H",
+					"rank": 47
+				},
+				"meeting": {
+					"id": 274,
+					"short_name": null,
+					"name": "2012 European Champs",
+					"slug": "2012-european-champs",
+					"year": 2012,
+					"city": "Helsinki"
+				}
+			},
+			{
+				"mark_display": "14:52.20",
+				"id": 77944,
+				"champ_id": 18,
+				"meeting_id": 273,
+				"event_id": 73,
+				"medal": 1,
+				"athlete_id": 34073,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 145220,
+				"mark_format": "00:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": true,
+				"is_canceled": true,
+				"notes": "DQ FOR DOPING",
+				"created_date": "2020-03-28T22:24:42.726Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34073,
+					"first_name": "Alemitu",
+					"last_name": "Bekele",
+					"slug": "alemitu-bekele",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1977-09-17"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 73,
+					"name": "5000m",
+					"rank": 18
+				},
+				"meeting": {
+					"id": 273,
+					"short_name": null,
+					"name": "2010 European Champs",
+					"slug": "2010-european-champs",
+					"year": 2010,
+					"city": "Barcelona"
+				}
+			},
+			{
+				"mark_display": "14:54.44",
+				"id": 77941,
+				"champ_id": 18,
+				"meeting_id": 273,
+				"event_id": 73,
+				"medal": 1,
+				"athlete_id": 34004,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 145444,
+				"mark_format": "00:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": ["CR"],
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T22:24:41.581Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34004,
+					"first_name": "Elvan",
+					"last_name": "Abeylegesse",
+					"slug": "elvan-abeylegesse",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1982-09-11"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 73,
+					"name": "5000m",
+					"rank": 18
+				},
+				"meeting": {
+					"id": 273,
+					"short_name": null,
+					"name": "2010 European Champs",
+					"slug": "2010-european-champs",
+					"year": 2010,
+					"city": "Barcelona"
+				}
+			},
+			{
+				"mark_display": "31:10.23",
+				"id": 77884,
+				"champ_id": 18,
+				"meeting_id": 273,
+				"event_id": 3,
+				"medal": 1,
+				"athlete_id": 34004,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 311023,
+				"mark_format": "00:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T22:24:19.595Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34004,
+					"first_name": "Elvan",
+					"last_name": "Abeylegesse",
+					"slug": "elvan-abeylegesse",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1982-09-11"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 3,
+					"name": "10,000m",
+					"rank": 25
+				},
+				"meeting": {
+					"id": 273,
+					"short_name": null,
+					"name": "2010 European Champs",
+					"slug": "2010-european-champs",
+					"year": 2010,
+					"city": "Barcelona"
+				}
+			},
+			{
+				"mark_display": "12.63",
+				"id": 77888,
+				"champ_id": 18,
+				"meeting_id": 273,
+				"event_id": 7,
+				"medal": 1,
+				"athlete_id": 34033,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 1263,
+				"mark_format": "00.00",
+				"order": null,
+				"wind": -0.5,
+				"info": null,
+				"records": ["NR"],
+				"is_team": false,
+				"is_canceled": false,
+				"notes": "Reax: 0.184",
+				"created_date": "2020-03-28T22:24:21.149Z",
+				"updated_date": "2020-05-01T17:15:46.233Z",
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34033,
+					"first_name": "Nevin",
+					"last_name": "Yanıt",
+					"slug": "nevin-yanit",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1986-02-16"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 7,
+					"name": "100H",
+					"rank": 47
+				},
+				"meeting": {
+					"id": 273,
+					"short_name": null,
+					"name": "2010 European Champs",
+					"slug": "2010-european-champs",
+					"year": 2010,
+					"city": "Barcelona"
+				}
+			},
+			{
+				"mark_display": "14:59.29",
+				"id": 77846,
+				"champ_id": 18,
+				"meeting_id": 272,
+				"event_id": 73,
+				"medal": 3,
+				"athlete_id": 34004,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 145929,
+				"mark_format": "00:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T22:24:05.569Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 34004,
+					"first_name": "Elvan",
+					"last_name": "Abeylegesse",
+					"slug": "elvan-abeylegesse",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1982-09-11"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 73,
+					"name": "5000m",
+					"rank": 18
+				},
+				"meeting": {
+					"id": 272,
+					"short_name": null,
+					"name": "2006 European Champs",
+					"slug": "2006-european-champs",
+					"year": 2006,
+					"city": "Gothenburg"
+				}
+			},
+			{
+				"mark_display": "3:58.79",
+				"id": 77718,
+				"champ_id": 18,
+				"meeting_id": 271,
+				"event_id": 20,
+				"medal": 1,
+				"athlete_id": 33919,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 1,
+				"mark": 35879,
+				"mark_format": "0:00.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": ["NR"],
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T22:23:16.146Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 33919,
+					"first_name": "Süreyya",
+					"last_name": "Ayhan",
+					"slug": "sureyya-ayhan",
+					"gender": false,
+					"olympic_mark": false,
+					"date_of_birth": "1978-09-06"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 20,
+					"name": "1500m",
+					"rank": 14
+				},
+				"meeting": {
+					"id": 271,
+					"short_name": null,
+					"name": "2002 European Champs",
+					"slug": "2002-european-champs",
+					"year": 2002,
+					"city": "Munich"
+				}
+			},
+			{
+				"mark_display": "14.53",
+				"id": 18190,
+				"champ_id": 18,
+				"meeting_id": 257,
+				"event_id": 152,
+				"medal": 3,
+				"athlete_id": 9275,
+				"athlete_name": null,
+				"country_code": "TUR",
+				"gender": 0,
+				"mark": 1453,
+				"mark_format": "0.00",
+				"order": null,
+				"wind": null,
+				"info": null,
+				"records": null,
+				"is_team": false,
+				"is_canceled": false,
+				"notes": null,
+				"created_date": "2020-03-28T11:21:24.058Z",
+				"updated_date": null,
+				"champ": {
+					"id": 18,
+					"name": "European Championships",
+					"slug": "european-champs",
+					"category": 3
+				},
+				"athlete": {
+					"id": 9275,
+					"first_name": "Ruhi",
+					"last_name": "Sarialp",
+					"slug": "ruhi-sarialp",
+					"gender": true,
+					"olympic_mark": false,
+					"date_of_birth": "1924-12-15"
+				},
+				"country": {
+					"code": "TUR",
+					"name": "Turkey"
+				},
+				"event": {
+					"id": 152,
+					"name": "TJ",
+					"rank": 73
+				},
+				"meeting": {
+					"id": 257,
+					"short_name": null,
+					"name": "1950 European Champs",
+					"slug": "1950-european-champs",
+					"year": 1950,
+					"city": "Brussels"
+				}
+			}
+		],
+		"counts": {
+			"gold": 15,
+			"silver": 11,
+			"bronze": 12
+		}
+	}
+}
