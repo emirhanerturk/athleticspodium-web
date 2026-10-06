@@ -157,7 +157,7 @@ The Angular service worker deletes its caches and unregisters itself when `/ngsw
 
 These replace SOLID as the working rules:
 
-- **Functional core, imperative shell.** Pure modules hold the logic: `domain`, `format`, `seo`, `urls` and the mappers. Routes, hooks and backend API modules do the I/O and stay thin.
+- **Functional core, imperative shell.** Pure modules hold the logic: `domain`, `format`, `seo`, `urls` and the backend parsers. Routes, hooks and backend API modules do the I/O and stay thin.
 - **Deep modules.** A module exposes a few functions with simple signatures and hides its details. For example, `backend.athletes.getProfile(id)` hides several requests and the mapping.
 - **Parse, don't validate.** Backend responses become domain types once, at the boundary. Nothing outside `lib/server/backend` sees a DTO.
 - **YAGNI.** An abstraction appears with its second real use, not before.
@@ -178,12 +178,12 @@ athleticspodium-web/
 │   │   └── (page folders as in 5.1)
 │   ├── lib/
 │   │   ├── server/backend/      the only code that talks to athleticspodium-backend
-│   │   │   ├── http-client.ts   base URL, timeout, errors
+│   │   │   ├── client.ts        fetch with base URL, timeout and error mapping
 │   │   │   ├── index.ts         createBackend(fetch, baseUrl)
-│   │   │   └── <resource>/      athletes, champs, meetings, countries, medals, articles, search, stats, pages
-│   │   │       ├── <resource>.api.ts      requests
-│   │   │       ├── <resource>.dto.ts      response shapes as the backend sends them
-│   │   │       └── <resource>.mapper.ts   DTO to domain
+│   │   │   └── <resource>/      athletes, champs, meetings, countries, medals, articles, search, stats, pages, sitemap
+│   │   │       ├── index.ts     the public surface: page-shaped functions such as getProfile(id)
+│   │   │       ├── dto.ts       response shapes as the backend sends them (private to the folder)
+│   │   │       └── parse.ts     DTO to domain, pure (private to the folder)
 │   │   ├── domain/              types and pure rules (athlete, medal, champ, meeting, country, record)
 │   │   ├── components/
 │   │   │   ├── ui/              design-system primitives (MedalDisc, RecordBadge, Flag, Tabs, Button, icons/)
@@ -203,24 +203,34 @@ athleticspodium-web/
     └── fixtures/backend/        JSON responses for the stub backend
 ```
 
+The folders follow the principles in 6.1:
+
+| Layer | Folders | May import |
+|---|---|---|
+| Core (pure, no I/O, unit-tested) | `lib/domain`, `lib/format`, `lib/seo`, `lib/urls.ts`, `lib/utils` | only other core modules |
+| Shell (I/O) | `routes/`, `hooks.server.ts`, `lib/server/backend` | core, and the shell's own modules |
+| View | `lib/components` | core and other components |
+
 Rules:
 
+- ESLint `no-restricted-imports` enforces the table above.
+- Outside a backend resource folder, only its `index.ts` may be imported. Its `dto.ts` and `parse.ts` stay private.
+- A backend resource exposes page-shaped functions. For example, `athletes.getProfile(id)` runs the profile's requests in parallel and returns one parsed object, so a route makes one call per need.
 - Unit tests sit next to the file they test (`*.test.ts`).
 - Components live only under `lib/components/<area>/`, one component per file, named in PascalCase. Route folders hold no components.
-- Components and routes import domain types, never DTOs. ESLint enforces this with `no-restricted-imports` on `**/*.dto`.
 - `lib/server/**` is server-only. SvelteKit refuses to bundle it for the browser.
 
 ### 6.3 Request flow
 
 1. `hooks.server.ts` applies the redirects in 5.2. It then sets `event.locals.backend = createBackend(event.fetch, BACKEND_URL)`.
 2. A route's `+page.server.ts` calls `locals.backend.<resource>.<function>()`. Independent requests run in parallel.
-3. The API module sends the request through `http-client.ts`. The mapper turns the response into domain types.
+3. The resource module sends its requests through `client.ts`. Its `parse.ts` turns the responses into domain types.
 4. `+page.svelte` composes components from the domain data and sets `SeoHead` and `JsonLd`.
 5. `hooks.server.ts` adds `Cache-Control` according to the route type (6.4).
 
 Error handling:
 
-- `http-client.ts` throws `BackendNotFoundError` when a record is missing and `BackendUnavailableError` for a timeout (8 s), a server error or a network failure.
+- `client.ts` throws `BackendNotFoundError` when a record is missing and `BackendUnavailableError` for a timeout (8 s), a server error or a network failure.
 - Until B20 ships, a missing record still comes back as HTTP 200 with `data: null`. So the client reads the body as well:
   - `success: false` with code `4040` means not found; any other code is an error.
   - `success: true` with `data: null` on a detail endpoint also means not found.
@@ -589,7 +599,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
 
 ## 12. Testing
 
-- **Unit (Vitest):** Every pure module has tests next to it: domain rules, formatters, mappers, URL builders, SEO builders and redirect resolution.
+- **Unit (Vitest):** Every pure module has tests next to it: domain rules, formatters, backend parsers, URL builders, SEO builders and redirect resolution.
 - **End-to-end (Playwright):**
   - Setup: The tests run against the built app. `BACKEND_URL` points to a stub server that serves JSON fixtures captured from the local backend.
   - Coverage, for every route type:
