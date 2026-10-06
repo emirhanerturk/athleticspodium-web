@@ -29,3 +29,9 @@ export function formatDaysToGo(days: number): string {
 	if (days === 1) return 'tomorrow';
 	return `in ${days} days`;
 }
+
+export function formatYearSpan(first: number, last: number): string {
+	if (first === last) return String(first);
+	const sameCentury = Math.floor(first / 100) === Math.floor(last / 100);
+	return `${first}–${sameCentury ? String(last).slice(2) : last}`;
+}

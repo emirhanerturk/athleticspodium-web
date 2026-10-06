@@ -19,6 +19,7 @@ export default defineConfig({
 			env: {
 				BACKEND_URL: `http://localhost:${STUB_BACKEND_PORT}/1.0`,
 				PUBLIC_SITE_URL: 'https://athleticspodium.com',
+				PUBLIC_MEDIA_URL: `http://localhost:${STUB_BACKEND_PORT}/media`,
 				PUBLIC_SITE_ENV: 'production',
 				PUBLIC_GA_MEASUREMENT_ID: 'G-TEST'
 			}

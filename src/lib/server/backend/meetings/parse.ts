@@ -1,19 +1,7 @@
-import type {
-	EditionEntry,
-	EditionEvent,
-	EditionMeeting,
-	Gender,
-	NationTally
-} from '#lib/domain/edition.js';
+import type { EditionEntry, EditionEvent, EditionMeeting, Gender } from '#lib/domain/edition.js';
 import { describeEvent } from '#lib/domain/event.js';
 import type { MeetingSummary } from '#lib/domain/meeting.js';
-import type {
-	EditionEntryDto,
-	EditionMedalsDto,
-	MeetingDetailDto,
-	MeetingDto,
-	NationTallyDto
-} from './dto.js';
+import type { EditionEntryDto, EditionMedalsDto, MeetingDetailDto, MeetingDto } from './dto.js';
 
 export function parseMeetingSummaries(dtos: MeetingDto[]): MeetingSummary[] {
 	return dtos.flatMap((dto) =>
@@ -67,16 +55,6 @@ export function parseEditionEvents(dto: EditionMedalsDto): EditionEvent[] {
 			entries: event.medals.map(parseEditionEntry)
 		}))
 	);
-}
-
-export function parseNationTallies(dtos: NationTallyDto[]): NationTally[] {
-	return dtos.map(({ gold, silver, bronze, total, country }) => ({
-		country,
-		gold,
-		silver,
-		bronze,
-		total
-	}));
 }
 
 function parseEditionEntry(dto: EditionEntryDto): EditionEntry {

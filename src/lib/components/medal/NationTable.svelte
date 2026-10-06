@@ -3,7 +3,11 @@
 	import type { NationTally } from '#lib/domain/edition.js';
 	import { countryUrl } from '#lib/routing/urls.js';
 
-	let { nations, medals }: { nations: NationTally[]; medals: number } = $props();
+	let {
+		nations,
+		medals,
+		title = 'Medal table'
+	}: { nations: NationTally[]; medals?: number; title?: string } = $props();
 
 	const COLLAPSED_ROWS = 12;
 
@@ -15,10 +19,10 @@
 
 <div>
 	<div class="mb-3.5 flex items-baseline justify-between gap-3">
-		<h2 class="font-display text-[34px] leading-[0.94] font-bold sm:text-[40px]">Medal table</h2>
-		<span class="font-data text-[13.5px] text-ink-3"
-			>{nations.length} nations · {medals} medals</span
-		>
+		<h2 class="font-display text-[34px] leading-[0.94] font-bold sm:text-[40px]">{title}</h2>
+		<span class="font-data text-[13.5px] text-ink-3">
+			{nations.length} nations{#if medals !== undefined}&nbsp;· {medals} medals{/if}
+		</span>
 	</div>
 	<div class="overflow-x-auto">
 		<table class="w-full min-w-[480px] border-collapse text-[14.5px]">

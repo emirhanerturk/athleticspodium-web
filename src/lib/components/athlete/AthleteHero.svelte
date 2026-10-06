@@ -76,7 +76,7 @@
 </script>
 
 <section class="page-container pt-6 pb-12">
-	<div class="grid gap-11 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
+	<div class="grid grid-cols-1 gap-11 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
 		<figure class="flex flex-col gap-2.5">
 			{#if athlete.image}
 				<MediaImage

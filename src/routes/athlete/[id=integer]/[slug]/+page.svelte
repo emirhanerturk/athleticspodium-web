@@ -2,7 +2,6 @@
 	import { PUBLIC_MEDIA_URL, PUBLIC_SITE_URL } from '$app/env/public';
 	import StoryList from '#lib/components/article/StoryList.svelte';
 	import AthleteHero from '#lib/components/athlete/AthleteHero.svelte';
-	import Biography from '#lib/components/athlete/Biography.svelte';
 	import ChampionshipTally from '#lib/components/athlete/ChampionshipTally.svelte';
 	import NationalResults from '#lib/components/athlete/NationalResults.svelte';
 	import OlympicCards from '#lib/components/athlete/OlympicCards.svelte';
@@ -11,6 +10,7 @@
 	import Breadcrumb from '#lib/components/layout/Breadcrumb.svelte';
 	import JsonLd from '#lib/components/seo/JsonLd.svelte';
 	import SeoHead from '#lib/components/seo/SeoHead.svelte';
+	import CollapsibleHtml from '#lib/components/ui/CollapsibleHtml.svelte';
 	import { fullName } from '#lib/domain/athlete.js';
 	import {
 		careerSummary,
@@ -71,9 +71,16 @@
 
 {#if athlete.biography || hasAside}
 	<section class="page-container pb-12">
-		<div class="grid gap-12 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+		<div class="grid grid-cols-1 gap-12 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
 			<div>
-				{#if athlete.biography}<Biography html={athlete.biography} />{/if}
+				{#if athlete.biography}
+					<article>
+						<h2 class="mb-3.5 font-display text-[30px] leading-[0.94] font-bold sm:text-4xl">
+							Biography
+						</h2>
+						<CollapsibleHtml html={athlete.biography} moreLabel="Read full biography" />
+					</article>
+				{/if}
 			</div>
 			{#if hasAside}
 				<aside class="flex flex-col gap-7">
@@ -88,7 +95,7 @@
 
 {#if byChampionship.length || national.length}
 	<section class="border-y border-line bg-surface">
-		<div class="page-container grid gap-12 py-[52px] md:grid-cols-2">
+		<div class="page-container grid grid-cols-1 gap-12 py-[52px] md:grid-cols-2">
 			{#if byChampionship.length}
 				<ChampionshipTally rows={byChampionship} total={career.international} />
 			{/if}

@@ -57,9 +57,10 @@ Railway, in project `athletics-podium` next to the backend:
 
 - **Service:** `athleticspodium-web`, environment `production`, region `europe-west4-drams3a`, one replica. This folder is linked with the Railway CLI, so `railway logs`, `railway variables` and `railway status` work from here.
 - **Deploys:** Every push to `main` deploys automatically. Railpack runs `npm run build` and then `npm start` (`node build`, adapter-node). The health check is `/robots.txt`.
+  - If pushes stop deploying, reconnect the source: `railway service source connect --repo emirhanerturk/athleticspodium-web --branch main --service athleticspodium-web`.
 - **Variables:** `BACKEND_URL` reaches the backend over the private network (`http://${{athleticspodium-backend.RAILWAY_PRIVATE_DOMAIN}}:8080/1.0`). `PROTOCOL_HEADER=x-forwarded-proto` makes request URLs https behind Railway's proxy.
 - **Staging until cutover:**
   - Domains: `next.athleticspodium.com` (DNS only on Cloudflare) and `athleticspodium-web-production.up.railway.app`.
   - `PUBLIC_SITE_ENV=staging`, so every response carries `X-Robots-Tag: noindex` and `robots.txt` is closed. GA only loads in production.
 - **CDN:** Railway's CDN (`railway cdn`) stays off until the cutover.
-- **Config files:** `railway.json` works until 2026-12-01; migrate it to `.railway/railway.ts` before then. Use a named partial: an IaC file deletes the resources it omits, including the backend and Postgres.
+- **Config:** `.railway/railway.ts` declares the service as the named partial `athleticspodium-web`. Preview a change with `railway config plan`, then apply the reviewed plan with `railway config apply`. Keep the partial: a full IaC file deletes the resources it omits, including the backend and Postgres.

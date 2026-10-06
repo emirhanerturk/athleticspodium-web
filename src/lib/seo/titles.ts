@@ -1,5 +1,6 @@
 import { fullName, type AthleteProfile } from '#lib/domain/athlete.js';
 import type { CareerSummary } from '#lib/domain/career.js';
+import type { ChampionshipFacts } from '#lib/domain/championship.js';
 import { yearOf } from '#lib/domain/date.js';
 import type { EditionMeeting, EditionStats } from '#lib/domain/edition.js';
 import { formatDateRange } from '#lib/format/date.js';
@@ -47,4 +48,25 @@ export function editionDescription(meeting: EditionMeeting, stats: EditionStats)
 	const events = stats.events === 1 ? '1 event' : `${stats.events} events`;
 
 	return `${meeting.name}${context ? ` ${context}` : ''}: medallists and results of ${events}, the medal table and the records set.`;
+}
+
+export function championshipTitle(name: string): string {
+	return `${name} – editions, medal table and history`;
+}
+
+export function championshipDescription(
+	name: string,
+	facts: ChampionshipFacts,
+	nations: number
+): string {
+	const { first, editionsHeld } = facts;
+	if (!first) return `${name}: editions, results and the programme.`;
+
+	const editions =
+		editionsHeld === 1
+			? `the ${first.year} edition`
+			: `${editionsHeld} editions since ${first.year}`;
+	const table = nations ? `the all-time medal table of ${nations} nations` : 'the medal table';
+
+	return `${name}: ${editions}, ${table} and the most successful athletes.`;
 }

@@ -1,3 +1,5 @@
+import type { Gender } from '#lib/domain/edition.js';
+
 export const PAGES = {
 	home: '/',
 	champs: '/champs',
@@ -40,6 +42,15 @@ export function articleUrl(article: { id: number; slug: string }): string {
 
 export function calendarUrl(year: number): string {
 	return `/calendar/${year}`;
+}
+
+const GENDER_PARAMS: Record<Gender, number> = { men: 0, women: 1, mixed: 2 };
+
+export function medalSearchUrl(filter: { champ: number; event?: number; gender?: Gender }): string {
+	const query = new URLSearchParams({ champs: String(filter.champ) });
+	if (filter.event !== undefined) query.set('event', String(filter.event));
+	if (filter.gender) query.set('gender', String(GENDER_PARAMS[filter.gender]));
+	return `${PAGES.medalSearch}?${query}`;
 }
 
 export function flagUrl(countryCode: string): string {
