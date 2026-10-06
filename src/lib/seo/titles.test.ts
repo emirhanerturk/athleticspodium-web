@@ -9,6 +9,9 @@ import {
 	championshipsDescription,
 	championshipsTitle,
 	championshipTitle,
+	countryAthletesTitle,
+	countryDescription,
+	countryTitle,
 	editionDescription,
 	editionTitle,
 	pageTitle
@@ -143,6 +146,32 @@ describe('championshipsTitle and championshipsDescription', () => {
 			})
 		).toBe(
 			'212 athletics championships from 1873 to 2031: global, continental, multi-region and national championships and road races, with every edition and medallist.'
+		);
+	});
+});
+
+describe('country titles', () => {
+	const turkey = { code: 'TUR', name: 'Turkey' };
+
+	it('name the country with its code and medal record', () => {
+		expect(countryTitle(turkey)).toBe('Turkey (TUR) – athletics medals and athletes');
+		expect(
+			countryDescription(turkey, { gold: 1201, silver: 1300, bronze: 1400, total: 3901 }, 3284)
+		).toBe(
+			'Turkey in athletics: 3,901 international medals (1,201 gold), 3,284 national titles, the most decorated athletes and the championships it hosted.'
+		);
+	});
+
+	it('describe a country without medals', () => {
+		expect(countryDescription(turkey, { gold: 0, silver: 0, bronze: 0, total: 0 }, 0)).toBe(
+			'Turkey in athletics: medals, athletes and the championships it hosted.'
+		);
+	});
+
+	it('number the athlete pages after the first', () => {
+		expect(countryAthletesTitle(turkey, 1)).toBe('Turkey – athletes by international medals');
+		expect(countryAthletesTitle(turkey, 3)).toBe(
+			'Turkey – athletes by international medals, page 3'
 		);
 	});
 });

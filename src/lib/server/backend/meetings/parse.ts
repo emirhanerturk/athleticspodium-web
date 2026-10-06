@@ -1,7 +1,14 @@
+import type { HostedMeeting } from '#lib/domain/country.js';
 import type { EditionEntry, EditionEvent, EditionMeeting, Gender } from '#lib/domain/edition.js';
 import { describeEvent } from '#lib/domain/event.js';
 import type { MeetingSummary } from '#lib/domain/meeting.js';
-import type { EditionEntryDto, EditionMedalsDto, MeetingDetailDto, MeetingDto } from './dto.js';
+import type {
+	EditionEntryDto,
+	EditionMedalsDto,
+	MeetingDetailDto,
+	MeetingDto,
+	MeetingListDto
+} from './dto.js';
 
 export function parseMeetingSummaries(dtos: MeetingDto[]): MeetingSummary[] {
 	return dtos.flatMap((dto) =>
@@ -15,6 +22,25 @@ export function parseMeetingSummaries(dtos: MeetingDto[]): MeetingSummary[] {
 						countryCode: dto.country_code,
 						startDate: dto.start_date,
 						endDate: dto.end_date
+					}
+				]
+			: []
+	);
+}
+
+export function parseHostedMeetings(dto: MeetingListDto): HostedMeeting[] {
+	return dto.rows.flatMap((row) =>
+		row.champ
+			? [
+					{
+						name: row.name,
+						slug: row.slug,
+						champ: { name: row.champ.name, slug: row.champ.slug },
+						year: row.year,
+						city: row.city,
+						startDate: row.start_date,
+						endDate: row.end_date,
+						hasResults: row.has_results ?? false
 					}
 				]
 			: []

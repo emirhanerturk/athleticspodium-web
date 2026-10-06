@@ -6,7 +6,10 @@ const SUMMARY_FIELDS = 'created_date';
 
 export function createArticles(client: BackendClient) {
 	return {
-		async latest(filter: { athlete?: number; champ?: number; meeting?: number }, limit: number) {
+		async latest(
+			filter: { athlete?: number; champ?: number; country?: string; meeting?: number },
+			limit: number
+		) {
 			const list = await client.get<ArticleListDto>('/articles', {
 				...filter,
 				limit,

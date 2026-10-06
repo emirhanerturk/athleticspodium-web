@@ -1,6 +1,9 @@
 import { fullName, type AthleteProfile } from '#lib/domain/athlete.js';
 import type { CareerSummary } from '#lib/domain/career.js';
 import type { ArchiveExtent, ChampionshipFacts } from '#lib/domain/championship.js';
+import type { CountryProfile } from '#lib/domain/country.js';
+import type { MedalTally } from '#lib/domain/result.js';
+import { formatCount } from '#lib/format/number.js';
 import { yearOf } from '#lib/domain/date.js';
 import type { EditionMeeting, EditionStats } from '#lib/domain/edition.js';
 import { formatDateRange } from '#lib/format/date.js';
@@ -78,4 +81,25 @@ export function championshipsTitle(): string {
 export function championshipsDescription(count: number, extent: ArchiveExtent | null): string {
 	const span = extent ? ` from ${extent.first.year} to ${extent.last.year}` : '';
 	return `${count} athletics championships${span}: global, continental, multi-region and national championships and road races, with every edition and medallist.`;
+}
+
+export function countryTitle(country: Pick<CountryProfile, 'code' | 'name'>): string {
+	return `${country.name} (${country.code}) – athletics medals and athletes`;
+}
+
+export function countryDescription(
+	country: Pick<CountryProfile, 'name'>,
+	international: MedalTally,
+	nationalTitles: number
+): string {
+	if (!international.total && !nationalTitles) {
+		return `${country.name} in athletics: medals, athletes and the championships it hosted.`;
+	}
+	const medals = `${formatCount(international.total)} international ${international.total === 1 ? 'medal' : 'medals'} (${formatCount(international.gold)} gold)`;
+	const titles = nationalTitles ? `, ${formatCount(nationalTitles)} national titles` : '';
+	return `${country.name} in athletics: ${medals}${titles}, the most decorated athletes and the championships it hosted.`;
+}
+
+export function countryAthletesTitle(country: Pick<CountryProfile, 'name'>, page: number): string {
+	return `${country.name} – athletes by international medals${page > 1 ? `, page ${page}` : ''}`;
 }

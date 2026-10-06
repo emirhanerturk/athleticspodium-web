@@ -507,8 +507,9 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 - **Data:**
   - `/countries?fields=code,name,categories,is_country&order=name`.
   - Olympic medal totals from the Olympic Games counts (`/champs/:slug/counts`, B7).
-- **Client-side features:** letter groups, area tabs and search.
-- **"Teams & neutral entries"** lists countries with `is_country = false`.
+- **Client-side features:** letter groups, search (name without accents, or the exact IOC code, across all areas) and the sort (A–Z or most Olympic medals).
+- **Area tabs:** links to `/country?area=<slug>` (`europe`, `africa`, `asia`, `americas`, `oceania`; none for all), handled like the championship tabs. A country page's area crumb links to its tab.
+- **"Teams & neutral entries"** lists countries with `is_country = false`, each linking to its page.
 - **Dropped:** the "Former nations" group.
 
 ### Country (`/country/[code]`)
@@ -522,13 +523,16 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 | Stories                                           | `/articles?country=`                                         | —            |
 
 - **Link:** "All athletes" goes to `/country/[code]/athletes`.
+- **Medal table rows** link to `/medals/country-champs?country=<code>&champ=<id>` (the legacy parameters). The level bars and tabs filter the table; national titles are the golds in national championships.
+- **Hosted meetings:** the 8 latest international meetings (`international=1`), with a countdown for coming ones and "Results" when `has_results` is true.
+- **About:** `content` is collapsible under the hero.
 - **Dropped:** the structured facts strip.
 
 ### Country athletes (`/country/[code]/athletes?page=n`)
 
 - **Display:** A v2 table of the country's athletes, sorted by international medals.
 - **Data:** `/countries/:code/athletes?international=1&limit=100&offset=` (B3).
-- **Pagination:** It uses `<a href>` links.
+- **Pagination:** It uses `<a href>` links. Each page asks for 101 rows to know whether a next page exists. `?page=1` and invalid values redirect (301) to the first page; an empty page after the first answers 404.
 
 ### Calendar (`/calendar`, `/calendar/[year]`)
 
@@ -577,7 +581,7 @@ Each item is a normal backend PR. It ships before the page that needs it (releas
 | B2  | `/countries/:code/medals`: add `category` to the champ include and grouping.                                                                                                                                                                                                                             | Country                             |
 | B3  | `/countries/:code/athletes`: return `image`, `date_of_birth` and `events`; add `gender`, `international` and `offset` parameters.                                                                                                                                                                        | Country, Country athletes, Athletes |
 | B4  | `/champs/:slug`: include meetings with `country_code`, `start_date`, `end_date` and an events count per edition.                                                                                                                                                                                         | Championship                        |
-| B5  | `/meetings`: add a `country` filter and a `has_results` flag; leave `content` out of the list.                                                                                                                                                                                                           | Country, Calendar                   |
+| B5  | `/meetings`: add a `country` filter, an `international` filter and a `has_results` flag; leave `content` out of the list.                                                                                                                                                                                | Country, Calendar                   |
 | B6  | `/meetings/upcoming-meetings`: add `limit` and `days`; include running meetings (`end_date` ≥ today); add `category` to the champ include.                                                                                                                                                               | Header, Home, Calendar              |
 | B7  | Accept slugs on `/meetings/:id/medals`, `/meetings/:id/counts` and `/champs/:id/counts`.                                                                                                                                                                                                                 | Edition, Championship, Countries    |
 | B8  | `/featured-athletes`: add international medal counts.                                                                                                                                                                                                                                                    | Home, Athletes                      |
@@ -671,9 +675,9 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    2. Edition (B11), done on 2026-10-07
    3. Championship (B4, B13), done on 2026-10-07
    4. Championships, done on 2026-10-07
-   5. Country (B2, B3, B5)
-   6. Country athletes
-   7. Countries
+   5. Country (B2, B3, B5), done on 2026-10-07
+   6. Country athletes, done on 2026-10-07
+   7. Countries, done on 2026-10-07
    8. Athletes A–Z
    9. Athletes (B8)
    10. Home (B6, B10, B15)
