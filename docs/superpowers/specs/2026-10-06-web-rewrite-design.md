@@ -221,7 +221,7 @@ Rules:
 Error handling:
 
 - `http-client.ts` throws `BackendNotFoundError` when a record is missing and `BackendUnavailableError` for a timeout (8 s), a server error or a network failure.
-- Until B19 ships, the backend answers HTTP 200 for everything. So the client reads the body as well:
+- Until B20 ships, a missing record still comes back as HTTP 200 with `data: null`. So the client reads the body as well:
   - `success: false` with code `4040` means not found; any other code is an error.
   - `success: true` with `data: null` on a detail endpoint also means not found.
 - Load functions turn these into `error(404)` or `error(503)`.
@@ -545,7 +545,8 @@ Each item is a normal backend PR. It ships before the page that needs it (releas
 | B16 | `is_olympian` on search and athlete list results, from `olympian_athlete`. | Search |
 | B17 | Sitemap feed: `GET /sitemap/:type?page=` for athletes, champs, meetings, countries and articles. Pages of 10,000 rows with the URL parts and `updated_date`. | sitemap |
 | B18 | `event.long_name` and `event.discipline` columns, filled by a one-off data migration. | Edition, Championship, Athlete chart |
-| B19 | Real HTTP status codes: 400, 401, 403, 404, 500. The `{success, error}` body and its codes stay. Detail lookups answer 404 instead of `success: true, data: null`. The CMS `api.service` reads the error body of non-2xx responses so the 4010 logout keeps working. | all pages, monitoring |
+| B19 | Error responses carry the matching HTTP status: 400, 401, 403, 404, 500. The `{success, error}` body and its codes stay. The CMS `api.service` reads the error body of non-2xx responses, so the 4010 logout keeps working. | all pages, monitoring |
+| B20 | After cutover, detail lookups answer 404 instead of `success: true, data: null`. The legacy frontend only detects missing records through the null data, so this waits until it is retired. | all detail pages |
 
 B12 search rework:
 - Rank results: exact name, then prefix, then contains, then international medals.
@@ -607,7 +608,8 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
 
 0. **Backend groundwork:**
    - B7, B9, B14 and B17, together with a fix that stops database error details from reaching clients. Done on 2026-10-06 in branch `feat/web-groundwork`.
-   - Then B19.
+   - B19, then the CMS fix and the backend change, in that order.
+   - B20 follows in phase 5.
 1. **Skeleton:**
    - SvelteKit, Tailwind tokens, fonts.
    - Layout: header, ticker, footer, quick search shell.
@@ -645,6 +647,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    - Watch Search Console coverage and 404s for 4 weeks.
    - Keep the Firebase site deployable for rollback.
 5. **Cleanup:**
+   - Ship B20.
    - Archive `athleticspodium-frontend`.
    - Update the workspace `CLAUDE.md`, `dev.sh` and the VS Code workspace.
 
