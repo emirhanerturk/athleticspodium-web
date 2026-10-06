@@ -1,3 +1,4 @@
+import type { CompareQuery } from '#lib/domain/compare.js';
 import { GENDER_CODES, type MedalQuery } from '#lib/domain/medal-search.js';
 import type { SearchRequest } from '#lib/domain/search.js';
 
@@ -95,4 +96,14 @@ export function searchUrl(request: Partial<SearchRequest> & { query: string }): 
 	if (filters?.olympian) params.set('olympian', '1');
 	if (request.page && request.page > 1) params.set('page', String(request.page));
 	return `${PAGES.search}?${params}`;
+}
+
+export function compareUrl(query: Partial<CompareQuery>): string {
+	const params = new URLSearchParams();
+	if (query.a) params.set('a', String(query.a));
+	if (query.b) params.set('b', String(query.b));
+	if (query.gender) params.set('gender', query.gender);
+	if (query.event) params.set('event', String(query.event));
+	const search = params.toString();
+	return search ? `${PAGES.compare}?${search}` : PAGES.compare;
 }

@@ -1,12 +1,12 @@
 <script lang="ts">
 	import ArrowRightIcon from '#lib/components/ui/icons/ArrowRightIcon.svelte';
-	import { medalSearchUrl, PAGES } from '#lib/routing/urls.js';
+	import { compareUrl, medalSearchUrl } from '#lib/routing/urls.js';
 
 	let { champ }: { champ: { id: number; name: string } } = $props();
 
 	const links = $derived([
 		{
-			href: PAGES.compare,
+			href: compareUrl({ a: champ.id }),
 			title: 'Compare with another championship',
 			note: 'Medal tables and winners side by side'
 		},
