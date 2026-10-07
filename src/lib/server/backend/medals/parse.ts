@@ -8,7 +8,7 @@ const GENDERS: Gender[] = ['men', 'women', 'mixed'];
 export function parseMedalSearch(dto: MedalSearchDto): MedalSearchPage {
 	return {
 		count: dto.count,
-		tally: dto.counts,
+		tally: { ...dto.counts, withdrawn: dto.counts.withdrawn ?? 0 },
 		rows: dto.rows.flatMap((row) => {
 			const record = parseMedalRecord(row);
 			return record ? [record] : [];
@@ -38,7 +38,13 @@ function parseMedalRecord(dto: MedalRowDto): MedalRecord | null {
 
 	return {
 		id: dto.id,
-		meeting: dto.meeting,
+		meeting: {
+			id: dto.meeting.id,
+			name: dto.meeting.name,
+			slug: dto.meeting.slug,
+			year: dto.meeting.year,
+			city: dto.meeting.city
+		},
 		champ: dto.champ,
 		event: describeEvent(dto.event?.name ?? '').longName,
 		gender: GENDERS[dto.gender] ?? 'mixed',
@@ -59,6 +65,7 @@ function parseMedalRecord(dto: MedalRowDto): MedalRecord | null {
 		markNote: dto.info,
 		wind: dto.wind,
 		records: dto.records ?? [],
-		notes: dto.notes?.trim() || null
+		notes: dto.notes?.trim() || null,
+		isTeam: dto.is_team
 	};
 }

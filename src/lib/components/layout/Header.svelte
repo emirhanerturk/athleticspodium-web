@@ -51,7 +51,7 @@
 				href={PAGES.medalSearch}
 				class="hidden h-11 shrink-0 items-center rounded-[10px] bg-brand px-[18px] text-sm font-bold whitespace-nowrap text-ink hover:bg-brand-hover md:inline-flex"
 			>
-				Medal Tracker
+				Medal search
 			</a>
 			<button
 				type="button"

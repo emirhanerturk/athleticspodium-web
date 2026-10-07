@@ -16,14 +16,23 @@ const eventsCache = createTtlCache<CatalogueEvent[]>(ONE_HOUR);
 
 export const load: PageServerLoad = async ({ url, locals: { backend } }) => {
 	const query = parseMedalQuery(url.searchParams);
-	const [champs, countries, events, results] = await Promise.all([
+	const searchable = isSearchable(query);
+	const [champs, countries, events, results, everyMedal] = await Promise.all([
 		champsCache(() => backend.medals.filterChamps()),
 		countriesCache(async () =>
 			(await backend.countries.list()).map(({ code, name, areas }) => ({ code, name, areas }))
 		),
 		eventsCache(() => backend.events.catalogue()),
-		isSearchable(query) ? backend.medals.search(query) : null
+		searchable ? backend.medals.search(query) : null,
+		searchable && query.medal ? backend.medals.search({ ...query, medal: null, page: 1 }) : null
 	]);
 
-	return { query, champs, countries, events, results };
+	return {
+		query,
+		champs,
+		countries,
+		events,
+		results,
+		medalTally: (everyMedal ?? results)?.tally ?? null
+	};
 };

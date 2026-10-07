@@ -2252,9 +2252,10 @@
 			}
 		],
 		"counts": {
-			"gold": 15,
-			"silver": 11,
-			"bronze": 12
+			"gold": 12,
+			"silver": 10,
+			"bronze": 12,
+			"withdrawn": 4
 		}
 	}
 }
