@@ -6,7 +6,7 @@
 
 	const tools = [
 		{ label: 'Medal search', href: PAGES.medalSearch },
-		{ label: 'Medals by country and championship', href: PAGES.countryChamps },
+		{ label: 'Medal countdown', href: PAGES.countryChamps },
 		{ label: 'Compare championships', href: PAGES.compare }
 	];
 

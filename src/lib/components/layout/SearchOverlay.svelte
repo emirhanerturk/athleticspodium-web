@@ -10,7 +10,7 @@
 	let recent = $state<string[]>([]);
 
 	const jumpLinks = $derived([
-		{ label: 'Medal Tracker', note: 'Tools', href: PAGES.medalSearch },
+		{ label: 'Medal search', note: 'Tools', href: PAGES.medalSearch },
 		{ label: `Calendar ${year}`, note: 'Every championship this season', href: calendarUrl(year) },
 		...(nextMeeting
 			? [

@@ -10,7 +10,7 @@ import type { MedalRecord } from './medal-search.js';
 
 const medal = (year: number, place: number, mark: string): MedalRecord => ({
 	id: year * 10 + place,
-	meeting: { name: `${year}`, slug: `${year}`, year },
+	meeting: { id: year, name: `${year}`, slug: `${year}`, year, city: null },
 	champ: { name: 'Champ', slug: 'champ' },
 	event: '100m',
 	gender: 'men',
@@ -23,7 +23,8 @@ const medal = (year: number, place: number, mark: string): MedalRecord => ({
 	markNote: null,
 	wind: null,
 	records: [],
-	notes: null
+	notes: null,
+	isTeam: false
 });
 
 describe('parseCompareQuery', () => {

@@ -32,7 +32,7 @@ export interface MedalQuery {
 
 export interface MedalRecord {
 	id: number;
-	meeting: { name: string; slug: string; year: number };
+	meeting: { id: number; name: string; slug: string; year: number; city: string | null };
 	champ: { name: string; slug: string };
 	event: string;
 	gender: Gender;
@@ -46,13 +46,47 @@ export interface MedalRecord {
 	wind: number | null;
 	records: string[];
 	notes: string | null;
+	isTeam: boolean;
+}
+
+export interface MedalSearchTally {
+	gold: number;
+	silver: number;
+	bronze: number;
+	withdrawn: number;
 }
 
 export interface MedalSearchPage {
 	count: number;
-	tally: { gold: number; silver: number; bronze: number };
+	tally: MedalSearchTally;
 	rows: MedalRecord[];
 }
+
+export interface MedalEntry {
+	record: MedalRecord;
+	team: MedalRecord[];
+}
+
+export interface EditionMedals {
+	meeting: MedalRecord['meeting'];
+	champ: MedalRecord['champ'];
+	entries: MedalEntry[];
+	tally: MedalSearchTally;
+}
+
+export const MEDAL_QUESTIONS: { label: string; query: Partial<MedalQuery> }[] = [
+	{ label: 'Turkey at the European Championships', query: { champ: 18, country: 'TUR' } },
+	{ label: 'Kenya at the World Championships', query: { champ: 52, country: 'KEN' } },
+	{
+		label: 'Every Olympic women’s marathon podium',
+		query: { champ: 40, event: 125, gender: 'women' }
+	},
+	{
+		label: 'Men’s 4x100m at the World Championships',
+		query: { champ: 52, event: 60, gender: 'men' }
+	},
+	{ label: 'Jamaica’s Olympic gold medals', query: { champ: 40, country: 'JAM', medal: 1 } }
+];
 
 export interface FilterChamp {
 	id: number;
@@ -132,4 +166,37 @@ export function eventsFor(
 	if (!champ) return catalogue;
 	const ids = new Set(gender ? champ.events[gender] : Object.values(champ.events).flat());
 	return catalogue.filter((event) => ids.has(event.id));
+}
+
+function entryKey(record: MedalRecord): string {
+	if (!record.isTeam) return `#${record.id}`;
+	return [record.event, record.gender, record.place, record.canceled, record.country?.code].join(
+		'|'
+	);
+}
+
+function tallyOf(entries: MedalEntry[]): MedalSearchTally {
+	const tally = { gold: 0, silver: 0, bronze: 0, withdrawn: 0 };
+	for (const { record } of entries) {
+		if (record.canceled) tally.withdrawn += 1;
+		else if (record.place === 1) tally.gold += 1;
+		else if (record.place === 2) tally.silver += 1;
+		else if (record.place === 3) tally.bronze += 1;
+	}
+	return tally;
+}
+
+export function groupByEdition(rows: MedalRecord[]): EditionMedals[] {
+	return [...Map.groupBy(rows, (row) => row.meeting.id).values()].map((records) => {
+		const entries = [...Map.groupBy(records, entryKey).values()].map((team) => ({
+			record: team[0],
+			team
+		}));
+		return {
+			meeting: records[0].meeting,
+			champ: records[0].champ,
+			entries,
+			tally: tallyOf(entries)
+		};
+	});
 }

@@ -3,6 +3,7 @@
 	import CountryChampsForm from '#lib/components/medal/CountryChampsForm.svelte';
 	import JsonLd from '#lib/components/seo/JsonLd.svelte';
 	import SeoHead from '#lib/components/seo/SeoHead.svelte';
+	import ToolsHero from '#lib/components/tools/ToolsHero.svelte';
 	import Flag from '#lib/components/ui/Flag.svelte';
 	import { addTallies } from '#lib/domain/country.js';
 	import {
@@ -31,7 +32,7 @@
 </script>
 
 <SeoHead
-	title={subject ? `${subject} – medals by edition` : 'Medals by country and championship'}
+	title={subject ? `${subject} – medals by edition` : 'Medal countdown by championship'}
 	description={subject
 		? `Every medal ${subject}, edition by edition: gold, silver, bronze and totals.`
 		: 'Pick a country and a championship to see its medals edition by edition.'}
@@ -40,26 +41,27 @@
 />
 <JsonLd
 	data={[
-		breadcrumbJsonLd(PUBLIC_SITE_URL, [{ name: 'Medals by country', path: PAGES.countryChamps }])
+		breadcrumbJsonLd(PUBLIC_SITE_URL, [{ name: 'Medal countdown', path: PAGES.countryChamps }])
 	]}
 />
 
-<section class="page-container pt-12 pb-16">
-	<div class="mb-6 flex flex-col gap-3">
-		<span class="font-data text-xs tracking-[0.16em] text-ink-3 uppercase"
-			>Medals by country and championship</span
-		>
-		<h1 class="font-display text-[48px] leading-[0.9] font-bold text-balance sm:text-[80px]">
-			{subject ?? 'Country × championship'}
-		</h1>
-	</div>
-	<CountryChampsForm
-		champs={data.champs}
-		countries={data.countries}
-		champId={data.champId}
-		countryCode={data.countryCode}
-	/>
+<ToolsHero active="countdown" medals={data.stats?.medals ?? null} />
 
+<section class="border-b border-line bg-surface">
+	<div class="page-container flex flex-col gap-5 py-[26px]">
+		<h2 class="font-display text-[30px] leading-[1.05] font-bold text-balance sm:text-[40px]">
+			{subject ?? 'One nation at one championship, edition by edition'}
+		</h2>
+		<CountryChampsForm
+			champs={data.champs}
+			countries={data.countries}
+			champId={data.champId}
+			countryCode={data.countryCode}
+		/>
+	</div>
+</section>
+
+<section class="page-container pb-16">
 	{#if data.editions && champ && country}
 		{#if data.editions.length}
 			<div class="mt-8 overflow-x-auto rounded-[20px] border border-line bg-surface">

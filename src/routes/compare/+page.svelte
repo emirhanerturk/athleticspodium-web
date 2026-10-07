@@ -4,6 +4,7 @@
 	import CompareTable from '#lib/components/compare/CompareTable.svelte';
 	import JsonLd from '#lib/components/seo/JsonLd.svelte';
 	import SeoHead from '#lib/components/seo/SeoHead.svelte';
+	import ToolsHero from '#lib/components/tools/ToolsHero.svelte';
 	import { compareByYear } from '#lib/domain/compare.js';
 	import { GENDER_LABELS } from '#lib/domain/edition.js';
 	import { describeEvent } from '#lib/domain/event.js';
@@ -35,21 +36,24 @@
 />
 <JsonLd data={[breadcrumbJsonLd(PUBLIC_SITE_URL, [{ name: 'Compare', path: PAGES.compare }])]} />
 
-<section class="page-container pt-12 pb-16">
-	<div class="mb-6 flex flex-col gap-3">
-		<span class="font-data text-xs tracking-[0.16em] text-ink-3 uppercase"
-			>Compare championships</span
-		>
-		<h1 class="font-display text-[44px] leading-[0.94] font-bold text-balance sm:text-[72px]">
-			{subject ?? 'Two championships, one event'}
-		</h1>
-		<p class="max-w-[640px] text-base leading-[1.55] text-ink-2">
-			Pick two championships and an event to line up their podiums year by year. The last column is
-			the winning mark of A minus that of B.
-		</p>
-	</div>
-	<CompareForm {query} champs={data.champs} events={data.events} />
+<ToolsHero active="compare" medals={data.stats?.medals ?? null} />
 
+<section class="border-b border-line bg-surface">
+	<div class="page-container flex flex-col gap-5 py-[26px]">
+		<div class="flex flex-col gap-2">
+			<h2 class="font-display text-[30px] leading-[1.05] font-bold text-balance sm:text-[40px]">
+				{subject ?? 'Two championships, one event'}
+			</h2>
+			<p class="max-w-[640px] text-[15px] leading-[1.55] text-ink-2">
+				Pick two championships and an event to line up their podiums year by year. The last column
+				is the winning mark of A minus that of B.
+			</p>
+		</div>
+		<CompareForm {query} champs={data.champs} events={data.events} />
+	</div>
+</section>
+
+<section class="page-container pb-16">
 	{#if years && champA && champB}
 		<div class="mt-8">
 			{#if years.length}

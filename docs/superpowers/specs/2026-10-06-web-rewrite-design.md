@@ -100,27 +100,27 @@ What the sample shows:
 
 ### 5.1 Routes
 
-| Page                               | URL                                                      | Design source                             | Indexable |
-| ---------------------------------- | -------------------------------------------------------- | ----------------------------------------- | --------- |
-| Home                               | `/`                                                      | `V2-Home` → `Home-B` (`v2=true`)          | yes       |
-| Championships                      | `/champs`                                                | `V2-Champs` → `Champs-A`                  | yes       |
-| Championship                       | `/champs/[champ]`                                        | `V2-Champ` → `ChampDetail`                | yes       |
-| Edition                            | `/champs/[champ]/[meeting]`                              | `V2-Edition` → `Meeting-A` (`cards=true`) | yes       |
-| Athletes                           | `/athlete`                                               | `V2-Athletes` → `Athletes-B`              | yes       |
-| Athletes A–Z                       | `/athlete/letter/[letter]?page=n`                        | v2 components                             | yes       |
-| Athlete                            | `/athlete/[id=integer]/[slug]`                           | `V2-Athlete` → `Athlete-A` (`v2=true`)    | yes       |
-| Countries                          | `/country`                                               | `V2-Countries`                            | yes       |
-| Country                            | `/country/[code]`                                        | `V2-Country`                              | yes       |
-| Country athletes                   | `/country/[code]/athletes?page=n`                        | v2 components                             | yes       |
-| Calendar                           | `/calendar`, `/calendar/[year=integer]`                  | `V2-Calendar`                             | yes       |
-| Search                             | `/search?q=&type=&gender=&born_from=&born_to=&olympian=` | `V2-Search`                               | no        |
-| Articles                           | `/article`, `/article/[id=integer]/[slug]`               | v2 components                             | yes       |
-| Medal search                       | `/medals/search?…`                                       | v2 components                             | yes       |
-| Medals by country and championship | `/medals/country-champs?…`                               | v2 components                             | yes       |
-| Compare                            | `/compare`                                               | v2 components                             | yes       |
-| About                              | `/about`                                                 | v2 components                             | yes       |
-| Missing information                | `/missing-information?tab=&q=`                           | `V2-Missing`                              | yes       |
-| How to read the database           | `/how-to-read-the-database`                              | `V2-Notes`                                | yes       |
+| Page                     | URL                                                      | Design source                             | Indexable |
+| ------------------------ | -------------------------------------------------------- | ----------------------------------------- | --------- |
+| Home                     | `/`                                                      | `V2-Home` → `Home-B` (`v2=true`)          | yes       |
+| Championships            | `/champs`                                                | `V2-Champs` → `Champs-A`                  | yes       |
+| Championship             | `/champs/[champ]`                                        | `V2-Champ` → `ChampDetail`                | yes       |
+| Edition                  | `/champs/[champ]/[meeting]`                              | `V2-Edition` → `Meeting-A` (`cards=true`) | yes       |
+| Athletes                 | `/athlete`                                               | `V2-Athletes` → `Athletes-B`              | yes       |
+| Athletes A–Z             | `/athlete/letter/[letter]?page=n`                        | v2 components                             | yes       |
+| Athlete                  | `/athlete/[id=integer]/[slug]`                           | `V2-Athlete` → `Athlete-A` (`v2=true`)    | yes       |
+| Countries                | `/country`                                               | `V2-Countries`                            | yes       |
+| Country                  | `/country/[code]`                                        | `V2-Country`                              | yes       |
+| Country athletes         | `/country/[code]/athletes?page=n`                        | v2 components                             | yes       |
+| Calendar                 | `/calendar`, `/calendar/[year=integer]`                  | `V2-Calendar`                             | yes       |
+| Search                   | `/search?q=&type=&gender=&born_from=&born_to=&olympian=` | `V2-Search`                               | no        |
+| Articles                 | `/article`, `/article/[id=integer]/[slug]`               | v2 components                             | yes       |
+| Medal search             | `/medals/search?…`                                       | `V2-Tools`                                | yes       |
+| Medal countdown          | `/medals/country-champs?…`                               | `V2-Tools` hero, v2 components            | yes       |
+| Compare                  | `/compare`                                               | v2 components                             | yes       |
+| About                    | `/about`                                                 | v2 components                             | yes       |
+| Missing information      | `/missing-information?tab=&q=`                           | `V2-Missing`                              | yes       |
+| How to read the database | `/how-to-read-the-database`                              | `V2-Notes`                                | yes       |
 
 Shared parts:
 
@@ -382,8 +382,8 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 - **Born today:** The top living athlete born today, then "+N more". It reuses the athletes list ordering: Olympic champions first, then youngest.
 - **Search field:** Opens the quick search. `/` and `⌘K` also open it.
 - **Links:**
-  - "Medal Tracker" goes to `/medals/search`.
-  - Nav: Championships, Athletes, Countries, Calendar, Tools, Articles. The Tools menu holds Medal search, Medals by country and championship, and Compare.
+  - The yellow "Medal search" button goes to `/medals/search` (it read "Medal Tracker" until 2026-10-08; one name per page).
+  - Nav: Championships, Athletes, Countries, Calendar, Tools, Articles. The Tools menu holds Medal search, Medal countdown and Compare.
   - Social links: Bluesky, Facebook, Instagram, and About.
 
 ### Footer (ink)
@@ -590,8 +590,15 @@ These are built with the v2 components on the existing endpoints:
 Notes:
 
 - **Articles:** `/article?page=n` lists 12 per page (the legacy page kept the page in memory). `/article/[id]/[slug]` shows the standfirst (`spot`), the photo with caption and credit, the content, the related championships, editions, athletes and countries, and three more stories, with `Article` JSON-LD. A wrong slug redirects (301); a missing id is a 404 (the backend now answers `data: null` instead of a 500).
-- **Medal search** (`/medals/search`): the legacy parameters `champs`, `country`, `event`, `year`, `gender` (0–2), `medal` (1–3), `order` and `page` (100 per page). A championship or a country is required. Choosing one narrows the other select, the years and the events, as on the legacy form. Column headers are sort links. The filter lists (championships, countries, events) are cached for an hour.
-- **Medals by country and championship** (`/medals/country-champs?country=&champ=`): editions newest first with gold, silver, bronze and total, a total row and a "Details →" link into the medal search for that year. Road races and national championships are left out of the select.
+- **Tools hero:** Medal search, Medal countdown and Compare share the `V2-Tools` hero: "Ask the archive" (the page `h1`), the medal total from `/stats` and the three tools as tabs. Each page's subject is an `h2` in the white band below.
+- **Medal search** (`/medals/search`):
+  - Parameters: the legacy `champs`, `country`, `event`, `year`, `gender` (0–2), `medal` (1–3), `order` and `page` (100 per page). A championship or a country is required.
+  - The question is a sentence ("Show medals won by … at the … in … · …"). Each box is a native select under a styled label, so it works without JavaScript inside a GET form; with JavaScript a change navigates at once and drops an event or year the new championship does not have.
+  - Medal tabs (with counts) and gender tabs are links. With a medal filter, a second request without it gives the tab counts.
+  - Results are grouped by edition (`groupByEdition`): relay legs join into one row, and each edition shows its own gold, silver, bronze and DQ count for the rows on the page.
+  - Side column: the totals from `counts` (withdrawn medals apart, relays once; backend PR #14), "Copy link", a link to the medal countdown when both a nation and a championship are chosen, and "Try another question" (`MEDAL_QUESTIONS`).
+  - The filter lists (championships, countries, events) are cached for an hour.
+- **Medal countdown** (`/medals/country-champs?country=&champ=`): editions newest first with gold, silver, bronze and total, a total row and a "Details →" link into the medal search for that year. Road races and national championships are left out of the select.
 - **Compare** (`/compare?a=&b=&gender=&event=`): the legacy page kept its state in memory; the new one reads it from the URL, so comparisons can be linked (the championship page links to `?a=<id>`). The server loads every medal of the event for both championships (up to 10 pages of 100), lines the podiums up by year and shows the winning mark of A minus B, formatted with the precision of the marks. Silver and bronze rows open per year.
 - Filters live in query strings.
 - The contact form uses a SvelteKit form action that posts to `/contacts`. It works without JavaScript, validates name, email, subject and message (up to 1,000 characters) on the server, drops messages that fill a hidden honeypot field, and forwards the visitor's IP (`x-forwarded-for`) and user agent so the backend records them as before.

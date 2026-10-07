@@ -1,6 +1,7 @@
 export interface MedalRowDto {
 	id: number;
 	medal: number | null;
+	is_team: boolean;
 	gender: number;
 	is_canceled: boolean;
 	athlete_name: string | null;
@@ -10,7 +11,7 @@ export interface MedalRowDto {
 	records: string[] | null;
 	notes: string | null;
 	champ: { name: string; slug: string } | null;
-	meeting: { name: string; slug: string; year: number } | null;
+	meeting: { id: number; name: string; slug: string; year: number; city: string | null } | null;
 	event: { name: string } | null;
 	country: { code: string; name: string } | null;
 	athlete: {
@@ -25,7 +26,7 @@ export interface MedalRowDto {
 
 export interface MedalSearchDto {
 	count: number;
-	counts: { gold: number; silver: number; bronze: number };
+	counts: { gold: number; silver: number; bronze: number; withdrawn?: number };
 	rows: MedalRowDto[];
 }
 

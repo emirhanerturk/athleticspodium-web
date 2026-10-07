@@ -23,8 +23,8 @@
 		{
 			title: 'Tools',
 			links: [
-				{ label: 'Medal Tracker', href: PAGES.medalSearch },
-				{ label: 'Medals by country', href: PAGES.countryChamps },
+				{ label: 'Medal search', href: PAGES.medalSearch },
+				{ label: 'Medal countdown', href: PAGES.countryChamps },
 				{ label: 'Compare championships', href: PAGES.compare }
 			]
 		},
