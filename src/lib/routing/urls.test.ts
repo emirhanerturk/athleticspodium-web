@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { medalSearchUrl, searchUrl } from './urls.js';
+import { medalSearchUrl, missingInformationUrl, searchUrl } from './urls.js';
 
 describe('medalSearchUrl', () => {
 	it('filters the medal search by championship', () => {
@@ -24,5 +24,15 @@ describe('searchUrl', () => {
 				filters: { gender: 'women', bornFrom: 1990, bornTo: null, olympian: true }
 			})
 		).toBe('/search?q=an&type=athletes&gender=women&born_from=1990&olympian=1&page=2');
+	});
+});
+
+describe('missingInformationUrl', () => {
+	it('leaves out the first tab and empty filters', () => {
+		expect(missingInformationUrl()).toBe('/missing-information');
+		expect(missingInformationUrl({ tab: 'medallists', query: ' ' })).toBe('/missing-information');
+		expect(missingInformationUrl({ tab: 'relays', query: 'NGR', gap: '1989 4x100 men' })).toBe(
+			'/missing-information?tab=relays&q=NGR&gap=1989+4x100+men'
+		);
 	});
 });

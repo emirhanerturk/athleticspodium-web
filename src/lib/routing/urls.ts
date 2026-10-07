@@ -1,5 +1,6 @@
 import type { CompareQuery } from '#lib/domain/compare.js';
 import { GENDER_CODES, type MedalQuery } from '#lib/domain/medal-search.js';
+import { MISSING_SECTIONS, type MissingSection } from '#lib/domain/missing.js';
 import type { SearchRequest } from '#lib/domain/search.js';
 
 export const PAGES = {
@@ -17,6 +18,19 @@ export const PAGES = {
 	databaseNotes: '/how-to-read-the-database',
 	missingInformation: '/missing-information'
 } as const;
+
+export function missingInformationUrl({
+	tab,
+	query,
+	gap
+}: { tab?: MissingSection; query?: string; gap?: string } = {}): string {
+	const params = new URLSearchParams();
+	if (tab && tab !== MISSING_SECTIONS[0]) params.set('tab', tab);
+	if (query?.trim()) params.set('q', query.trim());
+	if (gap) params.set('gap', gap);
+	const search = params.toString();
+	return search ? `${PAGES.missingInformation}?${search}` : PAGES.missingInformation;
+}
 
 export function athleteUrl(athlete: { id: number; slug: string }): string {
 	return `/athlete/${athlete.id}/${athlete.slug}`;

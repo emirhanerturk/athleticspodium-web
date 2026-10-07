@@ -8,7 +8,8 @@
 
 	let {
 		form,
-		fixedSubject
+		fixedSubject,
+		draft = ''
 	}: {
 		form: {
 			sent?: boolean;
@@ -17,6 +18,7 @@
 			errors?: ContactErrors;
 		} | null;
 		fixedSubject?: number;
+		draft?: string;
 	} = $props();
 
 	let sending = $state(false);
@@ -101,7 +103,7 @@
 				rows="5"
 				aria-invalid={!!errors.message}
 				class="{FIELD} {border('message')} py-2.5 leading-normal"
-				>{form?.values?.message ?? ''}</textarea
+				>{form?.values?.message ?? draft}</textarea
 			>
 			{#if errors.message}<span class="text-[13px] text-dq">{errors.message}</span>{/if}
 		</label>
