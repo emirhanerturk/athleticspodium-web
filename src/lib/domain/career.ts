@@ -53,10 +53,7 @@ export function careerSummary(results: Result[]): CareerSummary {
 }
 
 export function medalsByChampionship(results: Result[]): ChampionshipTally[] {
-	const byChamp = Map.groupBy(
-		internationalResults(results).filter(countsAsMedal),
-		(result) => result.champ.id
-	);
+	const byChamp = Map.groupBy(results.filter(countsAsMedal), (result) => result.champ.id);
 
 	return [...byChamp.values()]
 		.map((champResults) => ({ champ: champResults[0].champ, ...tallyOf(champResults) }))

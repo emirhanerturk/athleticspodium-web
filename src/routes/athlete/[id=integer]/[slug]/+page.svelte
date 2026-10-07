@@ -19,6 +19,7 @@
 		nationalResults,
 		olympicAppearances
 	} from '#lib/domain/career.js';
+	import { tallyOf } from '#lib/domain/result.js';
 	import { athleteUrl, countryUrl, PAGES } from '#lib/routing/urls.js';
 	import { breadcrumbJsonLd, personJsonLd } from '#lib/seo/json-ld.js';
 	import { athleteDescription, athleteTitle } from '#lib/seo/titles.js';
@@ -31,7 +32,8 @@
 	const career = $derived(careerSummary(data.results));
 	const international = $derived(internationalResults(data.results));
 	const national = $derived(nationalResults(data.results));
-	const byChampionship = $derived(medalsByChampionship(data.results));
+	const internationalTallies = $derived(medalsByChampionship(international));
+	const nationalTallies = $derived(medalsByChampionship(national));
 	const olympics = $derived(olympicAppearances(data.olympics, data.results));
 
 	const crumbs = $derived([
@@ -93,17 +95,30 @@
 	</section>
 {/if}
 
-{#if byChampionship.length || national.length}
+{#if internationalTallies.length || nationalTallies.length}
 	<section class="border-y border-line bg-surface">
 		<div class="page-container grid grid-cols-1 gap-12 py-[52px] md:grid-cols-2">
-			{#if byChampionship.length}
-				<ChampionshipTally rows={byChampionship} total={career.international} />
+			{#if internationalTallies.length}
+				<ChampionshipTally
+					title="By championship"
+					totalLabel="International total"
+					rows={internationalTallies}
+					total={career.international}
+				/>
 			{/if}
-			{#if national.length}<NationalResults results={national} />{/if}
+			{#if nationalTallies.length}
+				<ChampionshipTally
+					title="National championships"
+					totalLabel="National total"
+					rows={nationalTallies}
+					total={tallyOf(national)}
+				/>
+			{/if}
 		</div>
 	</section>
 {/if}
 
 {#if international.length}<ResultsTable results={international} />{/if}
+{#if national.length}<NationalResults results={national} />{/if}
 
 <div class="h-12"></div>

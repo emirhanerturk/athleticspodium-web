@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { careerSummary, levelCounts, medalsByChampionship, olympicAppearances } from './career.js';
+import {
+	careerSummary,
+	internationalResults,
+	levelCounts,
+	medalsByChampionship,
+	nationalResults,
+	olympicAppearances
+} from './career.js';
 import type { Result } from './result.js';
 
 const OLYMPICS = { id: 40, name: 'Olympic Games', slug: 'olympic-games', category: 0, rank: 1 };
@@ -64,13 +71,15 @@ describe('careerSummary', () => {
 });
 
 describe('medalsByChampionship', () => {
-	it('tallies international medals per championship in rank order', () => {
-		expect(
-			medalsByChampionship(career).map(({ champ, total, gold }) => [champ.name, gold, total])
-		).toEqual([
+	it('tallies medals per championship in rank order, leaving out finals and DQs', () => {
+		const rows = (results: Result[]) =>
+			medalsByChampionship(results).map(({ champ, total, gold }) => [champ.name, gold, total]);
+
+		expect(rows(internationalResults(career))).toEqual([
 			['Olympic Games', 1, 2],
 			['European Championships', 1, 1]
 		]);
+		expect(rows(nationalResults(career))).toEqual([['Ukrainian Championships', 1, 2]]);
 	});
 });
 
