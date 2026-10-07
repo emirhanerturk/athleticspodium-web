@@ -487,24 +487,25 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 
 ### Athlete (`/athlete/[id]/[slug]`)
 
-| Block                                                                    | Data                                            | Prerequisite                                     |
-| ------------------------------------------------------------------------ | ----------------------------------------------- | ------------------------------------------------ |
-| Identity, photo with credit, aka, birth details, biography               | `/athletes/:id`                                 | —                                                |
-| Podium counts, "on the podium" span, by-championship totals, level chips | derived from `/athletes/:id/medals` (section 8) | —                                                |
-| Olympian line, Olympic cards                                             | `/athletes/:id/olympians` with medal rows       | B1 for city                                      |
-| Results table with Venue column                                          | `/athletes/:id/medals`                          | B1                                               |
-| National titles box                                                      | the same, category 7                            | B1                                               |
-| Family                                                                   | `/athletes/:id/relateds`                        | —                                                |
-| Stories                                                                  | `/articles?athlete=`                            | —                                                |
-| "Heights on the podium" chart                                            | numeric marks by year                           | follow-up; discipline from `lib/domain/event.ts` |
+| Block                                                                    | Data                                            | Prerequisite |
+| ------------------------------------------------------------------------ | ----------------------------------------------- | ------------ |
+| Identity, photo with credit, aka, birth details, biography               | `/athletes/:id`                                 | —            |
+| Podium counts, "on the podium" span, by-championship totals, level chips | derived from `/athletes/:id/medals` (section 8) | —            |
+| Olympian line, Olympic cards                                             | `/athletes/:id/olympians` with medal rows       | B1 for city  |
+| Results table with Venue column                                          | `/athletes/:id/medals`                          | B1           |
+| National championships tally and national results list                   | the same, category 7                            | B1           |
+| Family                                                                   | `/athletes/:id/relateds`                        | —            |
+| Stories                                                                  | `/articles?athlete=`                            | —            |
 
 - **Results table:**
   - It keeps the event column, wind, notes and DQ.
   - "Show places 4–8" adds placings, with a "Place" column.
-- **Chart:** For an athlete with several events, the chart shows the event with the most medals.
 - **Mark notes:** `medal.info` is shown after the mark; `(i)` renders as the indoor "i".
-- **Layout until the chart is built:** the chart's place in the "By championship" band holds the national championships list.
-- **Dropped:** the age-group chip.
+- **Layout:**
+  - The "By championship" band shows the international tally beside a "National championships" tally.
+  - The Medals table follows. The national results list comes last, so national titles never push the international medals down.
+  - The national list shows the event when the athlete has more than one.
+- **Dropped:** the age-group chip and the "Heights on the podium" chart (decided 2026-10-07).
 
 ### Countries (`/country`)
 

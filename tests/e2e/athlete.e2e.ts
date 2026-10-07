@@ -36,6 +36,22 @@ test('filters the results by championship level', async ({ page }) => {
 	await expect(rows.first()).toContainText('European U23 Athletics Championships');
 });
 
+test('lists national results below the international medals', async ({ page }) => {
+	await page.goto(PROFILE);
+	const headings = await page.getByRole('heading', { level: 2 }).allTextContents();
+
+	expect(headings.map((heading) => heading.replace(/\s+/g, ' ').trim())).toEqual([
+		'Biography',
+		'By championship',
+		'National championships',
+		'Medals 4',
+		'National results 1'
+	]);
+	await expect(page.locator('#national li')).toHaveText([
+		/2021\s+Ukrainian Athletics Championships/
+	]);
+});
+
 test('redirects a wrong slug to the canonical profile', async ({ request }) => {
 	const response = await request.get('/athlete/35017/someone-else', { maxRedirects: 0 });
 

@@ -3,7 +3,12 @@
 	import type { MedalTally } from '#lib/domain/result.js';
 	import { champUrl } from '#lib/routing/urls.js';
 
-	let { rows, total }: { rows: ChampionshipTally[]; total: MedalTally } = $props();
+	let {
+		title,
+		totalLabel,
+		rows,
+		total
+	}: { title: string; totalLabel: string; rows: ChampionshipTally[]; total: MedalTally } = $props();
 
 	const MEDALS = [
 		{ key: 'gold', label: 'Gold', dot: 'bg-gold' },
@@ -13,9 +18,7 @@
 </script>
 
 <div>
-	<h2 class="mb-3.5 font-display text-[30px] leading-[0.94] font-bold sm:text-4xl">
-		By championship
-	</h2>
+	<h2 class="mb-3.5 font-display text-[30px] leading-[0.94] font-bold sm:text-4xl">{title}</h2>
 	<table class="w-full border-collapse text-[14.5px]">
 		<thead>
 			<tr class="font-data text-[11px] tracking-[0.1em] text-ink-3 uppercase">
@@ -49,7 +52,7 @@
 				</tr>
 			{/each}
 			<tr class="border-t-2 border-ink font-bold">
-				<td class="py-[11px] font-text">International total</td>
+				<td class="py-[11px] font-text">{totalLabel}</td>
 				{#each MEDALS as medal (medal.key)}
 					<td class="py-[11px] text-center">{total[medal.key]}</td>
 				{/each}
