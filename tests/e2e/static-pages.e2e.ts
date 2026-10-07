@@ -1,9 +1,9 @@
 import { expect, test } from './fixtures.js';
 
-test('renders the about, simple notes and missing information pages', async ({ page }) => {
+test('renders the about, database notes and missing information pages', async ({ page }) => {
 	for (const [path, heading] of [
 		['/about', 'About Athletics Podium'],
-		['/simple-notes', 'Simple notes on the database'],
+		['/how-to-read-the-database', 'How to read the database'],
 		['/missing-information', 'Missing information']
 	]) {
 		const response = await page.goto(path);
@@ -15,6 +15,29 @@ test('renders the about, simple notes and missing information pages', async ({ p
 		'href',
 		'/missing-information?tab=relays'
 	);
+});
+
+test('moves the simple notes address to the database notes page', async ({ request }) => {
+	const response = await request.get('/simple-notes', { maxRedirects: 0 });
+
+	expect(response.status()).toBe(301);
+	expect(response.headers().location).toBe('/how-to-read-the-database');
+});
+
+test('marks the section in view in the page contents', async ({ page }) => {
+	await page.goto('/how-to-read-the-database', { waitUntil: 'networkidle' });
+	const contents = page.getByRole('navigation', { name: 'On this page' });
+
+	await expect(contents.getByRole('link', { name: /Olympic champions/ })).toHaveAttribute(
+		'aria-current',
+		'location'
+	);
+	await contents.getByRole('link', { name: /Stripped medals/ }).click();
+	await expect(contents.getByRole('link', { name: /Stripped medals/ })).toHaveAttribute(
+		'aria-current',
+		'location'
+	);
+	await expect(page.getByRole('heading', { name: 'Stripped medals' })).toBeInViewport();
 });
 
 test('explains invalid contact fields and sends a valid message', async ({ page }) => {

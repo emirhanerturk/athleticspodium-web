@@ -14,7 +14,7 @@ export const PAGES = {
 	compare: '/compare',
 	search: '/search',
 	about: '/about',
-	simpleNotes: '/simple-notes',
+	databaseNotes: '/how-to-read-the-database',
 	missingInformation: '/missing-information'
 } as const;
 
