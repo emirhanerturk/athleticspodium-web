@@ -10,6 +10,7 @@ import {
 	type Relative
 } from '#lib/domain/athlete.js';
 import type { OlympicGames } from '#lib/domain/career.js';
+import type { Image } from '#lib/domain/image.js';
 import type { Result } from '#lib/domain/result.js';
 import type {
 	AthleteDetailDto,
@@ -18,6 +19,7 @@ import type {
 	AthleteRowDto,
 	AthleteSummaryDto,
 	FeaturedAthleteDto,
+	ImageDto,
 	OlympicMeetingDto,
 	RelationDto,
 	ResultDto
@@ -35,15 +37,24 @@ export function parseAthleteWithLifespan(dto: AthleteRowDto): AthleteRef & Athle
 	};
 }
 
+function parseImage(athleteId: number, dto: ImageDto): Image {
+	return {
+		path: `athletes/${athleteId}/${dto.uri}`,
+		credit: dto.credit?.trim() || null,
+		caption: dto.caption?.trim() || null
+	};
+}
+
+function parseCover(athleteId: number, dtos: ImageDto[] | null): Image | null {
+	return dtos?.[0] ? parseImage(athleteId, dtos[0]) : null;
+}
+
 export function parseAthleteListing(dto: AthleteListingDto): AthleteListing {
-	const image = dto.image?.[0];
 	return {
 		...parseAthleteWithLifespan(dto),
 		olympicChampion: dto.olympic_mark,
 		events: dto.events ?? [],
-		image: image
-			? { path: `athletes/${dto.id}/${image.uri}`, credit: image.credit ?? null, caption: null }
-			: null
+		image: parseCover(dto.id, dto.image)
 	};
 }
 
@@ -57,8 +68,6 @@ export function parseBirthdaysToday(dto: AthleteListDto): BirthdaysToday {
 }
 
 export function parseAthleteProfile(dto: AthleteDetailDto): AthleteProfile {
-	const image = dto.image?.[0];
-
 	return {
 		...parseAthleteWithLifespan(dto),
 		aka: dto.aka ?? [],
@@ -66,9 +75,7 @@ export function parseAthleteProfile(dto: AthleteDetailDto): AthleteProfile {
 		birthPlace: dto.place_of_birth,
 		events: dto.events ?? [],
 		country: dto.country,
-		image: image
-			? { path: `athletes/${dto.id}/${image.uri}`, credit: image.credit ?? null, caption: null }
-			: null,
+		photos: (dto.image ?? []).map((image) => parseImage(dto.id, image)),
 		biography: dto.biography?.trim() || null
 	};
 }
@@ -136,13 +143,7 @@ export function parseAthleteSummary(dto: AthleteSummaryDto): AthleteSummary {
 		...parseAthleteWithLifespan(dto),
 		events: dto.events ?? [],
 		olympicChampion: dto.olympic_mark,
-		image: dto.image
-			? {
-					path: `athletes/${dto.id}/${dto.image.uri}`,
-					credit: dto.image.credit ?? null,
-					caption: null
-				}
-			: null,
+		image: dto.image ? parseImage(dto.id, dto.image) : null,
 		medals: dto.medals
 	};
 }
@@ -150,19 +151,12 @@ export function parseAthleteSummary(dto: AthleteSummaryDto): AthleteSummary {
 export function parseFeaturedAthletes(dtos: FeaturedAthleteDto[]): FeaturedAthlete[] {
 	return dtos.flatMap(({ athlete }) => {
 		if (!athlete) return [];
-		const image = athlete.image?.[0];
 		return [
 			{
 				...parseAthleteWithLifespan(athlete),
 				events: athlete.events ?? [],
 				olympicChampion: athlete.olympic_mark,
-				image: image
-					? {
-							path: `athletes/${athlete.id}/${image.uri}`,
-							credit: image.credit ?? null,
-							caption: null
-						}
-					: null,
+				image: parseCover(athlete.id, athlete.image),
 				medals: athlete.medals ?? { gold: 0, silver: 0, bronze: 0, total: 0 },
 				biography: athlete.biography?.trim() || null
 			}

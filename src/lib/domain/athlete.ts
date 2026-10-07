@@ -44,7 +44,7 @@ export interface AthleteProfile extends AthleteRef, AthleteLifespan {
 	birthPlace: string | null;
 	events: string[];
 	country: { code: string; name: string } | null;
-	image: Image | null;
+	photos: Image[];
 	biography: string | null;
 }
 

@@ -52,6 +52,34 @@ test('lists national results below the international medals', async ({ page }) =
 	]);
 });
 
+test('opens the photos in a viewer', async ({ page }) => {
+	await page.goto(PROFILE, { waitUntil: 'networkidle' });
+	const viewer = page.getByRole('dialog', { name: 'Photos of Yaroslava Mahuchikh' });
+
+	await page.getByRole('link', { name: 'View photo 2 of 2' }).click();
+	await expect(viewer).toBeVisible();
+	await expect(viewer.getByText('Competing at 2021 European U23 Championships')).toBeInViewport({
+		ratio: 0.9
+	});
+
+	await page.keyboard.press('ArrowLeft');
+	await expect(viewer.getByText('1 / 2')).toBeInViewport({ ratio: 0.9 });
+
+	await page.keyboard.press('Escape');
+	await expect(viewer).toBeHidden();
+});
+
+test('links the photo to its file without JavaScript', async ({ browser }) => {
+	const context = await browser.newContext({ javaScriptEnabled: false });
+	const page = await context.newPage();
+	await page.goto(PROFILE);
+
+	await expect(
+		page.getByRole('link', { name: 'View photo of Yaroslava Mahuchikh' })
+	).toHaveAttribute('href', /\/athletes\/35017\/fcaa7ef2-7ab4-4c6e-ad70-f51f65a7c897\.jpeg$/);
+	await context.close();
+});
+
 test('redirects a wrong slug to the canonical profile', async ({ request }) => {
 	const response = await request.get('/athlete/35017/someone-else', { maxRedirects: 0 });
 

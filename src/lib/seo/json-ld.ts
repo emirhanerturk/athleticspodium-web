@@ -31,7 +31,7 @@ export function personJsonLd(
 		name: fullName(athlete),
 		alternateName: athlete.aka.length ? athlete.aka : undefined,
 		url: siteUrl + path,
-		image: athlete.image ? `${mediaUrl}/${athlete.image.path}` : undefined,
+		image: athlete.photos[0] ? `${mediaUrl}/${athlete.photos[0].path}` : undefined,
 		birthDate: athlete.birthDate ?? undefined,
 		deathDate: athlete.deathDate ?? undefined,
 		birthPlace: athlete.birthPlace ? { '@type': 'Place', name: athlete.birthPlace } : undefined,

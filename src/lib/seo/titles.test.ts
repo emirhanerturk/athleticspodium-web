@@ -30,7 +30,7 @@ const athlete: AthleteProfile = {
 	birthPlace: null,
 	events: ['High jump'],
 	country: { code: 'UKR', name: 'Ukraine' },
-	image: null,
+	photos: [],
 	biography: null
 };
 

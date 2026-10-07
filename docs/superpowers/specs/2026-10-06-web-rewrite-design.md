@@ -489,7 +489,7 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 
 | Block                                                                    | Data                                            | Prerequisite |
 | ------------------------------------------------------------------------ | ----------------------------------------------- | ------------ |
-| Identity, photo with credit, aka, birth details, biography               | `/athletes/:id`                                 | —            |
+| Identity, photos with caption and credit, aka, birth details, biography  | `/athletes/:id`                                 | —            |
 | Podium counts, "on the podium" span, by-championship totals, level chips | derived from `/athletes/:id/medals` (section 8) | —            |
 | Olympian line, Olympic cards                                             | `/athletes/:id/olympians` with medal rows       | B1 for city  |
 | Results table with Venue column                                          | `/athletes/:id/medals`                          | B1           |
@@ -501,6 +501,10 @@ For each page: what it shows, where the data comes from, and the backend prerequ
   - It keeps the event column, wind, notes and DQ.
   - "Show places 4–8" adds placings, with a "Place" column.
 - **Mark notes:** `medal.info` is shown after the mark; `(i)` renders as the indoor "i".
+- **Photos:**
+  - The hero shows the first photo, with any other photos as thumbnails below it (62 athletes have two or three).
+  - A click on a photo opens it uncropped in a full-screen `<dialog>`, with caption, credit, arrows, keyboard and swipe; the originals are at most about 800 px wide.
+  - Without JavaScript, each photo links to its file.
 - **Layout:**
   - The "By championship" band shows the international tally beside a "National championships" tally.
   - The Medals table follows. The national results list comes last, so national titles never push the international medals down.
