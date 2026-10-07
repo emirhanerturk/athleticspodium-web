@@ -1,7 +1,7 @@
 import { expect, test } from './fixtures.js';
 
 test('shows the compare form without a selection', async ({ page }) => {
-	const response = await page.goto('/compare');
+	const response = await page.goto('/medals/compare');
 
 	expect(response?.status()).toBe(200);
 	await expect(page.getByRole('heading', { level: 2 }).first()).toHaveText(
@@ -11,7 +11,7 @@ test('shows the compare form without a selection', async ({ page }) => {
 });
 
 test('lines up two championships year by year', async ({ page }) => {
-	await page.goto('/compare?a=18&b=40&gender=men&event=10', { waitUntil: 'networkidle' });
+	await page.goto('/medals/compare?a=18&b=40&gender=men&event=10', { waitUntil: 'networkidle' });
 
 	await expect(page.getByRole('heading', { level: 2 }).first()).toHaveText(
 		'European Championships vs Olympic Games: 100m, men'

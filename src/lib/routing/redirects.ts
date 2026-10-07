@@ -1,3 +1,6 @@
+import { parseLegacyMedalQuery } from '#lib/domain/medal-search.js';
+import { medalSearchUrl, PAGES } from './urls.js';
+
 const COUNTRY_CODE_SEGMENT = /^\/country\/([a-z]{3})(?=\/|$)/i;
 
 export function canonicalRedirect(url: URL): string | null {
@@ -5,6 +8,7 @@ export function canonicalRedirect(url: URL): string | null {
 
 	target.hostname = target.hostname.replace(/^www\./, '');
 	moveMatrixParamsToQuery(target);
+	moveLegacyTools(target);
 	target.pathname = target.pathname.replace(
 		COUNTRY_CODE_SEGMENT,
 		(_, code: string) => `/country/${code.toUpperCase()}`
@@ -33,4 +37,18 @@ function moveMatrixParamsToQuery(url: URL) {
 			url.searchParams.set(key, value);
 		}
 	}
+}
+
+const MOVED_TOOLS = new Map([
+	['/medals/country-champs', PAGES.medalCountdown],
+	['/compare', PAGES.compare]
+]);
+
+function moveLegacyTools(url: URL) {
+	if (url.pathname === '/medals/search') {
+		const moved = new URL(medalSearchUrl(parseLegacyMedalQuery(url.searchParams)), url);
+		url.pathname = moved.pathname;
+		url.search = moved.search;
+	}
+	url.pathname = MOVED_TOOLS.get(url.pathname) ?? url.pathname;
 }

@@ -5,6 +5,7 @@ import {
 	eventsFor,
 	groupByEdition,
 	isSearchable,
+	parseLegacyMedalQuery,
 	parseMedalQuery,
 	yearsFor,
 	type FilterChamp,
@@ -34,11 +35,11 @@ const countries = [
 ];
 
 describe('parseMedalQuery', () => {
-	it('reads the legacy parameters', () => {
+	it('reads the readable parameters', () => {
 		expect(
 			parseMedalQuery(
 				new URLSearchParams(
-					'champs=18&country=tur&event=10&year=2026&gender=1&medal=2&page=3&order=event'
+					'champ=18&country=tur&event=10&year=2026&gender=women&medal=silver&page=3'
 				)
 			)
 		).toEqual({
@@ -48,14 +49,13 @@ describe('parseMedalQuery', () => {
 			year: 2026,
 			gender: 'women',
 			medal: 2,
-			page: 3,
-			order: 'event'
+			page: 3
 		});
 	});
 
 	it('drops invalid values', () => {
 		expect(
-			parseMedalQuery(new URLSearchParams('champs=&country=TURKEY&medal=5&gender=7&order=x&page=0'))
+			parseMedalQuery(new URLSearchParams('champ=&country=TURKEY&medal=5&gender=1&page=0'))
 		).toEqual({
 			champ: null,
 			country: null,
@@ -63,9 +63,16 @@ describe('parseMedalQuery', () => {
 			year: null,
 			gender: null,
 			medal: null,
-			page: 1,
-			order: 'year'
+			page: 1
 		});
+	});
+
+	it('reads the legacy parameters for the redirect', () => {
+		expect(
+			parseLegacyMedalQuery(
+				new URLSearchParams('champs=18&country=TUR&gender=1&medal=1&order=athlete')
+			)
+		).toMatchObject({ champ: 18, country: 'TUR', gender: 'women', medal: 1, page: 1 });
 	});
 
 	it('needs a championship or a country', () => {

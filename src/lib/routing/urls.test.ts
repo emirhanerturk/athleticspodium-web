@@ -3,12 +3,12 @@ import { medalSearchUrl, missingInformationUrl, searchUrl } from './urls.js';
 
 describe('medalSearchUrl', () => {
 	it('filters the medal search by championship', () => {
-		expect(medalSearchUrl({ champ: 18 })).toBe('/medals/search?champs=18');
+		expect(medalSearchUrl({ champ: 18 })).toBe('/medals?champ=18');
 	});
 
-	it('adds the event and gender', () => {
-		expect(medalSearchUrl({ champ: 18, event: 10, gender: 'women' })).toBe(
-			'/medals/search?champs=18&event=10&gender=1'
+	it('writes the gender and the medal as words', () => {
+		expect(medalSearchUrl({ champ: 18, event: 10, gender: 'women', medal: 1, page: 2 })).toBe(
+			'/medals?champ=18&event=10&gender=women&medal=gold&page=2'
 		);
 	});
 });

@@ -46,7 +46,7 @@ test('shows the medal table, the athletes with most golds and the programme', as
 	await expect(page.getByRole('heading', { name: '66 events contested since 1934' })).toBeVisible();
 	await expect(page.getByRole('link', { name: 'Discus throw' }).first()).toHaveAttribute(
 		'href',
-		'/medals/search?champs=18&event=99&gender=0'
+		'/medals?champ=18&event=99&gender=men'
 	);
 });
 

@@ -14,7 +14,7 @@
 		type MedalQuery
 	} from '#lib/domain/medal-search.js';
 	import { formatCount } from '#lib/format/number.js';
-	import { countryChampsUrl, medalSearchUrl, PAGES } from '#lib/routing/urls.js';
+	import { medalCountdownUrl, medalSearchUrl, PAGES } from '#lib/routing/urls.js';
 	import { breadcrumbJsonLd } from '#lib/seo/json-ld.js';
 	import type { PageProps } from './$types';
 
@@ -28,7 +28,7 @@
 		data.results ? Math.max(1, Math.ceil(data.results.count / MEDAL_PAGE_SIZE)) : 1
 	);
 	const editions = $derived(data.results ? groupByEdition(data.results.rows) : []);
-	const path = $derived(medalSearchUrl({ ...query, order: 'year' }));
+	const path = $derived(medalSearchUrl(query));
 
 	const MEDAL_TABS: { medal: MedalQuery['medal']; label: string; dot?: string }[] = [
 		{ medal: null, label: 'All medals' },
@@ -228,7 +228,7 @@
 					</p>
 					{#if query.champ && query.country}
 						<a
-							href={countryChampsUrl(query.country, query.champ)}
+							href={medalCountdownUrl(query.country, query.champ)}
 							class="text-[13.5px] font-semibold text-brand-ink hover:underline"
 						>
 							Medal countdown, edition by edition →

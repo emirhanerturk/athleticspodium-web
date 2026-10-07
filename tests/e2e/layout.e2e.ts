@@ -55,7 +55,7 @@ test('redirects legacy URL forms in one 301', async ({ request }) => {
 	expect(lowerCase.status()).toBe(301);
 	expect(lowerCase.headers().location).toMatch(/\/country\/TUR$/);
 	expect(matrix.status()).toBe(301);
-	expect(matrix.headers().location).toMatch(/\/medals\/search\?country=TUR$/);
+	expect(matrix.headers().location).toMatch(/\/medals\?country=TUR$/);
 });
 
 test('publishes robots.txt and the sitemap in production', async ({ request }) => {

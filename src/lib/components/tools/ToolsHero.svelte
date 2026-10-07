@@ -18,7 +18,7 @@
 			icon: 'MC',
 			title: 'Medal countdown',
 			text: 'One nation at one championship, edition by edition.',
-			href: PAGES.countryChamps
+			href: PAGES.medalCountdown
 		},
 		{
 			key: 'compare',
