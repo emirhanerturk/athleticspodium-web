@@ -20,6 +20,7 @@
 	title="Athletes – find any medallist"
 	description="Search every athletics medallist and finalist in the archive, browse athletes A–Z, today's birthdays and the greatest athletes by nation."
 	path={PAGES.athletes}
+	fallbackImage="athletes"
 />
 <JsonLd data={[breadcrumbJsonLd(PUBLIC_SITE_URL, [{ name: 'Athletes', path: PAGES.athletes }])]} />
 

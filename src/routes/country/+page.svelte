@@ -23,6 +23,7 @@
 	description="{data.countries
 		.length} nations and territories in athletics: medals by championship, the most decorated athletes and the all-time Olympic table."
 	path={PAGES.countries}
+	fallbackImage="countries"
 />
 <JsonLd
 	data={[breadcrumbJsonLd(PUBLIC_SITE_URL, [{ name: 'Countries', path: PAGES.countries }])]}

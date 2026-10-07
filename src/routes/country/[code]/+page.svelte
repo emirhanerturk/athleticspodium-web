@@ -33,6 +33,7 @@
 	title={countryTitle(country)}
 	description={countryDescription(country, international, titles)}
 	{path}
+	fallbackImage="countries"
 />
 <JsonLd data={[breadcrumbJsonLd(PUBLIC_SITE_URL, crumbs)]} />
 

@@ -669,7 +669,10 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
   | article    | `Article`                                                       |
   | home       | `WebSite` and `Organization`                                    |
 
-- **Open Graph** uses the athlete or article image when there is one, otherwise the default social image.
+- **Open Graph** uses the page's own picture when there is one: the athlete photo, the championship hero or the article image. Every other page uses the social image of its section:
+  - The images are 1200×630 PNGs in `static/og/`: `default`, `championships`, `athletes`, `countries`, `calendar`, `tools` and `articles`. They carry no figures that go out of date.
+  - `npm run social-images` renders them with Playwright from `scripts/social-images.js`, using the site's fonts, colour tokens, logo and flags. Rerun it and commit the PNGs when the design or the copy changes.
+  - Pages name their section with `fallbackImage` on `SeoHead`; `lib/seo/social-images.ts` holds the alt texts.
 - **Sitemap:**
   - `/sitemap.xml` is an index of per-type files. Each file holds at most 50,000 URLs.
   - The files are built from the B17 feed, with `lastmod` from `updated_date`.

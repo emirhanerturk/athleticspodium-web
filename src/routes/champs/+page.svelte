@@ -19,6 +19,7 @@
 	title={championshipsTitle()}
 	description={championshipsDescription(data.champs.length, archiveExtent(data.champs))}
 	path={PAGES.champs}
+	fallbackImage="championships"
 />
 <JsonLd
 	data={[breadcrumbJsonLd(PUBLIC_SITE_URL, [{ name: 'Championships', path: PAGES.champs }])]}

@@ -14,6 +14,7 @@ npm run check                # svelte-kit sync + svelte-check
 npm run lint                 # prettier --check + eslint
 npm run test:unit -- --run   # Vitest once
 npm run test:e2e             # Playwright: builds, starts tests/stub-backend.js on 4499 and a preview on 4173
+npm run social-images        # renders the Open Graph images in static/og/ (commit the PNGs)
 ```
 
 Run a single unit test file with `npx vitest run src/lib/routing/redirects.test.ts`. Environment variables are declared in `src/env.ts`; copy `.env.example` to `.env` for local work.

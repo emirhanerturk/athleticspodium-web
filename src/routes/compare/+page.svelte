@@ -31,6 +31,7 @@
 		? `${subject}: the podiums of both championships year by year, with the difference between the winning marks.`
 		: 'Compare the podiums of two athletics championships event by event, year by year.'}
 	path={compareUrl(query)}
+	fallbackImage="tools"
 />
 <JsonLd data={[breadcrumbJsonLd(PUBLIC_SITE_URL, [{ name: 'Compare', path: PAGES.compare }])]} />
 

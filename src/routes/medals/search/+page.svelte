@@ -29,6 +29,7 @@
 		? `Every medal for ${subject}: year, event, athlete, country and mark.`
 		: 'Search every athletics medal in the archive by championship, country, event, year, gender and medal.'}
 	{path}
+	fallbackImage="tools"
 />
 <JsonLd
 	data={[breadcrumbJsonLd(PUBLIC_SITE_URL, [{ name: 'Medal search', path: PAGES.medalSearch }])]}

@@ -54,6 +54,7 @@
 	description={athleteDescription(athlete, career)}
 	{path}
 	image={athlete.photos[0] ? `${PUBLIC_MEDIA_URL}/${athlete.photos[0].path}` : undefined}
+	fallbackImage="athletes"
 />
 <JsonLd
 	data={[
