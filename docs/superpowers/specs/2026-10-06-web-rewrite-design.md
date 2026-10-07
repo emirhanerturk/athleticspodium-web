@@ -100,25 +100,26 @@ What the sample shows:
 
 ### 5.1 Routes
 
-| Page                                     | URL                                                      | Design source                             | Indexable |
-| ---------------------------------------- | -------------------------------------------------------- | ----------------------------------------- | --------- |
-| Home                                     | `/`                                                      | `V2-Home` → `Home-B` (`v2=true`)          | yes       |
-| Championships                            | `/champs`                                                | `V2-Champs` → `Champs-A`                  | yes       |
-| Championship                             | `/champs/[champ]`                                        | `V2-Champ` → `ChampDetail`                | yes       |
-| Edition                                  | `/champs/[champ]/[meeting]`                              | `V2-Edition` → `Meeting-A` (`cards=true`) | yes       |
-| Athletes                                 | `/athlete`                                               | `V2-Athletes` → `Athletes-B`              | yes       |
-| Athletes A–Z                             | `/athlete/letter/[letter]?page=n`                        | v2 components                             | yes       |
-| Athlete                                  | `/athlete/[id=integer]/[slug]`                           | `V2-Athlete` → `Athlete-A` (`v2=true`)    | yes       |
-| Countries                                | `/country`                                               | `V2-Countries`                            | yes       |
-| Country                                  | `/country/[code]`                                        | `V2-Country`                              | yes       |
-| Country athletes                         | `/country/[code]/athletes?page=n`                        | v2 components                             | yes       |
-| Calendar                                 | `/calendar`, `/calendar/[year=integer]`                  | `V2-Calendar`                             | yes       |
-| Search                                   | `/search?q=&type=&gender=&born_from=&born_to=&olympian=` | `V2-Search`                               | no        |
-| Articles                                 | `/article`, `/article/[id=integer]/[slug]`               | v2 components                             | yes       |
-| Medal search                             | `/medals/search?…`                                       | v2 components                             | yes       |
-| Medals by country and championship       | `/medals/country-champs?…`                               | v2 components                             | yes       |
-| Compare                                  | `/compare`                                               | v2 components                             | yes       |
-| About, Simple notes, Missing information | `/about`, `/simple-notes`, `/missing-information`        | v2 components                             | yes       |
+| Page                               | URL                                                      | Design source                             | Indexable |
+| ---------------------------------- | -------------------------------------------------------- | ----------------------------------------- | --------- |
+| Home                               | `/`                                                      | `V2-Home` → `Home-B` (`v2=true`)          | yes       |
+| Championships                      | `/champs`                                                | `V2-Champs` → `Champs-A`                  | yes       |
+| Championship                       | `/champs/[champ]`                                        | `V2-Champ` → `ChampDetail`                | yes       |
+| Edition                            | `/champs/[champ]/[meeting]`                              | `V2-Edition` → `Meeting-A` (`cards=true`) | yes       |
+| Athletes                           | `/athlete`                                               | `V2-Athletes` → `Athletes-B`              | yes       |
+| Athletes A–Z                       | `/athlete/letter/[letter]?page=n`                        | v2 components                             | yes       |
+| Athlete                            | `/athlete/[id=integer]/[slug]`                           | `V2-Athlete` → `Athlete-A` (`v2=true`)    | yes       |
+| Countries                          | `/country`                                               | `V2-Countries`                            | yes       |
+| Country                            | `/country/[code]`                                        | `V2-Country`                              | yes       |
+| Country athletes                   | `/country/[code]/athletes?page=n`                        | v2 components                             | yes       |
+| Calendar                           | `/calendar`, `/calendar/[year=integer]`                  | `V2-Calendar`                             | yes       |
+| Search                             | `/search?q=&type=&gender=&born_from=&born_to=&olympian=` | `V2-Search`                               | no        |
+| Articles                           | `/article`, `/article/[id=integer]/[slug]`               | v2 components                             | yes       |
+| Medal search                       | `/medals/search?…`                                       | v2 components                             | yes       |
+| Medals by country and championship | `/medals/country-champs?…`                               | v2 components                             | yes       |
+| Compare                            | `/compare`                                               | v2 components                             | yes       |
+| About, Missing information         | `/about`, `/missing-information`                         | v2 components                             | yes       |
+| How to read the database           | `/how-to-read-the-database`                              | `V2-Notes`                                | yes       |
 
 Shared parts:
 
@@ -151,6 +152,7 @@ All redirects are single-hop 301s, handled in `hooks.server.ts`:
 | lower-case country code (`/country/tur`)                | upper-case code                    |
 | athlete or article with a wrong slug                    | canonical slug                     |
 | matrix parameters (`/medals/search;country=TUR;page=2`) | the same filters as a query string |
+| `/simple-notes`                                         | `/how-to-read-the-database`        |
 | `/404`, `/ngsw.json`, any unknown path                  | HTTP 404 with the v2 error page    |
 
 The Angular service worker deletes its caches and unregisters itself when `/ngsw.json` returns 404. The safety worker at `/ngsw-worker.js` covers browsers that load the worker script first.
@@ -590,7 +592,11 @@ Notes:
 - **Compare** (`/compare?a=&b=&gender=&event=`): the legacy page kept its state in memory; the new one reads it from the URL, so comparisons can be linked (the championship page links to `?a=<id>`). The server loads every medal of the event for both championships (up to 10 pages of 100), lines the podiums up by year and shows the winning mark of A minus B, formatted with the precision of the marks. Silver and bronze rows open per year.
 - Filters live in query strings.
 - The contact form uses a SvelteKit form action that posts to `/contacts`. It works without JavaScript, validates name, email, subject and message (up to 1,000 characters) on the server, drops messages that fill a hidden honeypot field, and forwards the visitor's IP (`x-forwarded-for`) and user agent so the backend records them as before.
-- **Static pages:** `/about` (sections `main` and `box`, the two portraits now in `static/about/`, social links and the contact form), `/simple-notes`, and `/missing-information` with its four sections as `?tab=` links (`medallists`, `marks`, `names`, `relays`) and the contact form fixed to "Missing information".
+- **Static pages:** `/about` (sections `main` and `box`, the two portraits now in `static/about/`, social links and the contact form) and `/missing-information` with its four sections as `?tab=` links (`medallists`, `marks`, `names`, `relays`) and the contact form fixed to "Missing information".
+- **How to read the database** (`/how-to-read-the-database`, design `V2-Notes`):
+  - Static copy, restructured from the CMS page `simple-notes`, which the site no longer reads.
+  - It describes what the new site shows: the OG badge, notes in small type after the mark, and the Record and Notes columns.
+  - The contents list is sticky from 900 px and marks the section in view.
 - Form posts are never cached (`Cache-Control: no-store` for any method other than GET and HEAD).
 
 ## 10. Backend prerequisites

@@ -5,6 +5,8 @@ describe('recordTier', () => {
 	it('separates world, major and other records, ignoring = and * marks', () => {
 		expect(recordTier('WR')).toBe('world');
 		expect(recordTier('WR=')).toBe('world');
+		expect(recordTier('WIR')).toBe('world');
+		expect(recordTier('WB')).toBe('world');
 		expect(recordTier('CR*')).toBe('major');
 		expect(recordTier('AR')).toBe('major');
 		expect(recordTier('NR')).toBe('other');

@@ -31,7 +31,7 @@
 		{
 			title: 'The database',
 			links: [
-				{ label: 'Simple notes on database', href: PAGES.simpleNotes },
+				{ label: 'How to read the database', href: PAGES.databaseNotes },
 				{ label: 'Missing information', href: PAGES.missingInformation },
 				{ label: 'About & contact', href: PAGES.about }
 			]
