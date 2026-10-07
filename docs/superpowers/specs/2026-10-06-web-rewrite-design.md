@@ -118,7 +118,8 @@ What the sample shows:
 | Medal search                       | `/medals/search?…`                                       | v2 components                             | yes       |
 | Medals by country and championship | `/medals/country-champs?…`                               | v2 components                             | yes       |
 | Compare                            | `/compare`                                               | v2 components                             | yes       |
-| About, Missing information         | `/about`, `/missing-information`                         | v2 components                             | yes       |
+| About                              | `/about`                                                 | v2 components                             | yes       |
+| Missing information                | `/missing-information?tab=&q=`                           | `V2-Missing`                              | yes       |
 | How to read the database           | `/how-to-read-the-database`                              | `V2-Notes`                                | yes       |
 
 Shared parts:
@@ -592,7 +593,17 @@ Notes:
 - **Compare** (`/compare?a=&b=&gender=&event=`): the legacy page kept its state in memory; the new one reads it from the URL, so comparisons can be linked (the championship page links to `?a=<id>`). The server loads every medal of the event for both championships (up to 10 pages of 100), lines the podiums up by year and shows the winning mark of A minus B, formatted with the precision of the marks. Silver and bronze rows open per year.
 - Filters live in query strings.
 - The contact form uses a SvelteKit form action that posts to `/contacts`. It works without JavaScript, validates name, email, subject and message (up to 1,000 characters) on the server, drops messages that fill a hidden honeypot field, and forwards the visitor's IP (`x-forwarded-for`) and user agent so the backend records them as before.
-- **Static pages:** `/about` (sections `main` and `box`, the two portraits now in `static/about/`, social links and the contact form) and `/missing-information` with its four sections as `?tab=` links (`medallists`, `marks`, `names`, `relays`) and the contact form fixed to "Missing information".
+- **About:** sections `main` and `box`, the two portraits now in `static/about/`, social links and the contact form.
+- **Missing information** (design `V2-Missing`):
+  - The four CMS sections (`/pages/missing-information?section=`) stay the source and load together. `pages.missingInformation()` parses their HTML.
+  - Parsing rules:
+    - A bold-only line is a championship heading; headings starting with "Missing" are titles and are left out.
+    - A line that starts with a year is a gap. A trailing `- G / S / B` or `(G)`, `(S)`, `(B)` becomes dashed medal discs.
+    - A line ending in `Found (Thanks to …)` is a filled gap and is left out.
+    - Other lines (legends, contact lines) are left out.
+  - Tabs (with gap counts), the filter (`q`) and the prefilled message (`gap`) are read from the URL by the page, so switching them loads nothing. The filter is a GET form, so it works without JavaScript.
+  - "I know this" opens the contact form at `#send` with the gap as the start of the message; the subject is fixed to "Missing information".
+  - Later option from the design: generate the lists from the medals table (podium slots without an athlete, medals without a mark, relay teams without legs), so each row can link to its edition.
 - **How to read the database** (`/how-to-read-the-database`, design `V2-Notes`):
   - Static copy, restructured from the CMS page `simple-notes`, which the site no longer reads.
   - It describes what the new site shows: the OG badge, notes in small type after the mark, and the Record and Notes columns.

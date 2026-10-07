@@ -11,10 +11,9 @@ test('renders the about, database notes and missing information pages', async ({
 		await expect(page.getByRole('heading', { level: 1 })).toHaveText(heading);
 	}
 
-	await expect(page.getByRole('link', { name: 'relays' })).toHaveAttribute(
-		'href',
-		'/missing-information?tab=relays'
-	);
+	await expect(
+		page.getByRole('navigation', { name: 'Lists' }).getByRole('link', { name: /Relays/ })
+	).toHaveAttribute('href', '/missing-information?tab=relays');
 });
 
 test('moves the simple notes address to the database notes page', async ({ request }) => {

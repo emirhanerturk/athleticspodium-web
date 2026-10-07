@@ -88,12 +88,13 @@
 	const labelOf = (id: string) => SECTIONS.find((section) => section.id === id)?.label ?? '';
 
 	const followScroll: Attachment<HTMLElement> = (content) => {
+		const inView: Record<string, boolean> = {};
 		const observer = new IntersectionObserver(
 			(entries) => {
-				const reached = entries.find((entry) => entry.isIntersecting);
-				if (reached) active = reached.target.id;
+				for (const entry of entries) inView[entry.target.id] = entry.isIntersecting;
+				active = SECTIONS.find((section) => inView[section.id])?.id ?? active;
 			},
-			{ rootMargin: '0px 0px -70% 0px' }
+			{ rootMargin: '-40px 0px -70% 0px' }
 		);
 		for (const section of content.querySelectorAll('[id]')) observer.observe(section);
 		return () => observer.disconnect();
