@@ -36,6 +36,7 @@
 		? `Every medal ${subject}, edition by edition: gold, silver, bronze and totals.`
 		: 'Pick a country and a championship to see its medals edition by edition.'}
 	{path}
+	fallbackImage="tools"
 />
 <JsonLd
 	data={[

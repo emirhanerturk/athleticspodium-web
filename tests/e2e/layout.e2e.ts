@@ -16,6 +16,13 @@ test('renders the ticker, the navigation and the footer on the server', async ({
 	await expect(page.getByRole('contentinfo')).toContainText('Last addition · 2026 Sydney Marathon');
 });
 
+test('serves the social images', async ({ request }) => {
+	const response = await request.get('/og/default.png');
+
+	expect(response.status()).toBe(200);
+	expect(response.headers()['content-type']).toBe('image/png');
+});
+
 test('opens the quick search with the slash key and closes it with Escape', async ({ page }) => {
 	await page.goto('/', { waitUntil: 'networkidle' });
 	const search = page.getByRole('dialog', { name: 'Search' });

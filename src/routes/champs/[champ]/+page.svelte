@@ -36,6 +36,7 @@
 	description={championshipDescription(champ.name, facts, data.nations.length)}
 	{path}
 	image={data.image ? `${PUBLIC_MEDIA_URL}/${data.image.path}` : undefined}
+	fallbackImage="championships"
 />
 <JsonLd data={[breadcrumbJsonLd(PUBLIC_SITE_URL, crumbs)]} />
 

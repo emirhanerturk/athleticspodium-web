@@ -29,7 +29,12 @@
 	]);
 </script>
 
-<SeoHead title={editionTitle(meeting)} description={editionDescription(meeting, stats)} {path} />
+<SeoHead
+	title={editionTitle(meeting)}
+	description={editionDescription(meeting, stats)}
+	{path}
+	fallbackImage="championships"
+/>
 <JsonLd
 	data={[
 		sportsEventJsonLd(PUBLIC_SITE_URL, meeting, path),

@@ -28,6 +28,7 @@
 		data.count
 	)} medallists and finalists in the archive, with country and year of birth."
 	{path}
+	fallbackImage="athletes"
 />
 <JsonLd data={[breadcrumbJsonLd(PUBLIC_SITE_URL, crumbs)]} />
 

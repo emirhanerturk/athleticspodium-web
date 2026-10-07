@@ -25,6 +25,7 @@
 	title={countryAthletesTitle(country, data.page)}
 	description="Athletes from {country.name} ranked by international medals: gold, silver and bronze at global, continental and regional championships."
 	{path}
+	fallbackImage="countries"
 />
 <JsonLd data={[breadcrumbJsonLd(PUBLIC_SITE_URL, crumbs)]} />
 

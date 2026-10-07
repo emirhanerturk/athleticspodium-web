@@ -6,6 +6,10 @@ test('renders a country with its medals, athletes and hosted meetings', async ({
 	expect(response?.status()).toBe(200);
 	await expect(page).toHaveTitle('Turkey (TUR) – athletics medals and athletes | Athletics Podium');
 	await expect(page.getByRole('heading', { level: 1 })).toHaveText('Turkey');
+	await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+		'content',
+		'https://athleticspodium.com/og/countries.png'
+	);
 	await expect(page.getByRole('link', { name: 'Europe', exact: true })).toHaveAttribute(
 		'href',
 		'/country?area=europe'

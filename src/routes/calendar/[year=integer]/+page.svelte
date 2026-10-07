@@ -37,6 +37,7 @@
 	title="Athletics calendar {data.season} – every championship"
 	description="Every athletics championship of {data.season}: dates, host cities, levels and results, from global and continental championships to road races."
 	{path}
+	fallbackImage="calendar"
 />
 <JsonLd data={[breadcrumbJsonLd(PUBLIC_SITE_URL, [{ name: `Calendar ${data.season}`, path }])]} />
 

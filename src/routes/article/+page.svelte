@@ -20,6 +20,7 @@
 		: ''} – athletics history and championship reports"
 	description="Stories from the Athletics Podium archive: championship reports, records, numbers and the history of athletics."
 	{path}
+	fallbackImage="articles"
 />
 <JsonLd data={[breadcrumbJsonLd(PUBLIC_SITE_URL, [{ name: 'Articles', path: PAGES.articles }])]} />
 

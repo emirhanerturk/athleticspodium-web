@@ -28,6 +28,7 @@
 	description={article.description ?? article.standfirst ?? article.title}
 	{path}
 	image={article.image ? `${PUBLIC_MEDIA_URL}/${article.image.path}` : undefined}
+	fallbackImage="articles"
 />
 <JsonLd
 	data={[
