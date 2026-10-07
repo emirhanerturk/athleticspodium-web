@@ -1,0 +1,172 @@
+{
+	"success": true,
+	"data": {
+		"count": 145,
+		"rows": [
+			{
+				"id": 34461,
+				"slug": "valeria-bufanu",
+				"first_name": "Valeria",
+				"last_name": "Bufanu",
+				"country_code": "ROU",
+				"events": ["Hurdling", "sprint"],
+				"olympic_mark": false,
+				"date_of_birth": "1946-10-07",
+				"date_of_death": null,
+				"image": {
+					"uri": "7bd5bc60-42eb-45b1-a900-c910a5ec9885.jpeg",
+					"created_date": "2021-04-13T09:41:59.228Z"
+				},
+				"medals": {
+					"gold": 11,
+					"silver": 7,
+					"bronze": 6,
+					"total": 24
+				}
+			},
+			{
+				"id": 28485,
+				"slug": "vu-thi-huong",
+				"first_name": "Vu Thi",
+				"last_name": "Huong",
+				"country_code": "VIE",
+				"events": ["Sprints"],
+				"olympic_mark": false,
+				"date_of_birth": "1986-10-07",
+				"date_of_death": null,
+				"image": {
+					"uri": "6a602bd1-9b4a-445f-8de3-b80ed5a0460d.jpeg",
+					"credit": "Source: Beijing 2008 LOC",
+					"created_date": "2023-07-15T10:37:56.588Z"
+				},
+				"medals": {
+					"gold": 9,
+					"silver": 9,
+					"bronze": 6,
+					"total": 24
+				}
+			},
+			{
+				"id": 37747,
+				"slug": "barbara-leoncio",
+				"first_name": "Barbara",
+				"last_name": "Leoncio",
+				"country_code": "BRA",
+				"events": ["Sprints"],
+				"olympic_mark": false,
+				"date_of_birth": "1991-10-07",
+				"date_of_death": null,
+				"image": {
+					"uri": "e7beff2f-6b77-4a86-b434-e7a726c6dda2.jpeg",
+					"credit": "Photo: Alexandre Loureiro for CBAt",
+					"created_date": "2021-04-27T19:30:01.286Z"
+				},
+				"medals": {
+					"gold": 14,
+					"silver": 5,
+					"bronze": 4,
+					"total": 23
+				}
+			},
+			{
+				"id": 14631,
+				"slug": "sanderlei-parrela",
+				"first_name": "Sanderlei",
+				"last_name": "Parrela",
+				"country_code": "BRA",
+				"events": ["400 metres"],
+				"olympic_mark": false,
+				"date_of_birth": "1974-10-07",
+				"date_of_death": null,
+				"image": {
+					"uri": "77b1bae7-76f3-4c7a-aea9-cf381c4a0bb8.jpeg",
+					"created_date": "2021-03-18T20:58:47.041Z"
+				},
+				"medals": {
+					"gold": 15,
+					"silver": 6,
+					"bronze": 1,
+					"total": 22
+				}
+			},
+			{
+				"id": 33924,
+				"slug": "olesya-zykina",
+				"first_name": "Olesya",
+				"last_name": "Zykina",
+				"country_code": "RUS",
+				"events": null,
+				"olympic_mark": false,
+				"date_of_birth": "1980-10-07",
+				"date_of_death": null,
+				"image": {
+					"uri": "40d68af6-d4f1-4fcc-bbb7-628a1bc0f477.jpeg",
+					"created_date": "2021-01-09T10:39:02.345Z"
+				},
+				"medals": {
+					"gold": 11,
+					"silver": 6,
+					"bronze": 5,
+					"total": 22
+				}
+			},
+			{
+				"id": 24909,
+				"slug": "vladimir-letnicov",
+				"first_name": "Vladimir",
+				"last_name": "Letnicov",
+				"country_code": "MDA",
+				"events": null,
+				"olympic_mark": false,
+				"date_of_birth": "1981-10-07",
+				"date_of_death": null,
+				"image": {
+					"uri": "38e35846-0b3c-4e6d-96bc-a26b812df750.jpeg",
+					"created_date": "2021-09-24T19:08:58.453Z"
+				},
+				"medals": {
+					"gold": 2,
+					"silver": 6,
+					"bronze": 7,
+					"total": 15
+				}
+			},
+			{
+				"id": 8486,
+				"slug": "hezekiah-munyoro-nyamau",
+				"first_name": "Hezekiah",
+				"last_name": "Nyamau",
+				"country_code": "KEN",
+				"events": ["400 metres"],
+				"olympic_mark": true,
+				"date_of_birth": "1942-12-05",
+				"date_of_death": "2025-10-07",
+				"image": null,
+				"medals": {
+					"gold": 6,
+					"silver": 1,
+					"bronze": 0,
+					"total": 7
+				}
+			},
+			{
+				"id": 33529,
+				"slug": "ellen-tittel",
+				"first_name": "Ellen",
+				"last_name": "Tittel",
+				"country_code": "GER",
+				"events": ["Middle and long distances", "XC"],
+				"olympic_mark": false,
+				"date_of_birth": "1948-06-28",
+				"date_of_death": "2023-10-07",
+				"image": null,
+				"medals": {
+					"gold": 3,
+					"silver": 0,
+					"bronze": 2,
+					"total": 5
+				}
+			}
+		]
+	}
+}

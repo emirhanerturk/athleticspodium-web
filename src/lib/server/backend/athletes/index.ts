@@ -1,5 +1,6 @@
-import { byMedals, type OnThisDay } from '#lib/domain/athlete.js';
+import type { OnThisDay } from '#lib/domain/athlete.js';
 import { monthDayOf, type IsoDate } from '#lib/domain/date.js';
+import { monthDayParam, type DayOfYear } from '#lib/domain/day.js';
 import { BackendNotFoundError, type BackendClient } from '../client.js';
 import type {
 	AthleteDetailDto,
@@ -23,7 +24,6 @@ import {
 } from './parse.js';
 
 const BIRTHDAY_CANDIDATES = 10;
-const ON_THIS_DAY_CANDIDATES = 50;
 
 export function createAthletes(client: BackendClient) {
 	return {
@@ -55,23 +55,16 @@ export function createAthletes(client: BackendClient) {
 			return parseFeaturedAthletes(await client.get<FeaturedAthleteDto[]>('/featured-athletes'));
 		},
 
-		async onThisDay(date: IsoDate, kind: 'born' | 'died', limit: number): Promise<OnThisDay> {
-			const field = kind === 'born' ? 'date_of_birth' : 'date_of_death';
-			const list = await client.get<AthleteListDto>('/athletes', {
-				[field]: monthDayOf(date),
-				order: field,
-				limit: ON_THIS_DAY_CANDIDATES,
-				fields: 'country_code,date_of_death'
-			});
-			if (!list.rows.length) return { count: list.count, athletes: [] };
-
-			const summaries = await client.get<AthleteSummaryDto[]>('/athletes/summaries', {
-				ids: list.rows.map((row) => row.id).join(',')
-			});
-			return {
-				count: list.count,
-				athletes: summaries.map(parseAthleteSummary).sort(byMedals).slice(0, limit)
-			};
+		async onThisDay(
+			day: DayOfYear,
+			kind: 'born' | 'died',
+			{ limit, offset = 0 }: { limit: number; offset?: number }
+		): Promise<OnThisDay> {
+			const page = await client.get<{ count: number; rows: AthleteSummaryDto[] }>(
+				'/athletes/on-this-day',
+				{ kind, date: monthDayParam(day), limit, offset }
+			);
+			return { count: page.count, athletes: page.rows.map(parseAthleteSummary) };
 		},
 
 		async getSummary(id: number) {

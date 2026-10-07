@@ -1,4 +1,5 @@
 import type { IsoDate } from '#lib/domain/date.js';
+import type { DayOfYear } from '#lib/domain/day.js';
 
 const WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const LONG_MONTHS = [
@@ -60,4 +61,12 @@ export function formatYearSpan(first: number, last: number): string {
 export function formatLongDate(date: IsoDate): string {
 	const weekday = WEEKDAYS[new Date(`${date}T00:00:00Z`).getUTCDay()];
 	return `${weekday} ${Number(date.slice(8, 10))} ${LONG_MONTHS[Number(date.slice(5, 7)) - 1]} ${date.slice(0, 4)}`;
+}
+
+export function formatDay({ month, day }: DayOfYear, style: 'short' | 'long' = 'long'): string {
+	return `${day} ${(style === 'long' ? LONG_MONTHS : MONTHS)[month - 1]}`;
+}
+
+export function formatMonth(month: number): string {
+	return LONG_MONTHS[month - 1];
 }

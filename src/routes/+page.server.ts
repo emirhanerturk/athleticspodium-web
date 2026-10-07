@@ -1,3 +1,4 @@
+import { dayOfDate } from '#lib/domain/day.js';
 import { isoDateOf } from '#lib/domain/date.js';
 import type { PageServerLoad } from './$types';
 
@@ -16,8 +17,8 @@ export const load: PageServerLoad = async ({ locals: { backend } }) => {
 		backend.articles.teasers(LATEST_LIMIT + 1),
 		backend.meetings.recentResults(DESK_LIMIT),
 		backend.meetings.upcoming({ days: TIMELINE_DAYS, limit: TIMELINE_LIMIT }),
-		backend.athletes.onThisDay(today, 'born', BORN_LIMIT),
-		backend.athletes.onThisDay(today, 'died', DIED_LIMIT),
+		backend.athletes.onThisDay(dayOfDate(today), 'born', { limit: BORN_LIMIT }),
+		backend.athletes.onThisDay(dayOfDate(today), 'died', { limit: DIED_LIMIT }),
 		backend.athletes.featured()
 	]);
 	const lead = featured[0] ?? teasers[0] ?? null;
