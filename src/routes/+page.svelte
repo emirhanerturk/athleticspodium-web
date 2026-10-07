@@ -3,12 +3,14 @@
 	import logo from '#lib/assets/logo.svg';
 	import Dateline from '#lib/components/home/Dateline.svelte';
 	import FrontStories from '#lib/components/home/FrontStories.svelte';
+	import Guides from '#lib/components/home/Guides.svelte';
 	import OnThisDay from '#lib/components/home/OnThisDay.svelte';
 	import Portraits from '#lib/components/home/Portraits.svelte';
 	import ResultsDesk from '#lib/components/home/ResultsDesk.svelte';
 	import UpcomingTimeline from '#lib/components/home/UpcomingTimeline.svelte';
 	import JsonLd from '#lib/components/seo/JsonLd.svelte';
 	import SeoHead from '#lib/components/seo/SeoHead.svelte';
+	import { GUIDES } from '#lib/domain/guides.js';
 	import { PAGES, SOCIAL_LINKS } from '#lib/routing/urls.js';
 	import { organizationJsonLd, websiteJsonLd } from '#lib/seo/json-ld.js';
 	import type { PageProps } from './$types';
@@ -45,6 +47,7 @@
 		spanDays={data.timelineDays}
 	/>
 {/if}
+<Guides guides={GUIDES} />
 {#if data.born.athletes.length || data.died.athletes.length}
 	<OnThisDay born={data.born} died={data.died} today={data.today} />
 {/if}

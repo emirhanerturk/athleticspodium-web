@@ -23,3 +23,12 @@ test('renders the front page on the server', async ({ page }) => {
 		);
 	expect(types).toEqual(expect.arrayContaining(['WebSite', 'Organization']));
 });
+
+test('links the guide cards to their articles', async ({ page }) => {
+	await page.goto('/');
+	const guides = page.getByRole('region', { name: 'Guides' }).getByRole('link');
+
+	await expect(guides).toHaveCount(2);
+	await expect(guides.first()).toHaveAttribute('href', '/article/199/paris-2024-all-information');
+	await expect(guides.last()).toContainText('World Marathon Majors');
+});

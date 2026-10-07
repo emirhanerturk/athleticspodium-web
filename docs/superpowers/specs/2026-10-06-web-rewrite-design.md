@@ -405,12 +405,16 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 | Context tag on stories                                   | related meeting or championship name                 | B10; no tag without it |
 | Results desk (4)                                         | `last-meetings` summary                              | B15                    |
 | Next six months timeline                                 | `upcoming-meetings?days=183`                         | B6                     |
+| Guides                                                   | `lib/domain/guides.ts`                               | —                      |
 | On this day counts, Born today (7), Remembered today (6) | `/athletes?date_of_birth=` and `?date_of_death=`     | B9 for `date_of_death` |
 | Portraits                                                | `/featured-athletes`, with an excerpt of `biography` | B8                     |
 
 - **Results desk rule.** Road races (category 8) show the winners. Other meetings show the top three nations. Meetings are the most recently ended ones that have results.
 - **Lead and latest:** the first featured article leads (the newest article when none is featured); the latest five follow without it.
 - **On this day:** up to 50 candidates per list ranked by international medals (B11), 7 born and 6 remembered.
+- **Guides:**
+  - The cards replace the legacy Paris 2024 and World Marathon Majors banners. Each links to its article and uses the article's cover image.
+  - Copy and figures are kept by hand in `lib/domain/guides.ts`. Update them when the article changes, for example the World Marathon Majors race count after each race.
 - **Headings:** a visually hidden `h1` names the site; the lead title is an `h2`.
 - **JSON-LD:** `WebSite` with a `SearchAction` to `/search?q=` and `Organization` with the logo and the social profiles.
 - **Dropped:** the article kicker ("Analysis").
