@@ -1,5 +1,5 @@
 import type { CompareQuery } from '#lib/domain/compare.js';
-import { GENDER_CODES, type MedalQuery } from '#lib/domain/medal-search.js';
+import { MEDAL_NAMES, type MedalQuery } from '#lib/domain/medal-search.js';
 import { MISSING_SECTIONS, type MissingSection } from '#lib/domain/missing.js';
 import type { SearchRequest } from '#lib/domain/search.js';
 
@@ -10,9 +10,9 @@ export const PAGES = {
 	countries: '/country',
 	calendar: '/calendar',
 	articles: '/article',
-	medalSearch: '/medals/search',
-	countryChamps: '/medals/country-champs',
-	compare: '/compare',
+	medalSearch: '/medals',
+	medalCountdown: '/medals/countdown',
+	compare: '/medals/compare',
 	search: '/search',
 	about: '/about',
 	databaseNotes: '/how-to-read-the-database',
@@ -66,20 +66,19 @@ export function calendarUrl(year: number): string {
 
 export function medalSearchUrl(query: Partial<MedalQuery>): string {
 	const params = new URLSearchParams();
-	if (query.champ) params.set('champs', String(query.champ));
+	if (query.champ) params.set('champ', String(query.champ));
 	if (query.country) params.set('country', query.country);
 	if (query.event) params.set('event', String(query.event));
 	if (query.year) params.set('year', String(query.year));
-	if (query.gender) params.set('gender', String(GENDER_CODES[query.gender]));
-	if (query.medal) params.set('medal', String(query.medal));
-	if (query.order && query.order !== 'year') params.set('order', query.order);
+	if (query.gender) params.set('gender', query.gender);
+	if (query.medal) params.set('medal', MEDAL_NAMES[query.medal]);
 	if (query.page && query.page > 1) params.set('page', String(query.page));
 	const search = params.toString();
 	return search ? `${PAGES.medalSearch}?${search}` : PAGES.medalSearch;
 }
 
-export function countryChampsUrl(countryCode: string, champId: number): string {
-	return `${PAGES.countryChamps}?country=${countryCode.toUpperCase()}&champ=${champId}`;
+export function medalCountdownUrl(countryCode: string, champId: number): string {
+	return `${PAGES.medalCountdown}?country=${countryCode.toUpperCase()}&champ=${champId}`;
 }
 
 export function countriesUrl(areaSlug?: string): string {

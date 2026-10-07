@@ -5,19 +5,8 @@ import type { CatalogueEvent } from './event.js';
 export const MEDAL_PAGE_SIZE = 100;
 export const FIRST_YEAR = 1860;
 
-export type MedalOrder = 'year' | 'champs' | 'event' | 'medal' | 'athlete' | 'gender' | 'country';
-
-export const MEDAL_ORDERS: MedalOrder[] = [
-	'year',
-	'champs',
-	'event',
-	'medal',
-	'athlete',
-	'gender',
-	'country'
-];
-
 export const GENDER_CODES: Record<Gender, number> = { men: 0, women: 1, mixed: 2 };
+export const MEDAL_NAMES = { 1: 'gold', 2: 'silver', 3: 'bronze' } as const;
 
 export interface MedalQuery {
 	champ: number | null;
@@ -27,7 +16,6 @@ export interface MedalQuery {
 	gender: Gender | null;
 	medal: 1 | 2 | 3 | null;
 	page: number;
-	order: MedalOrder;
 }
 
 export interface MedalRecord {
@@ -107,22 +95,40 @@ export interface FilterCountry {
 const GLOBAL = 0;
 const integer = (value: string | null) => (value && /^\d{1,9}$/.test(value) ? Number(value) : null);
 
+const PLACES = [1, 2, 3] as const;
+const GENDERS = Object.keys(GENDER_CODES) as Gender[];
+
+function countryOf(value: string | null): string | null {
+	const code = value?.toUpperCase() ?? '';
+	return /^[A-Z]{3}$/.test(code) ? code : null;
+}
+
 export function parseMedalQuery(params: URLSearchParams): MedalQuery {
+	const gender = params.get('gender');
+	const medal = params.get('medal');
+
+	return {
+		champ: integer(params.get('champ')),
+		country: countryOf(params.get('country')),
+		event: integer(params.get('event')),
+		year: integer(params.get('year')),
+		gender: GENDERS.find((key) => key === gender) ?? null,
+		medal: PLACES.find((place) => MEDAL_NAMES[place] === medal) ?? null,
+		page: Math.max(1, integer(params.get('page')) ?? 1)
+	};
+}
+
+export function parseLegacyMedalQuery(params: URLSearchParams): MedalQuery {
 	const gender = integer(params.get('gender'));
-	const medal = integer(params.get('medal'));
-	const country = params.get('country')?.toUpperCase() ?? '';
-	const order = params.get('order') as MedalOrder;
 
 	return {
 		champ: integer(params.get('champs')),
-		country: /^[A-Z]{3}$/.test(country) ? country : null,
+		country: countryOf(params.get('country')),
 		event: integer(params.get('event')),
 		year: integer(params.get('year')),
-		gender:
-			(Object.keys(GENDER_CODES) as Gender[]).find((key) => GENDER_CODES[key] === gender) ?? null,
-		medal: medal === 1 || medal === 2 || medal === 3 ? medal : null,
-		page: Math.max(1, integer(params.get('page')) ?? 1),
-		order: MEDAL_ORDERS.includes(order) ? order : 'year'
+		gender: GENDERS.find((key) => GENDER_CODES[key] === gender) ?? null,
+		medal: PLACES.find((place) => place === integer(params.get('medal'))) ?? null,
+		page: Math.max(1, integer(params.get('page')) ?? 1)
 	};
 }
 

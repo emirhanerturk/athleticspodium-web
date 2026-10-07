@@ -8,7 +8,7 @@
 	import { addTallies } from '#lib/domain/country.js';
 	import {
 		champUrl,
-		countryChampsUrl,
+		medalCountdownUrl,
 		countryUrl,
 		medalSearchUrl,
 		meetingUrl,
@@ -25,8 +25,8 @@
 	const subject = $derived(country && champ ? `${country.name} at the ${champ.name}` : null);
 	const path = $derived(
 		data.countryCode && data.champId
-			? countryChampsUrl(data.countryCode, data.champId)
-			: PAGES.countryChamps
+			? medalCountdownUrl(data.countryCode, data.champId)
+			: PAGES.medalCountdown
 	);
 	const CELL = 'py-2.5 text-center font-data tabular';
 </script>
@@ -41,7 +41,7 @@
 />
 <JsonLd
 	data={[
-		breadcrumbJsonLd(PUBLIC_SITE_URL, [{ name: 'Medal countdown', path: PAGES.countryChamps }])
+		breadcrumbJsonLd(PUBLIC_SITE_URL, [{ name: 'Medal countdown', path: PAGES.medalCountdown }])
 	]}
 />
 

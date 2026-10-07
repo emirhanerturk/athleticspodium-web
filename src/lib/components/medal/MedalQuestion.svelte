@@ -8,7 +8,7 @@
 		champsFor,
 		countriesFor,
 		eventsFor,
-		GENDER_CODES,
+		MEDAL_NAMES,
 		yearsFor,
 		type FilterChamp,
 		type FilterCountry,
@@ -70,8 +70,8 @@
 	action={PAGES.medalSearch}
 	class="flex flex-wrap items-center gap-x-2.5 gap-y-2 font-display text-[24px] leading-[1.3] font-bold sm:text-[30px]"
 >
-	{#if query.medal}<input type="hidden" name="medal" value={query.medal} />{/if}
-	{#if query.gender}<input type="hidden" name="gender" value={GENDER_CODES[query.gender]} />{/if}
+	{#if query.medal}<input type="hidden" name="medal" value={MEDAL_NAMES[query.medal]} />{/if}
+	{#if query.gender}<input type="hidden" name="gender" value={query.gender} />{/if}
 	<span>Show medals</span>
 	<span class="text-ink-3">won by</span>
 	<label class={CHIP}>
@@ -92,7 +92,7 @@
 	<label class={CHIP}>
 		{@render face(champ?.name ?? 'any championship')}
 		<select
-			name="champs"
+			name="champ"
 			aria-label="Championship"
 			class={MENU}
 			onchange={(change) => chooseChamp(number(change.currentTarget.value))}

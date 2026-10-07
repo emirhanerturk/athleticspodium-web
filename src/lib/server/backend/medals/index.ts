@@ -16,7 +16,7 @@ export function createMedals(client: BackendClient) {
 			gender: query.gender ? GENDER_CODES[query.gender] : undefined,
 			medal: query.medal ?? undefined,
 			page: query.page,
-			order: query.order
+			order: 'year'
 		});
 		return parseMedalSearch(page);
 	}
@@ -34,8 +34,7 @@ export function createMedals(client: BackendClient) {
 					year: null,
 					gender,
 					medal: null,
-					page,
-					order: 'year'
+					page
 				});
 				rows.push(...result.rows);
 				if (!result.rows.length || rows.length >= result.count) break;

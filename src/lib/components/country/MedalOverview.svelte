@@ -8,7 +8,7 @@
 	} from '#lib/domain/country.js';
 	import type { MedalTally } from '#lib/domain/result.js';
 	import { formatCount } from '#lib/format/number.js';
-	import { countryChampsUrl } from '#lib/routing/urls.js';
+	import { medalCountdownUrl } from '#lib/routing/urls.js';
 
 	let {
 		countryCode,
@@ -187,7 +187,7 @@
 				</div>
 				{#each groups[level] as row (row.champ.id)}
 					<a
-						href={countryChampsUrl(countryCode, row.champ.id)}
+						href={medalCountdownUrl(countryCode, row.champ.id)}
 						class="grid grid-cols-[minmax(0,1fr)_40px_40px_40px_52px] items-center gap-2 border-t border-line px-5 py-2.5 hover:bg-brand-soft sm:grid-cols-[minmax(0,1fr)_44px_44px_44px_56px]"
 					>
 						<span class="flex min-w-0 flex-col gap-[5px]">

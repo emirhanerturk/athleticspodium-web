@@ -16,7 +16,7 @@ test('renders a country with its medals, athletes and hosted meetings', async ({
 	);
 	await expect(page.getByRole('link', { name: /European Championships/ }).first()).toHaveAttribute(
 		'href',
-		'/medals/country-champs?country=TUR&champ=18'
+		'/medals/countdown?country=TUR&champ=18'
 	);
 	await expect(page.locator('section', { hasText: 'Most decorated' }).locator('li')).toHaveCount(
 		12
@@ -33,7 +33,7 @@ test('filters the medal table by level', async ({ page }) => {
 
 	await page.getByRole('group', { name: 'Level' }).getByRole('button', { name: 'Road' }).click();
 
-	const table = page.locator('a[href^="/medals/country-champs"]');
+	const table = page.locator('a[href^="/medals/countdown"]');
 	await expect(table.filter({ hasText: 'Istanbul Marathon' })).toBeVisible();
 	await expect(table.filter({ hasText: 'European Championships' })).toHaveCount(0);
 });

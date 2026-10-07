@@ -24,7 +24,7 @@
 			title: 'Tools',
 			links: [
 				{ label: 'Medal search', href: PAGES.medalSearch },
-				{ label: 'Medal countdown', href: PAGES.countryChamps },
+				{ label: 'Medal countdown', href: PAGES.medalCountdown },
 				{ label: 'Compare championships', href: PAGES.compare }
 			]
 		},

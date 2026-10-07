@@ -115,9 +115,9 @@ What the sample shows:
 | Calendar                 | `/calendar`, `/calendar/[year=integer]`                  | `V2-Calendar`                             | yes       |
 | Search                   | `/search?q=&type=&gender=&born_from=&born_to=&olympian=` | `V2-Search`                               | no        |
 | Articles                 | `/article`, `/article/[id=integer]/[slug]`               | v2 components                             | yes       |
-| Medal search             | `/medals/search?…`                                       | `V2-Tools`                                | yes       |
-| Medal countdown          | `/medals/country-champs?…`                               | `V2-Tools` hero, v2 components            | yes       |
-| Compare                  | `/compare`                                               | v2 components                             | yes       |
+| Medal search             | `/medals?…`                                              | `V2-Tools`                                | yes       |
+| Medal countdown          | `/medals/countdown?…`                                    | `V2-Tools` hero, v2 components            | yes       |
+| Compare                  | `/medals/compare?…`                                      | `V2-Tools` hero, v2 components            | yes       |
 | About                    | `/about`                                                 | v2 components                             | yes       |
 | Missing information      | `/missing-information?tab=&q=`                           | `V2-Missing`                              | yes       |
 | How to read the database | `/how-to-read-the-database`                              | `V2-Notes`                                | yes       |
@@ -146,15 +146,16 @@ Endpoints served by this app:
 
 All redirects are single-hop 301s, handled in `hooks.server.ts`:
 
-| Request                                                 | Response                           |
-| ------------------------------------------------------- | ---------------------------------- |
-| `www.athleticspodium.com/*`                             | apex host, same path               |
-| trailing slash (`/champs/`)                             | path without the slash             |
-| lower-case country code (`/country/tur`)                | upper-case code                    |
-| athlete or article with a wrong slug                    | canonical slug                     |
-| matrix parameters (`/medals/search;country=TUR;page=2`) | the same filters as a query string |
-| `/simple-notes`                                         | `/how-to-read-the-database`        |
-| `/404`, `/ngsw.json`, any unknown path                  | HTTP 404 with the v2 error page    |
+| Request                                                                      | Response                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `www.athleticspodium.com/*`                                                  | apex host, same path                                                                                                                                                                                      |
+| trailing slash (`/champs/`)                                                  | path without the slash                                                                                                                                                                                    |
+| lower-case country code (`/country/tur`)                                     | upper-case code                                                                                                                                                                                           |
+| athlete or article with a wrong slug                                         | canonical slug                                                                                                                                                                                            |
+| matrix parameters (`/athlete/letter/a;page=2`)                               | the same filters as a query string                                                                                                                                                                        |
+| `/medals/search`, `/medals/country-champs`, `/compare` (moved on 2026-10-08) | `/medals`, `/medals/countdown`, `/medals/compare`; medal search parameters translated (`champs` → `champ`, `gender` 0–2 → `men`/`women`/`mixed`, `medal` 1–3 → `gold`/`silver`/`bronze`, `order` dropped) |
+| `/simple-notes`                                                              | `/how-to-read-the-database`                                                                                                                                                                               |
+| `/404`, `/ngsw.json`, any unknown path                                       | HTTP 404 with the v2 error page                                                                                                                                                                           |
 
 The Angular service worker deletes its caches and unregisters itself when `/ngsw.json` returns 404. The safety worker at `/ngsw-worker.js` covers browsers that load the worker script first.
 
@@ -382,7 +383,7 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 - **Born today:** The top living athlete born today, then "+N more". It reuses the athletes list ordering: Olympic champions first, then youngest.
 - **Search field:** Opens the quick search. `/` and `⌘K` also open it.
 - **Links:**
-  - The yellow "Medal search" button goes to `/medals/search` (it read "Medal Tracker" until 2026-10-08; one name per page).
+  - The yellow "Medal search" button goes to `/medals` (it read "Medal Tracker" until 2026-10-08; one name per page).
   - Nav: Championships, Athletes, Countries, Calendar, Tools, Articles. The Tools menu holds Medal search, Medal countdown and Compare.
   - Social links: Bluesky, Facebook, Instagram, and About.
 
@@ -451,7 +452,7 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 - **Facts:** an edition counts as held from its start date, or from its year when it has no dates. Two meetings in one year (Europeans 1938, men and women) count as one edition. The fourth figure is the next edition, or the latest one when none is scheduled.
 - **Editions strip:** newest first; the latest held edition is highlighted and upcoming ones are dashed.
 - **Event catalogue:** `/events` (names and ranks) is cached in memory for an hour. It orders the programme and each athlete's events.
-- **Links:** programme events and "Every medal in the tracker" go to `/medals/search` with the legacy parameters `champs`, `event` and `gender` (0 men, 1 women, 2 mixed); "Compare" goes to `/compare`.
+- **Links:** programme events and "Every medal in the tracker" go to `/medals` with `champ`, `event` and `gender`; "Compare" goes to `/medals/compare`.
 - **Dropped:** the frequency label ("every two years"), the "historic" nation badge, the area crumb in the breadcrumb and the "All N articles" link.
 
 ### Edition (`/champs/[champ]/[meeting]`)
@@ -541,7 +542,7 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 | Stories                                           | `/articles?country=`                                         | —            |
 
 - **Link:** "All athletes" goes to `/country/[code]/athletes`.
-- **Medal table rows** link to `/medals/country-champs?country=<code>&champ=<id>` (the legacy parameters). The level bars and tabs filter the table; national titles are the golds in national championships.
+- **Medal table rows** link to `/medals/countdown?country=<code>&champ=<id>`. The level bars and tabs filter the table; national titles are the golds in national championships.
 - **Hosted meetings:** the 8 latest international meetings (`international=1`), with a countdown for coming ones and "Results" when `has_results` is true.
 - **About:** `content` is collapsible under the hero.
 - **Dropped:** the structured facts strip.
@@ -591,15 +592,15 @@ Notes:
 
 - **Articles:** `/article?page=n` lists 12 per page (the legacy page kept the page in memory). `/article/[id]/[slug]` shows the standfirst (`spot`), the photo with caption and credit, the content, the related championships, editions, athletes and countries, and three more stories, with `Article` JSON-LD. A wrong slug redirects (301); a missing id is a 404 (the backend now answers `data: null` instead of a 500).
 - **Tools hero:** Medal search, Medal countdown and Compare share the `V2-Tools` hero: "Ask the archive" (the page `h1`), the medal total from `/stats` and the three tools as tabs. Each page's subject is an `h2` in the white band below.
-- **Medal search** (`/medals/search`):
-  - Parameters: the legacy `champs`, `country`, `event`, `year`, `gender` (0–2), `medal` (1–3), `order` and `page` (100 per page). A championship or a country is required.
+- **Medal search** (`/medals`):
+  - Parameters: `champ`, `country`, `event`, `year`, `gender` (`men`, `women`, `mixed`), `medal` (`gold`, `silver`, `bronze`) and `page` (100 per page). A championship or a country is required. The legacy names and numeric values redirect (section 5).
   - The question is a sentence ("Show medals won by … at the … in … · …"). Each box is a native select under a styled label, so it works without JavaScript inside a GET form; with JavaScript a change navigates at once and drops an event or year the new championship does not have.
   - Medal tabs (with counts) and gender tabs are links. With a medal filter, a second request without it gives the tab counts.
   - Results are grouped by edition (`groupByEdition`): relay legs join into one row, and each edition shows its own gold, silver, bronze and DQ count for the rows on the page.
   - Side column: the totals from `counts` (withdrawn medals apart, relays once; backend PR #14), "Copy link", a link to the medal countdown when both a nation and a championship are chosen, and "Try another question" (`MEDAL_QUESTIONS`).
   - The filter lists (championships, countries, events) are cached for an hour.
-- **Medal countdown** (`/medals/country-champs?country=&champ=`): editions newest first with gold, silver, bronze and total, a total row and a "Details →" link into the medal search for that year. Road races and national championships are left out of the select.
-- **Compare** (`/compare?a=&b=&gender=&event=`): the legacy page kept its state in memory; the new one reads it from the URL, so comparisons can be linked (the championship page links to `?a=<id>`). The server loads every medal of the event for both championships (up to 10 pages of 100), lines the podiums up by year and shows the winning mark of A minus B, formatted with the precision of the marks. Silver and bronze rows open per year.
+- **Medal countdown** (`/medals/countdown?country=&champ=`): editions newest first with gold, silver, bronze and total, a total row and a "Details →" link into the medal search for that year. Road races and national championships are left out of the select.
+- **Compare** (`/medals/compare?a=&b=&gender=&event=`): the legacy page kept its state in memory; the new one reads it from the URL, so comparisons can be linked (the championship page links to `?a=<id>`). The server loads every medal of the event for both championships (up to 10 pages of 100), lines the podiums up by year and shows the winning mark of A minus B, formatted with the precision of the marks. Silver and bronze rows open per year.
 - Filters live in query strings.
 - The contact form uses a SvelteKit form action that posts to `/contacts`. It works without JavaScript, validates name, email, subject and message (up to 1,000 characters) on the server, drops messages that fill a hidden honeypot field, and forwards the visitor's IP (`x-forwarded-for`) and user agent so the backend records them as before.
 - **About:** sections `main` and `box`, the two portraits now in `static/about/`, social links and the contact form.

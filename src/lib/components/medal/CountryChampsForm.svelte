@@ -30,7 +30,7 @@
 
 <form
 	method="get"
-	action={PAGES.countryChamps}
+	action={PAGES.medalCountdown}
 	class="grid grid-cols-1 items-end gap-3 rounded-[20px] border border-line bg-surface p-5 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto]"
 >
 	<label class="flex flex-col gap-1.5">
