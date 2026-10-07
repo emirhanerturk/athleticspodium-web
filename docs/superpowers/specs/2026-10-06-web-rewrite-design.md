@@ -244,7 +244,9 @@ Error handling:
   - `success: false` with code `4040` means not found; any other code is an error.
   - `success: true` with `data: null` on a detail endpoint also means not found.
 - Load functions turn these into `error(404)` or `error(503)`.
-- `+error.svelte` renders the v2 error page.
+- `+error.svelte` renders the v2 error page:
+  - 404 follows `V2-404`: "DNF.", a search box to `/search`, shortcut links, and a results sheet whose last row is the missing page.
+  - 503 ("The archive didn’t answer.") and other errors follow the error card of `V2-States`: a DQ disc, "Try again" (a full reload) and "Report problem" (the About contact form).
 - `handleError` logs unexpected errors with the request path.
 
 ### 6.4 Caching

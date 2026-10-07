@@ -32,7 +32,13 @@ test('answers unknown pages with a real 404', async ({ page }) => {
 	const response = await page.goto('/no-such-page');
 
 	expect(response?.status()).toBe(404);
-	await expect(page.getByRole('heading', { level: 1 })).toHaveText('Page not found');
+	await expect(page).toHaveTitle('Page not found | Athletics Podium');
+	await expect(page.getByRole('heading', { level: 1 })).toHaveText(/DNF\.\s+Page not found/);
+	await expect(page.getByText('Did not reach the finish line')).toBeVisible();
+
+	await page.getByRole('searchbox', { name: 'Search' }).fill('bolt');
+	await page.getByRole('button', { name: 'Search', exact: true }).click();
+	await expect(page).toHaveURL(/\/search\?q=bolt$/);
 });
 
 test('redirects legacy URL forms in one 301', async ({ request }) => {
