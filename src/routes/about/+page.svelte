@@ -66,7 +66,7 @@
 					<li><a href="mailto:{EMAIL}" class="text-brand-ink hover:underline">{EMAIL}</a></li>
 				</ul>
 			</div>
-			<div class="flex flex-col gap-3">
+			<div id="contact" class="flex scroll-mt-6 flex-col gap-3">
 				<h2 class="font-display text-[30px] leading-none font-bold">Contact</h2>
 				<ContactForm {form} />
 			</div>
