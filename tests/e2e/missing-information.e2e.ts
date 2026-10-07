@@ -1,6 +1,6 @@
 import { expect, test } from './fixtures.js';
 
-test('lists the gaps by championship, with the gaps readers filled', async ({ page }) => {
+test('lists the gaps by championship, without the gaps readers filled', async ({ page }) => {
 	await page.goto('/missing-information');
 	const lists = page.getByRole('navigation', { name: 'Lists' });
 
@@ -11,7 +11,7 @@ test('lists the gaps by championship, with the gaps readers filled', async ({ pa
 	await expect(lists.getByRole('link', { name: /Medallists/ })).toContainText('53');
 	await expect(page.getByRole('heading', { name: 'Pan Arab Games' })).toBeVisible();
 	await expect(page.getByTitle('Silver missing').first()).toBeVisible();
-	await expect(page.getByRole('complementary')).toContainText('Michel Maze');
+	await expect(page.getByRole('heading', { name: 'Francophonie Games' })).toHaveCount(0);
 });
 
 test('filters the list as the visitor types', async ({ page }) => {

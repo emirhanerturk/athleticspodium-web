@@ -599,7 +599,7 @@ Notes:
   - Parsing rules:
     - A bold-only line is a championship heading; headings starting with "Missing" are titles and are left out.
     - A line that starts with a year is a gap. A trailing `- G / S / B` or `(G)`, `(S)`, `(B)` becomes dashed medal discs.
-    - A line ending in `Found (Thanks to …)` is listed under "Gaps filled by readers" instead.
+    - A line ending in `Found (Thanks to …)` is a filled gap and is left out.
     - Other lines (legends, contact lines) are left out.
   - Tabs (with gap counts), the filter (`q`) and the prefilled message (`gap`) are read from the URL by the page, so switching them loads nothing. The filter is a GET form, so it works without JavaScript.
   - "I know this" opens the contact form at `#send` with the gap as the start of the message; the subject is fixed to "Missing information".

@@ -39,8 +39,7 @@
 	const tab = $derived(parseMissingSection(page.url.searchParams.get('tab')));
 	const query = $derived(page.url.searchParams.get('q') ?? '');
 	const gap = $derived(page.url.searchParams.get('gap'));
-	const groups = $derived(filterGaps(data.lists[tab].groups, query));
-	const found = $derived(MISSING_SECTIONS.flatMap((section) => data.lists[section].found));
+	const groups = $derived(filterGaps(data.lists[tab], query));
 
 	const knowHref = (item: Gap, group: string | null) =>
 		`${missingInformationUrl({ tab, query, gap: describeGap(item, group) })}#send`;
@@ -87,7 +86,7 @@
 		</div>
 		<nav aria-label="Lists" class="flex [scrollbar-width:none] gap-1 overflow-x-auto">
 			{#each MISSING_SECTIONS as section (section)}
-				{@const count = gapCount(data.lists[section].groups)}
+				{@const count = gapCount(data.lists[section])}
 				<a
 					href={missingInformationUrl({ tab: section })}
 					aria-current={section === tab ? 'page' : undefined}
@@ -112,7 +111,7 @@
 		<div class="flex min-w-0 flex-col gap-[18px]">
 			<div class="flex flex-wrap items-center justify-between gap-3">
 				<p class="text-[15px] text-ink-2">{INTROS[tab]}</p>
-				{#if data.lists[tab].groups.length}
+				{#if data.lists[tab].length}
 					<form
 						method="get"
 						role="search"
@@ -139,7 +138,7 @@
 				<div
 					class="flex flex-col items-center gap-2.5 rounded-[20px] border border-dashed border-line-2 p-11 text-center"
 				>
-					{#if data.lists[tab].groups.length}
+					{#if data.lists[tab].length}
 						<strong class="font-display text-[32px] leading-none font-bold">
 							No gap matches “{query}”
 						</strong>
@@ -175,33 +174,6 @@
 					or <a href="mailto:{EMAIL}" class="underline hover:no-underline">{EMAIL}</a>
 				</span>
 			</div>
-			{#if found.length}
-				<div
-					class="flex flex-col gap-2 rounded-[18px] border border-line bg-surface px-5 py-[18px]"
-				>
-					<h2 class="text-sm font-bold">Gaps filled by readers</h2>
-					<ul>
-						{#each found as item, index (index)}
-							<li class="grid grid-cols-[22px_minmax(0,1fr)] gap-2.5 border-t border-line py-2">
-								<span
-									aria-hidden="true"
-									class="mt-0.5 grid size-[22px] place-items-center rounded-full bg-brand-soft text-xs font-bold text-brand-ink"
-									>✓</span
-								>
-								<span class="flex flex-col gap-px">
-									<strong class="text-[13.5px] font-semibold">{item.by}</strong>
-									<span class="text-[12.5px] text-ink-3">
-										{item.group ? `${item.group} · ` : ''}{item.line}
-									</span>
-								</span>
-							</li>
-						{/each}
-					</ul>
-					<a href={PAGES.about} class="text-[13.5px] font-bold text-brand-ink hover:underline">
-						All contributors →
-					</a>
-				</div>
-			{/if}
 		</aside>
 	</div>
 </section>

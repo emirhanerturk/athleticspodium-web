@@ -16,17 +16,6 @@ export interface GapGroup {
 	gaps: Gap[];
 }
 
-export interface FoundGap {
-	line: string;
-	group: string | null;
-	by: string;
-}
-
-export interface MissingList {
-	groups: GapGroup[];
-	found: FoundGap[];
-}
-
 export function parseMissingSection(value: string | null): MissingSection {
 	return MISSING_SECTIONS.find((section) => section === value) ?? MISSING_SECTIONS[0];
 }

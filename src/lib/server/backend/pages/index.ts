@@ -1,4 +1,4 @@
-import { MISSING_SECTIONS, type MissingList, type MissingSection } from '#lib/domain/missing.js';
+import { MISSING_SECTIONS, type GapGroup, type MissingSection } from '#lib/domain/missing.js';
 import { BackendNotFoundError, type BackendClient } from '../client.js';
 import { parseMissingList } from './parse.js';
 
@@ -14,13 +14,13 @@ export function createPages(client: BackendClient) {
 		return { title: page.title, content: page.content?.trim() || null };
 	}
 
-	async function missingInformation(): Promise<Record<MissingSection, MissingList>> {
+	async function missingInformation(): Promise<Record<MissingSection, GapGroup[]>> {
 		const pages = await Promise.all(
 			MISSING_SECTIONS.map((section) => get('missing-information', section))
 		);
 		return Object.fromEntries(
 			MISSING_SECTIONS.map((section, index) => [section, parseMissingList(pages[index].content)])
-		) as Record<MissingSection, MissingList>;
+		) as Record<MissingSection, GapGroup[]>;
 	}
 
 	return { get, missingInformation };

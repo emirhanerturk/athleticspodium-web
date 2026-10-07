@@ -1,9 +1,9 @@
-import type { Gap, GapGroup, MissingList, MissingMedal } from '#lib/domain/missing.js';
+import type { Gap, GapGroup, MissingMedal } from '#lib/domain/missing.js';
 import { htmlToText } from '#lib/utils/html-text.js';
 
 const LINE_BREAK = /<\/p>|<br\s*\/?>/i;
 const BOLD = /<strong\b[^>]*>[\s\S]*?<\/strong>/gi;
-const FOUND = /^(.*?)[\s-]*Found \(Thanks to ([^)]+)\)$/i;
+const FOUND = /Found \(Thanks to [^)]+\)$/i;
 const MEDAL_SUFFIX = /\s+-\s+([GSB](?:\s*\/\s*[GSB])*)$/;
 
 function isHeading(fragment: string): boolean {
@@ -27,9 +27,8 @@ function parseGap(line: string): Gap | null {
 	};
 }
 
-export function parseMissingList(html: string | null): MissingList {
+export function parseMissingList(html: string | null): GapGroup[] {
 	const groups: GapGroup[] = [];
-	const found: MissingList['found'] = [];
 	let current: GapGroup | null = null;
 
 	for (const fragment of (html ?? '').split(LINE_BREAK)) {
@@ -43,13 +42,7 @@ export function parseMissingList(html: string | null): MissingList {
 			continue;
 		}
 
-		const thanks = text.match(FOUND);
-		if (thanks && /^\d{4}\s/.test(text)) {
-			found.push({ line: thanks[1].trim(), group: current?.name ?? null, by: thanks[2].trim() });
-			continue;
-		}
-
-		const gap = parseGap(text);
+		const gap = FOUND.test(text) ? null : parseGap(text);
 		if (!gap) continue;
 		if (!current) {
 			current = { name: null, gaps: [] };
@@ -58,5 +51,5 @@ export function parseMissingList(html: string | null): MissingList {
 		current.gaps.push(gap);
 	}
 
-	return { groups: groups.filter((group) => group.gaps.length), found };
+	return groups.filter((group) => group.gaps.length);
 }

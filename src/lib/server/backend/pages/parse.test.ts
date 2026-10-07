@@ -3,11 +3,11 @@ import { parseMissingList } from './parse.js';
 
 describe('parseMissingList', () => {
 	it('groups the dated lines under the bold championship lines', () => {
-		const list = parseMissingList(
+		const groups = parseMissingList(
 			'<p><strong>MISSING MEDALLISTS BY CHAMPIONSHIPS</strong></p><p><em>(G - Gold, S - Silver, B - Bronze)</em></p><p><br></p><p><strong>African U20 Championships</strong></p><p>2019 Men\'s JT - G / S / B</p><p>1988 Women\'s SP, DT, 4x100m - S/ B </p><p><strong style="color: rgb(65, 65, 65);">Balkan&nbsp;Championships</strong></p><p><span>1930 4x100 men: JUG (B)</span></p><p><em>If you have information - please contact:&nbsp;</em><a href="mailto:a@b.c"><strong><em>a@b.c</em></strong></a></p>'
 		);
 
-		expect(list.groups).toEqual([
+		expect(groups).toEqual([
 			{
 				name: 'African U20 Championships',
 				gaps: [
@@ -20,15 +20,14 @@ describe('parseMissingList', () => {
 				gaps: [{ year: 1930, text: '4x100 men: JUG (B)', medals: ['B'] }]
 			}
 		]);
-		expect(list.found).toEqual([]);
 	});
 
 	it('keeps lines before any championship together and leaves out the rest', () => {
-		const list = parseMissingList(
+		const groups = parseMissingList(
 			'<p><strong>Missing Marks</strong><br>1957 Pan Arab Games Men&#39;s 4x400m silver - Lebanon<br>1975 CAC Championships Men&#39;s 200m bronze - Raymond Heerenveen</p><p><em>If you have information please contact us</em></p>'
 		);
 
-		expect(list.groups).toEqual([
+		expect(groups).toEqual([
 			{
 				name: null,
 				gaps: [
@@ -44,18 +43,20 @@ describe('parseMissingList', () => {
 		expect(
 			parseMissingList(
 				'<p><strong>Missing</strong> <strong>forenames</strong></p><p>Soon will be updated.</p>'
-			).groups
+			)
 		).toEqual([]);
 	});
 
-	it('moves the lines found by readers out of the gaps', () => {
-		const list = parseMissingList(
+	it('leaves out the gaps readers have filled', () => {
+		const groups = parseMissingList(
 			'<p><strong>Francophonie Games</strong></p><p>1997 4x100 women gold - MAD</p><p><em>1997 4x400 women bronze - MAD - Found (Thanks to Michel Maze)</em></p>'
 		);
 
-		expect(list.groups[0].gaps).toHaveLength(1);
-		expect(list.found).toEqual([
-			{ line: '1997 4x400 women bronze - MAD', group: 'Francophonie Games', by: 'Michel Maze' }
+		expect(groups).toEqual([
+			{
+				name: 'Francophonie Games',
+				gaps: [{ year: 1997, text: '4x100 women gold - MAD', medals: [] }]
+			}
 		]);
 	});
 });
