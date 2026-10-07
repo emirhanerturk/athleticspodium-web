@@ -210,26 +210,22 @@ function podium() {
 
 function resultRows() {
 	const rows = [
-		{ place: 1, name: 210, mark: 70 },
-		{ place: 1, name: 170, mark: 82 },
-		{ place: 2, name: 230, mark: 64 },
-		{ place: 1, name: 150, mark: 76 },
-		{ place: 3, name: 196, mark: 70 },
-		{ place: 2, name: 180, mark: 84 },
-		{ place: 1, name: 220, mark: 66 }
+		{ place: 1, name: 220, mark: 76 },
+		{ place: 2, name: 180, mark: 88 },
+		{ place: 3, name: 240, mark: 70 }
 	];
 	const lines = rows.map(
 		({
 			place,
 			name,
 			mark
-		}) => `<div style="display: flex; align-items: center; gap: 20px; height: 76px; border-bottom: 1px solid var(--color-night-line-2);">
-			<span class="disc ${MEDAL_FILLS[place]}" style="width: 46px; height: 46px;">${place}</span>
-			<span style="width: ${name}px; height: 16px; border-radius: 8px; background: var(--color-night-ink-4);"></span>
-			<span style="margin-left: auto; width: ${mark}px; height: 16px; border-radius: 8px; background: var(--color-night-line-2);"></span>
+		}) => `<div style="display: flex; align-items: center; gap: 26px; height: 120px; border-bottom: 1px solid var(--color-night-line-2);">
+			<span class="disc ${MEDAL_FILLS[place]}" style="width: 72px; height: 72px; font-size: 34px;">${place}</span>
+			<span style="width: ${name}px; height: 22px; border-radius: 11px; background: var(--color-night-ink-4);"></span>
+			<span style="margin-left: auto; width: ${mark}px; height: 22px; border-radius: 11px; background: var(--color-night-line-2);"></span>
 		</div>`
 	);
-	return `<div style="position: absolute; top: 40px; right: 72px; width: 400px; mask-image: linear-gradient(to bottom, #000 70%, transparent);">${lines.join('')}</div>`;
+	return `<div style="position: absolute; top: 130px; right: 72px; width: 440px;">${lines.join('')}</div>`;
 }
 
 function flagMosaic(assets) {
