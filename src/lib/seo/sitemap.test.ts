@@ -1,11 +1,18 @@
 import { describe, expect, it } from 'vitest';
-import { parseSitemapFileName, sitemapIndexXml, urlSetXml } from './sitemap.js';
+import { daySitemapEntries, parseSitemapFileName, sitemapIndexXml, urlSetXml } from './sitemap.js';
 
 const SITE = 'https://athleticspodium.com';
 
 describe('parseSitemapFileName', () => {
 	it('reads the type and page', () => {
 		expect(parseSitemapFileName('athletes-3.xml')).toEqual({ type: 'athletes', page: 3 });
+	});
+
+	it('knows the day pages, which the site lists itself', () => {
+		expect(parseSitemapFileName('days-1.xml')).toEqual({ type: 'days', page: 1 });
+		const entries = daySitemapEntries('2026-10-07');
+		expect(entries).toHaveLength(366);
+		expect(entries[0]).toEqual({ path: '/on-this-day/january-1', lastModified: '2026-10-07' });
 	});
 
 	it('rejects unknown types, page zero and other names', () => {

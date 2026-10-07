@@ -3,7 +3,8 @@
 	import { ageOn, fullName, type AthleteSummary, type OnThisDay } from '#lib/domain/athlete.js';
 	import type { IsoDate } from '#lib/domain/date.js';
 	import { formatDayMonth } from '#lib/format/date.js';
-	import { athleteUrl } from '#lib/routing/urls.js';
+	import { dayOfDate } from '#lib/domain/day.js';
+	import { athleteUrl, onThisDayUrl } from '#lib/routing/urls.js';
 
 	let { born, died, today }: { born: OnThisDay; died: OnThisDay; today: IsoDate } = $props();
 
@@ -18,7 +19,9 @@
 		const years = ageOn(athlete.birthDate, today);
 		return index === 0 ? `turns ${years}` : String(years);
 	};
+	const dayUrl = $derived(onThisDayUrl(dayOfDate(today)));
 	const H3 = 'text-[15px] font-bold tracking-[0.06em] uppercase';
+	const ALL = 'font-data text-[13.5px] font-semibold text-brand-ink hover:underline';
 	const ROW = 'border-b border-line-2 py-[11px] hover:text-brand-ink';
 </script>
 
@@ -28,9 +31,12 @@
 	>
 		<div class="flex flex-col gap-3">
 			<span class="font-data text-xs tracking-[0.16em] text-ink-3 uppercase">On this day</span>
-			<span class="font-display text-[80px] leading-[0.86] font-bold sm:text-[120px]">
+			<a
+				href={dayUrl}
+				class="font-display text-[80px] leading-[0.86] font-bold hover:text-brand-ink sm:text-[120px]"
+			>
 				{formatDayMonth(today)}
-			</span>
+			</a>
 			<p class="max-w-[280px] text-[15px] leading-[1.55] text-ink-2">
 				{born.count}
 				{born.count === 1 ? 'medallist was' : 'medallists were'} born on this day, {died.count} died on
@@ -40,7 +46,7 @@
 		<div class="flex flex-col">
 			<div class="flex items-baseline justify-between border-b-2 border-ink pb-2.5">
 				<h2 class={H3}>Born today</h2>
-				<span class="font-data text-[13.5px] text-ink-3">{born.count}</span>
+				<a href="{dayUrl}#born" class={ALL}>All {born.count} →</a>
 			</div>
 			{#each born.athletes as athlete, index (athlete.id)}
 				<a
@@ -68,7 +74,7 @@
 		<div class="flex flex-col">
 			<div class="flex items-baseline justify-between border-b-2 border-ink pb-2.5">
 				<h2 class={H3}>Remembered today</h2>
-				<span class="font-data text-[13.5px] text-ink-3">{died.count}</span>
+				<a href="{dayUrl}#died" class={ALL}>All {died.count} →</a>
 			</div>
 			{#each died.athletes as athlete (athlete.id)}
 				<a

@@ -108,6 +108,7 @@ What the sample shows:
 | Edition                  | `/champs/[champ]/[meeting]`                              | `V2-Edition` → `Meeting-A` (`cards=true`) | yes       |
 | Athletes                 | `/athlete`                                               | `V2-Athletes` → `Athletes-B`              | yes       |
 | Athletes A–Z             | `/athlete/letter/[letter]?page=n`                        | v2 components                             | yes       |
+| On this day              | `/on-this-day/[day]?page=n`                              | v2 components (home "On this day" style)  | yes       |
 | Athlete                  | `/athlete/[id=integer]/[slug]`                           | `V2-Athlete` → `Athlete-A` (`v2=true`)    | yes       |
 | Countries                | `/country`                                               | `V2-Countries`                            | yes       |
 | Country                  | `/country/[code]`                                        | `V2-Country`                              | yes       |
@@ -380,7 +381,7 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 ### Header (ticker)
 
 - **Up next:** The first meeting from `upcoming-meetings` that is running or still to come, with a countdown (B6).
-- **Born today:** The top living athlete born today, then "+N more". It reuses the athletes list ordering: Olympic champions first, then youngest.
+- **Born today:** The top living athlete born today, then "+N more". It reuses the athletes list ordering: Olympic champions first, then youngest. It links to today's day page.
 - **Search field:** Opens the quick search. `/` and `⌘K` also open it.
 - **Links:**
   - The yellow "Medal search" button goes to `/medals` (it read "Medal Tracker" until 2026-10-08; one name per page).
@@ -412,12 +413,12 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 | Results desk (4)                                         | `last-meetings` summary                              | B15                    |
 | Next six months timeline                                 | `upcoming-meetings?days=183`                         | B6                     |
 | Guides                                                   | `lib/domain/guides.ts`                               | —                      |
-| On this day counts, Born today (7), Remembered today (6) | `/athletes?date_of_birth=` and `?date_of_death=`     | B9 for `date_of_death` |
+| On this day counts, Born today (7), Remembered today (6) | `/athletes/on-this-day`                              | backend PR #15         |
 | Portraits                                                | `/featured-athletes`, with an excerpt of `biography` | B8                     |
 
 - **Results desk rule.** Road races (category 8) show the winners. Other meetings show the top three nations. Meetings are the most recently ended ones that have results.
 - **Lead and latest:** the first featured article leads (the newest article when none is featured); the latest five follow without it.
-- **On this day:** up to 50 candidates per list ranked by international medals (B11), 7 born and 6 remembered.
+- **On this day:** the first 7 born and 6 remembered from `/athletes/on-this-day`, which ranks by international medals. The date and the "All N →" links go to the day page.
 - **Guides:**
   - The cards replace the legacy Paris 2024 and World Marathon Majors banners. Each links to its article and uses the article's cover image.
   - Copy and figures are kept by hand in `lib/domain/guides.ts`. Update them when the article changes, for example the World Marathon Majors race count after each race.
@@ -482,7 +483,7 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 - **Total athletes:** the `athletes` figure of `/stats` (B14), already loaded by the layout.
 - **Hero search:** a `GET /search?type=athletes&q=` form, so it works without JavaScript; the quick search suggestions are added with the search work (B12).
 - **Featured cards:** from `/featured-athletes` (B8).
-- **Born today:** up to 50 candidates from `/athletes?date_of_birth=` are ranked by international medals through `/athletes/summaries` (B11); the first six are shown. `†` and life years mark deceased athletes (B9).
+- **Born today:** the first six from `/athletes/on-this-day`, with "All N born on …" linking to the day page. `†` and life years mark deceased athletes (B9).
 - **Greatest by nation:**
   - Top 5 per nation, from `/countries/:code/athletes?limit=5&international=1` (B3).
   - The nation chips come from a fixed list in `lib/domain/featured-nations.ts`.
@@ -520,6 +521,16 @@ For each page: what it shows, where the data comes from, and the backend prerequ
   - The Medals table follows. The national results list comes last, so national titles never push the international medals down.
   - The national list shows the event when the athlete has more than one.
 - **Dropped:** the age-group chip and the "Heights on the podium" chart (decided 2026-10-07).
+
+### On this day (`/on-this-day/[day]?page=n`)
+
+- **Address:** the day is a month name and a number (`/on-this-day/october-7`); all 366 days exist, 29 February included.
+  - `/on-this-day` answers 302 to today, or to `?month=&day=` from the day picker (a day past the month's end becomes its last day).
+  - Other spellings (`October-07`) and `?page=1` answer 301; a day that does not exist, or a page past the last, answers 404.
+- **Data:** `GET /athletes/on-this-day?kind=born|died&date=MM-DD&limit=100&offset=` (backend PR #15). It ranks by international medals with the summaries' rule (no national championships, placings or withdrawn medals) and returns the total.
+- **Display:** the hero shows the date, the counts, the previous and next day, "Today" and a day/month picker. Below it come "Born on …" and "Died on …", 100 per page each under one `page` parameter. Each row has the rank, flag, name with the hover card, OG, events, years, "turns N" or "aged N" and the medal tally.
+- **Links in:** the home page's date and "All N →" links, the ticker's "Born today", and the athletes hub's "All N born on …".
+- **Sitemap:** the site adds `/sitemaps/days-1.xml` with the 366 day pages to the index itself.
 
 ### Countries (`/country`)
 

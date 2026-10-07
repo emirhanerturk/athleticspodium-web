@@ -6,8 +6,9 @@
 	import OnThisDayCards from '#lib/components/athlete/OnThisDayCards.svelte';
 	import JsonLd from '#lib/components/seo/JsonLd.svelte';
 	import SeoHead from '#lib/components/seo/SeoHead.svelte';
+	import { dayOfDate } from '#lib/domain/day.js';
 	import { formatDayMonth } from '#lib/format/date.js';
-	import { athleteLetterUrl, PAGES } from '#lib/routing/urls.js';
+	import { athleteLetterUrl, onThisDayUrl, PAGES } from '#lib/routing/urls.js';
 	import { breadcrumbJsonLd } from '#lib/seo/json-ld.js';
 	import type { PageProps } from './$types';
 
@@ -43,9 +44,12 @@
 		<div class="rounded-[20px] border border-line bg-surface p-[26px]">
 			<div class="mb-[18px] flex flex-wrap items-baseline justify-between gap-2.5">
 				<h2 class={H2}>Birthdays today</h2>
-				<span class="font-data text-[13.5px] text-ink-3">
-					{formatDayMonth(data.today)} · {data.born.count}
-				</span>
+				<a
+					href={onThisDayUrl(dayOfDate(data.today))}
+					class="text-sm font-semibold text-brand-ink hover:underline"
+				>
+					All {data.born.count} born on {formatDayMonth(data.today)} →
+				</a>
 			</div>
 			<OnThisDayCards athletes={data.born.athletes} today={data.today} />
 		</div>

@@ -1,8 +1,11 @@
 import type { IsoDate } from '#lib/domain/date.js';
+import { everyDay } from '#lib/domain/day.js';
+import { onThisDayUrl } from '#lib/routing/urls.js';
 
 export const SITEMAP_TYPES = ['athletes', 'meetings', 'champs', 'countries', 'articles'] as const;
 
 export type SitemapType = (typeof SITEMAP_TYPES)[number];
+export type SitemapFileType = SitemapType | 'days';
 
 export interface SitemapEntry {
 	path: string;
@@ -15,7 +18,7 @@ export interface SitemapPage {
 }
 
 export interface SitemapFile {
-	type: SitemapType;
+	type: SitemapFileType;
 	page: number;
 }
 
@@ -27,7 +30,7 @@ export function sitemapFileName({ type, page }: SitemapFile): string {
 
 export function parseSitemapFileName(name: string): SitemapFile | null {
 	const match = FILE_NAME.exec(name);
-	if (!match || !isSitemapType(match[1])) return null;
+	if (!match || !isSitemapFileType(match[1])) return null;
 	return { type: match[1], page: Number(match[2]) };
 }
 
@@ -47,8 +50,12 @@ export function urlSetXml(siteUrl: string, entries: SitemapEntry[]): string {
 	return xmlDocument('urlset', items);
 }
 
-function isSitemapType(value: string): value is SitemapType {
-	return (SITEMAP_TYPES as readonly string[]).includes(value);
+function isSitemapFileType(value: string): value is SitemapFileType {
+	return value === 'days' || (SITEMAP_TYPES as readonly string[]).includes(value);
+}
+
+export function daySitemapEntries(today: IsoDate): SitemapEntry[] {
+	return everyDay().map((day) => ({ path: onThisDayUrl(day), lastModified: today }));
 }
 
 function xmlDocument(root: string, items: string[]): string {

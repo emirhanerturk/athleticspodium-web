@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { ageOn, fullName, type BirthdaysToday } from '#lib/domain/athlete.js';
 	import type { IsoDate } from '#lib/domain/date.js';
+	import { dayOfDate } from '#lib/domain/day.js';
 	import { meetingTiming, type MeetingSummary } from '#lib/domain/meeting.js';
 	import { formatDateRange, formatDaysToGo } from '#lib/format/date.js';
-	import { meetingUrl, PAGES } from '#lib/routing/urls.js';
+	import { meetingUrl, onThisDayUrl, PAGES } from '#lib/routing/urls.js';
 	import SocialLinks from './SocialLinks.svelte';
 
 	let {
@@ -47,7 +48,10 @@
 
 		{#if birthdays && birthdayAthlete?.birthDate}
 			<span aria-hidden="true" class="hidden h-4 w-px bg-night-line-2 md:block"></span>
-			<a href={PAGES.athletes} class="hidden items-center gap-2.5 hover:text-night-ink md:flex">
+			<a
+				href={onThisDayUrl(dayOfDate(today))}
+				class="hidden items-center gap-2.5 hover:text-night-ink md:flex"
+			>
 				<span class="font-data text-[11px] font-bold tracking-[0.1em] text-brand">BORN TODAY</span>
 				<span>
 					<strong class="font-semibold text-night-ink">{fullName(birthdayAthlete)}</strong>

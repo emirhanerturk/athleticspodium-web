@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { medalSearchUrl, missingInformationUrl, searchUrl } from './urls.js';
+import { medalSearchUrl, missingInformationUrl, onThisDayUrl, searchUrl } from './urls.js';
 
 describe('medalSearchUrl', () => {
 	it('filters the medal search by championship', () => {
@@ -34,5 +34,12 @@ describe('missingInformationUrl', () => {
 		expect(missingInformationUrl({ tab: 'relays', query: 'NGR', gap: '1989 4x100 men' })).toBe(
 			'/missing-information?tab=relays&q=NGR&gap=1989+4x100+men'
 		);
+	});
+});
+
+describe('onThisDayUrl', () => {
+	it('names the month and adds the page after the first', () => {
+		expect(onThisDayUrl({ month: 2, day: 29 })).toBe('/on-this-day/february-29');
+		expect(onThisDayUrl({ month: 10, day: 7 }, 2)).toBe('/on-this-day/october-7?page=2');
 	});
 });

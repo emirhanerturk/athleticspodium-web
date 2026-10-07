@@ -1,3 +1,4 @@
+import { dayOfDate } from '#lib/domain/day.js';
 import { isoDateOf } from '#lib/domain/date.js';
 import { FEATURED_NATIONS } from '#lib/domain/featured-nations.js';
 import type { PageServerLoad } from './$types';
@@ -9,7 +10,7 @@ export const load: PageServerLoad = async ({ locals: { backend } }) => {
 	const today = isoDateOf(new Date());
 	const [featured, born, nations] = await Promise.all([
 		backend.athletes.featured(),
-		backend.athletes.onThisDay(today, 'born', BIRTHDAY_LIMIT),
+		backend.athletes.onThisDay(dayOfDate(today), 'born', { limit: BIRTHDAY_LIMIT }),
 		Promise.all(
 			FEATURED_NATIONS.map(async (nation) => ({
 				...nation,

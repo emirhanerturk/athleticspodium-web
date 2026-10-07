@@ -1,4 +1,5 @@
 import type { CompareQuery } from '#lib/domain/compare.js';
+import { daySlug, type DayOfYear } from '#lib/domain/day.js';
 import { MEDAL_NAMES, type MedalQuery } from '#lib/domain/medal-search.js';
 import { MISSING_SECTIONS, type MissingSection } from '#lib/domain/missing.js';
 import type { SearchRequest } from '#lib/domain/search.js';
@@ -16,7 +17,8 @@ export const PAGES = {
 	search: '/search',
 	about: '/about',
 	databaseNotes: '/how-to-read-the-database',
-	missingInformation: '/missing-information'
+	missingInformation: '/missing-information',
+	onThisDay: '/on-this-day'
 } as const;
 
 export function missingInformationUrl({
@@ -30,6 +32,11 @@ export function missingInformationUrl({
 	if (gap) params.set('gap', gap);
 	const search = params.toString();
 	return search ? `${PAGES.missingInformation}?${search}` : PAGES.missingInformation;
+}
+
+export function onThisDayUrl(day: DayOfYear, page = 1): string {
+	const path = `${PAGES.onThisDay}/${daySlug(day)}`;
+	return page > 1 ? `${path}?page=${page}` : path;
 }
 
 export function athleteUrl(athlete: { id: number; slug: string }): string {
