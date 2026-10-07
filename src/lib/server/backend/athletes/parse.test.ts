@@ -54,23 +54,29 @@ describe('parseRelatives', () => {
 });
 
 describe('parseAthleteProfile', () => {
-	it('builds the media path of the first image and drops an empty biography', () => {
+	it('builds the media path of every photo and drops an empty biography', () => {
 		const profile = parseAthleteProfile({
 			...row(35017, null),
 			aka: null,
 			olympic_mark: true,
 			place_of_birth: null,
 			events: ['High jump'],
-			image: [{ uri: 'photo.jpeg', credit: 'Photo by someone' }],
+			image: [
+				{ uri: 'photo.jpeg', credit: 'Photo by someone' },
+				{ uri: 'second.jpeg', credit: ' ', caption: 'Competing at 2015 Balkan Indoor' }
+			],
 			biography: '  ',
 			country: { code: 'UKR', name: 'Ukraine' }
 		});
 
-		expect(profile.image).toEqual({
-			path: 'athletes/35017/photo.jpeg',
-			credit: 'Photo by someone',
-			caption: null
-		});
+		expect(profile.photos).toEqual([
+			{ path: 'athletes/35017/photo.jpeg', credit: 'Photo by someone', caption: null },
+			{
+				path: 'athletes/35017/second.jpeg',
+				credit: null,
+				caption: 'Competing at 2015 Balkan Indoor'
+			}
+		]);
 		expect(profile.biography).toBeNull();
 		expect(profile.aka).toEqual([]);
 	});

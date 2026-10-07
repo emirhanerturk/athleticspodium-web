@@ -53,7 +53,7 @@
 	title={athleteTitle(athlete)}
 	description={athleteDescription(athlete, career)}
 	{path}
-	image={athlete.image ? `${PUBLIC_MEDIA_URL}/${athlete.image.path}` : undefined}
+	image={athlete.photos[0] ? `${PUBLIC_MEDIA_URL}/${athlete.photos[0].path}` : undefined}
 />
 <JsonLd
 	data={[

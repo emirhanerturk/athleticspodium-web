@@ -31,7 +31,7 @@ describe('personJsonLd', () => {
 				birthPlace: 'Dnipropetrovsk, Ukraine',
 				events: ['High jump'],
 				country: { code: 'UKR', name: 'Ukraine' },
-				image: { path: 'athletes/35017/photo.jpeg', credit: null, caption: null },
+				photos: [{ path: 'athletes/35017/photo.jpeg', credit: null, caption: null }],
 				biography: null
 			},
 			'/athlete/35017/yaroslava-mahuchikh'

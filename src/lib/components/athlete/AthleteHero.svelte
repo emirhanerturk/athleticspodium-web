@@ -1,10 +1,13 @@
 <script lang="ts">
+	import { PUBLIC_MEDIA_URL } from '$app/env/public';
 	import PodiumTally from '#lib/components/medal/PodiumTally.svelte';
 	import Flag from '#lib/components/ui/Flag.svelte';
 	import MediaImage from '#lib/components/ui/MediaImage.svelte';
+	import PhotoViewer from '#lib/components/ui/PhotoViewer.svelte';
 	import { ageOn, fullName, type AthleteProfile } from '#lib/domain/athlete.js';
 	import type { CareerSummary, OlympicAppearance } from '#lib/domain/career.js';
 	import type { IsoDate } from '#lib/domain/date.js';
+	import { imageNote } from '#lib/domain/image.js';
 	import { formatDate } from '#lib/format/date.js';
 	import { countryUrl, PAGES } from '#lib/routing/urls.js';
 
@@ -24,6 +27,15 @@
 
 	const name = $derived(fullName(athlete));
 	const initials = $derived(`${athlete.firstName[0] ?? ''}${athlete.lastName[0] ?? ''}`);
+	const [cover, ...morePhotos] = $derived(athlete.photos);
+
+	let viewer = $state<PhotoViewer>();
+
+	function showPhoto(event: MouseEvent, index: number) {
+		if (!viewer || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+		event.preventDefault();
+		viewer.open(index);
+	}
 
 	const facts = $derived(
 		[
@@ -77,19 +89,51 @@
 
 <section class="page-container pt-6 pb-12">
 	<div class="grid grid-cols-1 gap-11 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
-		<figure class="flex flex-col gap-2.5">
-			{#if athlete.image}
-				<MediaImage
-					image={athlete.image}
-					alt={name}
-					width={480}
-					height={600}
-					eager
-					class="aspect-[4/5] w-full rounded-[22px] bg-surface-2 object-cover object-[50%_25%]"
-				/>
-				{#if athlete.image.credit}
-					<figcaption class="text-xs text-ink-3">{athlete.image.credit}</figcaption>
+		<div class="flex flex-col gap-2.5">
+			{#if cover}
+				<figure class="flex flex-col gap-2.5">
+					<a
+						href="{PUBLIC_MEDIA_URL}/{cover.path}"
+						aria-label="View photo of {name}"
+						onclick={(event) => showPhoto(event, 0)}
+						class="block cursor-zoom-in rounded-[22px]"
+					>
+						<MediaImage
+							image={cover}
+							alt={name}
+							width={480}
+							height={600}
+							eager
+							class="aspect-[4/5] w-full rounded-[22px] bg-surface-2 object-cover object-[50%_25%]"
+						/>
+					</a>
+					{#if imageNote(cover)}
+						<figcaption class="text-xs text-ink-3">{imageNote(cover)}</figcaption>
+					{/if}
+				</figure>
+				{#if morePhotos.length}
+					<ul aria-label="More photos" class="flex gap-2">
+						{#each morePhotos as photo, index (photo.path)}
+							<li>
+								<a
+									href="{PUBLIC_MEDIA_URL}/{photo.path}"
+									aria-label="View photo {index + 2} of {athlete.photos.length}"
+									onclick={(event) => showPhoto(event, index + 1)}
+									class="block cursor-zoom-in rounded-xl"
+								>
+									<MediaImage
+										image={photo}
+										alt=""
+										width={72}
+										height={72}
+										class="size-[72px] rounded-xl bg-surface-2 object-cover object-[50%_25%] hover:opacity-85"
+									/>
+								</a>
+							</li>
+						{/each}
+					</ul>
 				{/if}
+				<PhotoViewer bind:this={viewer} photos={athlete.photos} alt={name} />
 			{:else}
 				<div
 					aria-hidden="true"
@@ -98,7 +142,7 @@
 					{initials}
 				</div>
 			{/if}
-		</figure>
+		</div>
 
 		<div class="flex flex-col justify-center gap-6">
 			<div class="flex flex-wrap gap-2">
