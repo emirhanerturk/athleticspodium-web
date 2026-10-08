@@ -80,7 +80,9 @@
 		class="page-container grid grid-cols-1 gap-12 py-14 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]"
 	>
 		{#if data.nations.length}
-			<NationTable nations={data.nations} title="All-time medal table" />
+			<div id="medal-table" class="min-w-0 scroll-mt-6">
+				<NationTable nations={data.nations} title="All-time medal table" />
+			</div>
 		{/if}
 		{#if data.leaders.length}
 			<ChampionshipLeaders leaders={data.leaders} today={data.today} />

@@ -117,7 +117,7 @@ What the sample shows:
 | Search                   | `/search?q=&type=&gender=&born_from=&born_to=&olympian=` | `V2-Search`                               | no        |
 | Articles                 | `/article`, `/article/[id=integer]/[slug]`               | v2 components                             | yes       |
 | Medal search             | `/medals?…`                                              | `V2-Tools`                                | yes       |
-| Medal countdown          | `/medals/countdown?…`                                    | `V2-Tools` hero, v2 components            | yes       |
+| Medal countdown          | `/medals/countdown?…`                                    | `V2-Tools` hero, `V2-Countdown`           | yes       |
 | Compare                  | `/medals/compare?…`                                      | `V2-Tools` hero, `V2-Compare`             | yes       |
 | About                    | `/about`                                                 | v2 components                             | yes       |
 | Missing information      | `/missing-information?tab=&q=`                           | `V2-Missing`                              | yes       |
@@ -617,7 +617,22 @@ Notes:
   - Results are grouped by edition (`groupByEdition`): relay legs join into one row, and each edition shows its own gold, silver, bronze and DQ count for the rows on the page.
   - Side column: the totals from `counts` (withdrawn medals apart, relays once; backend PR #14), "Copy link", a link to the medal countdown when both a nation and a championship are chosen, and "Try another question" (`MEDAL_QUESTIONS`).
   - The filter lists (championships, countries, events) are cached for an hour.
-- **Medal countdown** (`/medals/countdown?country=&champ=`): editions newest first with gold, silver, bronze and total, a total row and a "Details →" link into the medal search for that year. Road races and national championships are left out of the select.
+- **Medal countdown** (`/medals/countdown?country=&champ=`, design `V2-Countdown` below the shared Tools hero):
+  - The question is a sentence: "Count [nation]’s medals at every [championship]". The boxes are native selects in a GET form, as in the medal search. Road races and national championships are left out. "Also try" offers fixed examples (`COUNTDOWN_PRESETS`), and the shareable address is shown.
+  - Data:
+    - per-edition tallies from `/medals/country-champs`, which leaves out withdrawn medals;
+    - every edition from `/champs/:slug`, so editions without a medal and the next edition appear;
+    - the medal table from `/champs/:slug/counts`;
+    - the withdrawn medals from `/medals?is_canceled=1`;
+    - the first page of `/medals` for the year of the first medal and of the first gold.
+  - A team medal is one entry and is named "Team" only when the entry has more than one row: some individual medals are flagged as team medals in the data.
+  - The summary is the all-time haul (withdrawn medals noted, relays once) and five cards: on the podium (editions with a medal of those held, and the current unbroken run), first medal, first gold, best edition and the place in the all-time table.
+  - "Every edition" is a strip with one column per edition and the next edition dashed. Up to 12 medals in the best edition it shows one dot per medal; above that, proportional gold, silver and bronze bars. A column links to its row in the table and opens it.
+  - "Edition by edition" lists every edition held, newest first: its number, the medals, G, S, B and total. It can be limited to editions with medals, and ends in a total row. "Medallists" opens a drawer filled from `/internal/medals/[champ]/[country]/[year]` (cached like the hover card); "Details →" goes to the medal search for that year, also without JavaScript.
+  - Side column:
+    - the all-time medal table around the nation (nine rows, ranked by golds with ties sharing a place, each row a countdown of its own);
+    - the withdrawn medals;
+    - the next edition.
 - **Compare** (`/medals/compare?a=&b=&gender=&event=`, design `V2-Compare` below the shared Tools hero):
   - The legacy page kept its state in memory; the new one reads it from the URL, so comparisons can be linked (the championship page links to `?a=<id>`).
   - The question is a sentence: "Compare [A] ⇄ [B] in [Women’s 100m]". A is brand yellow, B is ink. The swap button is a link. The race menu groups the events by gender and lists only those both championships have held. Without JavaScript the boxes submit a GET form; the race menu sends `race=women-10`, which redirects (302) to `gender` and `event`. With JavaScript a change navigates at once and drops a race the new pair has not held.

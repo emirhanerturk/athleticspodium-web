@@ -8,8 +8,11 @@ describe('cacheControlFor', () => {
 		);
 	});
 
-	it('caches hover cards in the browser too', () => {
+	it('caches hover cards and medallist drawers in the browser too', () => {
 		expect(cacheControlFor('/internal/athlete-card/[id=integer]', 200)).toBe(
+			'public, max-age=3600, s-maxage=86400'
+		);
+		expect(cacheControlFor('/internal/medals/[champ=integer]/[country]/[year=integer]', 200)).toBe(
 			'public, max-age=3600, s-maxage=86400'
 		);
 	});

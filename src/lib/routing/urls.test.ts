@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { medalSearchUrl, missingInformationUrl, onThisDayUrl, searchUrl } from './urls.js';
+import {
+	medalCountdownUrl,
+	medalSearchUrl,
+	missingInformationUrl,
+	onThisDayUrl,
+	searchUrl
+} from './urls.js';
 
 describe('medalSearchUrl', () => {
 	it('filters the medal search by championship', () => {
@@ -10,6 +16,14 @@ describe('medalSearchUrl', () => {
 		expect(medalSearchUrl({ champ: 18, event: 10, gender: 'women', medal: 1, page: 2 })).toBe(
 			'/medals?champ=18&event=10&gender=women&medal=gold&page=2'
 		);
+	});
+});
+
+describe('medalCountdownUrl', () => {
+	it('keeps whichever of the nation and the championship is chosen', () => {
+		expect(medalCountdownUrl('tur', 18)).toBe('/medals/countdown?country=TUR&champ=18');
+		expect(medalCountdownUrl(null, 18)).toBe('/medals/countdown?champ=18');
+		expect(medalCountdownUrl(null, null)).toBe('/medals/countdown');
 	});
 });
 

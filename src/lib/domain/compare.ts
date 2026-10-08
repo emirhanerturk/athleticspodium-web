@@ -1,6 +1,6 @@
 import { fullName } from './athlete.js';
 import type { Gender } from './edition.js';
-import { describeEvent, type CatalogueEvent, type MarkKind } from './event.js';
+import { eventInSentence, type CatalogueEvent, type MarkKind } from './event.js';
 import { groupByEdition, type FilterChamp, type MedalRecord } from './medal-search.js';
 
 export interface CompareQuery {
@@ -79,11 +79,7 @@ export function isComplete(
 export const raceValue = (gender: Gender, event: number) => `${gender}-${event}`;
 
 export function raceName(gender: Gender, eventName: string): string {
-	const { longName } = describeEvent(eventName);
-	const name = /^[A-Z][a-z]/.test(longName)
-		? longName[0].toLowerCase() + longName.slice(1)
-		: longName;
-	return `${POSSESSIVE[gender]} ${name}`;
+	return `${POSSESSIVE[gender]} ${eventInSentence(eventName)}`;
 }
 
 export function racesFor(champs: FilterChamp[], catalogue: CatalogueEvent[]): RaceGroup[] {
