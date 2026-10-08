@@ -1,16 +1,21 @@
 <script lang="ts">
 	import '../styles/app.css';
+	import { onMount } from 'svelte';
 	import { PUBLIC_GA_MEASUREMENT_ID, PUBLIC_SITE_ENV } from '$app/env/public';
 	import GoogleAnalytics from '#lib/components/analytics/GoogleAnalytics.svelte';
 	import favicon from '#lib/assets/favicon.svg';
 	import Footer from '#lib/components/layout/Footer.svelte';
 	import Header from '#lib/components/layout/Header.svelte';
 	import SearchOverlay from '#lib/components/layout/SearchOverlay.svelte';
+	import { setVisitorToday } from '#lib/components/layout/visitor-today.svelte.js';
+	import { localIsoDateOf } from '#lib/domain/date.js';
 	import type { LayoutProps } from './$types';
 
 	let { data, children }: LayoutProps = $props();
 
 	let searchOverlay: SearchOverlay;
+
+	onMount(() => setVisitorToday(localIsoDateOf(new Date())));
 
 	function openSearchFromKeyboard(event: KeyboardEvent) {
 		const typing =

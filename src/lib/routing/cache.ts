@@ -6,6 +6,7 @@ const NEVER = 'no-store';
 
 const POLICY_BY_ROUTE_PREFIX: [string, string][] = [
 	['/internal/athlete-card', HOVER_CARD],
+	['/internal/on-this-day', HOVER_CARD],
 	['/internal/search', SHORT],
 	['/search', SHORT],
 	['/sitemap', DAILY],

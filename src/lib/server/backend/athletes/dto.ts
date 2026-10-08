@@ -8,11 +8,6 @@ export interface AthleteRowDto {
 	date_of_death: string | null;
 }
 
-export interface AthleteListDto {
-	count: number;
-	rows: AthleteRowDto[];
-}
-
 export interface ImageDto {
 	uri: string;
 	credit?: string | null;

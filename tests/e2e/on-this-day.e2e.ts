@@ -1,5 +1,7 @@
 import { expect, test } from './fixtures.js';
 
+test.use({ timezoneId: 'UTC' });
+
 const MONTHS = [
 	'january',
 	'february',
@@ -54,8 +56,7 @@ test('redirects to the canonical day and rejects days that do not exist', async 
 	const redirects: [string, number, string][] = [
 		['/on-this-day/October-07', 301, '/on-this-day/october-7'],
 		['/on-this-day/october-7?page=1', 301, '/on-this-day/october-7'],
-		['/on-this-day?month=2&day=31', 302, '/on-this-day/february-29'],
-		['/on-this-day', 302, todayPath]
+		['/on-this-day?month=2&day=31', 302, '/on-this-day/february-29']
 	];
 	for (const [from, status, to] of redirects) {
 		const response = await request.get(from, { maxRedirects: 0 });
@@ -88,4 +89,29 @@ test('lists every day of the year in the sitemap', async ({ request }) => {
 	expect(index).toContain('/sitemaps/days-1.xml');
 	expect(days.match(/<url>/g)).toHaveLength(366);
 	expect(days).toContain('https://athleticspodium.com/on-this-day/february-29');
+});
+
+test('follows the visitor’s own date, not the server’s', async ({ browser }) => {
+	const timezoneId = new Date().getUTCHours() >= 10 ? 'Pacific/Kiritimati' : 'Pacific/Pago_Pago';
+	const [year, month, day] = new Intl.DateTimeFormat('en-CA', { timeZone: timezoneId })
+		.format(new Date())
+		.split('-')
+		.map(Number);
+	const localPath = `/on-this-day/${MONTHS[month - 1]}-${day}`;
+	expect(localPath).not.toBe(todayPath);
+	expect(year).toBeGreaterThan(2000);
+
+	const context = await browser.newContext({ timezoneId, viewport: { width: 1280, height: 800 } });
+	const page = await context.newPage();
+
+	await page.goto('/on-this-day');
+	await expect(page).toHaveURL(new RegExp(`${localPath}$`));
+
+	await page.goto('/', { waitUntil: 'networkidle' });
+	await expect(page.getByRole('link', { name: 'All 145 →' }).first()).toHaveAttribute(
+		'href',
+		`${localPath}#born`
+	);
+	await expect(page.getByRole('link', { name: /BORN TODAY/ })).toHaveAttribute('href', localPath);
+	await context.close();
 });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseAthleteProfile, parseBirthdaysToday, parseRelatives } from './parse.js';
+import { parseAthleteProfile, parseRelatives } from './parse.js';
 
 const row = (id: number, deathDate: string | null) => ({
 	id,
@@ -9,22 +9,6 @@ const row = (id: number, deathDate: string | null) => ({
 	country_code: 'NZL',
 	date_of_birth: '1984-10-06',
 	date_of_death: deathDate
-});
-
-describe('parseBirthdaysToday', () => {
-	it('features the first living athlete and keeps the full count', () => {
-		const birthdays = parseBirthdaysToday({
-			count: 134,
-			rows: [row(1, '2020-01-01'), row(2, null)]
-		});
-
-		expect(birthdays.count).toBe(134);
-		expect(birthdays.featured?.id).toBe(2);
-	});
-
-	it('features nobody when every candidate has died', () => {
-		expect(parseBirthdaysToday({ count: 1, rows: [row(1, '2020-01-01')] }).featured).toBeNull();
-	});
 });
 
 describe('parseRelatives', () => {

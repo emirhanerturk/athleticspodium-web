@@ -5,7 +5,6 @@ import {
 	type AthleteProfile,
 	type AthleteRef,
 	type AthleteSummary,
-	type BirthdaysToday,
 	type FeaturedAthlete,
 	type Relative
 } from '#lib/domain/athlete.js';
@@ -14,7 +13,6 @@ import type { Image } from '#lib/domain/image.js';
 import type { Result } from '#lib/domain/result.js';
 import type {
 	AthleteDetailDto,
-	AthleteListDto,
 	AthleteListingDto,
 	AthleteRowDto,
 	AthleteSummaryDto,
@@ -55,15 +53,6 @@ export function parseAthleteListing(dto: AthleteListingDto): AthleteListing {
 		olympicChampion: dto.olympic_mark,
 		events: dto.events ?? [],
 		image: parseCover(dto.id, dto.image)
-	};
-}
-
-export function parseBirthdaysToday(dto: AthleteListDto): BirthdaysToday {
-	const living = dto.rows.find((row) => row.date_of_death === null);
-
-	return {
-		featured: living ? parseAthleteWithLifespan(living) : null,
-		count: dto.count
 	};
 }
 

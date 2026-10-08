@@ -1,7 +1,7 @@
 <script lang="ts">
 	import logo from '#lib/assets/logo.svg';
 	import SearchIcon from '#lib/components/ui/icons/SearchIcon.svelte';
-	import type { BirthdaysToday } from '#lib/domain/athlete.js';
+	import type { OnThisDay } from '#lib/domain/athlete.js';
 	import type { IsoDate } from '#lib/domain/date.js';
 	import type { MeetingSummary } from '#lib/domain/meeting.js';
 	import { PAGES } from '#lib/routing/urls.js';
@@ -16,7 +16,7 @@
 	}: {
 		today: IsoDate;
 		nextMeeting: MeetingSummary | null;
-		birthdays: BirthdaysToday | null;
+		birthdays: OnThisDay | null;
 		onSearch: () => void;
 	} = $props();
 </script>

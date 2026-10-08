@@ -4,6 +4,7 @@
 	import FeaturedAthleteCards from '#lib/components/athlete/FeaturedAthleteCards.svelte';
 	import GreatestByNation from '#lib/components/athlete/GreatestByNation.svelte';
 	import OnThisDayCards from '#lib/components/athlete/OnThisDayCards.svelte';
+	import { visitorHighlights } from '#lib/components/layout/visitor-today.svelte.js';
 	import JsonLd from '#lib/components/seo/JsonLd.svelte';
 	import SeoHead from '#lib/components/seo/SeoHead.svelte';
 	import { dayOfDate } from '#lib/domain/day.js';
@@ -13,6 +14,12 @@
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
+
+	const BIRTHDAYS_SHOWN = 6;
+	const visitor = visitorHighlights(
+		() => data.today,
+		() => ({ born: data.born, died: { count: 0, athletes: [] } })
+	);
 
 	const H2 = 'font-display text-[34px] leading-[0.94] font-bold sm:text-[44px]';
 </script>
@@ -39,19 +46,22 @@
 	</section>
 {/if}
 
-{#if data.born.athletes.length}
+{#if visitor.born.athletes.length}
 	<section class="page-container py-8">
 		<div class="rounded-[20px] border border-line bg-surface p-[26px]">
 			<div class="mb-[18px] flex flex-wrap items-baseline justify-between gap-2.5">
 				<h2 class={H2}>Birthdays today</h2>
 				<a
-					href={onThisDayUrl(dayOfDate(data.today))}
+					href={onThisDayUrl(dayOfDate(visitor.today))}
 					class="text-sm font-semibold text-brand-ink hover:underline"
 				>
-					All {data.born.count} born on {formatDayMonth(data.today)} →
+					All {visitor.born.count} born on {formatDayMonth(visitor.today)} →
 				</a>
 			</div>
-			<OnThisDayCards athletes={data.born.athletes} today={data.today} />
+			<OnThisDayCards
+				athletes={visitor.born.athletes.slice(0, BIRTHDAYS_SHOWN)}
+				today={visitor.today}
+			/>
 		</div>
 	</section>
 {/if}
