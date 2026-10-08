@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { Attachment } from 'svelte/attachments';
 	import ResultMark from '#lib/components/medal/ResultMark.svelte';
 	import SeoHead from '#lib/components/seo/SeoHead.svelte';
 	import Flag from '#lib/components/ui/Flag.svelte';
 	import MedalDisc from '#lib/components/ui/MedalDisc.svelte';
+	import OnThisPage from '#lib/components/ui/OnThisPage.svelte';
 	import RecordBadge from '#lib/components/ui/RecordBadge.svelte';
 	import { meetingUrl, PAGES } from '#lib/routing/urls.js';
 
@@ -81,24 +81,9 @@
 
 	const CARD = 'scroll-mt-6 rounded-[20px] border border-line bg-surface';
 
-	let active = $state(SECTIONS[0].id);
-
 	const numberOf = (id: string) =>
 		String(SECTIONS.findIndex((section) => section.id === id) + 1).padStart(2, '0');
 	const labelOf = (id: string) => SECTIONS.find((section) => section.id === id)?.label ?? '';
-
-	const followScroll: Attachment<HTMLElement> = (content) => {
-		const inView: Record<string, boolean> = {};
-		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) inView[entry.target.id] = entry.isIntersecting;
-				active = SECTIONS.find((section) => inView[section.id])?.id ?? active;
-			},
-			{ rootMargin: '-40px 0px -70% 0px' }
-		);
-		for (const section of content.querySelectorAll('[id]')) observer.observe(section);
-		return () => observer.disconnect();
-	};
 </script>
 
 {#snippet heading(id: string, text: string, size = 'text-[34px]')}
@@ -130,26 +115,13 @@
 
 <section class="page-container pt-2 pb-[72px]">
 	<div class="grid grid-cols-1 items-start gap-12 md:grid-cols-[250px_minmax(0,1fr)]">
-		<nav
-			aria-label="On this page"
+		<OnThisPage
+			sections={SECTIONS}
+			numbered
 			class="grid grid-cols-2 gap-0.5 sm:grid-cols-3 md:sticky md:top-6 md:flex md:flex-col"
-		>
-			{#each SECTIONS as section (section.id)}
-				<a
-					href="#{section.id}"
-					aria-current={active === section.id ? 'location' : undefined}
-					onclick={() => (active = section.id)}
-					class="flex gap-2.5 border-l-[3px] px-3 py-2 text-sm hover:text-ink {active === section.id
-						? 'border-brand font-bold text-ink'
-						: 'border-line font-medium text-ink-3'}"
-				>
-					<span class="font-data font-medium text-ink-3">{numberOf(section.id)}</span>
-					{section.label}
-				</a>
-			{/each}
-		</nav>
+		/>
 
-		<div {@attach followScroll} class="flex min-w-0 flex-col gap-[22px]">
+		<div class="flex min-w-0 flex-col gap-[22px]">
 			<article
 				id="olympic"
 				class="{CARD} grid grid-cols-1 gap-6 p-6 lg:grid-cols-[minmax(0,1fr)_360px]"

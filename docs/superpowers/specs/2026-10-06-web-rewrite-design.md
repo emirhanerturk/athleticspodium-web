@@ -119,7 +119,7 @@ What the sample shows:
 | Medal search             | `/medals?…`                                              | `V2-Tools`                                | yes       |
 | Medal countdown          | `/medals/countdown?…`                                    | `V2-Tools` hero, `V2-Countdown`           | yes       |
 | Compare                  | `/medals/compare?…`                                      | `V2-Tools` hero, `V2-Compare`             | yes       |
-| About                    | `/about`                                                 | v2 components                             | yes       |
+| About                    | `/about`                                                 | `V2-About`                                | yes       |
 | Missing information      | `/missing-information?tab=&q=`                           | `V2-Missing`                              | yes       |
 | How to read the database | `/how-to-read-the-database`                              | `V2-Notes`                                | yes       |
 
@@ -248,7 +248,7 @@ Error handling:
 - Load functions turn these into `error(404)` or `error(503)`.
 - `+error.svelte` renders the v2 error page:
   - 404 follows `V2-404`: "DNF.", a search box to `/search`, shortcut links, and a results sheet whose last row is the missing page.
-  - 503 ("The archive didn’t answer.") and other errors follow the error card of `V2-States`: a DQ disc, "Try again" (a full reload) and "Report problem" (the About contact form).
+  - 503 ("The archive didn’t answer.") and other errors follow the error card of `V2-States`: a DQ disc, "Try again" (a full reload) and "Report problem" (the About contact form, on the Other topic).
 - `handleError` logs unexpected errors with the request path.
 
 - **Today is the visitor's date.** The server renders "today" in UTC, because it cannot know the visitor's time zone, and pages stay shareable in caches.
@@ -678,8 +678,16 @@ Notes:
   - The timeline: A on the left (mirrored), the year in the middle, B on the right, newest first, with a sticky header. Every medal is shown, gold larger, records as badges, withdrawn medals struck through in red. An empty side says "no edition" or, when the championship was held that year, "not held". Notes on hand timing and withdrawn medals appear only when they apply.
   - Without a full selection the page offers ready-made comparisons (`COMPARE_PRESETS`).
 - Filters live in query strings.
-- The contact form uses a SvelteKit form action that posts to `/contacts`. It works without JavaScript, validates name, email, subject and message (up to 1,000 characters) on the server, drops messages that fill a hidden honeypot field, and forwards the visitor's IP (`x-forwarded-for`) and user agent so the backend records them as before.
-- **About:** sections `main` and `box`, the two portraits now in `static/about/`, social links and the contact form.
+- The contact form uses a SvelteKit form action that posts to `/contacts`. It works without JavaScript, validates name, email, topic and message (up to 1,000 characters) on the server, drops messages that fill a hidden honeypot field, and forwards the visitor's IP (`x-forwarded-for`) and user agent so the backend records them as before.
+  - Topics are radio chips, and each one sets the message label and hint. They map to the backend `subject`: Missing info 3, Correction 4, Photo 5, Collaborate 6, Other 0 (general message). Subjects 4–6 are new; the CMS messages list names them (CMS PR #5). The legacy subjects 1 (technical error) and 2 (suggestion) are no longer offered.
+  - `?topic=<key>#contact` opens the About form on a topic (`contactUrl`).
+  - The Missing information page uses the same form with the subject fixed to 3 and no chips.
+- **About** (design `V2-About`):
+  - Static copy from the design, which condenses the old CMS sections `main` and `box`. The site no longer reads `/pages/about`.
+  - Hero with the press-tribune photo, then a dark band of numbers: medals and nations from `/stats`, stories from the article count (cached for an hour), people credited from the static lists, and the opening date.
+  - Story ("Why it exists", "What’s included"), six aims and the open-data note, with a sticky "On this page" list from 900 px. The list is the shared `OnThisPage` component, which the database notes page uses too.
+  - Editor card (portrait, career lines; no personal-site link), the team (9) and the contributors (28, with flags), kept in `lib/domain/about.ts`.
+  - "Help us fill the gaps": the four Missing information lists, the database notes link, social links and the contact form.
 - **Missing information** (design `V2-Missing`):
   - The four CMS sections (`/pages/missing-information?section=`) stay the source and load together. `pages.missingInformation()` parses their HTML.
   - Parsing rules:

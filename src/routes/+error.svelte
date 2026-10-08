@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import SearchIcon from '#lib/components/ui/icons/SearchIcon.svelte';
-	import { PAGES } from '#lib/routing/urls.js';
+	import { contactUrl, PAGES } from '#lib/routing/urls.js';
 
 	const notFound = $derived(page.status === 404);
 	const unavailable = $derived(page.status === 503);
@@ -115,7 +115,7 @@
 						Try again
 					</a>
 					<a
-						href="{PAGES.about}#contact"
+						href={contactUrl('other')}
 						class="inline-flex h-10 items-center rounded-[10px] border border-line-2 px-4 font-semibold hover:border-ink"
 					>
 						Report problem

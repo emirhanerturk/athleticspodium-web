@@ -1,4 +1,5 @@
 import type { CompareQuery } from '#lib/domain/compare.js';
+import type { ContactTopic } from '#lib/domain/contact.js';
 import {
 	cleanSearch,
 	DEFAULT_ATHLETE_SORT,
@@ -25,6 +26,10 @@ export const PAGES = {
 	missingInformation: '/missing-information',
 	onThisDay: '/on-this-day'
 } as const;
+
+export function contactUrl(topic?: ContactTopic['key']): string {
+	return `${PAGES.about}${topic ? `?topic=${topic}` : ''}#contact`;
+}
 
 export function missingInformationUrl({
 	tab,

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+	contactUrl,
 	countryAthletesUrl,
 	medalCountdownUrl,
 	medalSearchUrl,
@@ -82,5 +83,12 @@ describe('countryAthletesUrl', () => {
 				page: 2
 			})
 		).toBe('/country/TUR/athletes?q=yasemin+can&gender=women&era=since-2000&sort=medals&page=2');
+	});
+});
+
+describe('contactUrl', () => {
+	it('opens the about contact form, on a topic when given', () => {
+		expect(contactUrl()).toBe('/about#contact');
+		expect(contactUrl('other')).toBe('/about?topic=other#contact');
 	});
 });
