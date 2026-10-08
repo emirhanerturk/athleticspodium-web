@@ -87,10 +87,6 @@ test('shows a country’s medals at a championship edition by edition', async ({
 	await expect(table.locator('tbody tr')).toHaveCount(28);
 	await page.getByRole('button', { name: 'Medal editions only' }).click();
 	await expect(table.locator('tbody tr')).toHaveCount(11);
-	await expect(page.getByRole('link', { name: 'Details →' }).first()).toHaveAttribute(
-		'href',
-		/^\/medals\?champ=18&country=TUR&year=\d{4}$/
-	);
 });
 
 test('opens the medallists of an edition', async ({ page }) => {

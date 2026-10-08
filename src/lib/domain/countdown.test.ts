@@ -171,5 +171,8 @@ describe('medals of a nation', () => {
 		expect(entries.map((team) => team.length)).toEqual([2, 1]);
 		expect(medalLine(entries[0])).toBe('Team, 4x100m silver');
 		expect(medalLine(entries[1])).toBe('Aslı Çakır, 1500m gold');
+		expect(medalLine([medal(2012, 1, '4x100m', { isTeam: true, athleteName: null })])).toBe(
+			'Team, 4x100m gold'
+		);
 	});
 });
