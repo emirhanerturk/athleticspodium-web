@@ -311,7 +311,7 @@ Rules that still hold:
 | `surface-3`                  | `#E4E1D9`                         | pressed states                   |
 | `ink`                        | `#121316`                         | primary text, ticker bar, footer |
 | `ink-2`                      | `#474A52`                         | secondary text                   |
-| `ink-3`                      | `#686C75`                         | captions                         |
+| `ink-3`                      | `#666A73`                         | captions                         |
 | `line`                       | `#E3E0D8`                         | borders                          |
 | `line-2`                     | `#D2CEC4`                         | strong borders                   |
 | `brand`                      | `#F9BA0F`                         | Podium Gold, primary actions     |
@@ -760,7 +760,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
   | ---------- | --------------------------------------------------------------- |
   | every page | `BreadcrumbList`                                                |
   | athlete    | `Person` (name, birth and death dates, nationality, image, URL) |
-  | edition    | `SportsEvent` (dates, location)                                 |
+  | edition    | `SportsEvent` (dates, location, status); none without a date    |
   | article    | `Article`                                                       |
   | home       | `WebSite` and `Organization`                                    |
 
@@ -786,7 +786,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
     - title, canonical and JSON-LD
     - key content in the server HTML
     - hover card and quick search behaviour
-- **URL check:** `scripts/check-urls.ts` takes a list of URLs and a base URL. It reports each status and redirect chain. It runs against staging with the Search Console export and with every sitemap URL.
+- **URL check:** `node scripts/check-urls.ts --base <origin> [--per-source N] [--concurrency N] <source>...` takes sitemap URLs (an index is followed) and text files of URLs or paths, rebases them on `--base`, and reports each status, redirect chain and time. `--per-source` samples each sitemap file; text files are checked in full. `scripts/legacy-urls.txt` holds one example of every legacy address shape. Every address must end in 200; the exit code is 1 otherwise.
 - **CI (GitHub Actions on pull requests):**
   - lint and format
   - `svelte-check`
@@ -825,11 +825,17 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    15. Medals by country and championship, done on 2026-10-07
    16. Compare, done on 2026-10-07
    17. Static pages, done on 2026-10-07
-3. **Pre-cutover QA:**
-   - The URL check against every sitemap URL and the Search Console export.
-   - Lighthouse on the main page types.
-   - Google's Rich Results Test.
-   - Content spot checks against the old site.
+3. **Pre-cutover QA** (first round on 2026-10-08, against staging):
+   - **URL check:** a sample of 8 per sitemap file and the legacy shapes (136 addresses), plus all 48 sitemap addresses with characters outside `[A-Za-z0-9._-]`. Found 10 redirect loops: athlete and article slugs ending in `?`. The web now percent-encodes slug segments (commas stay). Backend PR #17 makes `Slugify` strict and adds `scripts/normalize-slugs.js`, which rewrites 33 broken athlete and article slugs once applied to production. The full run waits for the cutover, against production. The Search Console export is no longer on disk; export it again then.
+   - **Lighthouse** (11 page types):
+     - Mobile performance 73–95; desktop 97–100.
+     - SEO 69 only because staging is `noindex`.
+     - Accessibility 93–100. Fixed: `ink-3` on `surface-2` was 4.45:1 (now 4.59:1 with `#666A73`); count badges went from 70 % to 85 % opacity; the labelled medal dots got `role="img"`.
+     - Left as is: relay runner links are small inline targets.
+   - **Rich Results:** the JSON-LD of each page type was checked against Google's fields. `SportsEvent` gained `eventStatus` and `eventAttendanceMode` and is left out when a meeting has no start date; article titles are trimmed. Single-item breadcrumbs on top-level pages are valid and stay. Google's Rich Results Test runs at cutover, because staging's `robots.txt` blocks it.
+   - **Content:** 14 pages were compared with the old site: five athletes (including withdrawn medals and a 4th place), three editions, two championships, two countries, the 2026 calendar and an article. All figures match. Rule differences:
+     - "national titles" on a country counts golds in any national championship (for example Kenyans at the British AAA);
+     - the country athletes list counts international medals only.
 4. **Cutover:**
    - Set `PUBLIC_SITE_ENV=production` and `PUBLIC_SITE_URL=https://athleticspodium.com` on the service.
    - Turn on Railway's CDN (HTML caching that follows `Cache-Control`, stale-while-revalidate, purge on deploy).

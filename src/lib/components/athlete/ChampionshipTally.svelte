@@ -27,6 +27,7 @@
 					<th scope="col" class="w-10 py-2">
 						<span
 							title={medal.label}
+							role="img"
 							class="inline-block size-3 rounded-full {medal.dot}"
 							aria-label={medal.label}
 						></span>

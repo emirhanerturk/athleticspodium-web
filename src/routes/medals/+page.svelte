@@ -126,7 +126,7 @@
 									></span>{/if}
 								{tab.label}
 								{#if tabCount(tab.medal) !== null}
-									<span class="font-data opacity-70">{formatCount(tabCount(tab.medal)!)}</span>
+									<span class="font-data opacity-85">{formatCount(tabCount(tab.medal)!)}</span>
 								{/if}
 							</a>
 						{/each}

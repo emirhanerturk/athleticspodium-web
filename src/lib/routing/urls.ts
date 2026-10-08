@@ -56,16 +56,18 @@ export function onThisDayUrl(
 	return search ? `${path}?${search}` : path;
 }
 
+const segment = (slug: string) => encodeURIComponent(slug).replaceAll('%2C', ',');
+
 export function athleteUrl(athlete: { id: number; slug: string }): string {
-	return `/athlete/${athlete.id}/${athlete.slug}`;
+	return `/athlete/${athlete.id}/${segment(athlete.slug)}`;
 }
 
 export function champUrl(champSlug: string): string {
-	return `/champs/${champSlug}`;
+	return `/champs/${segment(champSlug)}`;
 }
 
 export function meetingUrl(champSlug: string, meetingSlug: string): string {
-	return `/champs/${champSlug}/${meetingSlug}`;
+	return `/champs/${segment(champSlug)}/${segment(meetingSlug)}`;
 }
 
 export function countryUrl(code: string): string {
@@ -89,7 +91,7 @@ export function countryAthletesUrl(
 }
 
 export function articleUrl(article: { id: number; slug: string }): string {
-	return `/article/${article.id}/${article.slug}`;
+	return `/article/${article.id}/${segment(article.slug)}`;
 }
 
 export function articlesUrl(page = 1): string {

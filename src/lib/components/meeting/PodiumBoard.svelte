@@ -74,7 +74,7 @@
 							: 'text-ink-2'}"
 					>
 						{GENDER_LABELS[option.gender]}
-						<span class="font-data text-xs opacity-70">{option.count}</span>
+						<span class="font-data text-xs opacity-85">{option.count}</span>
 					</button>
 				{/each}
 			</div>

@@ -4,6 +4,7 @@ import {
 	breadcrumbJsonLd,
 	organizationJsonLd,
 	personJsonLd,
+	jsonLdScriptTag,
 	serializeJsonLd,
 	sportsEventJsonLd,
 	websiteJsonLd
@@ -107,6 +108,8 @@ describe('sportsEventJsonLd', () => {
 			name: '2026 European Champs',
 			url: 'https://athleticspodium.com/champs/european-champs/2026-european-championships',
 			sport: 'Athletics',
+			eventStatus: 'https://schema.org/EventScheduled',
+			eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
 			startDate: '2026-08-10',
 			endDate: '2026-08-16',
 			location: {
@@ -119,6 +122,28 @@ describe('sportsEventJsonLd', () => {
 				}
 			}
 		});
+	});
+});
+
+describe('sportsEventJsonLd without a start date', () => {
+	it('leaves the event out, since Google requires the start date', () => {
+		const meeting = {
+			id: 1,
+			name: '1938 European Champs',
+			slug: '1938-european-champs-men',
+			year: 1938,
+			city: 'Paris',
+			country: null,
+			startDate: null,
+			endDate: null,
+			note: null,
+			champ: { id: 18, name: 'European Championships', slug: 'european-champs', category: 3 }
+		};
+
+		expect(sportsEventJsonLd(SITE.siteUrl, meeting, '/x')).toBeNull();
+		expect(jsonLdScriptTag([null, { '@type': 'Thing' }])).toBe(
+			'<script type="application/ld+json">[{"@type":"Thing"}]</script>'
+		);
 	});
 });
 

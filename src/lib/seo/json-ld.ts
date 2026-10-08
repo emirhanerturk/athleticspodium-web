@@ -40,13 +40,16 @@ export function personJsonLd(
 }
 
 export function sportsEventJsonLd(siteUrl: string, meeting: EditionMeeting, path: string) {
+	if (!meeting.startDate) return null;
 	return withoutEmpty({
 		'@context': 'https://schema.org',
 		'@type': 'SportsEvent',
 		name: meeting.name,
 		url: siteUrl + path,
 		sport: 'Athletics',
-		startDate: meeting.startDate ?? undefined,
+		eventStatus: 'https://schema.org/EventScheduled',
+		eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+		startDate: meeting.startDate,
 		endDate: meeting.endDate ?? undefined,
 		location: meeting.city
 			? {
@@ -116,7 +119,8 @@ export function serializeJsonLd(data: unknown): string {
 }
 
 export function jsonLdScriptTag(data: unknown): string {
-	return `<script type="application/ld+json">${serializeJsonLd(data)}</script>`;
+	const items = Array.isArray(data) ? data.filter((item) => item !== null) : data;
+	return `<script type="application/ld+json">${serializeJsonLd(items)}</script>`;
 }
 
 function withoutEmpty<T extends Record<string, unknown>>(value: T): Partial<T> {

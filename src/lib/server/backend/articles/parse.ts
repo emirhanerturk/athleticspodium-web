@@ -15,7 +15,7 @@ export function parseArticleSummary(dto: ArticleRowDto): ArticleSummary {
 	return {
 		id: dto.id,
 		slug: dto.slug,
-		title: dto.title,
+		title: dto.title.trim(),
 		description: dto.description,
 		publishedOn: dto.created_date.slice(0, 10),
 		image: dto.image
