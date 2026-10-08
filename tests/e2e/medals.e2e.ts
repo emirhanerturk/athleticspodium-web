@@ -150,6 +150,20 @@ test('places the nation in the all-time table and points to the next edition', a
 	);
 });
 
+test('links the athletes of withdrawn medals and opens their cards', async ({ page }) => {
+	await page.goto('/medals/countdown?country=TUR&champ=18', { waitUntil: 'networkidle' });
+
+	const athlete = page
+		.locator('section', { has: page.getByRole('heading', { name: 'Withdrawn medals' }) })
+		.getByRole('link', { name: 'Aslı Çakır' });
+	await expect(athlete).toHaveAttribute('href', '/athlete/34116/asli-cakir');
+
+	await athlete.hover();
+	await expect(
+		page.locator('[aria-busy]').getByRole('link', { name: 'Profile →' })
+	).toHaveAttribute('href', '/athlete/34116/asli-cakir');
+});
+
 test('counts medals without JavaScript', async ({ browser }) => {
 	const context = await browser.newContext({ javaScriptEnabled: false });
 	const page = await context.newPage();

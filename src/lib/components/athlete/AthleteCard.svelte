@@ -5,22 +5,27 @@
 	import type { IsoDate } from '#lib/domain/date.js';
 	import { formatDate } from '#lib/format/date.js';
 	import { athleteUrl } from '#lib/routing/urls.js';
+	import type { PopoverAlign } from '#lib/utils/popover-align.js';
 
 	let {
 		athlete,
 		summary,
 		loading,
 		today,
-		result
+		result,
+		align = 'start'
 	}: {
 		athlete: AthleteRef;
 		summary: AthleteSummary | null;
 		loading: boolean;
 		today: IsoDate;
 		result?: string;
+		align?: PopoverAlign;
 	} = $props();
 
 	const SKELETON = 'rounded bg-surface-2 motion-safe:animate-pulse';
+
+	const arrowSide = $derived(align === 'end' ? 'right-[22px]' : 'left-[22px]');
 
 	const initials = $derived(`${athlete.firstName[0] ?? ''}${athlete.lastName[0] ?? ''}`);
 	const tally = $derived(
@@ -40,7 +45,7 @@
 >
 	<span
 		aria-hidden="true"
-		class="absolute -top-1.5 left-[22px] size-2.5 rotate-45 border-t border-l border-line bg-surface"
+		class="absolute -top-1.5 {arrowSide} size-2.5 rotate-45 border-t border-l border-line bg-surface"
 	></span>
 	<div class="flex items-center gap-2.5">
 		{#if summary?.image}

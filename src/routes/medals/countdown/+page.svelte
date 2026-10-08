@@ -81,6 +81,7 @@
 				withdrawn={countdown.withdrawn}
 				next={countdown.next}
 				nextOrdinal={countdownFacts(countdown.editions).held + 1}
+				today={data.today}
 			/>
 		</div>
 	</div>
