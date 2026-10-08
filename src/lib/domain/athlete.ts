@@ -23,11 +23,6 @@ export interface AthleteLifespan {
 	deathDate: IsoDate | null;
 }
 
-export interface BirthdaysToday {
-	featured: (AthleteRef & AthleteLifespan) | null;
-	count: number;
-}
-
 export function fullName(athlete: Pick<AthleteRef, 'firstName' | 'lastName'>): string {
 	return `${athlete.firstName} ${athlete.lastName}`.trim();
 }

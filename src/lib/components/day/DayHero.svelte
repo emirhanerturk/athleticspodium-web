@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { todayFor } from '#lib/components/layout/visitor-today.svelte.js';
 	import type { IsoDate } from '#lib/domain/date.js';
 	import { dayOf, dayOfDate, daysIn, shiftDay, type DayOfYear } from '#lib/domain/day.js';
 	import { formatDay, formatMonth } from '#lib/format/date.js';
@@ -12,7 +13,7 @@
 
 	const previous = $derived(shiftDay(day, -1));
 	const next = $derived(shiftDay(day, 1));
-	const todayDay = $derived(dayOfDate(today));
+	const todayDay = $derived(dayOfDate(todayFor(today)));
 	const isToday = $derived(day.month === todayDay.month && day.day === todayDay.day);
 
 	function choose(month: number, date: number) {

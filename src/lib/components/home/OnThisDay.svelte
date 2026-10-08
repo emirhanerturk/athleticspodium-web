@@ -5,8 +5,19 @@
 	import { formatDayMonth } from '#lib/format/date.js';
 	import { dayOfDate } from '#lib/domain/day.js';
 	import { athleteUrl, onThisDayUrl } from '#lib/routing/urls.js';
+	import { visitorHighlights } from '#lib/components/layout/visitor-today.svelte.js';
 
 	let { born, died, today }: { born: OnThisDay; died: OnThisDay; today: IsoDate } = $props();
+
+	const BORN_SHOWN = 7;
+	const DIED_SHOWN = 6;
+
+	const visitor = visitorHighlights(
+		() => today,
+		() => ({ born, died })
+	);
+	const shownBorn = $derived(visitor.born.athletes.slice(0, BORN_SHOWN));
+	const shownDied = $derived(visitor.died.athletes.slice(0, DIED_SHOWN));
 
 	const lifeYears = (athlete: AthleteSummary) =>
 		athlete.deathDate
@@ -16,10 +27,10 @@
 				: '';
 	const age = (athlete: AthleteSummary, index: number) => {
 		if (athlete.deathDate || !athlete.birthDate) return '';
-		const years = ageOn(athlete.birthDate, today);
+		const years = ageOn(athlete.birthDate, visitor.today);
 		return index === 0 ? `turns ${years}` : String(years);
 	};
-	const dayUrl = $derived(onThisDayUrl(dayOfDate(today)));
+	const dayUrl = $derived(onThisDayUrl(dayOfDate(visitor.today)));
 	const H3 = 'text-[15px] font-bold tracking-[0.06em] uppercase';
 	const ALL = 'font-data text-[13.5px] font-semibold text-brand-ink hover:underline';
 	const ROW = 'border-b border-line-2 py-[11px] hover:text-brand-ink';
@@ -35,20 +46,20 @@
 				href={dayUrl}
 				class="font-display text-[80px] leading-[0.86] font-bold hover:text-brand-ink sm:text-[120px]"
 			>
-				{formatDayMonth(today)}
+				{formatDayMonth(visitor.today)}
 			</a>
 			<p class="max-w-[280px] text-[15px] leading-[1.55] text-ink-2">
-				{born.count}
-				{born.count === 1 ? 'medallist was' : 'medallists were'} born on this day, {died.count} died on
-				it. The most decorated come first.
+				{visitor.born.count}
+				{visitor.born.count === 1 ? 'medallist was' : 'medallists were'} born on this day, {visitor
+					.died.count} died on it. The most decorated come first.
 			</p>
 		</div>
 		<div class="flex flex-col">
 			<div class="flex items-baseline justify-between border-b-2 border-ink pb-2.5">
 				<h2 class={H3}>Born today</h2>
-				<a href="{dayUrl}#born" class={ALL}>All {born.count} →</a>
+				<a href="{dayUrl}#born" class={ALL}>All {visitor.born.count} →</a>
 			</div>
-			{#each born.athletes as athlete, index (athlete.id)}
+			{#each shownBorn as athlete, index (athlete.id)}
 				<a
 					href={athleteUrl(athlete)}
 					class="grid grid-cols-[20px_minmax(0,1fr)_auto_auto] items-center gap-3 {ROW}"
@@ -74,9 +85,9 @@
 		<div class="flex flex-col">
 			<div class="flex items-baseline justify-between border-b-2 border-ink pb-2.5">
 				<h2 class={H3}>Remembered today</h2>
-				<a href="{dayUrl}#died" class={ALL}>All {died.count} →</a>
+				<a href="{dayUrl}#died" class={ALL}>All {visitor.died.count} →</a>
 			</div>
-			{#each died.athletes as athlete (athlete.id)}
+			{#each shownDied as athlete (athlete.id)}
 				<a
 					href={athleteUrl(athlete)}
 					class="grid grid-cols-[20px_minmax(0,1fr)_auto] items-center gap-3 {ROW}"

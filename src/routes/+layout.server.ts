@@ -1,5 +1,6 @@
-import type { BirthdaysToday } from '#lib/domain/athlete.js';
+import type { OnThisDay } from '#lib/domain/athlete.js';
 import { isoDateOf, yearOf } from '#lib/domain/date.js';
+import { dayOfDate } from '#lib/domain/day.js';
 import type { MeetingSummary } from '#lib/domain/meeting.js';
 import type { SiteStats } from '#lib/domain/stats.js';
 import { createTtlCache } from '#lib/utils/ttl-cache.js';
@@ -9,7 +10,7 @@ const TEN_MINUTES = 10 * 60 * 1000;
 
 const statsCache = createTtlCache<SiteStats>(TEN_MINUTES);
 const upcomingCache = createTtlCache<MeetingSummary[]>(TEN_MINUTES);
-const birthdaysCache = createTtlCache<BirthdaysToday>(TEN_MINUTES);
+const birthdaysCache = createTtlCache<OnThisDay>(TEN_MINUTES);
 
 export const load: LayoutServerLoad = async ({ locals: { backend } }) => {
 	const today = isoDateOf(new Date());
@@ -17,7 +18,9 @@ export const load: LayoutServerLoad = async ({ locals: { backend } }) => {
 	const [stats, upcoming, birthdays] = await Promise.all([
 		orNull(statsCache(() => backend.stats.get())),
 		orNull(upcomingCache(() => backend.meetings.upcoming())),
-		orNull(birthdaysCache(() => backend.athletes.bornOn(today)))
+		orNull(
+			birthdaysCache(() => backend.athletes.onThisDay(dayOfDate(today), 'born', { limit: 10 }))
+		)
 	]);
 
 	return { today, year: yearOf(today), stats, nextMeeting: upcoming?.[0] ?? null, birthdays };

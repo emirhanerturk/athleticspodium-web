@@ -251,6 +251,12 @@ Error handling:
   - 503 ("The archive didn’t answer.") and other errors follow the error card of `V2-States`: a DQ disc, "Try again" (a full reload) and "Report problem" (the About contact form).
 - `handleError` logs unexpected errors with the request path.
 
+- **Today is the visitor's date.** The server renders "today" in UTC, because it cannot know the visitor's time zone, and pages stay shareable in caches.
+  - After hydration the root layout stores the browser's local date (`visitor-today.svelte.ts`).
+  - The ticker, the home dateline and "On this day" block, the athletes hub's birthdays and the day page's "today" mark follow it.
+  - When the local date differs from the server's, these blocks load that day from `/internal/on-this-day/[day]` once and swap it in.
+  - Other dates (countdowns on the calendar, ages in hover cards) still use the server's date.
+
 ### 6.4 Caching
 
 | Response                      | Cache-Control                                                    |
@@ -381,7 +387,7 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 ### Header (ticker)
 
 - **Up next:** The first meeting from `upcoming-meetings` that is running or still to come, with a countdown (B6).
-- **Born today:** The top living athlete born today, then "+N more". It reuses the athletes list ordering: Olympic champions first, then youngest. It links to today's day page.
+- **Born today:** the most decorated living athlete born today (from `/athletes/on-this-day`), then "+N more". It links to today's day page.
 - **Search field:** Opens the quick search. `/` and `⌘K` also open it.
 - **Links:**
   - The yellow "Medal search" button goes to `/medals` (it read "Medal Tracker" until 2026-10-08; one name per page).
@@ -525,7 +531,7 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 ### On this day (`/on-this-day/[day]?page=n`)
 
 - **Address:** the day is a month name and a number (`/on-this-day/october-7`); all 366 days exist, 29 February included.
-  - `/on-this-day` answers 302 to today, or to `?month=&day=` from the day picker (a day past the month's end becomes its last day).
+  - `/on-this-day` opens the visitor's own date in the browser (a `noindex` page with a link to the server's date as a fallback). With `?month=&day=` from the day picker it answers 302 to that day (a day past the month's end becomes its last day).
   - Other spellings (`October-07`) and `?page=1` answer 301; a day that does not exist, or a page past the last, answers 404.
 - **Data:** `GET /athletes/on-this-day?kind=born|died&date=MM-DD&limit=100&offset=` (backend PR #15). It ranks by international medals with the summaries' rule (no national championships, placings or withdrawn medals) and returns the total.
 - **Display:** the hero shows the date, the counts, the previous and next day, "Today" and a day/month picker. Below it come "Born on …" and "Died on …", 100 per page each under one `page` parameter. Each row has the rank, flag, name with the hover card, OG, events, years, "turns N" or "aged N" and the medal tally.

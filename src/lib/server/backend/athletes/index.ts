@@ -1,11 +1,9 @@
 import type { OnThisDay } from '#lib/domain/athlete.js';
-import { monthDayOf, type IsoDate } from '#lib/domain/date.js';
 import { monthDayParam, type DayOfYear } from '#lib/domain/day.js';
 import { BackendNotFoundError, type BackendClient } from '../client.js';
 import type {
 	AthleteDetailDto,
 	AthleteLetterPageDto,
-	AthleteListDto,
 	AthleteSummaryDto,
 	FeaturedAthleteDto,
 	OlympicMeetingDto,
@@ -16,14 +14,11 @@ import {
 	parseAthleteListing,
 	parseAthleteProfile,
 	parseAthleteSummary,
-	parseBirthdaysToday,
 	parseFeaturedAthletes,
 	parseOlympicGames,
 	parseRelatives,
 	parseResult
 } from './parse.js';
-
-const BIRTHDAY_CANDIDATES = 10;
 
 export function createAthletes(client: BackendClient) {
 	return {
@@ -69,16 +64,6 @@ export function createAthletes(client: BackendClient) {
 
 		async getSummary(id: number) {
 			return parseAthleteSummary(await client.get<AthleteSummaryDto>(`/athletes/${id}/summary`));
-		},
-
-		async bornOn(date: IsoDate) {
-			const list = await client.get<AthleteListDto>('/athletes', {
-				date_of_birth: monthDayOf(date),
-				order: 'date_of_birth',
-				limit: BIRTHDAY_CANDIDATES,
-				fields: 'country_code,date_of_death'
-			});
-			return parseBirthdaysToday(list);
 		}
 	};
 }

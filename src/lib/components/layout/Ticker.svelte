@@ -1,21 +1,28 @@
 <script lang="ts">
-	import { ageOn, fullName, type BirthdaysToday } from '#lib/domain/athlete.js';
+	import { ageOn, fullName, type OnThisDay } from '#lib/domain/athlete.js';
 	import type { IsoDate } from '#lib/domain/date.js';
 	import { dayOfDate } from '#lib/domain/day.js';
 	import { meetingTiming, type MeetingSummary } from '#lib/domain/meeting.js';
 	import { formatDateRange, formatDaysToGo } from '#lib/format/date.js';
 	import { meetingUrl, onThisDayUrl, PAGES } from '#lib/routing/urls.js';
 	import SocialLinks from './SocialLinks.svelte';
+	import { visitorHighlights } from './visitor-today.svelte.js';
 
 	let {
 		today,
 		nextMeeting,
 		birthdays
-	}: { today: IsoDate; nextMeeting: MeetingSummary | null; birthdays: BirthdaysToday | null } =
-		$props();
+	}: { today: IsoDate; nextMeeting: MeetingSummary | null; birthdays: OnThisDay | null } = $props();
 
-	const timing = $derived(nextMeeting && meetingTiming(nextMeeting, today));
-	const birthdayAthlete = $derived(birthdays?.featured);
+	const NOBODY = { count: 0, athletes: [] };
+	const visitor = visitorHighlights(
+		() => today,
+		() => ({ born: birthdays ?? NOBODY, died: NOBODY })
+	);
+	const timing = $derived(nextMeeting && meetingTiming(nextMeeting, visitor.today));
+	const birthdayAthlete = $derived(
+		visitor.born.athletes.find((athlete) => athlete.birthDate && !athlete.deathDate)
+	);
 </script>
 
 <div class="bg-ink text-[13px] text-night-ink-2">
@@ -46,18 +53,18 @@
 			</a>
 		{/if}
 
-		{#if birthdays && birthdayAthlete?.birthDate}
+		{#if birthdayAthlete?.birthDate}
 			<span aria-hidden="true" class="hidden h-4 w-px bg-night-line-2 md:block"></span>
 			<a
-				href={onThisDayUrl(dayOfDate(today))}
+				href={onThisDayUrl(dayOfDate(visitor.today))}
 				class="hidden items-center gap-2.5 hover:text-night-ink md:flex"
 			>
 				<span class="font-data text-[11px] font-bold tracking-[0.1em] text-brand">BORN TODAY</span>
 				<span>
 					<strong class="font-semibold text-night-ink">{fullName(birthdayAthlete)}</strong>
 					{#if birthdayAthlete.countryCode}({birthdayAthlete.countryCode}){/if}
-					turns {ageOn(birthdayAthlete.birthDate, today)}
-					{#if birthdays.count > 1}· +{birthdays.count - 1} more{/if}
+					turns {ageOn(birthdayAthlete.birthDate, visitor.today)}
+					{#if visitor.born.count > 1}· +{visitor.born.count - 1} more{/if}
 				</span>
 			</a>
 		{/if}
