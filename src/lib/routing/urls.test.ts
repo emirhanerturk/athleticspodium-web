@@ -1,9 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import {
+	articleUrl,
+	athleteUrl,
 	contactUrl,
 	countryAthletesUrl,
 	medalCountdownUrl,
 	medalSearchUrl,
+	meetingUrl,
 	missingInformationUrl,
 	onThisDayUrl,
 	searchUrl
@@ -90,5 +93,34 @@ describe('contactUrl', () => {
 	it('opens the about contact form, on a topic when given', () => {
 		expect(contactUrl()).toBe('/about#contact');
 		expect(contactUrl('other')).toBe('/about?topic=other#contact');
+	});
+});
+
+describe('slug addresses', () => {
+	it('encodes slugs that hold a query mark, spaces or letters outside ASCII', () => {
+		expect(athleteUrl({ id: 37346, slug: 'zheng-?' })).toBe('/athlete/37346/zheng-%3F');
+		expect(articleUrl({ id: 333, slug: 'new-era-for-ethiopia?' })).toBe(
+			'/article/333/new-era-for-ethiopia%3F'
+		);
+		expect(athleteUrl({ id: 76950, slug: 'Tacca Lisbeth Huarachi' })).toBe(
+			'/athlete/76950/Tacca%20Lisbeth%20Huarachi'
+		);
+		expect(athleteUrl({ id: 41583, slug: 'maria-böcke' })).toBe('/athlete/41583/maria-b%C3%B6cke');
+	});
+
+	it('keeps commas and apostrophes as the legacy links did', () => {
+		expect(meetingUrl('european-cup-10000m', '1997-european-cup-10,000m')).toBe(
+			'/champs/european-cup-10000m/1997-european-cup-10,000m'
+		);
+		expect(athleteUrl({ id: 49030, slug: "h'mimed-rahouli" })).toBe(
+			"/athlete/49030/h'mimed-rahouli"
+		);
+	});
+
+	it('round-trips every slug, so the canonical check never redirects to itself', () => {
+		for (const slug of ['zheng-?', 'a#b', '100%', 'Tacca Lisbeth Huarachi', 'mariş', '10,000m']) {
+			const path = athleteUrl({ id: 1, slug });
+			expect(decodeURIComponent(path.split('/').at(-1)!)).toBe(slug);
+		}
 	});
 });

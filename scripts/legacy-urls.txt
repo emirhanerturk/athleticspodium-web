@@ -1,0 +1,25 @@
+# Address shapes of the legacy Angular site. Each must answer 200, directly or after redirects.
+/
+/champs
+/champs/european-champs
+/champs/european-champs/1938-european-champs-men
+/country
+/country/TUR
+/country/tur
+/country/TUR/athletes
+/country/Ken/athletes
+/athlete
+/athlete/35017/yaroslava-mahuchikh
+/athlete/35017/wrong-slug
+/athlete/letter/a;page=2;sort=
+/calendar
+/calendar/2026
+/medals/search
+/medals/search;country=TUR;page=2
+/medals/country-champs?country=TUR&champ=18
+/article
+/article/14/from-sportsman-to-a-myth-zatopek
+/compare?a=18&b=40
+/about
+/simple-notes
+/missing-information
