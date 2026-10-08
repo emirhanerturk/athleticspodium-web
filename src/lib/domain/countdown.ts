@@ -2,7 +2,7 @@ import { fullName } from './athlete.js';
 import { isHeld, type EditionRef } from './championship.js';
 import type { IsoDate } from './date.js';
 import type { NationTally } from './edition.js';
-import { eventInSentence } from './event.js';
+import { describeEvent, eventInSentence } from './event.js';
 import { groupByEdition, type MedalRecord } from './medal-search.js';
 import type { MedalTally } from './result.js';
 
@@ -136,7 +136,8 @@ export function bestMedalOf(rows: MedalRecord[]): MedalEntry | null {
 
 export function medallistName([record, ...teammates]: MedalEntry): string {
 	const name = record.athleteName ?? (record.athlete ? fullName(record.athlete) : null);
-	if (teammates.length || (record.isTeam && !name)) return 'Team';
+	const teamEvent = record.isTeam || describeEvent(record.event).discipline === 'relays';
+	if (teammates.length || (teamEvent && !name)) return 'Team';
 	return name ?? '–';
 }
 

@@ -625,7 +625,7 @@ Notes:
     - the medal table from `/champs/:slug/counts`;
     - the withdrawn medals from `/medals?is_canceled=1`;
     - the first page of `/medals` for the year of the first medal and of the first gold.
-  - A team medal is one entry and is named "Team" only when the entry has more than one row: some individual medals are flagged as team medals in the data.
+  - A team medal is one entry. The `is_team` flag is unreliable both ways: some individual medals carry it, and some relay medals without runners lack it. So an entry is called "Team" when it has more than one row, or when it has no name and is a team or relay event.
   - The summary is the all-time haul (withdrawn medals noted, relays once) and five cards: on the podium (editions with a medal of those held, and the current unbroken run), first medal, first gold, best edition and the place in the all-time table.
   - "Every edition" is a strip with one column per edition and the next edition dashed. Up to 12 medals in the best edition it shows one dot per medal; above that, proportional gold, silver and bronze bars. A column links to its row in the table and opens it.
   - "Edition by edition" lists every edition held, newest first: its number, the medals, G, S, B and total. It can be limited to editions with medals, and ends in a total row. An arrow opens a drawer filled from `/internal/medals/[champ]/[country]/[year]` (cached like the hover card). The drawer lays itself out by its own width (container queries); if it cannot load, it links to the medal search for that year.
