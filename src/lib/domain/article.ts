@@ -23,6 +23,8 @@ export interface ArticleDetail extends ArticleSummary {
 	standfirst: string | null;
 	content: string | null;
 	updatedOn: IsoDate | null;
+	publishedAt: string;
+	updatedAt: string | null;
 	related: {
 		champs: { name: string; slug: string }[];
 		meetings: { name: string; slug: string; champSlug: string }[];

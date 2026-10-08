@@ -175,6 +175,8 @@ describe('articleJsonLd', () => {
 				standfirst: null,
 				content: null,
 				updatedOn: null,
+				publishedAt: '2026-09-29T08:30:00.000Z',
+				updatedAt: null,
 				related: { champs: [], meetings: [], countries: [], athletes: [] }
 			},
 			'/article/362/the-numbers-asian-games'
@@ -184,7 +186,7 @@ describe('articleJsonLd', () => {
 			'@type': 'Article',
 			headline: 'The numbers: Asian Games',
 			image: 'https://api.athleticspodium.com/media/articles/2026/09/a.jpeg',
-			datePublished: '2026-09-29'
+			datePublished: '2026-09-29T08:30:00.000Z'
 		});
 		expect(article).not.toHaveProperty('description');
 		expect(article).not.toHaveProperty('dateModified');
