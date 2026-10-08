@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { PUBLIC_SITE_URL } from '$app/env/public';
+	import ShareLink from '#lib/components/tools/ShareLink.svelte';
 	import Flag from '#lib/components/ui/Flag.svelte';
 	import Picker from '#lib/components/ui/Picker.svelte';
 	import { COUNTDOWN_PRESETS, type CountdownQuery } from '#lib/domain/countdown.js';
@@ -88,10 +89,6 @@
 		</a>
 	{/each}
 	{#if shareUrl}
-		<code
-			class="rounded-md bg-surface-2 px-2 py-[3px] font-data text-[13px] break-all text-ink-2 sm:ml-auto"
-		>
-			{shareUrl.host}{shareUrl.pathname}{shareUrl.search}
-		</code>
+		<ShareLink url={shareUrl} class="sm:ml-auto" />
 	{/if}
 </div>

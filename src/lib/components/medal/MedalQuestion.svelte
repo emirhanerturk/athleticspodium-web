@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { PUBLIC_SITE_URL } from '$app/env/public';
+	import ShareLink from '#lib/components/tools/ShareLink.svelte';
 	import Picker from '#lib/components/ui/Picker.svelte';
 	import { describeEvent, type CatalogueEvent } from '#lib/domain/event.js';
 	import { champPicks, eventPicks, nationPicks, yearPicks } from '#lib/domain/pick-list.js';
@@ -116,7 +117,5 @@
 	<span
 		>Each box is a menu — the sentence rewrites itself as you change it. The link is shareable:</span
 	>
-	<code class="rounded-md bg-surface-2 px-2 py-[3px] font-data text-[13px] break-all text-ink-2">
-		{shareUrl.host}{shareUrl.pathname}{shareUrl.search}
-	</code>
+	<ShareLink url={shareUrl} />
 </p>
