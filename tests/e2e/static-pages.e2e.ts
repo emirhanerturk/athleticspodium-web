@@ -2,7 +2,7 @@ import { expect, test } from './fixtures.js';
 
 test('renders the about, database notes and missing information pages', async ({ page }) => {
 	for (const [path, heading] of [
-		['/about', 'About Athletics Podium'],
+		['/about', /Every podium,\s*in one open place\./],
 		['/how-to-read-the-database', 'How to read the database'],
 		['/missing-information', 'Missing information']
 	]) {
@@ -39,18 +39,46 @@ test('marks the section in view in the page contents', async ({ page }) => {
 	await expect(page.getByRole('heading', { name: 'Stripped medals' })).toBeInViewport();
 });
 
-test('explains invalid contact fields and sends a valid message', async ({ page }) => {
-	await page.goto('/about', { waitUntil: 'networkidle' });
+test('shows live numbers and the credited team on the about page', async ({ page }) => {
+	await page.goto('/about');
 
-	await page.getByRole('button', { name: 'Send message' }).click();
+	await expect(
+		page.locator('dl').filter({ hasText: 'people credited' }).getByRole('definition')
+	).toHaveText(['395,929', '6', '253', '37', '10 May 2020']);
+	await expect(page.getByText('28 people · 21 countries')).toBeVisible();
+	await expect(page.getByRole('link', { name: /Relays/ })).toHaveAttribute(
+		'href',
+		'/missing-information?tab=relays'
+	);
+	await expect(page.getByRole('link', { name: /sferbay/ })).toHaveCount(0);
+});
+
+test('explains invalid contact fields and sends a message on a topic', async ({ page }) => {
+	await page.goto('/about', { waitUntil: 'networkidle' });
+	const form = page.locator('#contact');
+	const send = form.getByRole('button', { name: 'Send', exact: true });
+
+	await send.click();
 	await expect(page.getByText('Enter your name (up to 100 characters).')).toBeVisible();
 
-	await page.getByRole('textbox', { name: 'Name' }).fill('Ana');
-	await page.getByRole('textbox', { name: 'Email' }).fill('ana@example.org');
-	await page.getByRole('textbox', { name: 'Message' }).fill('A missing medal.');
-	await page.getByRole('button', { name: 'Send message' }).click();
+	await form.getByText('Photo', { exact: true }).click();
+	await expect(form.getByRole('radio', { name: 'Photo' })).toBeChecked();
+	const message = form.getByRole('textbox', { name: 'What the photo shows and who took it' });
+	await expect(message).toHaveAttribute('placeholder', /upload link/);
+
+	await form.getByRole('textbox', { name: 'Name' }).fill('Ana');
+	await form.getByRole('textbox', { name: 'Email' }).fill('ana@example.org');
+	await message.fill('A podium photo from 1987.');
+	await send.click();
 
 	await expect(page.getByRole('status')).toContainText('Your message has been sent.');
+});
+
+test('opens the contact form on the topic in the address', async ({ page }) => {
+	await page.goto('/about?topic=other#contact');
+
+	await expect(page.getByRole('radio', { name: 'Other' })).toBeChecked();
+	await expect(page.getByRole('textbox', { name: 'Message' })).toBeVisible();
 });
 
 test('accepts the contact form without JavaScript', async ({ browser }) => {
@@ -61,7 +89,7 @@ test('accepts the contact form without JavaScript', async ({ browser }) => {
 	await page.getByRole('textbox', { name: 'Name' }).fill('Ana');
 	await page.getByRole('textbox', { name: 'Email' }).fill('ana@example.org');
 	await page.getByRole('textbox', { name: 'Message' }).fill('Relay members for 1957.');
-	await page.getByRole('button', { name: 'Send message' }).click();
+	await page.getByRole('button', { name: 'Send', exact: true }).click();
 
 	await expect(page.getByRole('status')).toContainText('Your message has been sent.');
 	await context.close();

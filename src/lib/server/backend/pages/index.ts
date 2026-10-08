@@ -23,5 +23,5 @@ export function createPages(client: BackendClient) {
 		) as Record<MissingSection, GapGroup[]>;
 	}
 
-	return { get, missingInformation };
+	return { missingInformation };
 }
