@@ -627,7 +627,7 @@ Notes:
 
 - **Articles:** `/article?page=n` lists 12 per page (the legacy page kept the page in memory). `/article/[id]/[slug]` shows the standfirst (`spot`), the photo with caption and credit, the content, the related championships, editions, athletes and countries, and three more stories, with `Article` JSON-LD. A wrong slug redirects (301); a missing id is a 404 (the backend now answers `data: null` instead of a 500).
 - **Tools hero:** Medal search, Medal countdown and Compare share the `V2-Tools` hero: "Ask the archive" (the page `h1`), the medal total from `/stats` and the three tools as tabs. Each page's subject is an `h2` in the white band below.
-- **Share link** (`lib/components/tools/ShareLink.svelte`): the page's address on `PUBLIC_SITE_URL` without the scheme, under the sentence of each tool. After hydration a copy button sits at its end; it copies the full address and shows a check mark for two seconds. Without JavaScript or the Clipboard API the address is shown alone.
+- **Share link** (`lib/components/tools/ShareLink.svelte`): the page's address on `PUBLIC_SITE_URL` without the scheme, under the sentence of each tool. After hydration the whole address becomes a button with a copy icon at its end; a click copies the full address and swaps the icon for a check mark for two seconds. Without JavaScript or the Clipboard API the address is shown as plain text.
 - **Picker** (`lib/components/ui/Picker.svelte`, lists in `lib/domain/pick-list.ts`) is the box in the Tools sentences:
   - **Before hydration and without JavaScript:** the box is a styled label over a native `<select>`, so the GET form still works.
   - **After hydration:** it becomes a button that opens a popover.
@@ -648,7 +648,7 @@ Notes:
   - The question is a sentence ("Show medals won by … at the … in … · …"). Each box is a `Picker` (see "Picker" below). A change navigates at once and drops an event or year the new championship does not have. The share link follows the sentence.
   - Medal tabs (with counts) and gender tabs are links. With a medal filter, a second request without it gives the tab counts.
   - Results are grouped by edition (`groupByEdition`): relay legs join into one row, and each edition shows its own gold, silver, bronze and DQ count for the rows on the page.
-  - Side column: the totals from `counts` (withdrawn medals apart, relays once; backend PR #14), "Copy link", a link to the medal countdown when both a nation and a championship are chosen, and "Try another question" (`MEDAL_QUESTIONS`).
+  - Side column: the totals from `counts` (withdrawn medals apart, relays once; backend PR #14), a link to the medal countdown when both a nation and a championship are chosen, and "Try another question" (`MEDAL_QUESTIONS`).
   - The filter lists (championships, countries, events) are cached for an hour.
 - **Medal countdown** (`/medals/countdown?country=&champ=`, design `V2-Countdown` below the shared Tools hero):
   - The question is a sentence: "Count [nation]’s medals at every [championship]". The boxes are pickers, as in the medal search. Road races and national championships are left out. "Also try" offers fixed examples (`COUNTDOWN_PRESETS`), and the share link closes that row once a nation and a championship are chosen.
