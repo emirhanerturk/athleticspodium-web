@@ -5,7 +5,6 @@
 	import Breadcrumb from '#lib/components/layout/Breadcrumb.svelte';
 	import JsonLd from '#lib/components/seo/JsonLd.svelte';
 	import SeoHead from '#lib/components/seo/SeoHead.svelte';
-	import Pagination from '#lib/components/ui/Pagination.svelte';
 	import { fullName } from '#lib/domain/athlete.js';
 	import { formatDay } from '#lib/format/date.js';
 	import { onThisDayUrl, PAGES } from '#lib/routing/urls.js';
@@ -16,7 +15,7 @@
 
 	const day = $derived(data.day);
 	const longDay = $derived(formatDay(day));
-	const path = $derived(onThisDayUrl(day, data.page));
+	const path = $derived(onThisDayUrl(day));
 	const crumbs = $derived([
 		{ name: 'Athletes', path: PAGES.athletes },
 		{ name: `On this day: ${longDay}`, path: onThisDayUrl(day) }
@@ -30,7 +29,7 @@
 </script>
 
 <SeoHead
-	title="Athletes born on {longDay}{data.page > 1 ? `, page ${data.page}` : ''}"
+	title="Athletes born on {longDay}"
 	description="{data.born.count} athletics medallists were born on {longDay}{famous
 		? `, among them ${famous}`
 		: ''}, and {data.died.count} died on this day."
@@ -39,48 +38,39 @@
 />
 <JsonLd data={[breadcrumbJsonLd(PUBLIC_SITE_URL, crumbs)]} />
 
-<Breadcrumb
-	items={crumbs.map((crumb, index) => ({
-		label: crumb.name,
-		href: index < crumbs.length - 1 ? crumb.path : undefined
-	}))}
-/>
+<div class="border-b border-line bg-surface-2">
+	<Breadcrumb
+		items={crumbs.map((crumb, index) => ({
+			label: crumb.name,
+			href: index < crumbs.length - 1 ? crumb.path : undefined
+		}))}
+	/>
+	<DayHero {day} born={data.born.count} died={data.died.count} today={data.today} />
+</div>
 
-<DayHero {day} born={data.born.count} died={data.died.count} today={data.today} />
-
-<div class="page-container flex flex-col gap-12 pt-10 pb-16">
-	{#if data.born.athletes.length}
-		<DayAthleteList
-			id="born"
-			title="Born on {longDay}"
-			count={data.born.count}
-			athletes={data.born.athletes}
-			kind="born"
-			offset={data.offset}
-			today={data.today}
-		/>
-	{/if}
-	{#if data.died.athletes.length}
-		<DayAthleteList
-			id="died"
-			title="Died on {longDay}"
-			count={data.died.count}
-			athletes={data.died.athletes}
-			kind="died"
-			offset={data.offset}
-			today={data.today}
-		/>
-	{/if}
-	{#if !data.born.count && !data.died.count}
+<div class="page-container pt-10 pb-16">
+	{#if data.born.count || data.died.count}
+		<div class="grid grid-cols-1 items-start gap-x-12 gap-y-10 lg:grid-cols-2">
+			<DayAthleteList
+				id="born"
+				title="Born on {longDay}"
+				kind="born"
+				list={data.born}
+				pageHref={(born) => onThisDayUrl(day, { born, died: data.died.page })}
+				today={data.today}
+			/>
+			<DayAthleteList
+				id="died"
+				title="Died on {longDay}"
+				kind="died"
+				list={data.died}
+				pageHref={(died) => onThisDayUrl(day, { born: data.born.page, died })}
+				today={data.today}
+			/>
+		</div>
+	{:else}
 		<p class="rounded-[18px] border-2 border-dashed border-line-2 px-6 py-8 text-center text-ink-2">
 			No athlete in the archive was born or died on {longDay}.
 		</p>
-	{/if}
-	{#if data.lastPage > 1}
-		<Pagination
-			page={data.page}
-			lastPage={data.lastPage}
-			href={(page) => onThisDayUrl(day, page)}
-		/>
 	{/if}
 </div>

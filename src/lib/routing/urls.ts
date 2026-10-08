@@ -34,9 +34,16 @@ export function missingInformationUrl({
 	return search ? `${PAGES.missingInformation}?${search}` : PAGES.missingInformation;
 }
 
-export function onThisDayUrl(day: DayOfYear, page = 1): string {
+export function onThisDayUrl(
+	day: DayOfYear,
+	{ born = 1, died = 1 }: { born?: number; died?: number } = {}
+): string {
+	const params = new URLSearchParams();
+	if (born > 1) params.set('born', String(born));
+	if (died > 1) params.set('died', String(died));
+	const search = params.toString();
 	const path = `${PAGES.onThisDay}/${daySlug(day)}`;
-	return page > 1 ? `${path}?page=${page}` : path;
+	return search ? `${path}?${search}` : path;
 }
 
 export function athleteUrl(athlete: { id: number; slug: string }): string {

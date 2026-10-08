@@ -26,9 +26,9 @@
 		'h-10 rounded-[10px] border border-line-2 bg-surface px-3 text-[15px] font-semibold';
 </script>
 
-<section class="border-b border-line bg-surface-2">
+<section>
 	<div
-		class="page-container grid grid-cols-1 items-end gap-8 py-12 md:grid-cols-[minmax(0,1fr)_auto]"
+		class="page-container grid grid-cols-1 items-end gap-8 pt-8 pb-12 md:grid-cols-[minmax(0,1fr)_auto]"
 	>
 		<div class="flex flex-col gap-3">
 			<span class="font-data text-xs tracking-[0.16em] text-ink-3 uppercase">

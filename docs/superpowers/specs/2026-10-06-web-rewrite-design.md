@@ -108,7 +108,7 @@ What the sample shows:
 | Edition                  | `/champs/[champ]/[meeting]`                              | `V2-Edition` → `Meeting-A` (`cards=true`) | yes       |
 | Athletes                 | `/athlete`                                               | `V2-Athletes` → `Athletes-B`              | yes       |
 | Athletes A–Z             | `/athlete/letter/[letter]?page=n`                        | v2 components                             | yes       |
-| On this day              | `/on-this-day/[day]?page=n`                              | v2 components (home "On this day" style)  | yes       |
+| On this day              | `/on-this-day/[day]?born=n&died=n`                       | v2 components (home "On this day" style)  | yes       |
 | Athlete                  | `/athlete/[id=integer]/[slug]`                           | `V2-Athlete` → `Athlete-A` (`v2=true`)    | yes       |
 | Countries                | `/country`                                               | `V2-Countries`                            | yes       |
 | Country                  | `/country/[code]`                                        | `V2-Country`                              | yes       |
@@ -528,13 +528,13 @@ For each page: what it shows, where the data comes from, and the backend prerequ
   - The national list shows the event when the athlete has more than one.
 - **Dropped:** the age-group chip and the "Heights on the podium" chart (decided 2026-10-07).
 
-### On this day (`/on-this-day/[day]?page=n`)
+### On this day (`/on-this-day/[day]?born=n&died=n`)
 
 - **Address:** the day is a month name and a number (`/on-this-day/october-7`); all 366 days exist, 29 February included.
   - `/on-this-day` opens the visitor's own date in the browser (a `noindex` page with a link to the server's date as a fallback). With `?month=&day=` from the day picker it answers 302 to that day (a day past the month's end becomes its last day).
-  - Other spellings (`October-07`) and `?page=1` answer 301; a day that does not exist, or a page past the last, answers 404.
+  - Other spellings (`October-07`) and `?born=1` or `?died=1` answer 301; a day that does not exist, or a page past a list's last, answers 404. The canonical URL is the day without parameters.
 - **Data:** `GET /athletes/on-this-day?kind=born|died&date=MM-DD&limit=100&offset=` (backend PR #15). It ranks by international medals with the summaries' rule (no national championships, placings or withdrawn medals) and returns the total.
-- **Display:** the hero shows the date, the counts, the previous and next day, "Today" and a day/month picker. Below it come "Born on …" and "Died on …", 100 per page each under one `page` parameter. Each row has the rank, flag, name with the hover card, OG, events, years, "turns N" or "aged N" and the medal tally.
+- **Display:** one band holds the breadcrumb and the hero: the date, the counts, the previous and next day, "Today" and a day/month picker. Below, "Born on …" and "Died on …" stand side by side (stacked on phones), 25 compact rows each, and each list pages on its own (`born`, `died`). A row has the rank, flag, name with the hover card, OG, life years with the age (this year, or at death) and the medal tally.
 - **Links in:** the home page's date and "All N →" links, the ticker's "Born today", and the athletes hub's "All N born on …".
 - **Sitemap:** the site adds `/sitemaps/days-1.xml` with the 366 day pages to the index itself.
 
