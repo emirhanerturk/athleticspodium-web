@@ -1,4 +1,4 @@
-import { foldText } from '#lib/utils/fold-text.js';
+import { searchWords, startsWords } from '#lib/utils/fold-text.js';
 import { CATEGORY_GROUPS } from './championship.js';
 import { describeEvent, DISCIPLINE_LABELS, type CatalogueEvent, type Discipline } from './event.js';
 import type { FilterChamp, FilterCountry } from './medal-search.js';
@@ -16,21 +16,14 @@ export interface PickGroup {
 	options: PickOption[];
 }
 
-const WORD = /[\p{L}\p{N}]+/gu;
 const DISCIPLINES = Object.keys(DISCIPLINE_LABELS) as Discipline[];
-
-export function searchWords(text: string): string[] {
-	return foldText(text).match(WORD) ?? [];
-}
 
 export function matchPicks(groups: PickGroup[], query: string): PickGroup[] {
 	const tokens = searchWords(query);
 	if (!tokens.length) return groups;
 
-	const matches = (option: PickOption) => {
-		const words = searchWords([option.label, ...(option.keywords ?? [])].join(' '));
-		return tokens.every((token) => words.some((word) => word.startsWith(token)));
-	};
+	const matches = (option: PickOption) =>
+		startsWords(tokens, searchWords([option.label, ...(option.keywords ?? [])].join(' ')));
 	return groups
 		.map((group) => ({ ...group, options: group.options.filter(matches) }))
 		.filter((group) => group.options.length > 0);

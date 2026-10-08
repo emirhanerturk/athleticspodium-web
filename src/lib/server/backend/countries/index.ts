@@ -30,7 +30,7 @@ export function createCountries(client: BackendClient) {
 
 		async getAthletes(
 			code: string,
-			filter: { gender?: 'men' | 'women'; limit: number; offset?: number }
+			filter: { gender?: 'men' | 'women'; limit?: number; offset?: number } = {}
 		) {
 			const athletes = await client.get<CountryAthleteDto[]>(`/countries/${code}/athletes`, {
 				international: 1,

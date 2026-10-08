@@ -34,6 +34,9 @@ export interface CountryAthlete {
 		events: string[];
 	};
 	tally: MedalTally;
+	events: string[];
+	firstYear: number | null;
+	lastYear: number | null;
 }
 
 export interface HostedMeeting {

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+	countryAthletesUrl,
 	medalCountdownUrl,
 	medalSearchUrl,
 	missingInformationUrl,
@@ -60,5 +61,26 @@ describe('onThisDayUrl', () => {
 		expect(onThisDayUrl({ month: 10, day: 7 }, { born: 3, died: 2 })).toBe(
 			'/on-this-day/october-7?born=3&died=2'
 		);
+	});
+});
+
+describe('countryAthletesUrl', () => {
+	it('leaves the defaults out', () => {
+		expect(countryAthletesUrl('tur')).toBe('/country/TUR/athletes');
+		expect(countryAthletesUrl('TUR', { q: '  ', sort: 'golds', page: 1 })).toBe(
+			'/country/TUR/athletes'
+		);
+	});
+
+	it('keeps the search, the filters, the sort and the page', () => {
+		expect(
+			countryAthletesUrl('TUR', {
+				q: ' yasemin   can ',
+				gender: 'women',
+				era: 'since-2000',
+				sort: 'medals',
+				page: 2
+			})
+		).toBe('/country/TUR/athletes?q=yasemin+can&gender=women&era=since-2000&sort=medals&page=2');
 	});
 });

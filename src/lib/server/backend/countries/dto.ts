@@ -24,6 +24,9 @@ export interface CountryAthleteDto {
 	silver: string;
 	bronze: string;
 	total: string;
+	first_year?: number | null;
+	last_year?: number | null;
+	events?: string[] | null;
 	athlete?: {
 		id: number;
 		slug: string;
