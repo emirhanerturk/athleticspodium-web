@@ -65,7 +65,7 @@ What the sample shows:
 13. Medal counts follow one definition (section 8).
 14. `/country/:code/athletes` follows `V2-CountryAthletes`; its filters run on the server, so every state has a URL.
 15. The A–Z athlete directory stays, now with crawlable URLs.
-16. Placings 4–8 appear on the athlete profile behind a "Show places 4–8" toggle.
+16. Placings 4–8 have their own "Other achievements" section on the athlete profile, between Medals and National results, as on the legacy site. Until 2026-10-08 they sat behind a "Show places 4–8" toggle in the Medals table.
 17. Content the design omits stays:
     - meeting `content` and meeting notes
     - medal `notes`, `info` and wind
@@ -523,7 +523,8 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 
 - **Results table:**
   - It keeps the event column, wind, notes and DQ.
-  - "Show places 4–8" adds placings, with a "Place" column.
+  - The Medals table lists places 1–3 (and rows without a place) with the level chips. Places 4–8 follow in "Other achievements", with the same columns and no chips. Both tables show the Event column when the international results span more than one event.
+  - "All N results" in the hero goes to the start of these sections (`#results`).
 - **Mark notes:** `medal.info` is shown after the mark; `(i)` renders as the indoor "i".
 - **Photos:**
   - The hero shows the first photo, with any other photos as thumbnails below it (62 athletes have two or three).

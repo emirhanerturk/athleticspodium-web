@@ -3,23 +3,32 @@
 	import RecordBadge from '#lib/components/ui/RecordBadge.svelte';
 	import { levelCounts } from '#lib/domain/career.js';
 	import { LEVEL_LABELS, levelOf, type Level } from '#lib/domain/championship.js';
-	import { isPlacing, type Result } from '#lib/domain/result.js';
+	import type { Result } from '#lib/domain/result.js';
 	import { champUrl, meetingUrl } from '#lib/routing/urls.js';
 	import ResultMark from '#lib/components/medal/ResultMark.svelte';
 
-	let { results }: { results: Result[] } = $props();
+	let {
+		id,
+		title,
+		results,
+		showEvent,
+		filterable = false,
+		class: className = 'pt-10'
+	}: {
+		id: string;
+		title: string;
+		results: Result[];
+		showEvent: boolean;
+		filterable?: boolean;
+		class?: string;
+	} = $props();
 
 	let level = $state<Level | 'all'>('all');
-	let showPlacings = $state(false);
 
-	const placingCount = $derived(results.filter(isPlacing).length);
-	const showEvent = $derived(new Set(results.map((result) => result.event.id)).size > 1);
-	const pool = $derived(showPlacings ? results : results.filter((result) => !isPlacing(result)));
-	const levels = $derived(levelCounts(pool));
+	const levels = $derived(levelCounts(results));
 	const rows = $derived(
-		level === 'all' ? pool : pool.filter((result) => levelOf(result.champ.category) === level)
+		level === 'all' ? results : results.filter((result) => levelOf(result.champ.category) === level)
 	);
-	const medalCount = $derived(results.filter((result) => !isPlacing(result)).length);
 
 	const chip = (active: boolean) =>
 		`h-9 rounded-full border px-3.5 text-[13.5px] font-semibold ${
@@ -29,41 +38,37 @@
 		}`;
 </script>
 
-<section id="results" class="page-container scroll-mt-4 pt-[52px] pb-6">
+<section {id} class="page-container scroll-mt-4 pb-6 {className}">
 	<div class="mb-4 flex flex-wrap items-center justify-between gap-4">
 		<h2 class="font-display text-[34px] leading-[0.94] font-bold sm:text-[40px]">
-			Medals
-			<span class="font-data text-lg font-medium text-ink-3">{medalCount}</span>
+			{title}
+			<span class="font-data text-lg font-medium text-ink-3">{results.length}</span>
 		</h2>
-		<div class="flex flex-wrap items-center gap-2">
-			<button
-				type="button"
-				aria-pressed={level === 'all'}
-				class={chip(level === 'all')}
-				onclick={() => (level = 'all')}
-			>
-				All
-			</button>
-			{#if levels.length > 1}
-				{#each levels as item (item.level)}
-					<button
-						type="button"
-						aria-pressed={level === item.level}
-						class={chip(level === item.level)}
-						onclick={() => (level = item.level)}
-					>
-						{LEVEL_LABELS[item.level]}
-						<span class="font-data opacity-70">{item.count}</span>
-					</button>
-				{/each}
-			{/if}
-			{#if placingCount}
-				<label class="ml-2 flex items-center gap-2 text-[13.5px] font-semibold text-ink-2">
-					<input type="checkbox" bind:checked={showPlacings} class="size-4 accent-ink" />
-					Show places 4–8 <span class="font-data opacity-70">{placingCount}</span>
-				</label>
-			{/if}
-		</div>
+		{#if filterable}
+			<div class="flex flex-wrap items-center gap-2">
+				<button
+					type="button"
+					aria-pressed={level === 'all'}
+					class={chip(level === 'all')}
+					onclick={() => (level = 'all')}
+				>
+					All
+				</button>
+				{#if levels.length > 1}
+					{#each levels as item (item.level)}
+						<button
+							type="button"
+							aria-pressed={level === item.level}
+							class={chip(level === item.level)}
+							onclick={() => (level = item.level)}
+						>
+							{LEVEL_LABELS[item.level]}
+							<span class="font-data opacity-70">{item.count}</span>
+						</button>
+					{/each}
+				{/if}
+			</div>
+		{/if}
 	</div>
 
 	<div class="overflow-x-auto rounded-2xl border border-line bg-surface">
