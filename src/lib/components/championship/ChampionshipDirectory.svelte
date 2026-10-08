@@ -107,9 +107,8 @@
 				href={tabHref(group)}
 				aria-current={current ? 'page' : undefined}
 				{@attach current && revealInStrip}
-				data-sveltekit-noscroll
+				data-sveltekit-reset="false"
 				data-sveltekit-replacestate
-				data-sveltekit-keepfocus
 				class="inline-flex h-[52px] flex-none items-center gap-2 px-3.5 text-[15px] {current
 					? 'font-bold text-ink shadow-[inset_0_-3px_0_var(--color-brand)]'
 					: 'font-medium text-ink-2 hover:text-ink'}"

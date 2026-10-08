@@ -90,9 +90,8 @@
 				<a
 					href={missingInformationUrl({ tab: section })}
 					aria-current={section === tab ? 'page' : undefined}
-					data-sveltekit-noscroll
+					data-sveltekit-reset="false"
 					data-sveltekit-replacestate
-					data-sveltekit-keepfocus
 					class="flex flex-none items-baseline gap-2.5 rounded-t-[14px] px-5 pt-4 pb-[15px] font-display text-[26px] leading-none font-bold {section ===
 					tab
 						? 'bg-bg text-ink'

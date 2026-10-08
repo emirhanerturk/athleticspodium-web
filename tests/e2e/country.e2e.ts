@@ -124,3 +124,19 @@ test('finds countries by name or code and by area', async ({ page }) => {
 	await expect(page).toHaveURL('/country?area=europe');
 	await expect(page.getByText('66 shown')).toBeVisible();
 });
+
+test('keeps the scroll position and focus when switching areas', async ({ page }) => {
+	await page.goto('/country', { waitUntil: 'networkidle' });
+	const europe = page
+		.getByRole('navigation', { name: 'Areas' })
+		.getByRole('link', { name: /^Europe/ });
+
+	await page.evaluate(() => window.scrollTo(0, 120));
+	const scrolled = await page.evaluate(() => window.scrollY);
+	expect(scrolled).toBeGreaterThan(0);
+	await europe.click();
+
+	await expect(page).toHaveURL('/country?area=europe');
+	expect(await page.evaluate(() => window.scrollY)).toBe(scrolled);
+	await expect(europe).toBeFocused();
+});

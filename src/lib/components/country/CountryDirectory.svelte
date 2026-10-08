@@ -100,9 +100,8 @@
 					href={countriesUrl(tab.slug ?? undefined)}
 					aria-current={current ? 'page' : undefined}
 					{@attach current && revealInStrip}
-					data-sveltekit-noscroll
+					data-sveltekit-reset="false"
 					data-sveltekit-replacestate
-					data-sveltekit-keepfocus
 					class="inline-flex flex-none items-baseline gap-2 border-b-[3px] px-3.5 pt-4 pb-3.5 text-[15px] font-bold hover:text-ink {current
 						? 'border-brand text-ink'
 						: 'border-transparent text-ink-2'}"

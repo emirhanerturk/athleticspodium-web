@@ -74,7 +74,7 @@
 	<a
 		href={compareUrl({ ...query, a: query.b, b: query.a })}
 		aria-label="Swap championships"
-		data-sveltekit-noscroll
+		data-sveltekit-reset="false"
 		class="grid size-11 shrink-0 place-items-center rounded-full border border-line-2 bg-bg hover:border-ink"
 	>
 		<SwapIcon />

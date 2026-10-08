@@ -117,12 +117,12 @@
 			<span>{first}–{last} of {list.count}</span>
 			<span class="flex gap-1.5">
 				{#if list.page > 1}
-					<a href={pageHref(list.page - 1)} rel="prev" data-sveltekit-noscroll class={PAGER}>
+					<a href={pageHref(list.page - 1)} rel="prev" data-sveltekit-reset="false" class={PAGER}>
 						<span aria-hidden="true">←</span><span class="sr-only">Previous page</span>
 					</a>
 				{/if}
 				{#if list.page < list.lastPage}
-					<a href={pageHref(list.page + 1)} rel="next" data-sveltekit-noscroll class={PAGER}>
+					<a href={pageHref(list.page + 1)} rel="next" data-sveltekit-reset="false" class={PAGER}>
 						<span aria-hidden="true">→</span><span class="sr-only">Next page</span>
 					</a>
 				{/if}

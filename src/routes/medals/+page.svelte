@@ -117,7 +117,7 @@
 							<a
 								href={medalSearchUrl({ ...query, medal: tab.medal, page: 1 })}
 								aria-current={current ? 'page' : undefined}
-								data-sveltekit-noscroll
+								data-sveltekit-reset="false"
 								class="inline-flex h-[34px] items-center gap-[7px] rounded-full border px-3 text-[13.5px] font-semibold {current
 									? 'border-ink bg-ink text-bg'
 									: 'border-line-2 bg-surface hover:border-ink'}"
@@ -137,7 +137,7 @@
 							<a
 								href={medalSearchUrl({ ...query, gender: tab.gender, page: 1 })}
 								aria-current={current ? 'page' : undefined}
-								data-sveltekit-noscroll
+								data-sveltekit-reset="false"
 								class="inline-flex h-[30px] items-center rounded-full px-3.5 text-[13px] font-bold {current
 									? 'bg-surface text-ink shadow-[0_1px_3px_rgba(18,19,22,.12)]'
 									: 'text-ink-3 hover:text-ink'}"
