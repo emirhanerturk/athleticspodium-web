@@ -78,8 +78,8 @@ export function articleJsonLd(
 		headline: article.title,
 		description: article.description ?? undefined,
 		image: article.image ? `${mediaUrl}/${article.image.path}` : undefined,
-		datePublished: article.publishedOn,
-		dateModified: article.updatedOn ?? undefined,
+		datePublished: article.publishedAt,
+		dateModified: article.updatedAt ?? undefined,
 		url: siteUrl + path,
 		author: { '@type': 'Organization', name: SITE_NAME, url: `${siteUrl}/` },
 		publisher: { '@type': 'Organization', name: SITE_NAME, url: `${siteUrl}/` }

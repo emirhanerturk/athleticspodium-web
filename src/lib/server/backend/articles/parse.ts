@@ -46,6 +46,8 @@ export function parseArticleDetail(dto: ArticleDetailDto): ArticleDetail {
 		standfirst: dto.spot?.trim() || null,
 		content: dto.content?.trim() || null,
 		updatedOn: dto.updated_date?.slice(0, 10) ?? null,
+		publishedAt: dto.created_date,
+		updatedAt: dto.updated_date ?? null,
 		related: {
 			champs: (dto.related_champs_map ?? []).map(({ name, slug }) => ({ name, slug })),
 			meetings: (dto.related_meetings_map ?? []).flatMap(({ name, slug, champ }) =>
