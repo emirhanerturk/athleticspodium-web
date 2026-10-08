@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { PUBLIC_SITE_URL } from '$app/env/public';
+	import ShareLink from '#lib/components/tools/ShareLink.svelte';
 	import SwapIcon from '#lib/components/ui/icons/SwapIcon.svelte';
 	import Picker from '#lib/components/ui/Picker.svelte';
 	import {
@@ -24,6 +26,9 @@
 	const champA = $derived(champs.find((champ) => champ.id === query.a));
 	const champB = $derived(champs.find((champ) => champ.id === query.b));
 	const event = $derived(events.find((item) => item.id === query.event));
+	const shareUrl = $derived(
+		champA && champB && event && query.gender ? new URL(compareUrl(query), PUBLIC_SITE_URL) : null
+	);
 	const races = $derived(
 		racesFor(
 			[champA, champB].filter((champ) => !!champ),
@@ -110,3 +115,9 @@
 		<button type="submit" class="h-11 rounded-xl bg-ink px-4 text-lg text-bg">Compare</button>
 	</noscript>
 </form>
+{#if shareUrl}
+	<p class="mt-4 flex flex-wrap items-center gap-2.5 text-[13.5px] text-ink-3">
+		<span>The link is shareable:</span>
+		<ShareLink url={shareUrl} />
+	</p>
+{/if}
