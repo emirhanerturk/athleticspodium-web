@@ -335,7 +335,7 @@ Rules that still hold:
 ### 7.2 Building blocks
 
 - **Medal disc.** Places 1–3 use the medal colours. Places 4–8 use a neutral disc (`surface-2` with `ink-2`).
-- **DQ.** A cancelled result shows a red DQ disc, and its mark is struck through in `dq`. The original mark stays readable.
+- **DQ.** A cancelled result shows a red DQ disc, and its mark is struck through in `dq`. The original mark stays readable. The disc itself is not struck through, since a line across a disc that small hides the letters.
 - **Record badge.** `WR` uses `ink` with `brand` text. Area and championship records (`AR`, `ER`, `CR`, …) use `brand-soft` with `brand-ink`. `NR` and any unknown text use an outlined badge. Records are free text in the database, so the mapping matches known prefixes and shows unknown values unchanged.
 - **Athlete hover card.** The compact variant, 256 px wide:
   - photo or initials

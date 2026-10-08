@@ -10,7 +10,7 @@
 
 	const fill = $derived(
 		canceled
-			? 'bg-dq text-surface line-through decoration-2'
+			? 'bg-dq text-surface'
 			: place && FILLS[place]
 				? `${FILLS[place]} text-ink`
 				: 'bg-surface-2 text-ink-2'
