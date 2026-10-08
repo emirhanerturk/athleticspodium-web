@@ -1,33 +1,8 @@
 <script lang="ts">
 	import { formatCount } from '#lib/format/number.js';
-	import { PAGES } from '#lib/routing/urls.js';
+	import { TOOLS, type Tool } from '#lib/domain/tools.js';
 
-	let { active, medals }: { active: 'search' | 'countdown' | 'compare'; medals: number | null } =
-		$props();
-
-	const TOOLS = [
-		{
-			key: 'search',
-			icon: 'MS',
-			title: 'Medal search',
-			text: 'Every podium, filtered by nation, championship, event, year.',
-			href: PAGES.medalSearch
-		},
-		{
-			key: 'countdown',
-			icon: 'MC',
-			title: 'Medal countdown',
-			text: 'One nation at one championship, edition by edition.',
-			href: PAGES.medalCountdown
-		},
-		{
-			key: 'compare',
-			icon: 'VS',
-			title: 'Compare championships',
-			text: 'Two championships, one event, year by year.',
-			href: PAGES.compare
-		}
-	];
+	let { active, medals }: { active: Tool['key']; medals: number | null } = $props();
 </script>
 
 <section class="bg-night text-night-ink">
