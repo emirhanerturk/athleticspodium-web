@@ -9,7 +9,7 @@ export interface Contributor extends Credit {
 
 export const TEAM: Credit[] = [
 	{ name: 'Şevket F. Erbay', role: 'Founder and editor-in-chief' },
-	{ name: 'Emirhan Ertürk', role: 'Programmer-Technical manager' },
+	{ name: 'Emirhan Ertürk', role: 'Developer & Technical manager' },
 	{ name: 'Yavuz Yavuz', role: 'Contributing editor' },
 	{ name: 'Alp Ulagay', role: 'Contributing editor & UK Correspondent' },
 	{ name: 'Evren Özüyener', role: 'Contributing editor' },
