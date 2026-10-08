@@ -38,9 +38,23 @@ test('lists the athletes born and died on a day, most decorated first', async ({
 		'href',
 		'/on-this-day/october-8'
 	);
-	await expect(page.getByRole('link', { name: /Next/ })).toHaveAttribute(
+	await expect(
+		page
+			.getByRole('navigation', { name: 'Born on 7 October pages' })
+			.getByRole('link', { name: 'Next page' })
+	).toHaveAttribute('href', '/on-this-day/october-7?born=2');
+});
+
+test('pages each list on its own', async ({ page }) => {
+	await page.goto('/on-this-day/october-7?born=2', { waitUntil: 'networkidle' });
+
+	const died = page.getByRole('navigation', { name: 'Died on 7 October pages' });
+	await expect(died.getByRole('link', { name: 'Next page' })).toHaveAttribute(
 		'href',
-		'/on-this-day/october-7?page=2'
+		'/on-this-day/october-7?born=2&died=2'
+	);
+	await expect(page.getByRole('navigation', { name: 'Born on 7 October pages' })).toContainText(
+		'26–33 of 145'
 	);
 });
 
@@ -55,7 +69,7 @@ test('moves to another day from the month and day menus', async ({ page }) => {
 test('redirects to the canonical day and rejects days that do not exist', async ({ request }) => {
 	const redirects: [string, number, string][] = [
 		['/on-this-day/October-07', 301, '/on-this-day/october-7'],
-		['/on-this-day/october-7?page=1', 301, '/on-this-day/october-7'],
+		['/on-this-day/october-7?born=1&died=1', 301, '/on-this-day/october-7'],
 		['/on-this-day?month=2&day=31', 302, '/on-this-day/february-29']
 	];
 	for (const [from, status, to] of redirects) {
@@ -65,7 +79,7 @@ test('redirects to the canonical day and rejects days that do not exist', async 
 	}
 
 	expect((await request.get('/on-this-day/february-30')).status()).toBe(404);
-	expect((await request.get('/on-this-day/october-7?page=9')).status()).toBe(404);
+	expect((await request.get('/on-this-day/october-7?born=9')).status()).toBe(404);
 });
 
 test('links today’s birthdays and anniversaries to the day page', async ({ page }) => {

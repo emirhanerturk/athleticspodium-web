@@ -38,8 +38,13 @@ describe('missingInformationUrl', () => {
 });
 
 describe('onThisDayUrl', () => {
-	it('names the month and adds the page after the first', () => {
+	it('names the month and adds each list’s page after the first', () => {
 		expect(onThisDayUrl({ month: 2, day: 29 })).toBe('/on-this-day/february-29');
-		expect(onThisDayUrl({ month: 10, day: 7 }, 2)).toBe('/on-this-day/october-7?page=2');
+		expect(onThisDayUrl({ month: 10, day: 7 }, { born: 2, died: 1 })).toBe(
+			'/on-this-day/october-7?born=2'
+		);
+		expect(onThisDayUrl({ month: 10, day: 7 }, { born: 3, died: 2 })).toBe(
+			'/on-this-day/october-7?born=3&died=2'
+		);
 	});
 });
