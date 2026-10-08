@@ -25,13 +25,21 @@ test('renders the edition on the server', async ({ page }) => {
 	);
 });
 
-test('shows relay teams as one line with their members', async ({ page }) => {
+test('shows each relay team once with every runner, linking those with a profile', async ({
+	page
+}) => {
 	await page.goto(EDITION);
 	const relay = page.locator('article', { has: page.getByRole('heading', { name: '4x100m' }) });
 
 	await expect(relay.getByText('Great Britain & NI', { exact: true })).toBeVisible();
-	await expect(relay.getByText(/Azu/)).toBeVisible();
 	await expect(relay.locator('.grid')).toHaveCount(2);
+	await expect(relay.getByRole('link', { name: /Azu/ })).toHaveAttribute(
+		'href',
+		/^\/athlete\/\d+\//
+	);
+	await expect(relay.getByRole('link', { name: /Glave/ })).toBeVisible();
+	await expect(relay.getByText('Lucas Ansah-Peprah')).toBeVisible();
+	await expect(relay.getByRole('link', { name: /Ansah-Peprah/ })).toHaveCount(0);
 });
 
 test('switches to the women’s podiums', async ({ page }) => {
@@ -52,7 +60,10 @@ test('opens the athlete card at once and fills it when the summary arrives', asy
 	});
 	await page.goto(EDITION, { waitUntil: 'networkidle' });
 
-	await page.getByRole('link', { name: 'Romell Glave' }).hover();
+	await page
+		.locator('article', { has: page.getByRole('heading', { name: '100m', exact: true }) })
+		.getByRole('link', { name: 'Romell Glave' })
+		.hover();
 	const card = page.locator('[aria-busy]');
 
 	await expect(card).toHaveAttribute('aria-busy', 'true');

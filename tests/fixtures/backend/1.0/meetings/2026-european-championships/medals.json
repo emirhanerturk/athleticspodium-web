@@ -435,8 +435,8 @@
 						"meeting_id": 2219,
 						"event_id": 60,
 						"medal": 2,
-						"athlete_id": 12956,
-						"athlete_name": null,
+						"athlete_id": null,
+						"athlete_name": "Lucas Ansah-Peprah",
 						"country_code": "GER",
 						"gender": 0,
 						"mark": 3864,
@@ -455,15 +455,7 @@
 							"name": "4x100m",
 							"rank": 160
 						},
-						"athlete": {
-							"id": 12956,
-							"first_name": "Lucas",
-							"last_name": "Ansah-Peprah",
-							"slug": "lucas-ansah-peprah",
-							"gender": true,
-							"olympic_mark": false,
-							"date_of_birth": "2000-01-16"
-						},
+						"athlete": null,
 						"country": {
 							"code": "GER",
 							"name": "Germany"
