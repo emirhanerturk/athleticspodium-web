@@ -110,6 +110,3 @@
 		<button type="submit" class="h-11 rounded-xl bg-ink px-4 text-lg text-bg">Show</button>
 	</noscript>
 </form>
-<p class="mt-4 text-[13.5px] text-ink-3">
-	Each box is a menu — the sentence rewrites itself as you change it.
-</p>
