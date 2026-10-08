@@ -28,7 +28,7 @@ test('renders the athlete profile on the server', async ({ page }) => {
 
 test('filters the results by championship level', async ({ page }) => {
 	await page.goto(PROFILE, { waitUntil: 'networkidle' });
-	const rows = page.locator('#results tbody tr');
+	const rows = page.locator('#medals tbody tr');
 
 	await expect(rows).toHaveCount(4);
 	await page.getByRole('button', { name: /Continental/ }).click();
@@ -50,6 +50,20 @@ test('lists national results below the international medals', async ({ page }) =
 	await expect(page.locator('#national li')).toHaveText([
 		/2021\s+Ukrainian Athletics Championships/
 	]);
+});
+
+test('lists places 4–8 apart from the medals', async ({ page }) => {
+	await page.goto('/athlete/830/akani-simbine');
+	const headings = await page.getByRole('heading', { level: 2 }).allTextContents();
+
+	expect(headings.map((heading) => heading.replace(/\s+/g, ' ').trim())).toEqual(
+		expect.arrayContaining(['Medals 17', 'Other achievements 1', 'National results 7'])
+	);
+	await expect(page.locator('#medals tbody tr')).toHaveCount(17);
+	await expect(page.locator('#other-achievements tbody tr')).toHaveText([
+		/2024\s*Olympic Games\s*100m\s*Paris\s*4\s*9\.82/
+	]);
+	await expect(page.getByText('Show places 4–8')).toHaveCount(0);
 });
 
 test('opens the photos in a viewer', async ({ page }) => {

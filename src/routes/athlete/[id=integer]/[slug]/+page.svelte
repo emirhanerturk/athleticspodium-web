@@ -19,7 +19,7 @@
 		nationalResults,
 		olympicAppearances
 	} from '#lib/domain/career.js';
-	import { tallyOf } from '#lib/domain/result.js';
+	import { isPlacing, tallyOf } from '#lib/domain/result.js';
 	import { athleteUrl, countryUrl, PAGES } from '#lib/routing/urls.js';
 	import { breadcrumbJsonLd, personJsonLd } from '#lib/seo/json-ld.js';
 	import { athleteDescription, athleteTitle } from '#lib/seo/titles.js';
@@ -32,6 +32,9 @@
 	const career = $derived(careerSummary(data.results));
 	const international = $derived(internationalResults(data.results));
 	const national = $derived(nationalResults(data.results));
+	const medals = $derived(international.filter((result) => !isPlacing(result)));
+	const placings = $derived(international.filter(isPlacing));
+	const showEvent = $derived(new Set(international.map((result) => result.event.id)).size > 1);
 	const internationalTallies = $derived(medalsByChampionship(international));
 	const nationalTallies = $derived(medalsByChampionship(national));
 	const olympics = $derived(olympicAppearances(data.olympics, data.results));
@@ -119,7 +122,26 @@
 	</section>
 {/if}
 
-{#if international.length}<ResultsTable results={international} />{/if}
-{#if national.length}<NationalResults results={national} />{/if}
+<div id="results" class="scroll-mt-4">
+	{#if medals.length}
+		<ResultsTable
+			id="medals"
+			title="Medals"
+			results={medals}
+			{showEvent}
+			filterable
+			class="pt-[52px]"
+		/>
+	{/if}
+	{#if placings.length}
+		<ResultsTable
+			id="other-achievements"
+			title="Other achievements"
+			results={placings}
+			{showEvent}
+		/>
+	{/if}
+	{#if national.length}<NationalResults results={national} />{/if}
+</div>
 
 <div class="h-12"></div>

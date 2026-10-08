@@ -1,0 +1,28 @@
+{
+	"success": true,
+	"data": {
+		"id": 830,
+		"first_name": "Akani",
+		"last_name": "Simbine",
+		"aka": null,
+		"slug": "akani-simbine",
+		"country_code": "RSA",
+		"gender": true,
+		"olympic_mark": false,
+		"date_of_birth": "1993-09-21",
+		"date_of_death": null,
+		"place_of_birth": "Kempton Park, South Africa",
+		"events": ["Sprints"],
+		"image": [
+			{
+				"uri": "fc4df638-3c55-4a23-a7b5-9d28db1edcb0.jpeg",
+				"credit": "Courtesy of Bob Ramsak /  www.bobramsak.com  ",
+				"created_date": "2020-11-09T20:41:42.099Z"
+			}
+		],
+		"biography": null,
+		"created_date": "2020-03-28T09:35:12.683Z",
+		"updated_date": "2021-06-19T20:57:15.575Z",
+		"country": { "code": "RSA", "name": "Republic of South Africa" }
+	}
+}
