@@ -391,7 +391,13 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 - **Search field:** Opens the quick search. `/` and `⌘K` also open it.
 - **Links:**
   - The yellow "Medal search" button goes to `/medals` (it read "Medal Tracker" until 2026-10-08; one name per page).
-  - Nav: Championships, Athletes, Countries, Calendar, Tools, Articles. The Tools menu holds Medal search, Medal countdown and Compare.
+  - Nav: Championships, Athletes, Countries, Calendar, Tools, Articles.
+    - Each item reserves the width of its bold label, so the current item turning bold moves nothing.
+    - The current item's brand underline grows from the centre (200 ms); hovering draws a thin grey one. Tools is current on every `/medals` page.
+    - The Tools menu (`TOOLS` in `lib/domain/tools.ts`, shared with the Tools hero) is a popover listing each tool with its one-line description.
+      - It opens on mouse hover and closes 150 ms after the pointer leaves the button and the panel.
+      - Touch and keyboard open it by click or Enter.
+      - It fades in and slides down, and stays inside the viewport.
   - Social links: Bluesky, Facebook, Instagram, and About.
 
 ### Footer (ink)

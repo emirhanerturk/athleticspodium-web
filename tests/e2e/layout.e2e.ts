@@ -16,6 +16,41 @@ test('renders the ticker, the navigation and the footer on the server', async ({
 	await expect(page.getByRole('contentinfo')).toContainText('Last addition · 2026 Sydney Marathon');
 });
 
+test('keeps the main menu in place when the current item turns bold', async ({ page }) => {
+	await page.goto('/champs', { waitUntil: 'networkidle' });
+	const nav = page.getByRole('navigation', { name: 'Main' });
+	const articlesLeft = () =>
+		nav
+			.getByRole('link', { name: 'Articles' })
+			.evaluate((link) => link.getBoundingClientRect().left);
+	const before = await articlesLeft();
+
+	await nav.getByRole('link', { name: 'Calendar' }).click();
+
+	await expect(nav.getByRole('link', { name: 'Calendar' })).toHaveAttribute('aria-current', 'page');
+	expect(await articlesLeft()).toBe(before);
+});
+
+test('opens the tools menu on hover and marks the tools as current', async ({ page }) => {
+	await page.goto('/medals', { waitUntil: 'networkidle' });
+	const tools = page
+		.getByRole('navigation', { name: 'Main' })
+		.getByRole('button', { name: 'Tools' });
+	const menu = page.getByRole('navigation', { name: 'Tools menu' });
+
+	await expect(tools).toHaveClass(/font-bold/);
+	await tools.hover();
+
+	await expect(menu).toBeVisible();
+	await expect(menu.getByRole('link', { name: /^Medal search/ })).toHaveAttribute(
+		'aria-current',
+		'page'
+	);
+
+	await page.mouse.move(5, 600);
+	await expect(menu).toBeHidden();
+});
+
 test('serves the social images', async ({ request }) => {
 	const response = await request.get('/og/default.png');
 
