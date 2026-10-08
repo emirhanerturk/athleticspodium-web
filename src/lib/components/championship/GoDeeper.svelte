@@ -8,7 +8,7 @@
 		{
 			href: compareUrl({ a: champ.id }),
 			title: 'Compare with another championship',
-			note: 'Medal tables and winners side by side'
+			note: 'Podiums year by year, side by side'
 		},
 		{
 			href: medalSearchUrl({ champ: champ.id }),

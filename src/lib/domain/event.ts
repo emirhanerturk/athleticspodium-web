@@ -208,6 +208,14 @@ export function describeEvent(name: string): EventInfo {
 		: { longName: name, discipline: null };
 }
 
+export type MarkKind = 'time' | 'distance' | 'points';
+
+export function markKind(discipline: Discipline | null): MarkKind {
+	if (discipline === 'jumps' || discipline === 'throws') return 'distance';
+	if (discipline === 'combined') return 'points';
+	return 'time';
+}
+
 export function knownEventNames(): string[] {
 	return Object.keys(EVENTS);
 }
