@@ -23,9 +23,6 @@
 		]
 			.filter(Boolean)
 			.join(' · ');
-
-	const subtitle = (line: PodiumLine) =>
-		line.members.length ? line.members.map((member) => member.name).join(', ') : line.notes;
 </script>
 
 <article class="flex flex-col rounded-2xl border border-line bg-surface px-[18px] pt-4 pb-1.5">
@@ -72,8 +69,29 @@
 						</strong>
 					{/if}
 				</span>
-				{#if subtitle(line)}
-					<span class="truncate pl-[29px] text-xs text-ink-3">{subtitle(line)}</span>
+				{#if line.members.length}
+					<p class="pl-[29px] text-xs leading-relaxed text-ink-3">
+						{#each line.members as member, index (index)}
+							<span class="mr-1 inline-block whitespace-nowrap">
+								{#if member.athlete}
+									<AthleteName
+										athlete={member.athlete}
+										{today}
+										result={resultLine(line)}
+										class="text-ink-2 underline decoration-line-2 underline-offset-2 hover:text-brand-ink hover:decoration-brand-ink"
+									>
+										{member.name}
+									</AthleteName>
+								{:else}
+									{member.name}
+								{/if}{#if index < line.members.length - 1}<span aria-hidden="true" class="pl-1"
+										>·</span
+									>{/if}
+							</span>
+						{/each}
+					</p>
+				{:else if line.notes}
+					<span class="truncate pl-[29px] text-xs text-ink-3">{line.notes}</span>
 				{/if}
 			</span>
 			<span class="flex items-center gap-2">
