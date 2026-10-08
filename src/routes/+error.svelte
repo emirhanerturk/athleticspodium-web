@@ -51,7 +51,7 @@
 					>
 				{:else}
 					<span
-						class="grid size-[22px] place-items-center rounded-full bg-dq text-[10px] text-surface line-through"
+						class="grid size-[22px] place-items-center rounded-full bg-dq text-[10px] text-surface"
 						>DQ</span
 					>
 				{/if}
