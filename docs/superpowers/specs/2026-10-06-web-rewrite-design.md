@@ -826,7 +826,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    16. Compare, done on 2026-10-07
    17. Static pages, done on 2026-10-07
 3. **Pre-cutover QA** (first round on 2026-10-08, against staging):
-   - **URL check:** a sample of 8 per sitemap file and the legacy shapes (136 addresses), plus all 48 sitemap addresses with characters outside `[A-Za-z0-9._-]`. Found 10 redirect loops: athlete and article slugs ending in `?`. The web now percent-encodes slug segments (commas stay). Backend PR #17 makes `Slugify` strict and adds `scripts/normalize-slugs.js`, which rewrites 33 broken athlete and article slugs once applied to production. The full run waits for the cutover, against production. The Search Console export is no longer on disk; export it again then.
+   - **URL check:** a sample of 8 per sitemap file and the legacy shapes (136 addresses), plus all 48 sitemap addresses with characters outside `[A-Za-z0-9._-]`. Found 10 redirect loops: athlete and article slugs ending in `?`. The web now percent-encodes slug segments (commas stay). Backend PR #17 makes `Slugify` strict and adds `scripts/normalize-slugs.js`; it rewrote 33 broken athlete and article slugs in production on 2026-10-08 (run inside the backend service with `railway ssh`). The old forms answer with one 301 to the new slug. The full run waits for the cutover, against production. The Search Console export is no longer on disk; export it again then.
    - **Lighthouse** (11 page types):
      - Mobile performance 73–95; desktop 97–100.
      - SEO 69 only because staging is `noindex`.
