@@ -347,7 +347,7 @@ Rules that still hold:
   - international gold/silver/bronze
   - "Profile →" link
 
-  It opens on hover or keyboard focus after 150 ms and closes on leave, blur or Escape.
+  It opens on hover or keyboard focus after 100 ms and closes on leave, blur or Escape. It opens below the name, lined up with its left edge, or with its right edge when the card would otherwise run past the viewport.
 
 - **Icons.** Inline stroke SVG components in `components/ui/icons/`.
 - **Accessibility.**
@@ -663,7 +663,7 @@ Notes:
   - "Edition by edition" lists every edition held, newest first: its number, the medals, G, S, B and total. It can be limited to editions with medals, and ends in a total row. An arrow opens a drawer filled from `/internal/medals/[champ]/[country]/[year]` (cached like the hover card). The drawer lays itself out by its own width (container queries); if it cannot load, it links to the medal search for that year.
   - Side column:
     - the all-time medal table around the nation (nine rows, ranked by golds with ties sharing a place, each row a countdown of its own);
-    - the withdrawn medals;
+    - the withdrawn medals, each athlete a profile link with the hover card; a team entry lists its runners below its line;
     - the next edition.
 - **Compare** (`/medals/compare?a=&b=&gender=&event=`, design `V2-Compare` below the shared Tools hero):
   - The legacy page kept its state in memory; the new one reads it from the URL, so comparisons can be linked (the championship page links to `?a=<id>`).

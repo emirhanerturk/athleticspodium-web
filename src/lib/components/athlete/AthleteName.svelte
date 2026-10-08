@@ -22,6 +22,7 @@
 	import type { AthleteRef } from '#lib/domain/athlete.js';
 	import type { IsoDate } from '#lib/domain/date.js';
 	import { athleteUrl } from '#lib/routing/urls.js';
+	import { popoverAlign, type PopoverAlign } from '#lib/utils/popover-align.js';
 	import AthleteCard from './AthleteCard.svelte';
 
 	let {
@@ -43,6 +44,8 @@
 	let summary = $state<AthleteSummary | null>(null);
 	let loading = $state(false);
 	let open = $state(false);
+	let anchor = $state<HTMLElement>();
+	let align = $state<PopoverAlign>('start');
 	let timer: ReturnType<typeof setTimeout> | undefined;
 
 	function show(event: Event) {
@@ -69,11 +72,22 @@
 	function hideOnEscape(event: KeyboardEvent) {
 		if (event.key === 'Escape') hide();
 	}
+
+	function placeCard(card: HTMLElement) {
+		if (!anchor) return;
+		const viewportWidth = document.documentElement.clientWidth;
+		align = popoverAlign(anchor.getBoundingClientRect(), card.offsetWidth, viewportWidth);
+	}
 </script>
 
 <svelte:window onkeydown={open ? hideOnEscape : undefined} />
 
-<span class="relative inline-flex min-w-0" role="presentation" onpointerleave={hide}>
+<span
+	bind:this={anchor}
+	class="relative inline-flex min-w-0"
+	role="presentation"
+	onpointerleave={hide}
+>
 	<a
 		href={athleteUrl(athlete)}
 		onpointerenter={show}
@@ -84,8 +98,11 @@
 		{@render children()}
 	</a>
 	{#if open}
-		<div class="absolute top-full left-0 z-50 pt-2">
-			<AthleteCard {athlete} {summary} {loading} {today} {result} />
+		<div
+			{@attach placeCard}
+			class="absolute top-full z-50 pt-2 {align === 'end' ? 'right-0' : 'left-0'}"
+		>
+			<AthleteCard {athlete} {summary} {loading} {today} {result} {align} />
 		</div>
 	{/if}
 </span>

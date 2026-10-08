@@ -1,6 +1,8 @@
 <script lang="ts">
+	import AthleteName from '#lib/components/athlete/AthleteName.svelte';
 	import Flag from '#lib/components/ui/Flag.svelte';
 	import MedalDisc from '#lib/components/ui/MedalDisc.svelte';
+	import { fullName } from '#lib/domain/athlete.js';
 	import type { EditionRef } from '#lib/domain/championship.js';
 	import {
 		medallistName,
@@ -9,6 +11,8 @@
 		type MedalEntry,
 		type NationStanding
 	} from '#lib/domain/countdown.js';
+	import type { IsoDate } from '#lib/domain/date.js';
+	import type { MedalRecord } from '#lib/domain/medal-search.js';
 	import { formatOrdinal } from '#lib/format/number.js';
 	import { champUrl, medalCountdownUrl, meetingUrl } from '#lib/routing/urls.js';
 
@@ -18,7 +22,8 @@
 		standings,
 		withdrawn,
 		next,
-		nextOrdinal
+		nextOrdinal,
+		today
 	}: {
 		champ: { id: number; slug: string; name: string };
 		countryCode: string;
@@ -26,10 +31,25 @@
 		withdrawn: MedalEntry[];
 		next: EditionRef | null;
 		nextOrdinal: number;
+		today: IsoDate;
 	} = $props();
 
 	const around = $derived(standingsAround(standings, countryCode));
 </script>
+
+{#snippet person(record: MedalRecord)}
+	{#if record.athlete}
+		<AthleteName
+			athlete={record.athlete}
+			{today}
+			class="underline decoration-line-2 decoration-dotted underline-offset-4 hover:text-brand-ink"
+		>
+			{record.athleteName ?? fullName(record.athlete)}
+		</AthleteName>
+	{:else}
+		{record.athleteName ?? '–'}
+	{/if}
+{/snippet}
 
 <aside class="flex flex-col gap-4 md:sticky md:top-6">
 	{#if around.length}
@@ -73,10 +93,29 @@
 			<ul class="flex flex-col gap-2">
 				{#each withdrawn as entry (entry[0].id)}
 					{@const [record] = entry}
+					{@const team = entry.length > 1}
 					<li class="grid grid-cols-[26px_minmax(0,1fr)] items-center gap-2.5 text-[13px]">
 						<MedalDisc place={record.place} canceled class="size-6 text-[10px]" />
-						<span>
-							<strong>{medallistName(entry)}</strong> · {medalWhat(record)}, {record.meeting.year}
+						<span class="flex min-w-0 flex-col gap-0.5">
+							<span>
+								<strong>
+									{#if !team && record.athlete}
+										{@render person(record)}
+									{:else}
+										{medallistName(entry)}
+									{/if}
+								</strong>
+								· {medalWhat(record)}, {record.meeting.year}
+							</span>
+							{#if team}
+								<span class="flex flex-wrap gap-x-1 text-xs text-ink-2">
+									{#each entry as member, index (member.id)}
+										<span
+											>{@render person(member)}{#if index < entry.length - 1},{/if}</span
+										>
+									{/each}
+								</span>
+							{/if}
 						</span>
 					</li>
 				{/each}
