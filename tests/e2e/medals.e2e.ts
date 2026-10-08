@@ -23,8 +23,10 @@ test('groups the medals by edition, with relays once and withdrawn medals apart'
 }) => {
 	await page.goto('/medals?champ=18&country=TUR');
 
-	await expect(page.getByRole('combobox', { name: 'Nation' })).toHaveValue('TUR');
-	await expect(page.getByRole('combobox', { name: 'Championship' })).toHaveValue('18');
+	await expect(page.getByRole('button', { name: 'Nation: Turkey' })).toBeVisible();
+	await expect(
+		page.getByRole('button', { name: 'Championship: European Championships' })
+	).toBeVisible();
 	await expect(page.getByRole('heading', { level: 2, name: /^\d{4}/ })).toHaveCount(11);
 	await expect(page.getByRole('heading', { level: 2, name: '2018 Berlin' })).toBeVisible();
 	await expect(page.getByText('Relay team')).toHaveCount(1);
@@ -46,9 +48,45 @@ test('groups the medals by edition, with relays once and withdrawn medals apart'
 test('rewrites the search when a box in the sentence changes', async ({ page }) => {
 	await page.goto('/medals?champ=18&country=TUR', { waitUntil: 'networkidle' });
 
-	await page.getByRole('combobox', { name: 'Year' }).selectOption('2016');
+	await page.getByRole('button', { name: 'Year: all years' }).click();
+	await page.getByRole('option', { name: '2016' }).click();
+
 	await expect(page).toHaveURL(/\/medals\?champ=18&country=TUR&year=2016$/);
-	await expect(page.getByRole('combobox', { name: 'Year' })).toHaveValue('2016');
+	await expect(page.getByRole('button', { name: 'Year: 2016' })).toBeFocused();
+});
+
+test('finds a nation by typing in its box and picks it with the keyboard', async ({ page }) => {
+	await page.goto('/medals?champ=18&country=TUR', { waitUntil: 'networkidle' });
+
+	await page.getByRole('button', { name: 'Nation: Turkey' }).click();
+	const search = page.getByRole('combobox', { name: 'Search nation' });
+	await expect(search).toBeFocused();
+	await search.fill('ger');
+
+	const options = page.getByRole('listbox', { name: 'Nation' }).getByRole('option');
+	await expect(options).toHaveText([/Germany\s+GER/, /Germany DR.*GDR/]);
+	await search.press('ArrowDown');
+	await search.press('Enter');
+
+	await expect(page).toHaveURL(/\/medals\?champ=18&country=GDR$/);
+});
+
+test('groups the championships by area and closes with Escape', async ({ page }) => {
+	await page.goto('/medals?champ=18&country=TUR', { waitUntil: 'networkidle' });
+
+	const chip = page.getByRole('button', { name: 'Championship: European Championships' });
+	await chip.click();
+	const list = page.getByRole('listbox', { name: 'Championship' });
+
+	await expect(list.getByRole('group', { name: 'Europe' })).toBeVisible();
+	await expect(list.getByRole('option', { name: /European Championships/ })).toHaveAttribute(
+		'aria-selected',
+		'true'
+	);
+	await page.keyboard.press('Escape');
+
+	await expect(list).toBeHidden();
+	await expect(chip).toBeFocused();
 });
 
 test('moves the legacy tool addresses in one 301', async ({ request }) => {

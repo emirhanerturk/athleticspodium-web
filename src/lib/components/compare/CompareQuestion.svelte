@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import ChevronDownIcon from '#lib/components/ui/icons/ChevronDownIcon.svelte';
 	import SwapIcon from '#lib/components/ui/icons/SwapIcon.svelte';
+	import Picker from '#lib/components/ui/Picker.svelte';
 	import {
 		parseRace,
 		raceName,
@@ -9,9 +9,10 @@
 		raceValue,
 		type CompareQuery
 	} from '#lib/domain/compare.js';
-	import { GENDER_LABELS } from '#lib/domain/edition.js';
+	import { GENDER_LABELS, type Gender } from '#lib/domain/edition.js';
 	import type { CatalogueEvent } from '#lib/domain/event.js';
 	import type { FilterChamp } from '#lib/domain/medal-search.js';
+	import { champPicks, eventPicks } from '#lib/domain/pick-list.js';
 	import { compareUrl, PAGES } from '#lib/routing/urls.js';
 
 	let {
@@ -30,6 +31,18 @@
 		)
 	);
 
+	let raceTab = $derived<Gender>(query.gender ?? 'men');
+	const shownRaces = $derived(races.find((group) => group.gender === raceTab) ?? races[0]);
+	const raceFallback = $derived(
+		races.map((group) => ({
+			label: GENDER_LABELS[group.gender],
+			options: group.events.map((item) => ({
+				value: raceValue(group.gender, item.id),
+				label: raceName(group.gender, item.name)
+			}))
+		}))
+	);
+
 	const number = (value: string) => (value ? Number(value) : null);
 
 	function choose(change: Partial<CompareQuery>) {
@@ -40,16 +53,7 @@
 		);
 		goto(compareUrl(held ? next : { ...next, gender: null, event: null }), { reset: false });
 	}
-
-	const CHIP =
-		'relative inline-flex h-11 max-w-full items-center gap-2 rounded-xl border-2 px-3 text-[20px] focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-brand-ink sm:h-[50px] sm:text-[26px]';
-	const MENU = 'absolute inset-0 cursor-pointer opacity-0 disabled:cursor-default';
 </script>
-
-{#snippet face(text: string)}
-	<span class="truncate">{text}</span>
-	<ChevronDownIcon class="size-3.5 shrink-0" />
-{/snippet}
 
 <form
 	method="get"
@@ -57,22 +61,16 @@
 	class="flex flex-wrap items-center gap-x-2.5 gap-y-2 font-display text-[24px] leading-[1.3] font-bold sm:text-[34px]"
 >
 	<span>Compare</span>
-	<label class="{CHIP} border-brand bg-brand text-ink hover:bg-brand/85">
-		{@render face(champA?.name ?? 'a championship')}
-		<select
-			name="a"
-			aria-label="Championship A"
-			class={MENU}
-			onchange={(change) => choose({ a: number(change.currentTarget.value) })}
-		>
-			<option value="">a championship</option>
-			{#each champs as champ (champ.id)}
-				{#if champ.id !== query.b}
-					<option value={champ.id} selected={champ.id === query.a}>{champ.name}</option>
-				{/if}
-			{/each}
-		</select>
-	</label>
+	<Picker
+		label="Championship A"
+		name="a"
+		value={query.a ? String(query.a) : ''}
+		text={champA?.name ?? 'a championship'}
+		placeholder="Search championships"
+		groups={champPicks(champs.filter((champ) => champ.id !== query.b))}
+		class="border-brand bg-brand text-ink hover:bg-brand/85"
+		onchoose={(id) => choose({ a: number(id) })}
+	/>
 	<a
 		href={compareUrl({ ...query, a: query.b, b: query.a })}
 		aria-label="Swap championships"
@@ -81,46 +79,33 @@
 	>
 		<SwapIcon />
 	</a>
-	<label class="{CHIP} border-ink bg-ink text-bg hover:bg-ink/85">
-		{@render face(champB?.name ?? 'another championship')}
-		<select
-			name="b"
-			aria-label="Championship B"
-			class={MENU}
-			onchange={(change) => choose({ b: number(change.currentTarget.value) })}
-		>
-			<option value="">another championship</option>
-			{#each champs as champ (champ.id)}
-				{#if champ.id !== query.a}
-					<option value={champ.id} selected={champ.id === query.b}>{champ.name}</option>
-				{/if}
-			{/each}
-		</select>
-	</label>
+	<Picker
+		label="Championship B"
+		name="b"
+		value={query.b ? String(query.b) : ''}
+		text={champB?.name ?? 'another championship'}
+		placeholder="Search championships"
+		groups={champPicks(champs.filter((champ) => champ.id !== query.a))}
+		class="border-ink bg-ink text-bg hover:bg-ink/85"
+		onchoose={(id) => choose({ b: number(id) })}
+	/>
 	<span class="text-ink-3">in</span>
-	<label class="{CHIP} border-ink bg-bg hover:bg-brand-soft has-disabled:opacity-50">
-		{@render face(event && query.gender ? raceName(query.gender, event.name) : 'an event')}
-		<select
-			name="race"
-			aria-label="Event"
-			disabled={!races.length}
-			class={MENU}
-			onchange={(change) => choose(parseRace(change.currentTarget.value) ?? { event: null })}
-		>
-			<option value="">an event</option>
-			{#each races as group (group.gender)}
-				<optgroup label={GENDER_LABELS[group.gender]}>
-					{#each group.events as item (item.id)}
-						<option
-							value={raceValue(group.gender, item.id)}
-							selected={group.gender === query.gender && item.id === query.event}
-							>{raceName(group.gender, item.name)}</option
-						>
-					{/each}
-				</optgroup>
-			{/each}
-		</select>
-	</label>
+	<Picker
+		label="Event"
+		name="race"
+		value={query.gender && query.event ? raceValue(query.gender, query.event) : ''}
+		text={event && query.gender ? raceName(query.gender, event.name) : 'an event'}
+		placeholder="Search events"
+		groups={shownRaces
+			? eventPicks(shownRaces.events, (item) => raceValue(shownRaces.gender, item.id))
+			: []}
+		fallback={raceFallback}
+		tabs={races.map((group) => ({ value: group.gender, label: GENDER_LABELS[group.gender] }))}
+		tab={shownRaces?.gender}
+		ontab={(gender) => (raceTab = gender as Gender)}
+		disabled={!races.length}
+		onchoose={(value) => choose(parseRace(value) ?? { event: null })}
+	/>
 	<noscript>
 		<button type="submit" class="h-11 rounded-xl bg-ink px-4 text-lg text-bg">Compare</button>
 	</noscript>
