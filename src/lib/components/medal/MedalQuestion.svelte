@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { PUBLIC_SITE_URL } from '$app/env/public';
-	import ChevronDownIcon from '#lib/components/ui/icons/ChevronDownIcon.svelte';
-	import Flag from '#lib/components/ui/Flag.svelte';
+	import Picker from '#lib/components/ui/Picker.svelte';
 	import { describeEvent, type CatalogueEvent } from '#lib/domain/event.js';
+	import { champPicks, eventPicks, nationPicks, yearPicks } from '#lib/domain/pick-list.js';
 	import {
 		champsFor,
 		countriesFor,
@@ -53,17 +53,7 @@
 			year: keepsYear ? query.year : null
 		});
 	}
-
-	const CHIP =
-		'relative inline-flex h-11 max-w-full items-center gap-2 rounded-xl border-2 border-ink bg-bg pr-3 pl-2.5 text-[20px] focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-brand-ink hover:bg-brand-soft sm:text-[26px]';
-	const MENU = 'absolute inset-0 cursor-pointer opacity-0';
 </script>
-
-{#snippet face(text: string, flag?: string)}
-	{#if flag}<Flag code={flag} class="h-[21px] w-7 rounded-[3px]" />{/if}
-	<span class="truncate">{text}</span>
-	<ChevronDownIcon class="size-3.5 shrink-0" />
-{/snippet}
 
 <form
 	method="get"
@@ -74,67 +64,50 @@
 	{#if query.gender}<input type="hidden" name="gender" value={query.gender} />{/if}
 	<span>Show medals</span>
 	<span class="text-ink-3">won by</span>
-	<label class={CHIP}>
-		{@render face(country?.name ?? 'any nation', country?.code)}
-		<select
-			name="country"
-			aria-label="Nation"
-			class={MENU}
-			onchange={(change) => choose({ country: change.currentTarget.value || null })}
-		>
-			<option value="">any nation</option>
-			{#each countriesFor(champ, countries) as item (item.code)}
-				<option value={item.code} selected={item.code === query.country}>{item.name}</option>
-			{/each}
-		</select>
-	</label>
+	<Picker
+		label="Nation"
+		name="country"
+		value={query.country ?? ''}
+		text={country?.name ?? 'any nation'}
+		flag={country?.code}
+		anyLabel="any nation"
+		placeholder="Search nations or codes"
+		groups={nationPicks(countriesFor(champ, countries))}
+		onchoose={(code) => choose({ country: code || null })}
+	/>
 	<span class="text-ink-3">at the</span>
-	<label class={CHIP}>
-		{@render face(champ?.name ?? 'any championship')}
-		<select
-			name="champ"
-			aria-label="Championship"
-			class={MENU}
-			onchange={(change) => chooseChamp(number(change.currentTarget.value))}
-		>
-			<option value="">any championship</option>
-			{#each champsFor(country, champs) as item (item.id)}
-				<option value={item.id} selected={item.id === query.champ}>{item.name}</option>
-			{/each}
-		</select>
-	</label>
+	<Picker
+		label="Championship"
+		name="champ"
+		value={query.champ ? String(query.champ) : ''}
+		text={champ?.name ?? 'any championship'}
+		anyLabel="any championship"
+		placeholder="Search championships"
+		groups={champPicks(champsFor(country, champs))}
+		onchoose={(id) => chooseChamp(number(id))}
+	/>
 	<span class="text-ink-3">in</span>
-	<label class={CHIP}>
-		{@render face(event ? describeEvent(event.name).longName : 'any event')}
-		<select
-			name="event"
-			aria-label="Event"
-			class={MENU}
-			onchange={(change) => choose({ event: number(change.currentTarget.value) })}
-		>
-			<option value="">any event</option>
-			{#each eventsFor(champ, query.gender, events) as item (item.id)}
-				<option value={item.id} selected={item.id === query.event}
-					>{describeEvent(item.name).longName}</option
-				>
-			{/each}
-		</select>
-	</label>
+	<Picker
+		label="Event"
+		name="event"
+		value={query.event ? String(query.event) : ''}
+		text={event ? describeEvent(event.name).longName : 'any event'}
+		anyLabel="any event"
+		placeholder="Search events"
+		groups={eventPicks(eventsFor(champ, query.gender, events))}
+		onchoose={(id) => choose({ event: number(id) })}
+	/>
 	<span class="text-ink-3">·</span>
-	<label class={CHIP}>
-		{@render face(query.year ? String(query.year) : 'all years')}
-		<select
-			name="year"
-			aria-label="Year"
-			class={MENU}
-			onchange={(change) => choose({ year: number(change.currentTarget.value) })}
-		>
-			<option value="">all years</option>
-			{#each yearsFor(champ, currentYear) as year (year)}
-				<option value={year} selected={year === query.year}>{year}</option>
-			{/each}
-		</select>
-	</label>
+	<Picker
+		label="Year"
+		name="year"
+		value={query.year ? String(query.year) : ''}
+		text={query.year ? String(query.year) : 'all years'}
+		anyLabel="all years"
+		placeholder="Search years"
+		groups={yearPicks(yearsFor(champ, currentYear))}
+		onchoose={(year) => choose({ year: number(year) })}
+	/>
 	<noscript>
 		<button type="submit" class="h-11 rounded-xl bg-ink px-4 text-lg text-bg">Show</button>
 	</noscript>

@@ -6,7 +6,7 @@ test('offers ready-made comparisons before a selection', async ({ page }) => {
 	const response = await page.goto('/medals/compare');
 
 	expect(response?.status()).toBe(200);
-	await expect(page.getByRole('combobox', { name: 'Event' })).toBeDisabled();
+	await expect(page.getByRole('button', { name: 'Event: an event' })).toBeDisabled();
 	await expect(
 		page.getByRole('link', { name: 'Olympic Games vs World Championships · Women’s 100m →' })
 	).toHaveAttribute('href', '/medals/compare?a=40&b=52&gender=women&event=10');
@@ -38,6 +38,21 @@ test('traces a double winner through both championships', async ({ page }) => {
 	await expect(winner).toHaveAttribute('aria-pressed', 'true');
 	await expect(page.getByRole('rowheader', { name: '2022' })).toHaveClass(/bg-brand /);
 	await expect(page.getByRole('rowheader', { name: '2002' })).not.toHaveClass(/bg-brand /);
+});
+
+test('picks the event under a gender tab', async ({ page }) => {
+	await page.goto(EUROPEANS_VS_OLYMPICS, { waitUntil: 'networkidle' });
+
+	await page.getByRole('button', { name: 'Event: Men’s 100m' }).click();
+	await expect(page.getByRole('button', { name: 'Men', exact: true })).toHaveAttribute(
+		'aria-pressed',
+		'true'
+	);
+	await page.getByRole('button', { name: 'Women', exact: true }).click();
+	await expect(page.getByRole('combobox', { name: 'Search event' })).toBeFocused();
+	await page.getByRole('option', { name: '100m hurdles' }).click();
+
+	await expect(page).toHaveURL('/medals/compare?a=18&b=40&gender=women&event=7');
 });
 
 test('turns the race menu of the form into the gender and the event', async ({ page }) => {

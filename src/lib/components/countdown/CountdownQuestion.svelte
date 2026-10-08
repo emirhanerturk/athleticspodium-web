@@ -2,8 +2,9 @@
 	import { goto } from '$app/navigation';
 	import { PUBLIC_SITE_URL } from '$app/env/public';
 	import Flag from '#lib/components/ui/Flag.svelte';
-	import ChevronDownIcon from '#lib/components/ui/icons/ChevronDownIcon.svelte';
+	import Picker from '#lib/components/ui/Picker.svelte';
 	import { COUNTDOWN_PRESETS, type CountdownQuery } from '#lib/domain/countdown.js';
+	import { champPicks, nationPicks } from '#lib/domain/pick-list.js';
 	import {
 		champsFor,
 		countriesFor,
@@ -43,10 +44,6 @@
 			!nextCountry || !nextChamp || champsFor(nextCountry, champs).includes(nextChamp);
 		goto(medalCountdownUrl(next.country, eligible ? next.champ : null), { reset: false });
 	}
-
-	const CHIP =
-		'relative inline-flex h-11 max-w-full items-center gap-2.5 rounded-xl border-2 px-3 text-[20px] focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-brand-ink sm:h-[52px] sm:text-[26px]';
-	const MENU = 'absolute inset-0 cursor-pointer opacity-0';
 </script>
 
 <form
@@ -55,38 +52,27 @@
 	class="flex flex-wrap items-center gap-x-2.5 gap-y-2 font-display text-[24px] leading-[1.3] font-bold sm:text-[34px]"
 >
 	<span>Count</span>
-	<label class="{CHIP} border-ink bg-bg pl-2.5 hover:bg-brand-soft">
-		{#if country}<Flag code={country.code} class="h-6 w-8 rounded-[3px]" />{/if}
-		<span class="truncate">{country?.name ?? 'a nation'}</span>
-		<ChevronDownIcon class="size-3.5 shrink-0" />
-		<select
-			name="country"
-			aria-label="Nation"
-			class={MENU}
-			onchange={(change) => choose({ ...query, country: change.currentTarget.value || null })}
-		>
-			<option value="">a nation</option>
-			{#each countriesFor(champ, countries) as item (item.code)}
-				<option value={item.code} selected={item.code === query.country}>{item.name}</option>
-			{/each}
-		</select>
-	</label>
+	<Picker
+		label="Nation"
+		name="country"
+		value={query.country ?? ''}
+		text={country?.name ?? 'a nation'}
+		flag={country?.code}
+		placeholder="Search nations or codes"
+		groups={nationPicks(countriesFor(champ, countries))}
+		onchoose={(code) => choose({ ...query, country: code || null })}
+	/>
 	<span class="text-ink-3">’s medals at every</span>
-	<label class="{CHIP} border-brand bg-brand text-ink hover:bg-brand/85">
-		<span class="truncate">{champ?.name ?? 'championship'}</span>
-		<ChevronDownIcon class="size-3.5 shrink-0" />
-		<select
-			name="champ"
-			aria-label="Championship"
-			class={MENU}
-			onchange={(change) => choose({ ...query, champ: Number(change.currentTarget.value) || null })}
-		>
-			<option value="">championship</option>
-			{#each champsFor(country, champs) as item (item.id)}
-				<option value={item.id} selected={item.id === query.champ}>{item.name}</option>
-			{/each}
-		</select>
-	</label>
+	<Picker
+		label="Championship"
+		name="champ"
+		value={query.champ ? String(query.champ) : ''}
+		text={champ?.name ?? 'championship'}
+		placeholder="Search championships"
+		groups={champPicks(champsFor(country, champs))}
+		class="border-brand bg-brand text-ink hover:bg-brand/85"
+		onchoose={(id) => choose({ ...query, champ: Number(id) || null })}
+	/>
 	<noscript>
 		<button type="submit" class="h-11 rounded-xl bg-ink px-4 text-lg text-bg">Count</button>
 	</noscript>
