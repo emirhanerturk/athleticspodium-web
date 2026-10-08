@@ -63,7 +63,7 @@
 							onclick={() => (level = item.level)}
 						>
 							{LEVEL_LABELS[item.level]}
-							<span class="font-data opacity-70">{item.count}</span>
+							<span class="font-data opacity-85">{item.count}</span>
 						</button>
 					{/each}
 				{/if}

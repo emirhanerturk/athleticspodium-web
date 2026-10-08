@@ -274,7 +274,7 @@
 				>
 					<span class="size-[9px] rounded-full {FILTER_DOTS[option.key]}"></span>
 					{option.label}
-					<span class="font-data text-[13px] opacity-70">{countFor(option.key)}</span>
+					<span class="font-data text-[13px] opacity-85">{countFor(option.key)}</span>
 				</button>
 			{/each}
 		</div>

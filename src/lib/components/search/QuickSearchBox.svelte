@@ -264,7 +264,7 @@
 				class="mx-2.5 mt-1.5 mb-2.5 flex items-center justify-between rounded-xl bg-ink px-3.5 py-3 text-[14.5px] font-bold text-bg"
 			>
 				See all {results.total ? `${results.total} ` : ''}results for “{query.trim()}”
-				<span class="font-data text-[13px] opacity-70">⇧ ↵</span>
+				<span class="font-data text-[13px] opacity-85">⇧ ↵</span>
 			</a>
 		{:else if !active}
 			{@render idle?.()}
