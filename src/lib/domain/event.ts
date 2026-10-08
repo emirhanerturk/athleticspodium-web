@@ -208,6 +208,11 @@ export function describeEvent(name: string): EventInfo {
 		: { longName: name, discipline: null };
 }
 
+export function eventInSentence(name: string): string {
+	const { longName } = describeEvent(name);
+	return /^[A-Z][a-z]/.test(longName) ? longName[0].toLowerCase() + longName.slice(1) : longName;
+}
+
 export type MarkKind = 'time' | 'distance' | 'points';
 
 export function markKind(discipline: Discipline | null): MarkKind {

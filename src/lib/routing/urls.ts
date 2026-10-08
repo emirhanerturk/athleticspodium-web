@@ -91,8 +91,16 @@ export function medalSearchUrl(query: Partial<MedalQuery>): string {
 	return search ? `${PAGES.medalSearch}?${search}` : PAGES.medalSearch;
 }
 
-export function medalCountdownUrl(countryCode: string, champId: number): string {
-	return `${PAGES.medalCountdown}?country=${countryCode.toUpperCase()}&champ=${champId}`;
+export function medalCountdownUrl(countryCode: string | null, champId: number | null): string {
+	const params = new URLSearchParams();
+	if (countryCode) params.set('country', countryCode.toUpperCase());
+	if (champId) params.set('champ', String(champId));
+	const search = params.toString();
+	return search ? `${PAGES.medalCountdown}?${search}` : PAGES.medalCountdown;
+}
+
+export function editionMedalsUrl(champId: number, countryCode: string, year: number): string {
+	return `/internal/medals/${champId}/${countryCode}/${year}`;
 }
 
 export function countriesUrl(areaSlug?: string): string {

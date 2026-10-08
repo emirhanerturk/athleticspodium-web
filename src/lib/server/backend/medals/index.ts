@@ -6,40 +6,52 @@ import { parseFilterChamp, parseMedalSearch } from './parse.js';
 
 const MAX_PAGES = 10;
 
+type MedalFilter = Partial<Omit<MedalQuery, 'page'>> & { canceled?: boolean };
+
 export function createMedals(client: BackendClient) {
-	async function search(query: MedalQuery) {
-		const page = await client.get<MedalSearchDto>('/medals', {
-			champs: query.champ ?? undefined,
-			country: query.country ?? undefined,
-			event: query.event ?? undefined,
-			year: query.year ?? undefined,
-			gender: query.gender ? GENDER_CODES[query.gender] : undefined,
-			medal: query.medal ?? undefined,
-			page: query.page,
+	async function fetchPage(filter: MedalFilter, page: number) {
+		const result = await client.get<MedalSearchDto>('/medals', {
+			champs: filter.champ ?? undefined,
+			country: filter.country ?? undefined,
+			event: filter.event ?? undefined,
+			year: filter.year ?? undefined,
+			gender: filter.gender ? GENDER_CODES[filter.gender] : undefined,
+			medal: filter.medal ?? undefined,
+			is_canceled: filter.canceled ? 1 : undefined,
+			page,
 			order: 'year'
 		});
-		return parseMedalSearch(page);
+		return parseMedalSearch(result);
+	}
+
+	async function everyPage(filter: MedalFilter) {
+		const rows: MedalRecord[] = [];
+		for (let number = 1; number <= MAX_PAGES; number++) {
+			const result = await fetchPage(filter, number);
+			rows.push(...result.rows);
+			if (!result.rows.length || rows.length >= result.count) break;
+		}
+		return rows;
 	}
 
 	return {
-		search,
+		search: (query: MedalQuery) => fetchPage(query, query.page),
 
-		async allForEvent(champId: number, eventId: number, gender: Gender) {
-			const rows: MedalRecord[] = [];
-			for (let page = 1; page <= MAX_PAGES; page++) {
-				const result = await search({
-					champ: champId,
-					country: null,
-					event: eventId,
-					year: null,
-					gender,
-					medal: null,
-					page
-				});
-				rows.push(...result.rows);
-				if (!result.rows.length || rows.length >= result.count) break;
-			}
-			return rows;
+		allForEvent: (champ: number, event: number, gender: Gender) =>
+			everyPage({ champ, event, gender }),
+
+		async forEdition(champ: number, country: string, year: number) {
+			const rows = await everyPage({ champ, country, year });
+			return rows.filter((row) => row.meeting.year === year);
+		},
+
+		async withdrawn(champ: number, country: string) {
+			const rows = await everyPage({ champ, country, canceled: true });
+			return rows.filter((row) => row.canceled);
+		},
+
+		async firstPage(filter: MedalFilter) {
+			return (await fetchPage(filter, 1)).rows;
 		},
 
 		async filterChamps() {

@@ -79,11 +79,54 @@ test('shows a country’s medals at a championship edition by edition', async ({
 	await expect(page.getByRole('heading', { level: 2 }).first()).toHaveText(
 		'Turkey at the European Championships'
 	);
-	await expect(page.locator('tbody tr')).toHaveCount(12);
+	await expect(page.getByRole('heading', { name: 'On the podium' })).toBeVisible();
+	await expect(page.getByText('11 of 27', { exact: true })).toBeVisible();
+	await expect(page.getByRole('heading', { name: 'Every edition, 1934–2028' })).toBeVisible();
+
+	const table = page.locator('table');
+	await expect(table.locator('tbody tr')).toHaveCount(28);
+	await page.getByRole('button', { name: 'Medal editions only' }).click();
+	await expect(table.locator('tbody tr')).toHaveCount(11);
 	await expect(page.getByRole('link', { name: 'Details →' }).first()).toHaveAttribute(
 		'href',
 		/^\/medals\?champ=18&country=TUR&year=\d{4}$/
 	);
+});
+
+test('opens the medallists of an edition', async ({ page }) => {
+	await page.goto('/medals/countdown?country=TUR&champ=18', { waitUntil: 'networkidle' });
+
+	const toggle = page.getByRole('button', { name: 'Medallists, 2018' });
+	await toggle.click();
+
+	await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+	await expect(page.getByRole('link', { name: 'Ramil Guliyev' }).first()).toBeVisible();
+});
+
+test('places the nation in the all-time table and points to the next edition', async ({ page }) => {
+	await page.goto('/medals/countdown?country=TUR&champ=18');
+
+	await expect(page.getByRole('link', { name: /^22 Turkey/ })).toHaveAttribute(
+		'aria-current',
+		'page'
+	);
+	await expect(page.getByRole('link', { name: /Next edition/ })).toHaveAttribute(
+		'href',
+		'/champs/european-champs/2028-european-championships'
+	);
+});
+
+test('counts medals without JavaScript', async ({ browser }) => {
+	const context = await browser.newContext({ javaScriptEnabled: false });
+	const page = await context.newPage();
+	await page.goto('/medals/countdown');
+
+	await page.getByRole('combobox', { name: 'Nation' }).selectOption('TUR');
+	await page.getByRole('combobox', { name: 'Championship' }).selectOption('18');
+	await page.getByRole('button', { name: 'Count', exact: true }).click();
+
+	await expect(page).toHaveURL('/medals/countdown?country=TUR&champ=18');
+	await context.close();
 });
 
 test('rewrites the search without JavaScript', async ({ browser }) => {
