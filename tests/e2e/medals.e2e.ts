@@ -43,7 +43,6 @@ test('groups the medals by edition, with relays once and withdrawn medals apart'
 	await expect(
 		page.getByRole('link', { name: 'Medal countdown, edition by edition →' })
 	).toHaveAttribute('href', '/medals/countdown?country=TUR&champ=18');
-	await expect(page.getByRole('button', { name: /^Copy link/ })).toHaveCount(1);
 });
 
 test('rewrites the search when a box in the sentence changes', async ({ page }) => {
@@ -165,23 +164,6 @@ test('links the athletes of withdrawn medals and opens their cards', async ({ pa
 	).toHaveAttribute('href', '/athlete/34116/asli-cakir');
 });
 
-test('copies the shareable link of a countdown', async ({ page }) => {
-	await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
-	await page.goto('/medals/countdown?country=TUR&champ=18', { waitUntil: 'networkidle' });
-
-	await page
-		.getByRole('button', {
-			name: 'Copy link: athleticspodium.com/medals/countdown?country=TUR&champ=18'
-		})
-		.getByText('athleticspodium.com/medals/countdown?country=TUR&champ=18')
-		.click();
-
-	await expect(page.getByRole('status')).toHaveText('Link copied');
-	expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
-		'https://athleticspodium.com/medals/countdown?country=TUR&champ=18'
-	);
-});
-
 test('counts medals without JavaScript', async ({ browser }) => {
 	const context = await browser.newContext({ javaScriptEnabled: false });
 	const page = await context.newPage();
@@ -192,10 +174,6 @@ test('counts medals without JavaScript', async ({ browser }) => {
 	await page.getByRole('button', { name: 'Count', exact: true }).click();
 
 	await expect(page).toHaveURL('/medals/countdown?country=TUR&champ=18');
-	await expect(
-		page.getByText('athleticspodium.com/medals/countdown?country=TUR&champ=18')
-	).toBeVisible();
-	await expect(page.getByRole('button', { name: 'Copy link' })).toHaveCount(0);
 	await context.close();
 });
 

@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { PUBLIC_SITE_URL } from '$app/env/public';
-	import ShareLink from '#lib/components/tools/ShareLink.svelte';
 	import Picker from '#lib/components/ui/Picker.svelte';
 	import { describeEvent, type CatalogueEvent } from '#lib/domain/event.js';
 	import { champPicks, eventPicks, nationPicks, yearPicks } from '#lib/domain/pick-list.js';
@@ -34,7 +32,6 @@
 	const champ = $derived(champs.find((item) => item.id === query.champ));
 	const country = $derived(countries.find((item) => item.code === query.country));
 	const event = $derived(events.find((item) => item.id === query.event));
-	const shareUrl = $derived(new URL(medalSearchUrl(query), PUBLIC_SITE_URL));
 
 	const number = (value: string) => (value ? Number(value) : null);
 
@@ -113,9 +110,6 @@
 		<button type="submit" class="h-11 rounded-xl bg-ink px-4 text-lg text-bg">Show</button>
 	</noscript>
 </form>
-<p class="mt-4 flex flex-wrap items-center gap-2.5 text-[13.5px] text-ink-3">
-	<span
-		>Each box is a menu — the sentence rewrites itself as you change it. The link is shareable:</span
-	>
-	<ShareLink url={shareUrl} />
+<p class="mt-4 text-[13.5px] text-ink-3">
+	Each box is a menu — the sentence rewrites itself as you change it.
 </p>

@@ -10,7 +10,6 @@ test('offers ready-made comparisons before a selection', async ({ page }) => {
 	await expect(
 		page.getByRole('link', { name: 'Olympic Games vs World Championships · Women’s 100m →' })
 	).toHaveAttribute('href', '/medals/compare?a=40&b=52&gender=women&event=10');
-	await expect(page.getByText('The link is shareable:')).toHaveCount(0);
 });
 
 test('lines up two championships year by year', async ({ page }) => {
@@ -25,10 +24,6 @@ test('lines up two championships year by year', async ({ page }) => {
 		'href',
 		'/medals/compare?a=40&b=18&gender=men&event=10'
 	);
-	await expect(
-		page.getByText('athleticspodium.com/medals/compare?a=18&b=40&gender=men&event=10')
-	).toBeVisible();
-	await expect(page.getByRole('button', { name: 'Copy link' })).toBeVisible();
 });
 
 test('traces a double winner through both championships', async ({ page }) => {
