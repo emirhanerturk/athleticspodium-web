@@ -135,8 +135,9 @@ export function bestMedalOf(rows: MedalRecord[]): MedalEntry | null {
 }
 
 export function medallistName([record, ...teammates]: MedalEntry): string {
-	if (teammates.length) return 'Team';
-	return record.athleteName ?? (record.athlete ? fullName(record.athlete) : '–');
+	const name = record.athleteName ?? (record.athlete ? fullName(record.athlete) : null);
+	if (teammates.length || (record.isTeam && !name)) return 'Team';
+	return name ?? '–';
 }
 
 export function medalWhat(record: MedalRecord, { withMedal = true } = {}): string {

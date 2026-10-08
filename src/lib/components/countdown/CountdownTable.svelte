@@ -78,7 +78,7 @@
 						</th>
 					{/each}
 					<th scope="col" class="w-14 text-center">Total</th>
-					<th scope="col" class="w-12 pr-4 sm:w-[190px] sm:pr-5">
+					<th scope="col" class="w-14 pr-4 sm:w-[130px] sm:pr-5">
 						<span class="sr-only">Medallists</span>
 					</th>
 				</tr>
@@ -89,7 +89,7 @@
 					{@const expanded = open === edition.slug}
 					<tr
 						id="edition-{edition.slug}"
-						class="scroll-mt-4 border-b border-line {expanded ? 'bg-brand-soft' : ''} {tally
+						class="scroll-mt-4 {expanded ? 'bg-brand-soft' : 'border-b border-line'} {tally
 							? ''
 							: 'text-ink-3'}"
 					>
@@ -132,32 +132,24 @@
 						<td class="text-center font-data text-[17px] font-bold">{tally?.total ?? '–'}</td>
 						<td class="pr-4 sm:pr-5">
 							{#if tally}
-								<span class="flex justify-end gap-1.5">
-									<button
-										type="button"
-										aria-expanded={expanded}
-										aria-label="Medallists, {edition.year}"
-										onclick={() => (open = expanded ? null : edition.slug)}
-										class="inline-flex h-[30px] items-center gap-1 rounded-lg border px-2.5 text-[12.5px] font-bold {expanded
-											? 'border-ink bg-surface'
-											: 'border-line-2 hover:border-ink'}"
-									>
-										<span aria-hidden="true" class="max-sm:hidden">Medallists</span>
-										<ChevronDownIcon class="size-3 {expanded ? 'rotate-180' : ''}" />
-									</button>
-									<a
-										href={details(edition.year)}
-										class="inline-flex h-[30px] items-center rounded-lg border border-line-2 px-2.5 text-[12.5px] font-semibold whitespace-nowrap hover:border-ink max-sm:hidden"
-									>
-										Details →
-									</a>
-								</span>
+								<button
+									type="button"
+									aria-expanded={expanded}
+									aria-label="Medallists, {edition.year}"
+									onclick={() => (open = expanded ? null : edition.slug)}
+									class="ml-auto flex h-[30px] items-center gap-1.5 rounded-lg border px-2 text-[12.5px] font-bold sm:px-2.5 {expanded
+										? 'border-ink bg-surface'
+										: 'border-line-2 hover:border-ink'}"
+								>
+									<span aria-hidden="true" class="max-sm:hidden">Medallists</span>
+									<ChevronDownIcon class="size-3 {expanded ? 'rotate-180' : ''}" />
+								</button>
 							{/if}
 						</td>
 					</tr>
 					{#if expanded}
 						<tr class="border-b border-line bg-brand-soft">
-							<td colspan="8" class="px-4 pb-3.5 sm:pr-5 sm:pl-[96px]">
+							<td colspan="8" class="px-4 pt-1 pb-3.5 sm:pr-5 lg:pl-[96px]">
 								<EditionMedallists
 									url={editionMedalsUrl(champ.id, countryCode, edition.year)}
 									details={details(edition.year)}
