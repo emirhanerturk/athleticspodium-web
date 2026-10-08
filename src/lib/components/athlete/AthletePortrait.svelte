@@ -16,7 +16,7 @@
 		alt=""
 		width={88}
 		height={88}
-		class="{className} shrink-0 rounded-full object-cover object-top"
+		class="{className} shrink-0 rounded-full bg-surface-2 object-cover object-top"
 	/>
 {:else}
 	<span

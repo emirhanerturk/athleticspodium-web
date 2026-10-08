@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
 	import Highlighted from '#lib/components/search/Highlighted.svelte';
-	import { countPicks, matchPicks, searchWords, type PickGroup } from '#lib/domain/pick-list.js';
+	import { countPicks, matchPicks, type PickGroup } from '#lib/domain/pick-list.js';
+	import { searchWords } from '#lib/utils/fold-text.js';
 	import Flag from './Flag.svelte';
 	import CheckIcon from './icons/CheckIcon.svelte';
 	import ChevronDownIcon from './icons/ChevronDownIcon.svelte';

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { excerptFromHtml } from './text.js';
+import { excerptFromHtml, possessive } from './text.js';
 
 describe('excerptFromHtml', () => {
 	it('drops tags and extra spaces', () => {
@@ -12,5 +12,12 @@ describe('excerptFromHtml', () => {
 		expect(excerptFromHtml('<p>T&uuml;rkiye sprinter, born in Baku, world champion</p>', 30)).toBe(
 			'T&uuml;rkiye sprinter, born in…'
 		);
+	});
+});
+
+describe('possessive', () => {
+	it('adds an apostrophe, with an s unless the name ends in one', () => {
+		expect(possessive('Turkey')).toBe('Turkey’s');
+		expect(possessive('Bahamas')).toBe('Bahamas’');
 	});
 });

@@ -6,6 +6,9 @@
 			"silver": "9",
 			"bronze": "8",
 			"total": "35",
+			"first_year": 2012,
+			"last_year": 2026,
+			"events": ["SP", "SP 3 kg"],
 			"athlete": {
 				"id": 34262,
 				"first_name": "Emel",
@@ -30,6 +33,9 @@
 			"silver": "11",
 			"bronze": "3",
 			"total": "31",
+			"first_year": 2013,
+			"last_year": 2025,
+			"events": ["100m", "200m", "4x100m"],
 			"athlete": {
 				"id": 10352,
 				"first_name": "Ramil",
@@ -52,6 +58,9 @@
 			"silver": "3",
 			"bronze": "6",
 			"total": "24",
+			"first_year": 2016,
+			"last_year": 2025,
+			"events": ["10,000m", "3000m", "5000m", "Mixed XC", "Seniors", "Seniors (Team)"],
 			"athlete": {
 				"id": 34226,
 				"first_name": "Yasemin",
@@ -74,6 +83,9 @@
 			"silver": "7",
 			"bronze": "3",
 			"total": "23",
+			"first_year": 2013,
+			"last_year": 2026,
+			"events": ["400m", "4x100m", "4x400m"],
 			"athlete": {
 				"id": 12823,
 				"first_name": "Batuhan",
@@ -97,6 +109,9 @@
 			"silver": "7",
 			"bronze": "2",
 			"total": "22",
+			"first_year": 2011,
+			"last_year": 2020,
+			"events": ["400m", "4x400m"],
 			"athlete": {
 				"id": 15127,
 				"first_name": "Yavuz",
@@ -120,6 +135,9 @@
 			"silver": "6",
 			"bronze": "5",
 			"total": "24",
+			"first_year": 2019,
+			"last_year": 2026,
+			"events": ["400H", "400H 83.8", "400m", "4x400m", "4x400m Mixed"],
 			"athlete": {
 				"id": 12963,
 				"first_name": "Berke",
@@ -142,6 +160,9 @@
 			"silver": "5",
 			"bronze": "1",
 			"total": "18",
+			"first_year": 2015,
+			"last_year": 2022,
+			"events": ["100m", "200m", "4x100m"],
 			"athlete": {
 				"id": 10346,
 				"first_name": "Jak Ali",
@@ -164,6 +185,18 @@
 			"silver": "4",
 			"bronze": "3",
 			"total": "19",
+			"first_year": 2013,
+			"last_year": 2026,
+			"events": [
+				"10,000m",
+				"3000m",
+				"5000m",
+				"Half Mar",
+				"Mixed XC",
+				"Seniors",
+				"Seniors (Team)",
+				"U20"
+			],
 			"athlete": {
 				"id": 10296,
 				"first_name": "Ali",
@@ -186,6 +219,9 @@
 			"silver": "2",
 			"bronze": "2",
 			"total": "15",
+			"first_year": 2012,
+			"last_year": 2018,
+			"events": ["10,000m", "3000m", "5000m", "Seniors", "Seniors (Team)"],
 			"athlete": {
 				"id": 10241,
 				"first_name": "Polat Kemboi",
@@ -209,6 +245,9 @@
 			"silver": "6",
 			"bronze": "5",
 			"total": "21",
+			"first_year": 1999,
+			"last_year": 2013,
+			"events": ["10,000m", "3000m", "5000m", "Marathon", "Seniors", "U20", "U20 (Team)"],
 			"athlete": {
 				"id": 34004,
 				"first_name": "Elvan",
@@ -232,6 +271,9 @@
 			"silver": "4",
 			"bronze": "2",
 			"total": "16",
+			"first_year": 2018,
+			"last_year": 2026,
+			"events": ["400m", "4x400m", "Medley Relay"],
 			"athlete": {
 				"id": 11325,
 				"first_name": "Ilyas",
@@ -255,6 +297,9 @@
 			"silver": "3",
 			"bronze": "1",
 			"total": "14",
+			"first_year": 2020,
+			"last_year": 2026,
+			"events": ["100m", "4x100m", "60m"],
 			"athlete": {
 				"id": 48293,
 				"first_name": "Kayhan",

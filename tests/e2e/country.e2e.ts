@@ -38,17 +38,72 @@ test('filters the medal table by level', async ({ page }) => {
 	await expect(table.filter({ hasText: 'European Championships' })).toHaveCount(0);
 });
 
-test('lists the country athletes on numbered pages', async ({ page }) => {
+test('lists the country athletes with their medal events and years', async ({ page }) => {
 	const response = await page.goto('/country/TUR/athletes');
 
 	expect(response?.status()).toBe(200);
-	await expect(page.getByRole('heading', { level: 1 })).toHaveText('Turkey athletes');
+	await expect(page.getByRole('heading', { level: 1 })).toHaveText('Turkey’s athletes');
+	await expect(
+		page.locator('dl').filter({ hasText: 'medallists' }).getByRole('definition')
+	).toHaveText(['12', '9', '3']);
 	await expect(page.locator('tbody tr')).toHaveCount(12);
-	await expect(page.getByRole('navigation', { name: 'Pagination' })).toContainText('Page 1 of 1');
+	await expect(page.locator('tbody tr').first()).toContainText('Women · 2012–26');
+	await expect(page.locator('tbody tr').nth(1)).toContainText('100m, 200m, relays');
+	await expect(page.getByText('Showing 1–12 of 12')).toBeVisible();
+	await expect(page.getByRole('navigation', { name: 'Pagination' })).toHaveCount(0);
 
-	expect((await page.goto('/country/TUR/athletes?page=1'))?.url()).toMatch(
+	expect((await page.goto('/country/TUR/athletes?page=1&sort=golds'))?.url()).toMatch(
 		/\/country\/TUR\/athletes$/
 	);
+	expect((await page.goto('/country/TUR/athletes?page=2'))?.status()).toBe(404);
+});
+
+test('filters the athletes by name, gender and medal years, and sorts them', async ({ page }) => {
+	await page.goto('/country/TUR/athletes', { waitUntil: 'networkidle' });
+	const rows = page.locator('tbody tr');
+
+	await page.getByRole('searchbox', { name: 'Filter by name or event' }).fill('can');
+	await expect(page).toHaveURL('/country/TUR/athletes?q=can');
+	await expect(rows).toHaveCount(3);
+	await expect(page.getByRole('searchbox', { name: 'Filter by name or event' })).toBeFocused();
+
+	await page.getByRole('group', { name: 'Gender' }).getByRole('link', { name: 'Women' }).click();
+	await expect(page).toHaveURL('/country/TUR/athletes?q=can&gender=women');
+	await expect(rows).toHaveText([/Yasemin Can/]);
+
+	await page.getByRole('searchbox', { name: 'Filter by name or event' }).fill('steeple');
+	await expect(page.getByText('No medallist from Turkey matches these filters.')).toBeVisible();
+	await page.getByRole('link', { name: 'Clear filters' }).click();
+	await expect(page).toHaveURL('/country/TUR/athletes');
+	await expect(page.getByRole('searchbox', { name: 'Filter by name or event' })).toHaveValue('');
+
+	await page
+		.getByRole('group', { name: 'Medal years' })
+		.getByRole('link', { name: '1980–99' })
+		.click();
+	await expect(page).toHaveURL('/country/TUR/athletes?era=1980-1999');
+	await expect(rows).toHaveText([/Elvan Abeylegesse/]);
+
+	await page.getByRole('link', { name: 'Any era' }).click();
+	await expect(page).toHaveURL('/country/TUR/athletes');
+	await page.getByLabel('Sort').selectOption('youngest');
+	await expect(page).toHaveURL('/country/TUR/athletes?sort=youngest');
+	await expect(rows.first()).toContainText('Berke Akcam');
+});
+
+test('pages through a long list of athletes', async ({ page }) => {
+	await page.goto('/country/ETH/athletes', { waitUntil: 'networkidle' });
+
+	await expect(page.getByText('Showing 1–25 of 30')).toBeVisible();
+	await page
+		.getByRole('navigation', { name: 'Pagination' })
+		.getByRole('link', { name: 'Page 2' })
+		.click();
+
+	await expect(page).toHaveURL('/country/ETH/athletes?page=2#athletes');
+	await expect(page.getByText('Showing 26–30 of 30')).toBeVisible();
+	await expect(page.locator('tbody tr').first()).toContainText('26');
+	await expect(page).toHaveTitle(/page 2/);
 });
 
 test('finds countries by name or code and by area', async ({ page }) => {

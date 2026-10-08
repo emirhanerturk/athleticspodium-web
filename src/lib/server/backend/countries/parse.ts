@@ -28,7 +28,7 @@ export function parseCountryAthletes(
 	dtos: CountryAthleteDto[],
 	countryCode: string
 ): CountryAthlete[] {
-	return dtos.flatMap(({ athlete, gold, silver, bronze }) => {
+	return dtos.flatMap(({ athlete, gold, silver, bronze, first_year, last_year, events }) => {
 		if (!athlete) return [];
 		const image = athlete.image?.[0];
 		const tally = { gold: Number(gold), silver: Number(silver), bronze: Number(bronze) };
@@ -53,7 +53,10 @@ export function parseCountryAthletes(
 					birthDate: athlete.date_of_birth,
 					events: athlete.events ?? []
 				},
-				tally: { ...tally, total: tally.gold + tally.silver + tally.bronze }
+				tally: { ...tally, total: tally.gold + tally.silver + tally.bronze },
+				events: events ?? [],
+				firstYear: first_year ?? null,
+				lastYear: last_year ?? null
 			}
 		];
 	});

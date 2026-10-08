@@ -63,7 +63,7 @@ What the sample shows:
 11. The athlete hover card uses the single compact variant. It loads lazily on hover or focus. On touch devices the name is a plain link.
 12. `/search` is `noindex`. The quick search shows featured athletes instead of "trending". Recent searches stay in `localStorage`. Search starts at 2 characters.
 13. Medal counts follow one definition (section 8).
-14. `/country/:code/athletes` stays as a v2 list page.
+14. `/country/:code/athletes` follows `V2-CountryAthletes`; its filters run on the server, so every state has a URL.
 15. The A–Z athlete directory stays, now with crawlable URLs.
 16. Placings 4–8 appear on the athlete profile behind a "Show places 4–8" toggle.
 17. Content the design omits stays:
@@ -112,7 +112,7 @@ What the sample shows:
 | Athlete                  | `/athlete/[id=integer]/[slug]`                           | `V2-Athlete` → `Athlete-A` (`v2=true`)    | yes       |
 | Countries                | `/country`                                               | `V2-Countries`                            | yes       |
 | Country                  | `/country/[code]`                                        | `V2-Country`                              | yes       |
-| Country athletes         | `/country/[code]/athletes?page=n`                        | v2 components                             | yes       |
+| Country athletes         | `/country/[code]/athletes?q=&gender=&era=&sort=&page=`   | `V2-CountryAthletes`                      | yes       |
 | Calendar                 | `/calendar`, `/calendar/[year=integer]`                  | `V2-Calendar`                             | yes       |
 | Search                   | `/search?q=&type=&gender=&born_from=&born_to=&olympian=` | `V2-Search`                               | no        |
 | Articles                 | `/article`, `/article/[id=integer]/[slug]`               | v2 components                             | yes       |
@@ -561,21 +561,31 @@ For each page: what it shows, where the data comes from, and the backend prerequ
 | ------------------------------------------------- | ------------------------------------------------------------ | ------------ |
 | Header, area, about                               | `/countries/:code` (`content` shown as is)                   | —            |
 | Totals, by-level bars, grouped championship table | `/countries/:code/medals`                                    | B2           |
-| Most decorated (12), All / Men / Women            | `/countries/:code/athletes?limit=12&international=1&gender=` | B3           |
+| Most decorated (12), All / Men / Women            | `/countries/:code/athletes?limit=12&international=1&gender=` | B3, B21      |
 | Hosted meetings                                   | `/meetings?country=:code`                                    | B5           |
 | Stories                                           | `/articles?country=`                                         | —            |
 
 - **Link:** "All athletes" goes to `/country/[code]/athletes`.
+- **Most decorated:** the line under each name gives the gender and the first two medal events (B21).
 - **Medal table rows** link to `/medals/countdown?country=<code>&champ=<id>`. The level bars and tabs filter the table; national titles are the golds in national championships.
 - **Hosted meetings:** the 8 latest international meetings (`international=1`), with a countdown for coming ones and "Results" when `has_results` is true.
 - **About:** `content` is collapsible under the hero.
 - **Dropped:** the structured facts strip.
 
-### Country athletes (`/country/[code]/athletes?page=n`)
+### Country athletes (`/country/[code]/athletes`)
 
-- **Display:** A v2 table of the country's athletes, sorted by international medals.
-- **Data:** `/countries/:code/athletes?international=1&limit=100&offset=` (B3).
-- **Pagination:** It uses `<a href>` links. Each page asks for 101 rows to know whether a next page exists. `?page=1` and invalid values redirect (301) to the first page; an empty page after the first answers 404.
+- **Data:** the country's whole list from `/countries/:code/athletes?international=1` (B3, B21), with each athlete's medal events in catalogue order. The server keeps the profile and the list for 10 minutes, for up to 30 countries, and filters, sorts and pages them there. A page sends 25 rows.
+- **Hero:** the flag, "<code> · every international medallist", "<Country>’s athletes", and the counts of medallists, men and women.
+- **Toolbar:** sticky from 640 px.
+  - **Filter by name or event:** every word must start a word of the name, an event's short or long name, or its discipline. Folding ignores case and accents and also turns ı, ø, ł and đ into i, o, l and d. The URL follows after a 250 ms pause and replaces the history entry.
+  - **All / Men / Women.**
+  - **Medal years:** Any era, Before 1960, 1960–79, 1980–99, 2000+. An athlete appears in every era that their first-to-last medal span touches.
+  - **Sort:** Most golds (default: gold, silver, bronze), Most medals, Youngest first (unknown birth dates last), A–Z by surname.
+- **Rows:** the rank in the current order, the photo or initials, the name with the hover card, the gender and the medal years, the birth date, the medal events, gold/silver/bronze, and the total with a bar scaled to the square root of the country's highest total. Phones keep the rank, the athlete, the medals and the total.
+- **URLs:** `q`, `gender` (`men`, `women`), `era` (`before-1960`, `1960-1979`, `1980-1999`, `since-2000`), `sort` (`medals`, `youngest`, `name`) and `page`. Defaults are left out. A request whose known parameters are not in that form (empty, invalid, the default, or another order) redirects (301) to it; other parameters are left alone. A page past the last answers 404. Filtered or re-sorted states are `noindex`.
+- **Without JavaScript:** the search and the sort submit a GET form, which the redirect then cleans up; the gender and era options are links.
+- **Pagination:** numbered links (first, last and the pages around the current one) that land on the list (`#athletes`), with "Showing 1–25 of N".
+- **Footnote:** only international medals count; national titles are left out.
 
 ### Calendar (`/calendar`, `/calendar/[year]`)
 
@@ -711,6 +721,7 @@ Each item is a normal backend PR. It ships before the page that needs it (releas
 | B18 | Replaced on 2026-10-07 by `lib/domain/event.ts` in the web app. Only the new site uses long names and disciplines, and the backend has no migration tooling. Move the map into `event` columns if the CMS ever needs to edit it.                                                                         | —                                   |
 | B19 | Error responses carry the matching HTTP status: 400, 401, 403, 404, 500. The `{success, error}` body and its codes stay. The CMS `api.service` reads the error body of non-2xx responses, so the 4010 logout keeps working.                                                                              | all pages, monitoring               |
 | B20 | After cutover, detail lookups answer 404 instead of `success: true, data: null`. The legacy frontend only detects missing records through the null data, so this waits until it is retired.                                                                                                              | all detail pages                    |
+| B21 | `/countries/:code/athletes`: add each athlete's medal `events` and their `first_year` and `last_year`, like B13. Backend PR #16.                                                                                                                                                                         | Country athletes, Country           |
 
 B12 search rework:
 

@@ -1,0 +1,717 @@
+{
+	"success": true,
+	"data": [
+		{
+			"gold": "31",
+			"silver": "14",
+			"bronze": "5",
+			"total": "50",
+			"first_year": 1999,
+			"last_year": 2024,
+			"events": [
+				"10,000m",
+				"3000m",
+				"5000m",
+				"Marathon",
+				"Seniors",
+				"Seniors (SC)",
+				"Seniors (Team)",
+				"Seniors (Team) – SC",
+				"U20",
+				"U20 (Team)"
+			],
+			"athlete": {
+				"id": 645,
+				"first_name": "Kenenisa",
+				"last_name": "Bekele",
+				"slug": "kenenisa-bekele",
+				"gender": true,
+				"olympic_mark": true,
+				"image": null,
+				"date_of_birth": "1982-06-13",
+				"events": ["Long distances", "Marathon", "XC"]
+			}
+		},
+		{
+			"gold": "25",
+			"silver": "10",
+			"bronze": "5",
+			"total": "40",
+			"first_year": 2001,
+			"last_year": 2018,
+			"events": [
+				"10,000m",
+				"5000m",
+				"Marathon",
+				"Seniors",
+				"Seniors (SC)",
+				"Seniors (Team)",
+				"Seniors (Team) – SC",
+				"U20",
+				"U20 (Team)"
+			],
+			"athlete": {
+				"id": 26701,
+				"first_name": "Tirunesh",
+				"last_name": "Dibaba",
+				"slug": "tirunesh-dibaba",
+				"gender": false,
+				"olympic_mark": true,
+				"image": null,
+				"date_of_birth": "1985-10-01",
+				"events": ["Long distances", "Marathon"]
+			}
+		},
+		{
+			"gold": "18",
+			"silver": "7",
+			"bronze": "6",
+			"total": "31",
+			"first_year": 1991,
+			"last_year": 2009,
+			"events": [
+				"10,000m",
+				"1500m",
+				"3000m",
+				"5000m",
+				"Half Mar",
+				"Marathon",
+				"Seniors",
+				"Seniors (Team)",
+				"U20",
+				"U20 (Team)"
+			],
+			"athlete": {
+				"id": 335,
+				"first_name": "Haile",
+				"last_name": "Gebrselassie",
+				"slug": "haile-gebrselassie",
+				"gender": true,
+				"olympic_mark": true,
+				"image": null,
+				"date_of_birth": "1973-04-18",
+				"events": ["Long distances"]
+			}
+		},
+		{
+			"gold": "18",
+			"silver": "6",
+			"bronze": "3",
+			"total": "27",
+			"first_year": 1990,
+			"last_year": 2009,
+			"events": ["10,000m", "3000m", "Marathon", "Seniors", "Seniors (Team)"],
+			"athlete": {
+				"id": 26410,
+				"first_name": "Derartu",
+				"last_name": "Tulu",
+				"slug": "derartu-tulu",
+				"gender": false,
+				"olympic_mark": true,
+				"image": null,
+				"date_of_birth": "1972-03-21",
+				"events": ["Long distances"]
+			}
+		},
+		{
+			"gold": "14",
+			"silver": "2",
+			"bronze": "2",
+			"total": "18",
+			"first_year": 1970,
+			"last_year": 1983,
+			"events": ["10,000m", "5000m", "Seniors (Team)"],
+			"athlete": {
+				"id": 1,
+				"first_name": "Miruts",
+				"last_name": "Yifter",
+				"slug": "miruts-yifter",
+				"gender": true,
+				"olympic_mark": true,
+				"image": null,
+				"date_of_birth": "1944-05-15",
+				"events": null
+			}
+		},
+		{
+			"gold": "13",
+			"silver": "12",
+			"bronze": "7",
+			"total": "32",
+			"first_year": 1991,
+			"last_year": 2008,
+			"events": [
+				"10,000m",
+				"5000m",
+				"Marathon",
+				"Seniors",
+				"Seniors (SC)",
+				"Seniors (Team)",
+				"Seniors (Team) – SC",
+				"U20 (Team)"
+			],
+			"athlete": {
+				"id": 27035,
+				"first_name": "Gete",
+				"last_name": "Wami",
+				"slug": "gete-wami",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1974-12-11",
+				"events": null
+			}
+		},
+		{
+			"gold": "13",
+			"silver": "10",
+			"bronze": "3",
+			"total": "26",
+			"first_year": 1999,
+			"last_year": 2016,
+			"events": ["3000m", "5000m", "U20 (Team)"],
+			"athlete": {
+				"id": 26574,
+				"first_name": "Meseret",
+				"last_name": "Defar",
+				"slug": "meseret-defar",
+				"gender": false,
+				"olympic_mark": true,
+				"image": null,
+				"date_of_birth": "1983-11-19",
+				"events": null
+			}
+		},
+		{
+			"gold": "12",
+			"silver": "8",
+			"bronze": "5",
+			"total": "25",
+			"first_year": 2003,
+			"last_year": 2016,
+			"events": [
+				"10,000m",
+				"3000m",
+				"5000m",
+				"Marathon",
+				"Seniors",
+				"Seniors (SC)",
+				"Seniors (Team)",
+				"Seniors (Team) – SC",
+				"U20",
+				"U20 (Team)"
+			],
+			"athlete": {
+				"id": 26744,
+				"first_name": "Meselech",
+				"last_name": "Melkamu",
+				"slug": "meselech-melkamu",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1985-04-27",
+				"events": null
+			}
+		},
+		{
+			"gold": "12",
+			"silver": "7",
+			"bronze": "2",
+			"total": "21",
+			"first_year": 2007,
+			"last_year": 2022,
+			"events": [
+				"1500m",
+				"3000m",
+				"5000m",
+				"Marathon",
+				"Mixed XC",
+				"Seniors (Team)",
+				"U20",
+				"U20 (Team)"
+			],
+			"athlete": {
+				"id": 26875,
+				"first_name": "Genzebe",
+				"last_name": "Dibaba",
+				"slug": "genzebe-dibaba",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1991-02-08",
+				"events": ["1500m", "5000m", "XC"]
+			}
+		},
+		{
+			"gold": "11",
+			"silver": "8",
+			"bronze": "4",
+			"total": "23",
+			"first_year": 1997,
+			"last_year": 2010,
+			"events": [
+				"10,000m",
+				"Seniors",
+				"Seniors (SC)",
+				"Seniors (Team)",
+				"Seniors (Team) – SC",
+				"U20",
+				"U20 (Team)"
+			],
+			"athlete": {
+				"id": 27074,
+				"first_name": "Werknesh",
+				"last_name": "Kidane",
+				"slug": "werknesh-kidane",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1981-11-21",
+				"events": null
+			}
+		},
+		{
+			"gold": "10",
+			"silver": "8",
+			"bronze": "3",
+			"total": "21",
+			"first_year": 1991,
+			"last_year": 2009,
+			"events": ["10,000m", "3000m", "5000m", "Half Mar", "Marathon", "Seniors (Team)"],
+			"athlete": {
+				"id": 26461,
+				"first_name": "Berhane",
+				"last_name": "Adere",
+				"slug": "berhane-adere",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1973-07-21",
+				"events": null
+			}
+		},
+		{
+			"gold": "10",
+			"silver": "4",
+			"bronze": "5",
+			"total": "19",
+			"first_year": 2003,
+			"last_year": 2019,
+			"events": [
+				"10,000m",
+				"1500m",
+				"3000m",
+				"Marathon",
+				"Seniors (SC)",
+				"Seniors (Team)",
+				"Seniors (Team) – SC",
+				"U20",
+				"U20 (Team)"
+			],
+			"athlete": {
+				"id": 26719,
+				"first_name": "Gelete",
+				"last_name": "Burka",
+				"slug": "gelete-burka",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1986-02-15",
+				"events": null
+			}
+		},
+		{
+			"gold": "9",
+			"silver": "8",
+			"bronze": "8",
+			"total": "25",
+			"first_year": 2002,
+			"last_year": 2014,
+			"events": [
+				"10,000m",
+				"5000m",
+				"Marathon",
+				"Seniors",
+				"Seniors (SC)",
+				"Seniors (Team)",
+				"Seniors (Team) – SC",
+				"U20",
+				"U20 (Team)"
+			],
+			"athlete": {
+				"id": 657,
+				"first_name": "Gebregziabher",
+				"last_name": "Gebremariam",
+				"slug": "gebregziabher-gebremariam",
+				"gender": true,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1984-10-12",
+				"events": ["Long distances"]
+			}
+		},
+		{
+			"gold": "9",
+			"silver": "6",
+			"bronze": "5",
+			"total": "20",
+			"first_year": 1994,
+			"last_year": 2005,
+			"events": [
+				"1500m",
+				"800m",
+				"Marathon",
+				"Seniors (SC)",
+				"Seniors (Team) – SC",
+				"U20",
+				"U20 (Team)"
+			],
+			"athlete": {
+				"id": 27036,
+				"first_name": "Kutre",
+				"last_name": "Dulecha",
+				"slug": "kutre-dulecha",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1978-08-22",
+				"events": null
+			}
+		},
+		{
+			"gold": "8",
+			"silver": "3",
+			"bronze": "2",
+			"total": "13",
+			"first_year": 1976,
+			"last_year": 1986,
+			"events": ["10,000m", "Seniors", "Seniors (Team)"],
+			"athlete": {
+				"id": 55,
+				"first_name": "Mohamed",
+				"last_name": "Kedir",
+				"slug": "mohamed-kedir",
+				"gender": true,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1954-09-18",
+				"events": null
+			}
+		},
+		{
+			"gold": "7",
+			"silver": "5",
+			"bronze": "0",
+			"total": "12",
+			"first_year": 2013,
+			"last_year": 2026,
+			"events": ["10,000m", "3000m", "5000m", "5km Road Race", "Marathon", "Mixed XC"],
+			"athlete": {
+				"id": 1973,
+				"first_name": "Yomif",
+				"last_name": "Kejelcha",
+				"slug": "yomif-kejelcha",
+				"gender": true,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1997-08-01",
+				"events": null
+			}
+		},
+		{
+			"gold": "7",
+			"silver": "2",
+			"bronze": "2",
+			"total": "11",
+			"first_year": 2011,
+			"last_year": 2019,
+			"events": ["5000m", "Seniors", "Seniors (Team)", "U20", "U20 (Team)"],
+			"athlete": {
+				"id": 26171,
+				"first_name": "Mukhtar",
+				"last_name": "Edris",
+				"slug": "mukhtar-edris",
+				"gender": true,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1994-01-14",
+				"events": null
+			}
+		},
+		{
+			"gold": "7",
+			"silver": "1",
+			"bronze": "4",
+			"total": "12",
+			"first_year": 1982,
+			"last_year": 1990,
+			"events": ["10,000m", "1500m", "5000m", "Marathon", "Seniors", "Seniors (Team)"],
+			"athlete": {
+				"id": 63,
+				"first_name": "Wodajo",
+				"last_name": "Bulti",
+				"slug": "wodajo-bulti",
+				"gender": true,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1957-03-11",
+				"events": null
+			}
+		},
+		{
+			"gold": "6",
+			"silver": "8",
+			"bronze": "4",
+			"total": "18",
+			"first_year": 1991,
+			"last_year": 2003,
+			"events": ["3000m", "5000m", "Seniors", "Seniors (Team)", "Seniors (Team) – SC"],
+			"athlete": {
+				"id": 26467,
+				"first_name": "Merima",
+				"last_name": "Denboba",
+				"slug": "merima-denboba",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1974-08-21",
+				"events": null
+			}
+		},
+		{
+			"gold": "6",
+			"silver": "5",
+			"bronze": "5",
+			"total": "16",
+			"first_year": 1995,
+			"last_year": 2007,
+			"events": [
+				"10,000m",
+				"5000m",
+				"Marathon",
+				"Seniors (Team)",
+				"Seniors (Team) – SC",
+				"U20",
+				"U20 (Team)"
+			],
+			"athlete": {
+				"id": 27046,
+				"first_name": "Ayelech",
+				"last_name": "Worku",
+				"slug": "ayelech-worku",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1979-06-12",
+				"events": null
+			}
+		},
+		{
+			"gold": "6",
+			"silver": "5",
+			"bronze": "2",
+			"total": "13",
+			"first_year": 2015,
+			"last_year": 2023,
+			"events": ["10,000m", "Marathon", "Seniors", "Seniors (Team)", "U20", "U20 (Team)"],
+			"athlete": {
+				"id": 44460,
+				"first_name": "Letesenbet",
+				"last_name": "Gidey",
+				"slug": "letesenbet-gidey",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1998-03-20",
+				"events": null
+			}
+		},
+		{
+			"gold": "6",
+			"silver": "4",
+			"bronze": "3",
+			"total": "13",
+			"first_year": 2002,
+			"last_year": 2011,
+			"events": [
+				"10,000m",
+				"5000m",
+				"Marathon",
+				"Seniors",
+				"Seniors (Team)",
+				"Seniors (Team) – SC"
+			],
+			"athlete": {
+				"id": 26617,
+				"first_name": "Ejegayehu",
+				"last_name": "Dibaba",
+				"slug": "ejegayehu-dibaba",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1982-03-21",
+				"events": ["Long distances"]
+			}
+		},
+		{
+			"gold": "6",
+			"silver": "4",
+			"bronze": "2",
+			"total": "12",
+			"first_year": 2009,
+			"last_year": 2019,
+			"events": ["10,000m", "Half Mar", "Marathon"],
+			"athlete": {
+				"id": 1203,
+				"first_name": "Lelisa",
+				"last_name": "Desisa",
+				"slug": "lelisa-desisa",
+				"gender": true,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1990-01-14",
+				"events": null
+			}
+		},
+		{
+			"gold": "6",
+			"silver": "4",
+			"bronze": "2",
+			"total": "12",
+			"first_year": 2016,
+			"last_year": 2024,
+			"events": ["10,000m", "3000m", "5000m", "Seniors (Team)", "U20 (Team)"],
+			"athlete": {
+				"id": 2028,
+				"first_name": "Selemon",
+				"last_name": "Barega",
+				"slug": "selemon-barega",
+				"gender": true,
+				"olympic_mark": true,
+				"image": null,
+				"date_of_birth": "2000-01-20",
+				"events": null
+			}
+		},
+		{
+			"gold": "6",
+			"silver": "1",
+			"bronze": "1",
+			"total": "8",
+			"first_year": 2007,
+			"last_year": 2016,
+			"events": ["Half Mar", "Marathon"],
+			"athlete": {
+				"id": 27116,
+				"first_name": "Atsede",
+				"last_name": "Bayisa",
+				"slug": "atsede-bayisa",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1987-04-16",
+				"events": null
+			}
+		},
+		{
+			"gold": "6",
+			"silver": "0",
+			"bronze": "1",
+			"total": "7",
+			"first_year": 2002,
+			"last_year": 2010,
+			"events": ["Marathon", "Seniors (SC)", "Seniors (Team)", "Seniors (Team) – SC"],
+			"athlete": {
+				"id": 45212,
+				"first_name": "Teyba",
+				"last_name": "Erkesso",
+				"slug": "teyba-erkesso",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1982-10-30",
+				"events": null
+			}
+		},
+		{
+			"gold": "5",
+			"silver": "9",
+			"bronze": "4",
+			"total": "18",
+			"first_year": 1995,
+			"last_year": 2002,
+			"events": ["10,000m", "5000m", "Seniors", "Seniors (Team)", "U20", "U20 (Team)"],
+			"athlete": {
+				"id": 1108,
+				"first_name": "Assefa",
+				"last_name": "Mezgebu",
+				"slug": "assefa-mezgebu",
+				"gender": true,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1978-06-19",
+				"events": ["Long distances"]
+			}
+		},
+		{
+			"gold": "5",
+			"silver": "5",
+			"bronze": "2",
+			"total": "12",
+			"first_year": 2005,
+			"last_year": 2017,
+			"events": ["10,000m", "3000m", "Seniors (Team)", "U20", "U20 (Team)"],
+			"athlete": {
+				"id": 658,
+				"first_name": "Ibrahim",
+				"last_name": "Jeilan",
+				"slug": "ibrahim-jeilan",
+				"gender": true,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1989-06-12",
+				"events": null
+			}
+		},
+		{
+			"gold": "5",
+			"silver": "5",
+			"bronze": "1",
+			"total": "11",
+			"first_year": 2000,
+			"last_year": 2011,
+			"events": ["10,000m", "Marathon", "Seniors (Team)", "Seniors (Team) – SC", "U20 (Team)"],
+			"athlete": {
+				"id": 26589,
+				"first_name": "Eyerusalem",
+				"last_name": "Kuma",
+				"slug": "eyerusalem-kuma",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1981-09-07",
+				"events": null
+			}
+		},
+		{
+			"gold": "5",
+			"silver": "5",
+			"bronze": "1",
+			"total": "11",
+			"first_year": 1999,
+			"last_year": 2011,
+			"events": ["Marathon", "Seniors (Team)", "Seniors (Team) – SC", "U20 (Team)"],
+			"athlete": {
+				"id": 61513,
+				"first_name": "Bezunesh",
+				"last_name": "Bekele",
+				"slug": "bezunesh-bekele",
+				"gender": false,
+				"olympic_mark": false,
+				"image": null,
+				"date_of_birth": "1983-01-29",
+				"events": null
+			}
+		}
+	]
+}

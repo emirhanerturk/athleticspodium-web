@@ -1,4 +1,9 @@
 import type { CompareQuery } from '#lib/domain/compare.js';
+import {
+	cleanSearch,
+	DEFAULT_ATHLETE_SORT,
+	type CountryAthletesQuery
+} from '#lib/domain/country-athletes.js';
 import { daySlug, type DayOfYear } from '#lib/domain/day.js';
 import { MEDAL_NAMES, type MedalQuery } from '#lib/domain/medal-search.js';
 import { MISSING_SECTIONS, type MissingSection } from '#lib/domain/missing.js';
@@ -62,8 +67,20 @@ export function countryUrl(code: string): string {
 	return `/country/${code.toUpperCase()}`;
 }
 
-export function countryAthletesUrl(code: string, page = 1): string {
-	return `${countryUrl(code)}/athletes${page > 1 ? `?page=${page}` : ''}`;
+export function countryAthletesUrl(
+	code: string,
+	query: Partial<CountryAthletesQuery> = {}
+): string {
+	const params = new URLSearchParams();
+	const q = cleanSearch(query.q ?? '');
+	if (q) params.set('q', q);
+	if (query.gender) params.set('gender', query.gender);
+	if (query.era) params.set('era', query.era);
+	if (query.sort && query.sort !== DEFAULT_ATHLETE_SORT) params.set('sort', query.sort);
+	if (query.page && query.page > 1) params.set('page', String(query.page));
+	const search = params.toString();
+	const path = `${countryUrl(code)}/athletes`;
+	return search ? `${path}?${search}` : path;
 }
 
 export function articleUrl(article: { id: number; slug: string }): string {

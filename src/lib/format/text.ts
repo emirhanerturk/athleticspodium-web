@@ -9,3 +9,7 @@ export function excerptFromHtml(html: string, maxLength: number): string {
 	const cut = text.lastIndexOf(' ', maxLength);
 	return `${text.slice(0, cut > 0 ? cut : maxLength).replace(/[\s,.;:]+$/, '')}…`;
 }
+
+export function possessive(name: string): string {
+	return name.endsWith('s') ? `${name}’` : `${name}’s`;
+}

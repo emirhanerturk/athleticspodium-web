@@ -4,6 +4,7 @@
 	import { fullName } from '#lib/domain/athlete.js';
 	import type { CountryAthlete } from '#lib/domain/country.js';
 	import type { IsoDate } from '#lib/domain/date.js';
+	import { formatEventList } from '#lib/format/event.js';
 
 	let {
 		lists,
@@ -57,7 +58,7 @@
 		</div>
 		{#if lists[filter].length}
 			<ol class="grid grid-cols-[repeat(auto-fill,minmax(min(380px,100%),1fr))] gap-x-10">
-				{#each lists[filter] as { athlete, tally }, index (athlete.id)}
+				{#each lists[filter] as { athlete, tally, events }, index (athlete.id)}
 					<li
 						class="grid grid-cols-[28px_44px_minmax(0,1fr)_auto] items-center gap-3.5 border-b border-line py-3"
 					>
@@ -76,7 +77,9 @@
 								{fullName(athlete)}
 							</AthleteName>
 							<span class="truncate text-[12.5px] text-ink-3">
-								{[athlete.men ? 'Men' : 'Women', ...athlete.events.slice(0, 2)].join(' · ')}
+								{[athlete.men ? 'Men' : 'Women', formatEventList(events, 2)]
+									.filter(Boolean)
+									.join(' · ')}
 							</span>
 						</span>
 						<span class="flex items-center gap-1.5 font-data text-[14.5px] tabular">

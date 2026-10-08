@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { createTtlCache } from './ttl-cache.js';
+import { createKeyedTtlCache, createTtlCache } from './ttl-cache.js';
 
 describe('createTtlCache', () => {
 	it('reuses the value until it expires', async () => {
@@ -30,5 +30,25 @@ describe('createTtlCache', () => {
 
 		await expect(cache(load)).rejects.toThrow('down');
 		expect(await cache(load)).toBe(1);
+	});
+});
+
+describe('createKeyedTtlCache', () => {
+	it('keeps one value per key', async () => {
+		const cache = createKeyedTtlCache<string>(1000, 10, () => 0);
+
+		expect(await cache('TUR', async () => 'Turkey')).toBe('Turkey');
+		expect(await cache('KEN', async () => 'Kenya')).toBe('Kenya');
+		expect(await cache('TUR', async () => 'other')).toBe('Turkey');
+	});
+
+	it('drops the oldest key when it is full', async () => {
+		const cache = createKeyedTtlCache<string>(1000, 2, () => 0);
+		await cache('TUR', async () => 'Turkey');
+		await cache('KEN', async () => 'Kenya');
+		await cache('JAM', async () => 'Jamaica');
+
+		expect(await cache('KEN', async () => 'other')).toBe('Kenya');
+		expect(await cache('TUR', async () => 'reloaded')).toBe('reloaded');
 	});
 });
