@@ -118,7 +118,7 @@ What the sample shows:
 | Articles                 | `/article`, `/article/[id=integer]/[slug]`               | v2 components                             | yes       |
 | Medal search             | `/medals?…`                                              | `V2-Tools`                                | yes       |
 | Medal countdown          | `/medals/countdown?…`                                    | `V2-Tools` hero, v2 components            | yes       |
-| Compare                  | `/medals/compare?…`                                      | `V2-Tools` hero, v2 components            | yes       |
+| Compare                  | `/medals/compare?…`                                      | `V2-Tools` hero, `V2-Compare`             | yes       |
 | About                    | `/about`                                                 | v2 components                             | yes       |
 | Missing information      | `/missing-information?tab=&q=`                           | `V2-Missing`                              | yes       |
 | How to read the database | `/how-to-read-the-database`                              | `V2-Notes`                                | yes       |
@@ -618,7 +618,18 @@ Notes:
   - Side column: the totals from `counts` (withdrawn medals apart, relays once; backend PR #14), "Copy link", a link to the medal countdown when both a nation and a championship are chosen, and "Try another question" (`MEDAL_QUESTIONS`).
   - The filter lists (championships, countries, events) are cached for an hour.
 - **Medal countdown** (`/medals/countdown?country=&champ=`): editions newest first with gold, silver, bronze and total, a total row and a "Details →" link into the medal search for that year. Road races and national championships are left out of the select.
-- **Compare** (`/medals/compare?a=&b=&gender=&event=`): the legacy page kept its state in memory; the new one reads it from the URL, so comparisons can be linked (the championship page links to `?a=<id>`). The server loads every medal of the event for both championships (up to 10 pages of 100), lines the podiums up by year and shows the winning mark of A minus B, formatted with the precision of the marks. Silver and bronze rows open per year.
+- **Compare** (`/medals/compare?a=&b=&gender=&event=`, design `V2-Compare` below the shared Tools hero):
+  - The legacy page kept its state in memory; the new one reads it from the URL, so comparisons can be linked (the championship page links to `?a=<id>`).
+  - The question is a sentence: "Compare [A] ⇄ [B] in [Women’s 100m]". A is brand yellow, B is ink. The swap button is a link. The race menu groups the events by gender and lists only those both championships have held. Without JavaScript the boxes submit a GET form; the race menu sends `race=women-10`, which redirects (302) to `gender` and `event`. With JavaScript a change navigates at once and drops a race the new pair has not held.
+  - The server loads every medal of the event for both championships (up to 10 pages of 100). Relay teams count once.
+  - Four cards set A against B:
+    - Editions with medals, and the first year.
+    - The best winning mark: fastest time for races, best mark for jumps and throws, highest score for combined events. A wind over +2.0 is noted.
+    - Most titles: ties of more than three show only how many share it.
+    - Winning nations.
+  - "Won both" lists the athletes (or, in relays, the nations) with gold at both, most golds first. A chip traces them: their medals and their years are highlighted in brand colours. Names in the timeline stay profile links with the hover card.
+  - The timeline: A on the left (mirrored), the year in the middle, B on the right, newest first, with a sticky header. Every medal is shown, gold larger, records as badges, withdrawn medals struck through in red. An empty side says "no edition" or, when the championship was held that year, "not held". Notes on hand timing and withdrawn medals appear only when they apply.
+  - Without a full selection the page offers ready-made comparisons (`COMPARE_PRESETS`).
 - Filters live in query strings.
 - The contact form uses a SvelteKit form action that posts to `/contacts`. It works without JavaScript, validates name, email, subject and message (up to 1,000 characters) on the server, drops messages that fill a hidden honeypot field, and forwards the visitor's IP (`x-forwarded-for`) and user agent so the backend records them as before.
 - **About:** sections `main` and `box`, the two portraits now in `static/about/`, social links and the contact form.

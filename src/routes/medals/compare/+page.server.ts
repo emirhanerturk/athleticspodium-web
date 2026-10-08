@@ -1,6 +1,8 @@
+import { redirect } from '@sveltejs/kit';
 import { isComplete, parseCompareQuery } from '#lib/domain/compare.js';
 import type { CatalogueEvent } from '#lib/domain/event.js';
 import type { FilterChamp } from '#lib/domain/medal-search.js';
+import { compareUrl } from '#lib/routing/urls.js';
 import { createTtlCache } from '#lib/utils/ttl-cache.js';
 import type { PageServerLoad } from './$types';
 
@@ -11,6 +13,8 @@ const eventsCache = createTtlCache<CatalogueEvent[]>(ONE_HOUR);
 
 export const load: PageServerLoad = async ({ url, locals: { backend } }) => {
 	const query = parseCompareQuery(url.searchParams);
+	if (url.searchParams.has('race')) redirect(302, compareUrl(query));
+
 	const [champs, events, medals] = await Promise.all([
 		champsCache(() => backend.medals.filterChamps()),
 		eventsCache(() => backend.events.catalogue()),
