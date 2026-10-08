@@ -70,14 +70,6 @@
 		const largest = Math.max(tally.gold, tally.silver, tally.bronze);
 		return largest >= 10_000 ? 'text-[26px]' : largest >= 1_000 ? 'text-[32px]' : 'text-[44px]';
 	};
-
-	let copied = $state(false);
-
-	async function copyLink() {
-		await navigator.clipboard.writeText(location.href);
-		copied = true;
-		setTimeout(() => (copied = false), 2000);
-	}
 </script>
 
 <SeoHead
@@ -234,13 +226,6 @@
 							Medal countdown, edition by edition →
 						</a>
 					{/if}
-					<button
-						type="button"
-						onclick={copyLink}
-						class="h-[38px] rounded-[10px] border border-line-2 text-[13.5px] font-semibold hover:border-ink"
-					>
-						{copied ? 'Link copied' : 'Copy link'}
-					</button>
 				</div>
 			{/if}
 			<div class="flex flex-col gap-2.5 rounded-[18px] bg-surface-2 px-5 py-[18px]">

@@ -36,7 +36,7 @@ export interface NationStanding extends NationTally {
 
 export const COUNTDOWN_PRESETS: { country: string; champ: number }[] = [
 	{ country: 'TUR', champ: 60 },
-	{ country: 'TUR', champ: 30 },
+	{ country: 'CUB', champ: 43 },
 	{ country: 'KEN', champ: 40 },
 	{ country: 'JAM', champ: 52 }
 ];
