@@ -42,6 +42,16 @@ test('shows each relay team once with every runner, linking those with a profile
 	await expect(relay.getByRole('link', { name: /Ansah-Peprah/ })).toHaveCount(0);
 });
 
+test('shows places 4–8 with the podium, without a toggle', async ({ page }) => {
+	await page.goto(EDITION);
+	const sprint = page.locator('article', {
+		has: page.getByRole('heading', { name: '100m', exact: true })
+	});
+
+	await expect(sprint.getByText('Marco Rossi')).toBeVisible();
+	await expect(page.getByText('Show places 4–8')).toHaveCount(0);
+});
+
 test('switches to the women’s podiums', async ({ page }) => {
 	await page.goto(EDITION, { waitUntil: 'networkidle' });
 

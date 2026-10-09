@@ -131,6 +131,39 @@
 							"code": "GER",
 							"name": "Germany"
 						}
+					},
+					{
+						"mark_display": "10.24",
+						"id": 395032,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 10,
+						"medal": 4,
+						"athlete_id": null,
+						"athlete_name": "Marco Rossi",
+						"country_code": "ITA",
+						"gender": 0,
+						"mark": 1024,
+						"mark_format": "00.00",
+						"order": null,
+						"wind": -0.4,
+						"info": null,
+						"records": null,
+						"is_team": false,
+						"is_canceled": false,
+						"notes": null,
+						"created_date": "2026-08-12T16:53:06.674Z",
+						"updated_date": "2026-08-17T20:23:53.669Z",
+						"event": {
+							"id": 10,
+							"name": "100m",
+							"rank": 3
+						},
+						"athlete": null,
+						"country": {
+							"code": "ITA",
+							"name": "Italy"
+						}
 					}
 				]
 			},
