@@ -16,6 +16,16 @@ test('renders the about, database notes and missing information pages', async ({
 	).toHaveAttribute('href', '/missing-information?tab=relays');
 });
 
+test('gives info@athleticspodium.com as the contact address', async ({ page }) => {
+	for (const path of ['/about', '/missing-information']) {
+		await page.goto(path);
+		const links = page.getByRole('link', { name: 'info@athleticspodium.com' });
+
+		await expect(links.first()).toHaveAttribute('href', 'mailto:info@athleticspodium.com');
+		await expect(page.getByText('athleticspodium@gmail.com')).toHaveCount(0);
+	}
+});
+
 test('moves the simple notes address to the database notes page', async ({ request }) => {
 	const response = await request.get('/simple-notes', { maxRedirects: 0 });
 

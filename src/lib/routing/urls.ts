@@ -141,6 +141,8 @@ export const SOCIAL_LINKS = {
 	instagram: 'https://www.instagram.com/athleticspodium'
 } as const;
 
+export const CONTACT_EMAIL = 'info@athleticspodium.com';
+
 export function athleteLetterUrl(letter: string, page = 1): string {
 	return `${PAGES.athletes}/letter/${letter.toLowerCase()}${page > 1 ? `?page=${page}` : ''}`;
 }

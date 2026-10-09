@@ -2,7 +2,7 @@
 	import ContactForm from '#lib/components/contact/ContactForm.svelte';
 	import type { ContactFormResult, ContactTopic } from '#lib/domain/contact.js';
 	import type { MissingSection } from '#lib/domain/missing.js';
-	import { missingInformationUrl, PAGES, SOCIAL_LINKS } from '#lib/routing/urls.js';
+	import { CONTACT_EMAIL, missingInformationUrl, PAGES, SOCIAL_LINKS } from '#lib/routing/urls.js';
 
 	let {
 		form,
@@ -22,7 +22,7 @@
 		{ label: 'Bluesky', href: SOCIAL_LINKS.bluesky },
 		{ label: 'Facebook', href: SOCIAL_LINKS.facebook },
 		{ label: 'Instagram', href: SOCIAL_LINKS.instagram },
-		{ label: 'athleticspodium@gmail.com', href: 'mailto:athleticspodium@gmail.com' }
+		{ label: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` }
 	];
 </script>
 

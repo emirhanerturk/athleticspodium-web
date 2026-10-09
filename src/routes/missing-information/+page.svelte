@@ -15,12 +15,11 @@
 		type Gap,
 		type MissingSection
 	} from '#lib/domain/missing.js';
-	import { missingInformationUrl, PAGES } from '#lib/routing/urls.js';
+	import { CONTACT_EMAIL, missingInformationUrl, PAGES } from '#lib/routing/urls.js';
 	import type { PageProps } from './$types';
 
 	let { data, form }: PageProps = $props();
 
-	const EMAIL = 'athleticspodium@gmail.com';
 	const LABELS: Record<MissingSection, string> = {
 		medallists: 'Medallists',
 		marks: 'Marks',
@@ -170,7 +169,9 @@
 					Send information
 				</a>
 				<span class="text-[12.5px]">
-					or <a href="mailto:{EMAIL}" class="underline hover:no-underline">{EMAIL}</a>
+					or <a href="mailto:{CONTACT_EMAIL}" class="underline hover:no-underline"
+						>{CONTACT_EMAIL}</a
+					>
 				</span>
 			</div>
 		</aside>
