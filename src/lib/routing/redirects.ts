@@ -2,11 +2,14 @@ import { parseLegacyMedalQuery } from '#lib/domain/medal-search.js';
 import { medalSearchUrl, PAGES } from './urls.js';
 
 const COUNTRY_CODE_SEGMENT = /^\/country\/([a-z]{3})(?=\/|$)/i;
+const RAILWAY_HEALTH_CHECK = '/robots.txt';
+const LOCAL_HOSTNAMES = ['localhost', '127.0.0.1', '[::1]'];
 
-export function canonicalRedirect(url: URL): string | null {
+export function canonicalRedirect(url: URL, canonicalHost: string | null = null): string | null {
 	const target = new URL(url);
 
 	target.hostname = target.hostname.replace(/^www\./, '');
+	if (canonicalHost && movesToCanonicalHost(target)) target.host = canonicalHost;
 	moveMatrixParamsToQuery(target);
 	moveLegacyTools(target);
 	target.pathname = target.pathname.replace(
@@ -15,6 +18,10 @@ export function canonicalRedirect(url: URL): string | null {
 	);
 
 	return target.href === url.href ? null : target.href;
+}
+
+function movesToCanonicalHost(url: URL): boolean {
+	return url.pathname !== RAILWAY_HEALTH_CHECK && !LOCAL_HOSTNAMES.includes(url.hostname);
 }
 
 function moveMatrixParamsToQuery(url: URL) {

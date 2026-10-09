@@ -147,16 +147,17 @@ Endpoints served by this app:
 
 All redirects are single-hop 301s, handled in `hooks.server.ts`:
 
-| Request                                                                      | Response                                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `www.athleticspodium.com/*`                                                  | apex host, same path                                                                                                                                                                                      |
-| trailing slash (`/champs/`)                                                  | path without the slash                                                                                                                                                                                    |
-| lower-case country code (`/country/tur`)                                     | upper-case code                                                                                                                                                                                           |
-| athlete or article with a wrong slug                                         | canonical slug                                                                                                                                                                                            |
-| matrix parameters (`/athlete/letter/a;page=2`)                               | the same filters as a query string                                                                                                                                                                        |
-| `/medals/search`, `/medals/country-champs`, `/compare` (moved on 2026-10-08) | `/medals`, `/medals/countdown`, `/medals/compare`; medal search parameters translated (`champs` → `champ`, `gender` 0–2 → `men`/`women`/`mixed`, `medal` 1–3 → `gold`/`silver`/`bronze`, `order` dropped) |
-| `/simple-notes`                                                              | `/how-to-read-the-database`                                                                                                                                                                               |
-| `/404`, `/ngsw.json`, any unknown path                                       | HTTP 404 with the v2 error page                                                                                                                                                                           |
+| Request                                                                                                                                      | Response                                                                                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `www.athleticspodium.com/*`                                                                                                                  | apex host, same path                                                                                                                                                                                      |
+| any other host in production (`next.athleticspodium.com`, `*.up.railway.app`), except `/robots.txt` (Railway's health check) and local hosts | the host of `PUBLIC_SITE_URL`, same path                                                                                                                                                                  |
+| trailing slash (`/champs/`)                                                                                                                  | path without the slash                                                                                                                                                                                    |
+| lower-case country code (`/country/tur`)                                                                                                     | upper-case code                                                                                                                                                                                           |
+| athlete or article with a wrong slug                                                                                                         | canonical slug                                                                                                                                                                                            |
+| matrix parameters (`/athlete/letter/a;page=2`)                                                                                               | the same filters as a query string                                                                                                                                                                        |
+| `/medals/search`, `/medals/country-champs`, `/compare` (moved on 2026-10-08)                                                                 | `/medals`, `/medals/countdown`, `/medals/compare`; medal search parameters translated (`champs` → `champ`, `gender` 0–2 → `men`/`women`/`mixed`, `medal` 1–3 → `gold`/`silver`/`bronze`, `order` dropped) |
+| `/simple-notes`                                                                                                                              | `/how-to-read-the-database`                                                                                                                                                                               |
+| `/404`, `/ngsw.json`, any unknown path                                                                                                       | HTTP 404 with the v2 error page                                                                                                                                                                           |
 
 The Angular service worker deletes its caches and unregisters itself when `/ngsw.json` returns 404. The safety worker at `/ngsw-worker.js` covers browsers that load the worker script first.
 
@@ -259,15 +260,16 @@ Error handling:
 
 ### 6.4 Caching
 
-| Response                      | Cache-Control                                                    |
-| ----------------------------- | ---------------------------------------------------------------- |
-| content pages                 | `public, max-age=0, s-maxage=3600, stale-while-revalidate=86400` |
-| `/internal/athlete-card/*`    | `public, max-age=3600, s-maxage=86400`                           |
-| `/internal/search`, `/search` | `public, max-age=0, s-maxage=300`                                |
-| sitemap files                 | `public, s-maxage=86400`                                         |
-| hashed static assets          | `public, max-age=31536000, immutable`                            |
+| Response                      | Cache-Control                                                   |
+| ----------------------------- | --------------------------------------------------------------- |
+| content pages                 | `public, max-age=0, s-maxage=300, stale-while-revalidate=86400` |
+| `/internal/athlete-card/*`    | `public, max-age=3600, s-maxage=86400`                          |
+| `/internal/search`, `/search` | `public, max-age=0, s-maxage=300`                               |
+| sitemap files                 | `public, s-maxage=86400`                                        |
+| hashed static assets          | `public, max-age=31536000, immutable`                           |
 
 - **Layout data** (ticker and footer stats) is needed on every server render. It is memoised in process for 10 minutes by `lib/utils/memoize-with-ttl.ts`.
+- **Content pages** stay at the edge for 5 minutes, so results entered in the CMS reach the site within minutes (changed from 1 hour on 2026-10-09).
 - **Pages that show "today"** (home, ticker) keep `s-maxage` at 1 hour or less. That way, stale data never lasts more than an hour past midnight UTC.
 - **Shared cache:** Railway's CDN is switched on at cutover with HTML caching that follows `Cache-Control`, stale-while-revalidate and a purge on every deploy (`railway cdn`). Until then the headers apply to browsers only.
 

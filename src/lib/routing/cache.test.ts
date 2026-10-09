@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { cacheControlFor } from './cache.js';
 
 describe('cacheControlFor', () => {
-	it('caches content pages for an hour at the edge and serves stale for a day', () => {
+	it('caches content pages for five minutes at the edge and serves stale for a day', () => {
 		expect(cacheControlFor('/athlete/[id=integer]/[slug]', 200)).toBe(
-			'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400'
+			'public, max-age=0, s-maxage=300, stale-while-revalidate=86400'
 		);
 	});
 
