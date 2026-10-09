@@ -11,5 +11,5 @@
 	width="20"
 	height="15"
 	loading="lazy"
-	class="{className} shrink-0 rounded-[2px] object-cover"
+	class="{className} shrink-0 rounded-xs object-cover"
 />
