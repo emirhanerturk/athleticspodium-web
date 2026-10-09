@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { flagUrl } from '#lib/routing/urls.js';
+	import { PUBLIC_MEDIA_URL } from '$app/env/public';
+	import { flagPath } from '#lib/routing/urls.js';
 
 	let { code, class: className = 'h-[15px] w-5' }: { code: string; class?: string } = $props();
 </script>
 
 <img
-	src={flagUrl(code)}
+	src="{PUBLIC_MEDIA_URL}/{flagPath(code)}"
 	alt=""
 	width="20"
 	height="15"

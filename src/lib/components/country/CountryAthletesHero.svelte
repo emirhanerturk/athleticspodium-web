@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { PUBLIC_MEDIA_URL } from '$app/env/public';
 	import Breadcrumb from '#lib/components/layout/Breadcrumb.svelte';
 	import type { CountryProfile } from '#lib/domain/country.js';
 	import { formatCount } from '#lib/format/number.js';
 	import { possessive } from '#lib/format/text.js';
-	import { flagUrl } from '#lib/routing/urls.js';
+	import { flagPath } from '#lib/routing/urls.js';
 
 	let {
 		country,
@@ -28,7 +29,7 @@
 		<div class="grid grid-cols-1 items-end gap-8 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
 			<div class="flex items-center gap-3.5 sm:gap-[22px]">
 				<img
-					src={flagUrl(country.code)}
+					src="{PUBLIC_MEDIA_URL}/{flagPath(country.code)}"
 					alt="Flag of {country.name}"
 					width="96"
 					height="64"

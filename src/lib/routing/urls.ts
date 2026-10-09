@@ -131,8 +131,9 @@ export function countriesUrl(areaSlug?: string): string {
 	return areaSlug ? `${PAGES.countries}?area=${areaSlug}` : PAGES.countries;
 }
 
-export function flagUrl(countryCode: string): string {
-	return `/flags/${countryCode.toLowerCase()}.svg`;
+/** A flag's path under the media URL; flags are uploaded through the CMS. */
+export function flagPath(countryCode: string): string {
+	return `flags/${countryCode.toLowerCase()}.svg`;
 }
 
 export const SOCIAL_LINKS = {

@@ -209,7 +209,7 @@ athleticspodium-web/
 │   ├── env.ts                   environment variables (defineEnvVars)
 │   ├── hooks.server.ts          redirects, cache headers, locals.backend, error mapping
 │   └── app.html
-├── static/                      flags, ngsw-worker.js (logos and favicon are hashed imports from lib/assets)
+├── static/                      ngsw-worker.js, og/ (logos and favicon are hashed imports from lib/assets; flags come from the media URL)
 └── tests/
     ├── e2e/                     Playwright specs
     └── fixtures/backend/        JSON responses for the stub backend
@@ -769,7 +769,7 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
 
 - **Open Graph** uses the page's own picture when there is one: the athlete photo, the championship hero or the article image. Every other page uses the social image of its section:
   - The images are 1200×630 PNGs in `static/og/`: `default`, `championships`, `athletes`, `countries`, `calendar`, `tools` and `articles`. They carry no figures that go out of date.
-  - `npm run social-images` renders them with Playwright from `scripts/social-images.js`, using the site's fonts, colour tokens, logo and flags. Rerun it and commit the PNGs when the design or the copy changes.
+  - `npm run social-images` renders them with Playwright from `scripts/social-images.js`, using the site's fonts, colour tokens, logo and the flags from the media URL (`PUBLIC_MEDIA_URL`, else the production API). Rerun it and commit the PNGs when the design or the copy changes.
   - Pages name their section with `fallbackImage` on `SeoHead`; `lib/seo/social-images.ts` holds the alt texts.
 - **Sitemap:**
   - `/sitemap.xml` is an index of per-type files. Each file holds at most 50,000 URLs.

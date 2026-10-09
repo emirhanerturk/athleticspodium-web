@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { PUBLIC_MEDIA_URL } from '$app/env/public';
 	import Breadcrumb from '#lib/components/layout/Breadcrumb.svelte';
 	import CollapsibleHtml from '#lib/components/ui/CollapsibleHtml.svelte';
 	import { areaName } from '#lib/domain/championship.js';
 	import type { CountryProfile } from '#lib/domain/country.js';
 	import type { MedalTally } from '#lib/domain/result.js';
 	import { formatCount } from '#lib/format/number.js';
-	import { flagUrl } from '#lib/routing/urls.js';
+	import { flagPath } from '#lib/routing/urls.js';
 
 	let {
 		country,
@@ -33,7 +34,7 @@
 		<div class="grid grid-cols-1 items-end gap-10 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
 			<div class="flex flex-wrap items-center gap-7">
 				<img
-					src={flagUrl(country.code)}
+					src="{PUBLIC_MEDIA_URL}/{flagPath(country.code)}"
 					alt="Flag of {country.name}"
 					width="168"
 					height="112"

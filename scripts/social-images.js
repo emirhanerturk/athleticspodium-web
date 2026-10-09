@@ -3,6 +3,7 @@ import { mkdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 const ROOT = resolve(import.meta.dirname, '..');
+const MEDIA_URL = process.env.PUBLIC_MEDIA_URL ?? 'https://api.athleticspodium.com/media';
 const OUT_DIR = resolve(ROOT, 'static/og');
 const SIZE = { width: 1200, height: 630 };
 
@@ -147,7 +148,7 @@ async function loadAssets() {
 	const flags = await Promise.all(
 		flagCodes.map(async (code) => [
 			code,
-			await dataUri(`static/flags/${code}.svg`, 'image/svg+xml')
+			await downloadedDataUri(`${MEDIA_URL}/flags/${code}.svg`, 'image/svg+xml')
 		])
 	);
 	return {
@@ -162,6 +163,12 @@ async function loadAssets() {
 async function dataUri(path, type) {
 	const file = await readFile(resolve(ROOT, path));
 	return `data:${type};base64,${file.toString('base64')}`;
+}
+
+async function downloadedDataUri(url, type) {
+	const response = await fetch(url);
+	if (!response.ok) throw new Error(`${url} answered ${response.status}`);
+	return `data:${type};base64,${Buffer.from(await response.arrayBuffer()).toString('base64')}`;
 }
 
 function documentFor({ kicker, title, text, motif }, assets) {
