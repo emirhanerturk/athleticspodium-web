@@ -2,7 +2,6 @@
 	import type { IsoDate } from '#lib/domain/date.js';
 	import {
 		GENDER_LABELS,
-		isMedalLine,
 		podiumLines,
 		type EditionEvent,
 		type Gender
@@ -21,13 +20,8 @@
 			count: boards.filter(({ event }) => event.gender === gender).length
 		})).filter(({ count }) => count > 0)
 	);
-	const hasPlacings = $derived(
-		boards.some(({ lines }) => lines.some((line) => !line.canceled && !isMedalLine(line)))
-	);
-
 	let gender = $state<Gender | null>(null);
 	let discipline = $state<Discipline | 'all'>('all');
-	let showPlacings = $state(false);
 
 	const activeGender = $derived(gender ?? genders[0]?.gender ?? 'men');
 	const genderBoards = $derived(boards.filter(({ event }) => event.gender === activeGender));
@@ -37,12 +31,7 @@
 		) as Discipline[]
 	);
 	const visible = $derived(
-		genderBoards
-			.filter(({ event }) => discipline === 'all' || event.discipline === discipline)
-			.map(({ event, lines }) => ({
-				event,
-				lines: showPlacings ? lines : lines.filter((line) => line.canceled || isMedalLine(line))
-			}))
+		genderBoards.filter(({ event }) => discipline === 'all' || event.discipline === discipline)
 	);
 
 	function pickGender(next: Gender) {
@@ -81,8 +70,8 @@
 		{/if}
 	</div>
 
-	<div class="mb-[22px] flex flex-wrap items-center gap-2">
-		{#if disciplines.length > 1}
+	{#if disciplines.length > 1}
+		<div class="mb-[22px] flex flex-wrap items-center gap-2">
 			<button
 				type="button"
 				aria-pressed={discipline === 'all'}
@@ -101,23 +90,8 @@
 					{DISCIPLINE_LABELS[key]}
 				</button>
 			{/each}
-		{/if}
-		<span class="flex-1"></span>
-		<label
-			class="inline-flex items-center gap-2.5 text-[13.5px] {hasPlacings
-				? 'text-ink-2'
-				: 'text-ink-3'}"
-		>
-			<input
-				type="checkbox"
-				bind:checked={showPlacings}
-				disabled={!hasPlacings}
-				class="size-[18px] accent-ink"
-			/>
-			Show places 4–8
-			{#if !hasPlacings}<span class="text-xs">(none recorded yet)</span>{/if}
-		</label>
-	</div>
+		</div>
+	{/if}
 
 	<div class="grid grid-cols-[repeat(auto-fill,minmax(min(360px,100%),1fr))] gap-4">
 		{#each visible as board (board.event.id)}
