@@ -1,4 +1,4 @@
-const PAGE = 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400';
+const PAGE = 'public, max-age=0, s-maxage=300, stale-while-revalidate=86400';
 const SHORT = 'public, max-age=0, s-maxage=300';
 const DAILY = 'public, max-age=0, s-maxage=86400';
 const HOVER_CARD = 'public, max-age=3600, s-maxage=86400';

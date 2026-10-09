@@ -1,6 +1,6 @@
 import type { Handle, HandleServerError } from '@sveltejs/kit/hooks';
 import { BACKEND_URL } from '$app/env/private';
-import { PUBLIC_MEDIA_URL, PUBLIC_SITE_ENV } from '$app/env/public';
+import { PUBLIC_MEDIA_URL, PUBLIC_SITE_ENV, PUBLIC_SITE_URL } from '$app/env/public';
 import { cacheControlFor } from '#lib/routing/cache.js';
 import { canonicalRedirect } from '#lib/routing/redirects.js';
 import {
@@ -9,8 +9,10 @@ import {
 	createBackend
 } from '#lib/server/backend/index.js';
 
+const CANONICAL_HOST = PUBLIC_SITE_ENV === 'production' ? new URL(PUBLIC_SITE_URL).host : null;
+
 export const handle: Handle = async ({ event, resolve }) => {
-	const canonical = canonicalRedirect(event.url);
+	const canonical = canonicalRedirect(event.url, CANONICAL_HOST);
 	if (canonical) return new Response(null, { status: 301, headers: { location: canonical } });
 
 	event.locals.backend = createBackend(event.fetch, BACKEND_URL, PUBLIC_MEDIA_URL);

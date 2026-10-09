@@ -58,4 +58,44 @@ describe('canonicalRedirect', () => {
 			'https://athleticspodium.com/country/TUR'
 		);
 	});
+
+	it('keeps any host when no canonical host is given', () => {
+		expect(redirectOf('https://next.athleticspodium.com/athlete/1/miruts-yifter')).toBeNull();
+	});
+
+	it('moves every other host to the canonical host', () => {
+		const toCanonical = (href: string) => canonicalRedirect(new URL(href), 'athleticspodium.com');
+
+		expect(toCanonical('https://athleticspodium.com/athlete/1/miruts-yifter')).toBeNull();
+		expect(toCanonical('https://next.athleticspodium.com/athlete/1/miruts-yifter?x=1')).toBe(
+			'https://athleticspodium.com/athlete/1/miruts-yifter?x=1'
+		);
+		expect(toCanonical('https://athleticspodium-web-production.up.railway.app/')).toBe(
+			'https://athleticspodium.com/'
+		);
+		expect(toCanonical('https://www.athleticspodium.com/country/tur')).toBe(
+			'https://athleticspodium.com/country/TUR'
+		);
+	});
+
+	it('answers the health check on any host', () => {
+		expect(
+			canonicalRedirect(
+				new URL('https://healthcheck.railway.app/robots.txt'),
+				'athleticspodium.com'
+			)
+		).toBeNull();
+	});
+
+	it('keeps a production build that runs locally on its own host', () => {
+		expect(
+			canonicalRedirect(
+				new URL('http://localhost:4173/athlete/1/miruts-yifter'),
+				'athleticspodium.com'
+			)
+		).toBeNull();
+		expect(
+			canonicalRedirect(new URL('http://127.0.0.1:4173/country/tur'), 'athleticspodium.com')
+		).toBe('http://127.0.0.1:4173/country/TUR');
+	});
 });
