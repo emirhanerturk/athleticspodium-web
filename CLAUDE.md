@@ -60,8 +60,10 @@ Railway, in project `athletics-podium` next to the backend:
 - **Deploys:** Every push to `main` deploys automatically. Railpack runs `npm run build` and then `npm start` (`node build`, adapter-node). The health check is `/robots.txt`.
   - If pushes stop deploying, reconnect the source: `railway service source connect --repo emirhanerturk/athleticspodium-web --branch main --service athleticspodium-web`.
 - **Variables:** `BACKEND_URL` reaches the backend over the private network (`http://${{athleticspodium-backend.RAILWAY_PRIVATE_DOMAIN}}:8080/1.0`). `PROTOCOL_HEADER=x-forwarded-proto` makes request URLs https behind Railway's proxy.
-- **Staging until cutover:**
-  - Domains: `next.athleticspodium.com` (DNS only on Cloudflare) and `athleticspodium-web-production.up.railway.app`.
-  - `PUBLIC_SITE_ENV=staging`, so every response carries `X-Robots-Tag: noindex` and `robots.txt` is closed. GA only loads in production.
-- **CDN:** Railway's CDN (`railway cdn`) stays off until the cutover.
+- **Production since 2026-10-09** (it replaced the Angular site on Firebase):
+  - `PUBLIC_SITE_ENV=production` and `PUBLIC_SITE_URL=https://athleticspodium.com`.
+  - Domains: `athleticspodium.com` and `www.athleticspodium.com`, as Cloudflare CNAMEs to Railway, DNS only, verified by `_railway-verify` TXT records. Any other host, including `athleticspodium-web-production.up.railway.app`, redirects to the apex.
+  - The plan allows two custom domains per service, so there is no staging domain any more.
+  - Rollback: point the apex back to A `199.36.158.100` and `www` to CNAME `athletics-podium.web.app`. The Firebase site stays deployable for that.
+- **CDN:** Railway's CDN is on (`railway cdn status`): HTML caching follows `Cache-Control`, stale-while-revalidate is honoured and every deploy purges everything.
 - **Config:** `.railway/railway.ts` declares the service as the named partial `athleticspodium-web`. Preview a change with `railway config plan`, then apply the reviewed plan with `railway config apply`. Keep the partial: a full IaC file deletes the resources it omits, including the backend and Postgres.

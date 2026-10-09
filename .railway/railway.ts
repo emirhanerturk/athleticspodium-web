@@ -14,8 +14,8 @@ export default defineRailway(() => {
 		env: {
 			BACKEND_URL: 'http://${{athleticspodium-backend.RAILWAY_PRIVATE_DOMAIN}}:8080/1.0',
 			PROTOCOL_HEADER: 'x-forwarded-proto',
-			PUBLIC_SITE_URL: 'https://next.athleticspodium.com',
-			PUBLIC_SITE_ENV: 'staging',
+			PUBLIC_SITE_URL: 'https://athleticspodium.com',
+			PUBLIC_SITE_ENV: 'production',
 			PUBLIC_GA_MEASUREMENT_ID: 'G-7EDH9146FP'
 		}
 	});

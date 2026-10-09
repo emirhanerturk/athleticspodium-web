@@ -839,10 +839,12 @@ The CMS gets no changes in this project. Editing the new event columns in the CM
    - **Content:** 14 pages were compared with the old site: five athletes (including withdrawn medals and a 4th place), three editions, two championships, two countries, the 2026 calendar and an article. All figures match. Rule differences:
      - "national titles" on a country counts golds in any national championship (for example Kenyans at the British AAA);
      - the country athletes list counts international medals only.
-4. **Cutover:**
+4. **Cutover** (done on 2026-10-09, live at 13:19 Istanbul time):
    - Set `PUBLIC_SITE_ENV=production` and `PUBLIC_SITE_URL=https://athleticspodium.com` on the service.
    - Turn on Railway's CDN (HTML caching that follows `Cache-Control`, stale-while-revalidate, purge on deploy).
    - Add `athleticspodium.com` and `www.athleticspodium.com` as Railway custom domains, then point the DNS records to Railway, DNS only.
+     - Add Railway's `_railway-verify` TXT records **before** the CNAMEs. On the day the CNAMEs went first, and the site answered with Railway's default certificate and a 404 for about 8 minutes, until the TXT records verified the domains.
+     - `next.athleticspodium.com` was removed to stay within the plan's two custom domains per service.
    - Submit the sitemap.
    - Watch Search Console coverage and 404s for 4 weeks.
    - Keep the Firebase site deployable for rollback.
