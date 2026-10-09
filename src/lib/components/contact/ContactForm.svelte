@@ -7,6 +7,7 @@
 		type ContactMessage,
 		type ContactTopic
 	} from '#lib/domain/contact.js';
+	import { CONTACT_EMAIL } from '#lib/routing/urls.js';
 
 	let {
 		form,
@@ -21,8 +22,6 @@
 		fixedSubject?: number;
 		draft?: string;
 	} = $props();
-
-	const EMAIL = 'athleticspodium@gmail.com';
 
 	let sending = $state(false);
 	let subject = $derived(form?.values?.subject ?? topic.subject);
@@ -144,7 +143,9 @@
 			{sending ? 'Sending…' : 'Send'}
 		</button>
 		<span class="text-[12.5px] text-ink-3">
-			Or write to <a href="mailto:{EMAIL}" class="underline hover:text-ink">{EMAIL}</a>
+			Or write to <a href="mailto:{CONTACT_EMAIL}" class="underline hover:text-ink"
+				>{CONTACT_EMAIL}</a
+			>
 		</span>
 	</form>
 {/if}
