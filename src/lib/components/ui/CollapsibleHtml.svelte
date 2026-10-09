@@ -40,6 +40,15 @@
 		color: var(--color-ink);
 	}
 
+	.prose-body :global(h3) {
+		margin: 0.4em 0 0;
+		font-family: var(--font-display);
+		font-size: 24px;
+		font-weight: 700;
+		line-height: 1.05;
+		color: var(--color-ink);
+	}
+
 	.prose-body :global(a) {
 		color: var(--color-brand-ink);
 		text-decoration: underline;
