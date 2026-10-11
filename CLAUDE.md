@@ -66,4 +66,7 @@ Railway, in project `athletics-podium` next to the backend:
   - The plan allows two custom domains per service, so there is no staging domain any more.
   - Rollback: point the apex back to A `199.36.158.100` and `www` to CNAME `athletics-podium.web.app`. The Firebase site stays deployable for that.
 - **CDN:** Railway's CDN is on (`railway cdn status`): HTML caching follows `Cache-Control`, stale-while-revalidate is honoured and every deploy purges everything.
+  - Its revalidations reach the service from CDN77 addresses with an empty User-Agent (about a third of origin traffic), so never block empty User-Agents.
+  - Cache hits never reach the service and do not show in `railway logs --http`.
+- **Egress:** Railway bills the bytes leaving the container, before its edge compresses them, so `hooks.server.ts` gzips text responses itself (`lib/routing/compression.ts`). The `txBytes` of `railway logs --http --json` sum to the billed egress; `railway metrics --network --raw --json` gives it per hour.
 - **Config:** `.railway/railway.ts` declares the service as the named partial `athleticspodium-web`. Preview a change with `railway config plan`, then apply the reviewed plan with `railway config apply`. Keep the partial: a full IaC file deletes the resources it omits, including the backend and Postgres.

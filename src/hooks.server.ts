@@ -2,6 +2,7 @@ import type { Handle, HandleServerError } from '@sveltejs/kit/hooks';
 import { BACKEND_URL } from '$app/env/private';
 import { PUBLIC_MEDIA_URL, PUBLIC_SITE_ENV, PUBLIC_SITE_URL } from '$app/env/public';
 import { cacheControlFor } from '#lib/routing/cache.js';
+import { shouldGzip } from '#lib/routing/compression.js';
 import { canonicalRedirect } from '#lib/routing/redirects.js';
 import {
 	BackendNotFoundError,
@@ -29,8 +30,21 @@ export const handle: Handle = async ({ event, resolve }) => {
 		response.headers.set('x-robots-tag', 'noindex, nofollow');
 	}
 
-	return response;
+	return shouldGzip(event.request, response) ? gzip(response) : response;
 };
+
+function gzip(response: Response): Response {
+	const headers = new Headers(response.headers);
+	headers.set('content-encoding', 'gzip');
+	headers.delete('content-length');
+	headers.append('vary', 'accept-encoding');
+
+	return new Response(response.body?.pipeThrough(new CompressionStream('gzip')), {
+		status: response.status,
+		statusText: response.statusText,
+		headers
+	});
+}
 
 export const handleError: HandleServerError = ({ kind, error, event }) => {
 	if (kind !== 'unknown') return;
