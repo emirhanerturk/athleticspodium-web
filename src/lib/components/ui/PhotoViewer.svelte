@@ -39,7 +39,7 @@
 	aria-label="Photos of {alt}"
 	{onkeydown}
 	onclick={closeOutsidePhoto}
-	class="m-0 h-dvh max-h-none w-full max-w-none bg-night p-0 text-night-ink backdrop:bg-transparent"
+	class="group m-0 h-dvh max-h-none w-full max-w-none bg-night/90 p-0 text-night-ink opacity-0 backdrop-blur-sm transition-[opacity,display,overlay] transition-discrete duration-200 ease-out backdrop:bg-transparent open:opacity-100 motion-reduce:transition-none starting:open:opacity-0"
 >
 	<button
 		type="button"
@@ -78,7 +78,7 @@
 					src="{PUBLIC_MEDIA_URL}/{photo.path}"
 					alt={photos.length > 1 ? `${alt}, photo ${index + 1} of ${photos.length}` : alt}
 					loading="lazy"
-					class="max-h-[calc(100dvh-10rem)] max-w-full rounded-xl object-contain"
+					class="max-h-[calc(100dvh-10rem)] max-w-full scale-[.96] rounded-xl object-contain transition-[scale] duration-200 ease-out group-open:scale-100 motion-reduce:transition-none starting:group-open:scale-[.96]"
 				/>
 				<figcaption class="flex max-w-[640px] flex-wrap justify-center gap-x-3 text-sm">
 					<span class="text-night-ink-2">{imageNote(photo)}</span>

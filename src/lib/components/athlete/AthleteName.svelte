@@ -40,6 +40,8 @@
 	} = $props();
 
 	const OPEN_DELAY_MS = 100;
+	const APPEARING =
+		'transition-[opacity,translate] duration-150 ease-out motion-reduce:transition-none starting:translate-y-1 starting:opacity-0';
 
 	let summary = $state<AthleteSummary | null>(null);
 	let loading = $state(false);
@@ -100,7 +102,7 @@
 	{#if open}
 		<div
 			{@attach placeCard}
-			class="absolute top-full z-50 pt-2 {align === 'end' ? 'right-0' : 'left-0'}"
+			class="absolute top-full z-50 pt-2 {APPEARING} {align === 'end' ? 'right-0' : 'left-0'}"
 		>
 			<AthleteCard {athlete} {summary} {loading} {today} {result} {align} />
 		</div>
