@@ -101,8 +101,14 @@ test('redirects a wrong slug to the canonical profile', async ({ request }) => {
 	expect(response.headers().location).toBe(PROFILE);
 });
 
-test('answers 404 for an athlete that does not exist', async ({ page }) => {
-	const response = await page.goto('/athlete/1/nobody');
+test('redirects an address without a slug to the canonical profile', async ({ request }) => {
+	const response = await request.get('/athlete/75442', { maxRedirects: 0 });
 
-	expect(response?.status()).toBe(404);
+	expect(response.status()).toBe(301);
+	expect(response.headers().location).toBe('/athlete/75442/romell-glave');
+});
+
+test('answers 404 for an athlete that does not exist', async ({ page }) => {
+	expect((await page.goto('/athlete/1/nobody'))?.status()).toBe(404);
+	expect((await page.goto('/athlete/1'))?.status()).toBe(404);
 });
