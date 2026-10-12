@@ -126,7 +126,7 @@
 										alt=""
 										width={72}
 										height={72}
-										class="size-[72px] rounded-xl bg-surface-2 object-cover object-[50%_25%] hover:opacity-85"
+										class="size-[72px] rounded-xl bg-surface-2 object-cover object-[50%_25%] transition-opacity duration-150 ease-out hover:opacity-85"
 									/>
 								</a>
 							</li>

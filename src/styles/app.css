@@ -84,6 +84,15 @@
 		outline-offset: 2px;
 	}
 
+	a,
+	button,
+	label {
+		transition-property:
+			color, background-color, border-color, text-decoration-color, box-shadow, opacity;
+		transition-duration: 150ms;
+		transition-timing-function: ease-out;
+	}
+
 	::view-transition-old(root),
 	::view-transition-new(root) {
 		animation-duration: 150ms;
