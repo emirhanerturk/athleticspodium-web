@@ -2,6 +2,7 @@
 	import '../styles/app.css';
 	import { onMount } from 'svelte';
 	import { PUBLIC_GA_MEASUREMENT_ID, PUBLIC_SITE_ENV } from '$app/env/public';
+	import { onNavigate, type OnNavigate } from '$app/navigation';
 	import GoogleAnalytics from '#lib/components/analytics/GoogleAnalytics.svelte';
 	import favicon from '#lib/assets/favicon.svg';
 	import Footer from '#lib/components/layout/Footer.svelte';
@@ -17,6 +18,29 @@
 	let searchOverlay: SearchOverlay;
 
 	onMount(() => setVisitorToday(localIsoDateOf(new Date())));
+	onNavigate(crossFadeToNewPage);
+
+	function crossFadeToNewPage(navigation: OnNavigate) {
+		if (!shouldCrossFade(navigation)) return;
+
+		return new Promise<void>((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	}
+
+	function shouldCrossFade(navigation: OnNavigate) {
+		const newPage = navigation.from?.url.pathname !== navigation.to?.url.pathname;
+		const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+		return (
+			'startViewTransition' in document &&
+			newPage &&
+			navigation.type !== 'popstate' &&
+			!reducedMotion
+		);
+	}
 
 	function openSearchFromKeyboard(event: KeyboardEvent) {
 		const typing =
