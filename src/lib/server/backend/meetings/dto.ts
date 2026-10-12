@@ -1,3 +1,4 @@
+import type { MarkDto } from '../mark.js';
 import type { NationTallyDto } from '../nation-tally.js';
 
 export interface MeetingDto {
@@ -31,7 +32,7 @@ export interface EditionEntryDto {
 	id: number;
 	medal: number | null;
 	is_canceled: boolean;
-	mark_display: string | null;
+	mark_display: MarkDto;
 	info: string | null;
 	wind: number | null;
 	records: string[] | null;
@@ -64,7 +65,7 @@ export interface RecentResultDto extends MeetingDto {
 				type: 'winners';
 				winners: {
 					gender: number;
-					mark_display: string | null;
+					mark_display: MarkDto;
 					country_code: string | null;
 					athlete_name: string | null;
 					athlete: {

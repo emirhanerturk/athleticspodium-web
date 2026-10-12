@@ -1,3 +1,5 @@
+import type { MarkDto } from '../mark.js';
+
 export interface AthleteRowDto {
 	id: number;
 	slug: string;
@@ -39,7 +41,7 @@ export interface ResultDto {
 	id: number;
 	medal: number | null;
 	is_canceled: boolean;
-	mark_display: string | null;
+	mark_display: MarkDto;
 	info: string | null;
 	wind: number | null;
 	records: string[] | null;

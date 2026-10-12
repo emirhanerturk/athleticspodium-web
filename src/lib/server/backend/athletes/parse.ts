@@ -11,6 +11,7 @@ import {
 import type { OlympicGames } from '#lib/domain/career.js';
 import type { Image } from '#lib/domain/image.js';
 import type { Result } from '#lib/domain/result.js';
+import { parseMark } from '../mark.js';
 import type {
 	AthleteDetailDto,
 	AthleteListingDto,
@@ -74,7 +75,7 @@ export function parseResult(dto: ResultDto): Result {
 		id: dto.id,
 		place: dto.medal,
 		canceled: dto.is_canceled,
-		mark: dto.mark_display,
+		mark: parseMark(dto.mark_display),
 		markNote: dto.info,
 		wind: dto.wind,
 		records: dto.records ?? [],

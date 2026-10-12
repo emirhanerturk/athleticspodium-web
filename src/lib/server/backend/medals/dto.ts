@@ -1,3 +1,5 @@
+import type { MarkDto } from '../mark.js';
+
 export interface MedalRowDto {
 	id: number;
 	medal: number | null;
@@ -5,7 +7,7 @@ export interface MedalRowDto {
 	gender: number;
 	is_canceled: boolean;
 	athlete_name: string | null;
-	mark_display: string | null;
+	mark_display: MarkDto;
 	info: string | null;
 	wind: number | null;
 	records: string[] | null;

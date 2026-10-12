@@ -1,6 +1,7 @@
 import type { Gender } from '#lib/domain/edition.js';
 import { describeEvent } from '#lib/domain/event.js';
 import type { FilterChamp, MedalRecord, MedalSearchPage } from '#lib/domain/medal-search.js';
+import { parseMark } from '../mark.js';
 import type { FilterChampDto, MedalRowDto, MedalSearchDto } from './dto.js';
 
 const GENDERS: Gender[] = ['men', 'women', 'mixed'];
@@ -61,7 +62,7 @@ function parseMedalRecord(dto: MedalRowDto): MedalRecord | null {
 		},
 		athleteName: dto.athlete_name,
 		country: dto.country,
-		mark: dto.mark_display,
+		mark: parseMark(dto.mark_display),
 		markNote: dto.info,
 		wind: dto.wind,
 		records: dto.records ?? [],

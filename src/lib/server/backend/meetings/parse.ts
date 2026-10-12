@@ -3,6 +3,7 @@ import type { HostedMeeting } from '#lib/domain/country.js';
 import type { EditionEntry, EditionEvent, EditionMeeting, Gender } from '#lib/domain/edition.js';
 import { describeEvent } from '#lib/domain/event.js';
 import type { MeetingSummary, ResultsDeskEntry } from '#lib/domain/meeting.js';
+import { parseMark } from '../mark.js';
 import { parseNationTallies } from '../nation-tally.js';
 import type {
 	EditionEntryDto,
@@ -93,7 +94,7 @@ export function parseResultsDesk(dtos: RecentResultDto[]): ResultsDeskEntry[] {
 					: (winner.athlete_name ?? ''),
 				countryCode: winner.country_code,
 				event: describeEvent(winner.event?.name ?? '').longName,
-				mark: winner.mark_display
+				mark: parseMark(winner.mark_display)
 			};
 		});
 		return [{ meeting, summary: { kind: 'winners', winners } }];
@@ -141,7 +142,7 @@ function parseEditionEntry(dto: EditionEntryDto): EditionEntry {
 		id: dto.id,
 		place: dto.medal,
 		canceled: dto.is_canceled,
-		mark: dto.mark_display,
+		mark: parseMark(dto.mark_display),
 		markNote: dto.info,
 		wind: dto.wind,
 		records: dto.records ?? [],
