@@ -6,6 +6,7 @@
 	import favicon from '#lib/assets/favicon.svg';
 	import Footer from '#lib/components/layout/Footer.svelte';
 	import Header from '#lib/components/layout/Header.svelte';
+	import NavigationProgress from '#lib/components/layout/NavigationProgress.svelte';
 	import SearchOverlay from '#lib/components/layout/SearchOverlay.svelte';
 	import { setVisitorToday } from '#lib/components/layout/visitor-today.svelte.js';
 	import { localIsoDateOf } from '#lib/domain/date.js';
@@ -36,6 +37,8 @@
 <svelte:head>
 	<link rel="icon" href={favicon} type="image/svg+xml" />
 </svelte:head>
+
+<NavigationProgress />
 
 <div class="flex min-h-screen flex-col">
 	<Header

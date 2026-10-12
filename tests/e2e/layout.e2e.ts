@@ -31,6 +31,29 @@ test('keeps the main menu in place when the current item turns bold', async ({ p
 	expect(await articlesLeft()).toBe(before);
 });
 
+test('shows a loading bar while the next page is slow to load', async ({ page }) => {
+	let releasePage = () => {};
+	const pageHeld = new Promise<void>((resolve) => (releasePage = resolve));
+	await page.goto('/champs', { waitUntil: 'networkidle' });
+	await page.route('**/__data.json*', async (route) => {
+		await pageHeld;
+		await route.continue();
+	});
+	const calendar = page
+		.getByRole('navigation', { name: 'Main' })
+		.getByRole('link', { name: 'Calendar' });
+	const loading = page.getByRole('progressbar', { name: 'Loading page' });
+
+	await calendar.click();
+
+	await expect(loading).toBeVisible();
+
+	releasePage();
+
+	await expect(calendar).toHaveAttribute('aria-current', 'page');
+	await expect(loading).toBeHidden();
+});
+
 test('opens the tools menu on hover and marks the tools as current', async ({ page }) => {
 	await page.goto('/medals', { waitUntil: 'networkidle' });
 	const tools = page
