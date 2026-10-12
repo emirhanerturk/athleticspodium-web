@@ -58,32 +58,35 @@
 <dialog
 	bind:this={dialog}
 	aria-label="Search"
+	onclick={(event) => event.target === dialog && dialog.close()}
 	class="mx-auto mt-20 w-[calc(100%-32px)] max-w-[640px] overflow-hidden rounded-[22px] bg-surface p-0 text-ink shadow-[0_30px_80px_rgba(0,0,0,.35)] backdrop:bg-ink/55"
 >
-	<QuickSearchBox onnavigate={rememberQuery}>
-		{#snippet trailing()}
-			<kbd class="rounded-[7px] border border-line-2 px-2 py-0.5 font-data text-xs text-ink-3"
-				>esc</kbd
-			>
-		{/snippet}
-		{#snippet idle()}
-			{#if recent.length}
-				{@render group(
-					'Recent',
-					recent.map((query) => ({ label: query, note: 'Search', href: searchUrl({ query }) }))
-				)}
-			{/if}
-			{@render group('Jump to', jumpLinks)}
-		{/snippet}
-	</QuickSearchBox>
+	<div>
+		<QuickSearchBox onnavigate={rememberQuery}>
+			{#snippet trailing()}
+				<kbd class="rounded-[7px] border border-line-2 px-2 py-0.5 font-data text-xs text-ink-3"
+					>esc</kbd
+				>
+			{/snippet}
+			{#snippet idle()}
+				{#if recent.length}
+					{@render group(
+						'Recent',
+						recent.map((query) => ({ label: query, note: 'Search', href: searchUrl({ query }) }))
+					)}
+				{/if}
+				{@render group('Jump to', jumpLinks)}
+			{/snippet}
+		</QuickSearchBox>
 
-	<div
-		class="mt-1.5 flex flex-wrap gap-4 border-t border-line bg-surface-2 px-5 py-3 text-[12.5px] text-ink-3"
-	>
-		<span><strong class="font-data text-ink-2">↑ ↓</strong> move</span>
-		<span><strong class="font-data text-ink-2">↵</strong> open</span>
-		<span><strong class="font-data text-ink-2">⇧ ↵</strong> all results</span>
-		<span><strong class="font-data text-ink-2">esc</strong> close</span>
-		<span><strong class="font-data text-ink-2">/</strong> open search anywhere</span>
+		<div
+			class="mt-1.5 flex flex-wrap gap-4 border-t border-line bg-surface-2 px-5 py-3 text-[12.5px] text-ink-3"
+		>
+			<span><strong class="font-data text-ink-2">↑ ↓</strong> move</span>
+			<span><strong class="font-data text-ink-2">↵</strong> open</span>
+			<span><strong class="font-data text-ink-2">⇧ ↵</strong> all results</span>
+			<span><strong class="font-data text-ink-2">esc</strong> close</span>
+			<span><strong class="font-data text-ink-2">/</strong> open search anywhere</span>
+		</div>
 	</div>
 </dialog>

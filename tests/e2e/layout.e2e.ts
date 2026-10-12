@@ -70,6 +70,22 @@ test('opens the quick search with the slash key and closes it with Escape', asyn
 	await expect(search).toBeHidden();
 });
 
+test('closes the quick search on a click outside it, not inside', async ({ page }) => {
+	await page.goto('/', { waitUntil: 'networkidle' });
+	const search = page.getByRole('dialog', { name: 'Search' });
+	await page.keyboard.press('/');
+
+	const hints = await search
+		.locator('div', { hasText: 'open search anywhere' })
+		.last()
+		.boundingBox();
+	await page.mouse.click(hints!.x + 20, hints!.y - 3);
+	await expect(search).toBeVisible();
+
+	await page.mouse.click(10, 10);
+	await expect(search).toBeHidden();
+});
+
 test('answers unknown pages with a real 404', async ({ page }) => {
 	const response = await page.goto('/no-such-page');
 
