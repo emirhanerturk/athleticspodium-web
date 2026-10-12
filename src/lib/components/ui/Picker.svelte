@@ -304,6 +304,7 @@
 					/>
 				</label>
 			{/if}
+			<!-- flex-auto, not flex-1: Safari sizes the popover from a 0% basis and collapses the list -->
 			<div
 				bind:this={listbox}
 				id="{id}-list"
@@ -312,7 +313,7 @@
 				tabindex={searchable ? -1 : 0}
 				aria-activedescendant={searchable ? undefined : activeId}
 				onkeydown={searchable ? undefined : onkeydown}
-				class="min-h-0 flex-1 overflow-y-auto overscroll-contain p-1.5 outline-none"
+				class="min-h-0 flex-auto overflow-y-auto overscroll-contain p-1.5 outline-none"
 			>
 				{#each visible as group, groupIndex (groupIndex)}
 					<div role="group" aria-labelledby={group.label ? `${id}-group-${groupIndex}` : undefined}>
