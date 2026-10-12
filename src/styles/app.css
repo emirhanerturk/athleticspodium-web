@@ -60,6 +60,14 @@
 	--breakpoint-lg: 1100px;
 
 	--container-page: 1344px;
+
+	--animate-grow-up: grow-up 500ms ease-out backwards;
+
+	@keyframes grow-up {
+		from {
+			scale: 1 0;
+		}
+	}
 }
 
 @layer base {
