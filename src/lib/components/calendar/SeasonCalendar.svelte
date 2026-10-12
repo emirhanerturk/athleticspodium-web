@@ -63,6 +63,8 @@
 		road: 'border-2 border-up'
 	};
 
+	const BAR_STAGGER_MS = 30;
+
 	let filter = $state<LevelFilter>('all');
 	let showNational = $state(false);
 
@@ -239,12 +241,13 @@
 				>
 					<span class="flex h-11 items-end">
 						<span
-							class="min-h-[3px] flex-1 rounded-t-[3px] {current
+							class="min-h-[3px] flex-1 origin-bottom animate-grow-up rounded-t-[3px] transition-[height] duration-300 ease-out motion-reduce:animate-none motion-reduce:transition-none {current
 								? 'bg-brand'
 								: isPastMonth(month)
 									? 'bg-line-2'
 									: 'bg-ink'}"
 							style:height="{Math.round((count / busiest) * 44)}px"
+							style:animation-delay="{index * BAR_STAGGER_MS}ms"
 						></span>
 					</span>
 					<span class="flex items-baseline justify-between gap-1">

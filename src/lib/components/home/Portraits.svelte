@@ -24,13 +24,15 @@
 			<li>
 				<a href={athleteUrl(athlete)} class="flex flex-col gap-3.5 hover:text-brand-ink">
 					{#if athlete.image}
-						<MediaImage
-							image={athlete.image}
-							alt={fullName(athlete)}
-							width={560}
-							height={560}
-							class="block aspect-square w-full rounded object-cover object-[50%_25%]"
-						/>
+						<span class="block overflow-hidden rounded">
+							<MediaImage
+								image={athlete.image}
+								alt={fullName(athlete)}
+								width={560}
+								height={560}
+								class="block aspect-square w-full zoom-on-link-hover object-cover object-[50%_25%]"
+							/>
+						</span>
 					{/if}
 					<span
 						class="flex items-center gap-[9px] font-data text-xs tracking-[0.08em] text-ink-3 uppercase"

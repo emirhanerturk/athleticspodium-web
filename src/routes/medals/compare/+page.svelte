@@ -132,7 +132,7 @@
 							href={preset.href}
 							class="block py-2 text-sm leading-snug text-ink-2 hover:text-brand-ink"
 						>
-							{preset.label} →
+							{preset.label} <span class="nudge-on-link-hover">→</span>
 						</a>
 					</li>
 				{/each}

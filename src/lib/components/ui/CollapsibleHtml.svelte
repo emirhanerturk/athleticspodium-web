@@ -11,9 +11,9 @@
 
 <div
 	{@attach measureOverflow}
-	class="prose-body relative flex max-w-[720px] flex-col gap-3.5 text-[16.5px] leading-[1.65] text-ink-2 {expanded
-		? ''
-		: 'max-h-[19rem] overflow-hidden [mask-image:linear-gradient(to_bottom,black_70%,transparent)]'}"
+	class="prose-body relative flex max-w-[720px] flex-col gap-3.5 overflow-hidden text-[16.5px] leading-[1.65] text-ink-2 transition-[max-height] duration-300 ease-out [interpolate-size:allow-keywords] motion-reduce:transition-none {expanded
+		? 'max-h-[max-content]'
+		: 'max-h-[19rem] [mask-image:linear-gradient(to_bottom,black_70%,transparent)]'}"
 >
 	<!-- eslint-disable-next-line svelte/no-at-html-tags -- written by editors in the CMS -->
 	{@html html}

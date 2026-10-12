@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { flip } from 'svelte/animate';
+	import { prefersReducedMotion } from 'svelte/motion';
+	import { fade } from 'svelte/transition';
 	import type { IsoDate } from '#lib/domain/date.js';
 	import {
 		GENDER_LABELS,
@@ -12,6 +15,8 @@
 	let { events, today }: { events: EditionEvent[]; today: IsoDate } = $props();
 
 	const GENDERS: Gender[] = ['men', 'women', 'mixed'];
+	const MOVE_MS = 250;
+	const FADE_MS = 200;
 
 	const boards = $derived(events.map((event) => ({ event, lines: podiumLines(event.entries) })));
 	const genders = $derived(
@@ -33,6 +38,8 @@
 	const visible = $derived(
 		genderBoards.filter(({ event }) => discipline === 'all' || event.discipline === discipline)
 	);
+
+	const unlessReducedMotion = (ms: number) => (prefersReducedMotion.current ? 0 : ms);
 
 	function pickGender(next: Gender) {
 		gender = next;
@@ -95,7 +102,13 @@
 
 	<div class="grid grid-cols-[repeat(auto-fill,minmax(min(360px,100%),1fr))] gap-4">
 		{#each visible as board (board.event.id)}
-			<EventCard event={board.event} lines={board.lines} {today} />
+			<div
+				animate:flip={{ duration: unlessReducedMotion(MOVE_MS) }}
+				in:fade={{ duration: unlessReducedMotion(FADE_MS) }}
+				class="grid"
+			>
+				<EventCard event={board.event} lines={board.lines} {today} />
+			</div>
 		{/each}
 	</div>
 </section>

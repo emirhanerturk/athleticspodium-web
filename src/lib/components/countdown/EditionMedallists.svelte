@@ -102,7 +102,7 @@
 		<p class="py-3 text-sm text-ink-2">
 			The medallists could not be loaded.
 			<a href={details} class="font-semibold text-brand-ink hover:underline"
-				>See them in the medal search →</a
+				>See them in the medal search <span class="nudge-on-link-hover">→</span></a
 			>
 		</p>
 	{/if}

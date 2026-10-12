@@ -57,7 +57,9 @@
 		<div class="flex flex-col">
 			<div class="flex items-baseline justify-between border-b-2 border-ink pb-2.5">
 				<h2 class={H3}>Born today</h2>
-				<a href="{dayUrl}#born" class={ALL}>All {visitor.born.count} →</a>
+				<a href="{dayUrl}#born" class={ALL}
+					>All {visitor.born.count} <span class="nudge-on-link-hover">→</span></a
+				>
 			</div>
 			{#each shownBorn as athlete, index (athlete.id)}
 				<a
@@ -85,7 +87,9 @@
 		<div class="flex flex-col">
 			<div class="flex items-baseline justify-between border-b-2 border-ink pb-2.5">
 				<h2 class={H3}>Remembered today</h2>
-				<a href="{dayUrl}#died" class={ALL}>All {visitor.died.count} →</a>
+				<a href="{dayUrl}#died" class={ALL}
+					>All {visitor.died.count} <span class="nudge-on-link-hover">→</span></a
+				>
 			</div>
 			{#each shownDied as athlete (athlete.id)}
 				<a

@@ -6,7 +6,7 @@ const PREVIEW_PORT = 4173;
 export default defineConfig({
 	testDir: 'tests/e2e',
 	testMatch: '**/*.e2e.ts',
-	use: { baseURL: `http://localhost:${PREVIEW_PORT}` },
+	use: { baseURL: `http://localhost:${PREVIEW_PORT}`, reducedMotion: 'reduce' },
 	webServer: [
 		{
 			command: 'node tests/stub-backend.js',

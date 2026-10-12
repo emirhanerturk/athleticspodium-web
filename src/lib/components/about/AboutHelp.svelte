@@ -48,7 +48,9 @@
 						>
 							<strong class="font-display text-[26px] leading-none font-bold">{gap.title}</strong>
 							<span class="text-[13px] leading-[1.45] text-ink-3">{gap.text}</span>
-							<span class="mt-auto text-[13px] font-bold text-brand-ink">See the list →</span>
+							<span class="mt-auto text-[13px] font-bold text-brand-ink"
+								>See the list <span class="nudge-on-link-hover">→</span></span
+							>
 						</a>
 					</li>
 				{/each}
@@ -60,7 +62,7 @@
 				<span
 					>New here? <strong>How to read the database</strong> — symbols, records, wind codes</span
 				>
-				<span aria-hidden="true">→</span>
+				<span aria-hidden="true" class="nudge-on-link-hover">→</span>
 			</a>
 			<div class="flex flex-wrap gap-2 pt-2">
 				{#each LINKS as link (link.label)}

@@ -32,7 +32,7 @@
 				<strong class="font-semibold">{link.title}</strong>
 				<span class="text-[13px] text-ink-3">{link.note}</span>
 			</span>
-			<ArrowRightIcon />
+			<ArrowRightIcon class="nudge-on-link-hover size-[18px]" />
 		</a>
 	{/each}
 </nav>

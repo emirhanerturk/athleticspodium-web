@@ -19,7 +19,7 @@
 				</h2>
 			</div>
 			<a href={PAGES.champs} class="text-sm font-semibold text-brand hover:underline">
-				All championships →
+				All championships <span class="nudge-on-link-hover">→</span>
 			</a>
 		</div>
 		<ul class="grid grid-cols-[repeat(auto-fit,minmax(min(290px,100%),1fr))] gap-3.5">

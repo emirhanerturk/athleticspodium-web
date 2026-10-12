@@ -29,6 +29,11 @@
 		dialog.showModal();
 	}
 
+	const OPENING =
+		'scale-[.98] opacity-0 transition-[opacity,scale,display,overlay] transition-discrete duration-150 ease-out open:scale-100 open:opacity-100 starting:open:scale-[.98] starting:open:opacity-0 motion-reduce:transition-none';
+	const BACKDROP_OPENING =
+		'backdrop:opacity-0 backdrop:transition-[opacity,display,overlay] backdrop:transition-discrete backdrop:duration-150 open:backdrop:opacity-100 starting:open:backdrop:opacity-0 motion-reduce:backdrop:transition-none';
+
 	function rememberQuery(query: string) {
 		rememberSearch(query);
 		dialog.close();
@@ -59,7 +64,7 @@
 	bind:this={dialog}
 	aria-label="Search"
 	onclick={(event) => event.target === dialog && dialog.close()}
-	class="mx-auto mt-20 w-[calc(100%-32px)] max-w-[640px] overflow-hidden rounded-[22px] bg-surface p-0 text-ink shadow-[0_30px_80px_rgba(0,0,0,.35)] backdrop:bg-ink/55"
+	class="mx-auto mt-20 w-[calc(100%-32px)] max-w-[640px] overflow-hidden rounded-[22px] bg-surface p-0 text-ink shadow-[0_30px_80px_rgba(0,0,0,.35)] backdrop:bg-ink/55 {OPENING} {BACKDROP_OPENING}"
 >
 	<div>
 		<QuickSearchBox onnavigate={rememberQuery}>

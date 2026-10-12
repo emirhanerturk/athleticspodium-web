@@ -126,7 +126,7 @@
 				<a
 					href={PAGES.medalSearch}
 					class="inline-flex h-11 items-center rounded-xl bg-ink px-[18px] font-bold text-bg"
-					>Open medal search →</a
+					>Open medal search <span class="nudge-on-link-hover">→</span></a
 				>
 				<a
 					href={PAGES.search}
@@ -255,7 +255,8 @@
 					<span
 						>Looking for results, not people? <a
 							href={PAGES.medalSearch}
-							class="font-semibold text-brand-ink">Medal search →</a
+							class="font-semibold text-brand-ink"
+							>Medal search <span class="nudge-on-link-hover">→</span></a
 						></span
 					>
 				</div>
