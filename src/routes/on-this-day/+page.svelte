@@ -25,6 +25,6 @@
 	<h1 class="font-display text-6xl leading-none font-bold">On this day</h1>
 	<p class="text-lg text-ink-2">Opening today’s page…</p>
 	<a href={onThisDayUrl(data.serverDay)} class="font-semibold text-brand-ink hover:underline">
-		Today’s athletes →
+		Today’s athletes <span class="nudge-on-link-hover">→</span>
 	</a>
 </section>

@@ -45,6 +45,6 @@
 		href={champUrl('olympic-games')}
 		class="mt-2.5 block border-t border-night-line pt-3 text-[13.5px] font-semibold text-brand"
 	>
-		Full Olympic medal table →
+		Full Olympic medal table <span class="nudge-on-link-hover">→</span>
 	</a>
 </div>

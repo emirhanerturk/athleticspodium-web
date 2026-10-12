@@ -105,7 +105,7 @@
 			href={allHref}
 			class="mt-[18px] inline-block text-sm font-semibold text-brand-ink hover:underline"
 		>
-			All athletes from {countryName} →
+			All athletes from {countryName} <span class="nudge-on-link-hover">→</span>
 		</a>
 	</div>
 </section>

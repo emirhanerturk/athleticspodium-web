@@ -223,7 +223,7 @@
 							href={medalCountdownUrl(query.country, query.champ)}
 							class="text-[13.5px] font-semibold text-brand-ink hover:underline"
 						>
-							Medal countdown, edition by edition →
+							Medal countdown, edition by edition <span class="nudge-on-link-hover">→</span>
 						</a>
 					{/if}
 				</div>
@@ -237,7 +237,7 @@
 								href={medalSearchUrl(question.query)}
 								class="block py-2 text-sm leading-snug text-ink-2 hover:text-brand-ink"
 							>
-								{question.label} →
+								{question.label} <span class="nudge-on-link-hover">→</span>
 							</a>
 						</li>
 					{/each}

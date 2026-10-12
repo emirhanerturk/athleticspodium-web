@@ -29,7 +29,7 @@
 						alt=""
 						width={1000}
 						height={550}
-						class="absolute inset-0 size-full object-cover opacity-50"
+						class="absolute inset-0 size-full zoom-on-link-hover object-cover opacity-50"
 					/>
 					<span
 						aria-hidden="true"
@@ -62,7 +62,7 @@
 						aria-hidden="true"
 						class="absolute top-[26px] right-[26px] grid size-11 place-items-center rounded-full bg-brand text-ink"
 					>
-						<ArrowRightIcon class="size-5" />
+						<ArrowRightIcon class="nudge-on-link-hover size-5" />
 					</span>
 				</a>
 			</li>

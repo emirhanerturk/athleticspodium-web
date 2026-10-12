@@ -39,7 +39,7 @@
 		<div class="mb-[18px] flex items-baseline justify-between gap-3">
 			<h2 class={H2}>Featured</h2>
 			<a href={athleteLetterUrl('a')} class="text-sm font-semibold text-brand-ink hover:underline">
-				Browse A–Z →
+				Browse A–Z <span class="nudge-on-link-hover">→</span>
 			</a>
 		</div>
 		<FeaturedAthleteCards athletes={data.featured} />
@@ -55,7 +55,8 @@
 					href={onThisDayUrl(dayOfDate(visitor.today))}
 					class="text-sm font-semibold text-brand-ink hover:underline"
 				>
-					All {visitor.born.count} born on {formatDayMonth(visitor.today)} →
+					All {visitor.born.count} born on {formatDayMonth(visitor.today)}
+					<span class="nudge-on-link-hover">→</span>
 				</a>
 			</div>
 			<OnThisDayCards

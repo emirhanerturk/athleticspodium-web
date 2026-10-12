@@ -33,7 +33,7 @@
 			Next six months
 		</h2>
 		<a href={calendarUrl(year)} class="text-sm font-semibold text-brand-ink hover:underline">
-			Season calendar →
+			Season calendar <span class="nudge-on-link-hover">→</span>
 		</a>
 	</div>
 	<div class="overflow-x-auto pb-2">

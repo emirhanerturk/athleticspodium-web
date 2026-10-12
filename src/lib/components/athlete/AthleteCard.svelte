@@ -120,7 +120,7 @@
 			href={athleteUrl(athlete)}
 			class="ml-auto font-text text-[12.5px] font-bold text-brand-ink hover:underline"
 		>
-			Profile →
+			Profile <span class="nudge-on-link-hover">→</span>
 		</a>
 	</div>
 </div>

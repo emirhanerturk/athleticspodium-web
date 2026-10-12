@@ -104,3 +104,28 @@
 @utility tabular {
 	font-variant-numeric: tabular-nums;
 }
+
+@utility nudge-on-link-hover {
+	display: inline-block;
+	transition: translate 150ms ease-out;
+
+	:where(a:hover, a:focus-visible) & {
+		translate: 3px 0;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
+}
+
+@utility zoom-on-link-hover {
+	transition: scale 300ms ease-out;
+
+	:where(a:hover, a:focus-visible) & {
+		scale: 1.03;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
+}

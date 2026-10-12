@@ -14,13 +14,15 @@
 			class="flex flex-col overflow-hidden rounded-2xl border border-line bg-surface hover:shadow-[0_1px_2px_rgba(18,19,22,.05),0_8px_24px_rgba(18,19,22,.06)]"
 		>
 			{#if story.image}
-				<MediaImage
-					image={story.image}
-					alt=""
-					width={480}
-					height={300}
-					class="aspect-[16/10] w-full bg-surface-2 object-cover"
-				/>
+				<span class="block overflow-hidden">
+					<MediaImage
+						image={story.image}
+						alt=""
+						width={480}
+						height={300}
+						class="block aspect-[16/10] w-full zoom-on-link-hover bg-surface-2 object-cover"
+					/>
+				</span>
 			{/if}
 			<span class="flex flex-col gap-2 px-[18px] pt-4 pb-[18px]">
 				<span class="font-data text-xs text-ink-3">{formatDate(story.publishedOn)}</span>

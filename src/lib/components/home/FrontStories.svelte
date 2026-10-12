@@ -10,16 +10,18 @@
 <section class="page-container pt-7 pb-12">
 	<div class="grid grid-cols-1 gap-9 md:grid-cols-[minmax(0,8fr)_minmax(0,4fr)]">
 		{#if lead}
-			<a href={articleUrl(lead)} class="relative block hover:opacity-[.97]">
+			<a href={articleUrl(lead)} class="relative block">
 				{#if lead.image}
-					<MediaImage
-						image={lead.image}
-						alt={lead.image.caption ?? lead.title}
-						width={1200}
-						height={800}
-						eager
-						class="block aspect-[3/2] w-full rounded-md object-cover"
-					/>
+					<span class="block overflow-hidden rounded-md">
+						<MediaImage
+							image={lead.image}
+							alt={lead.image.caption ?? lead.title}
+							width={1200}
+							height={800}
+							eager
+							class="block aspect-[3/2] w-full zoom-on-link-hover object-cover"
+						/>
+					</span>
 				{/if}
 				<div
 					class="flex flex-col gap-3 rounded bg-bg px-5 pt-5 pb-4 shadow-[0_12px_40px_rgba(0,0,0,.18)] sm:px-7 sm:pt-[26px] sm:pb-6 {lead.image

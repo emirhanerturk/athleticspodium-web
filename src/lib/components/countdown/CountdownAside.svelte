@@ -83,7 +83,7 @@
 				href="{champUrl(champ.slug)}#medal-table"
 				class="mt-2.5 block text-[13.5px] font-bold text-brand-ink hover:underline"
 			>
-				Full medal table →
+				Full medal table <span class="nudge-on-link-hover">→</span>
 			</a>
 		</section>
 	{/if}

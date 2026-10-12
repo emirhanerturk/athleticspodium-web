@@ -21,13 +21,15 @@
 		class="grid overflow-hidden sm:grid-cols-[220px_minmax(0,1fr)] {CARD}"
 	>
 		{#if athlete.image}
-			<MediaImage
-				image={athlete.image}
-				alt=""
-				width={440}
-				height={520}
-				class="block h-full min-h-[220px] w-full object-cover object-top sm:min-h-[260px]"
-			/>
+			<span class="block overflow-hidden">
+				<MediaImage
+					image={athlete.image}
+					alt=""
+					width={440}
+					height={520}
+					class="block h-full min-h-[220px] w-full zoom-on-link-hover object-cover object-top sm:min-h-[260px]"
+				/>
+			</span>
 		{:else}
 			<span class="hidden bg-night-surface sm:block"></span>
 		{/if}
@@ -66,7 +68,9 @@
 					><span class="size-3 rounded-full bg-bronze"></span>{athlete.medals.bronze}</span
 				>
 				<span class="flex-1"></span>
-				<span class="font-text text-sm font-bold text-brand">Open profile →</span>
+				<span class="font-text text-sm font-bold text-brand"
+					>Open profile <span class="nudge-on-link-hover">→</span></span
+				>
 			</span>
 		</span>
 	</a>
@@ -77,7 +81,9 @@
 		<strong class={TITLE}>{champ.name}</strong>
 		<span class="flex flex-wrap gap-[18px] text-[14.5px] text-night-ink-2">
 			<span>{areaName(champ.category)} · {LEVEL_LABELS[levelOf(champ.category)]}</span>
-			<span class="font-bold text-brand">Open championship →</span>
+			<span class="font-bold text-brand"
+				>Open championship <span class="nudge-on-link-hover">→</span></span
+			>
 		</span>
 	</a>
 {:else}
@@ -93,6 +99,8 @@
 			>
 			<strong class={TITLE}>{country.name}</strong>
 		</span>
-		<span class="text-sm font-bold text-brand">Open country →</span>
+		<span class="text-sm font-bold text-brand"
+			>Open country <span class="nudge-on-link-hover">→</span></span
+		>
 	</a>
 {/if}
