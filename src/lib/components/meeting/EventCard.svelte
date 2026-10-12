@@ -48,7 +48,7 @@
 	</header>
 	{#each lines as line (line.key)}
 		<div
-			class="grid grid-cols-[26px_minmax(0,1fr)_auto] items-center gap-3 border-b border-line py-2.5 last:border-b-0"
+			class="grid grid-cols-[26px_minmax(0,1fr)_auto] items-center gap-x-3 border-b border-line py-2.5 last:border-b-0"
 		>
 			<MedalDisc place={line.place} canceled={line.canceled} />
 			<span class="flex min-w-0 flex-col gap-0.5">
@@ -69,28 +69,7 @@
 						</strong>
 					{/if}
 				</span>
-				{#if line.members.length}
-					<p class="pl-[29px] text-xs leading-relaxed text-ink-3">
-						{#each line.members as member, index (index)}
-							<span class="mr-1 inline-block whitespace-nowrap">
-								{#if member.athlete}
-									<AthleteName
-										athlete={member.athlete}
-										{today}
-										result={resultLine(line)}
-										class="text-ink-2 underline decoration-line-2 underline-offset-2 hover:text-brand-ink hover:decoration-brand-ink"
-									>
-										{member.name}
-									</AthleteName>
-								{:else}
-									{member.name}
-								{/if}{#if index < line.members.length - 1}<span aria-hidden="true" class="pl-1"
-										>·</span
-									>{/if}
-							</span>
-						{/each}
-					</p>
-				{:else if line.notes}
+				{#if !line.members.length && line.notes}
 					<span class="truncate pl-[29px] text-xs text-ink-3">{line.notes}</span>
 				{/if}
 			</span>
@@ -100,6 +79,41 @@
 					<ResultMark result={line} showWind={wind === null} />
 				</span>
 			</span>
+			{#if line.members.length}
+				<ul class="col-span-2 col-start-2 flex flex-col pt-1 pl-[29px] text-[13px] leading-relaxed">
+					{#each line.members as member, index (index)}
+						<li class="flex items-baseline gap-2">
+							<span class="flex max-w-full shrink-0">
+								{#if member.athlete}
+									<AthleteName
+										athlete={member.athlete}
+										{today}
+										result={resultLine(line)}
+										class="truncate text-ink-2 underline decoration-line-2 underline-offset-2 hover:text-brand-ink hover:decoration-brand-ink"
+									>
+										{member.name}
+									</AthleteName>
+								{:else}
+									<span class="truncate text-ink-2">{member.name}</span>
+								{/if}
+							</span>
+							{#if member.notes}
+								<span class="min-w-0 truncate text-xs text-ink-3" title={member.notes}>
+									{member.notes}
+								</span>
+							{/if}
+							{#if member.info}
+								<span class="ml-auto shrink-0 pl-1 font-data text-xs text-ink-3 tabular">
+									{member.info}
+								</span>
+							{/if}
+						</li>
+					{/each}
+				</ul>
+				{#if line.notes}
+					<p class="col-span-2 col-start-2 pt-1 pl-[29px] text-xs text-ink-3">{line.notes}</p>
+				{/if}
+			{/if}
 		</div>
 	{/each}
 	{#if event.note}

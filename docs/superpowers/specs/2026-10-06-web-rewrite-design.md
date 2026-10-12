@@ -490,7 +490,8 @@ For each page: what it shows, where the data comes from, and the backend prerequ
   - Each row shows its own wind next to the mark.
   - `medal.notes` and `info` appear as footnote markers.
   - Cancelled results use the DQ style.
-  - A relay team is one row: the country, then every runner below it, wrapping onto more lines as needed. Runners with a profile link to it with the hover card; the others are plain text.
+  - A relay team is one row: the country and the team's mark, then its runners one per line. Runners with a profile link to it with the hover card; the others are plain text.
+  - The team's mark is the one most runners hold, as runners of the heats only have none. Info that every runner shares (`(i)`) stands by the mark; otherwise each runner's info (a split, `Heat`, a cross-country place) is shown at the right of their line. A note most runners share is the team's, shown below the runners; a runner's own note (`Split: 43.26`) follows their name.
 - **"Show places 4–8"** toggles placings.
 - **Hero image:** Meetings have no image yet, so the hero runs full width without one.
 

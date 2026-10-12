@@ -54,6 +54,10 @@ export interface EditionEvent {
 export interface TeamMember {
 	name: string;
 	athlete: AthleteRef | null;
+	/** The runner's own info, like a split or "Heat", when the team's runners don't share one. */
+	info: string | null;
+	/** The runner's own note, when it isn't the team's. */
+	notes: string | null;
 }
 
 export interface PodiumLine {
@@ -102,31 +106,77 @@ export function memberName(entry: EditionEntry): string {
 }
 
 export function podiumLines(entries: EditionEntry[]): PodiumLine[] {
-	const lines = new Map<string, PodiumLine>();
-
+	const groups = new Map<string, EditionEntry[]>();
 	for (const entry of entries) {
 		const key = entry.isTeam
 			? `team-${entry.place}-${entry.country?.code}-${entry.canceled}`
 			: `entry-${entry.id}`;
-		const line = lines.get(key) ?? {
-			key,
-			place: entry.place,
-			canceled: entry.canceled,
-			mark: entry.mark,
-			markNote: entry.markNote,
-			wind: entry.wind,
-			records: entry.records,
-			notes: entry.notes,
-			country: entry.country,
-			athlete: entry.isTeam ? null : entry.athlete,
-			athleteName: entry.isTeam ? null : memberName(entry),
-			members: []
-		};
-		if (entry.isTeam) line.members.push({ name: memberName(entry), athlete: entry.athlete });
-		lines.set(key, line);
+		groups.set(key, [...(groups.get(key) ?? []), entry]);
 	}
 
-	return [...lines.values()];
+	return [...groups].map(([key, group]) =>
+		group[0].isTeam ? teamLine(key, group) : individualLine(key, group[0])
+	);
+}
+
+function individualLine(key: string, entry: EditionEntry): PodiumLine {
+	return {
+		key,
+		place: entry.place,
+		canceled: entry.canceled,
+		mark: entry.mark,
+		markNote: entry.markNote,
+		wind: entry.wind,
+		records: entry.records,
+		notes: entry.notes,
+		country: entry.country,
+		athlete: entry.athlete,
+		athleteName: memberName(entry),
+		members: []
+	};
+}
+
+/**
+ * A team's mark is the one most of its runners hold, as runners of the heats only have none. Its
+ * info is the one every runner shares and its note the one most runners share; a runner keeps
+ * another one, like a split, as their own.
+ */
+function teamLine(key: string, entries: EditionEntry[]): PodiumLine {
+	const mark = mostCommon(entries.map((entry) => entry.mark).filter((value) => value !== null));
+	const finalist = entries.find((entry) => entry.mark === mark) ?? entries[0];
+	const sharedInfo = entries.every((entry) => entry.markNote === entries[0].markNote);
+	const note = mostCommon(entries.map((entry) => entry.notes));
+	const notes =
+		entries.filter((entry) => entry.notes === note).length * 2 > entries.length ? note : null;
+
+	return {
+		key,
+		place: finalist.place,
+		canceled: finalist.canceled,
+		mark: mark ?? null,
+		markNote: sharedInfo ? entries[0].markNote : null,
+		wind: finalist.wind,
+		records: finalist.records,
+		notes: notes ?? null,
+		country: finalist.country,
+		athlete: null,
+		athleteName: null,
+		members: entries.map((entry) => ({
+			name: memberName(entry),
+			athlete: entry.athlete,
+			info: sharedInfo ? null : entry.markNote,
+			notes: entry.notes === notes ? null : entry.notes
+		}))
+	};
+}
+
+/** The value most items hold; the first one wins a tie. */
+function mostCommon<T>(items: T[]): T | undefined {
+	const count = (item: T) => items.filter((other) => other === item).length;
+	return items.reduce<T | undefined>(
+		(best, item) => (best === undefined || count(item) > count(best) ? item : best),
+		undefined
+	);
 }
 
 export function isMedalLine(line: Pick<PodiumLine, 'place' | 'canceled'>): boolean {

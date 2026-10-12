@@ -70,6 +70,51 @@ describe('podiumLines', () => {
 		]);
 		expect(podiumLines([entry(1, 'ITA'), entry(2, 'ITA')])).toHaveLength(2);
 	});
+
+	it('takes the team mark from its finalists and keeps each runner’s own info and note', () => {
+		const runner = (extra: Partial<EditionEntry>) =>
+			entry(3, 'TUR', { isTeam: true, mark: '3:17.54', records: ['NR'], ...extra });
+		const [line] = podiumLines([
+			runner({ mark: null, records: [], markNote: 'Heat', notes: 'Competed in heats.' }),
+			runner({ markNote: '45.60' }),
+			runner({ markNote: '46.74' })
+		]);
+
+		expect([line.mark, line.records, line.markNote, line.notes]).toEqual([
+			'3:17.54',
+			['NR'],
+			null,
+			null
+		]);
+		expect(line.members.map((member) => [member.info, member.notes])).toEqual([
+			['Heat', 'Competed in heats.'],
+			['45.60', null],
+			['46.74', null]
+		]);
+	});
+
+	it('keeps splits written as notes with each runner', () => {
+		const runner = (notes: string | null) => entry(1, 'USA', { isTeam: true, notes });
+		const [line] = podiumLines([runner('Split: 44.45'), runner('Split: 43.26'), runner(null)]);
+
+		expect(line.notes).toBeNull();
+		expect(line.members.map((member) => member.notes)).toEqual([
+			'Split: 44.45',
+			'Split: 43.26',
+			null
+		]);
+	});
+
+	it('shows the info every runner shares once, by the team mark', () => {
+		const runner = () => entry(1, 'GBR', { isTeam: true, markNote: '(i)', notes: 'Lane 4' });
+		const [line] = podiumLines([runner(), runner()]);
+
+		expect([line.markNote, line.notes]).toEqual(['(i)', 'Lane 4']);
+		expect(line.members.map((member) => [member.info, member.notes])).toEqual([
+			[null, null],
+			[null, null]
+		]);
+	});
 });
 
 describe('sharedWind', () => {

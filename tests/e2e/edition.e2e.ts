@@ -42,6 +42,25 @@ test('shows each relay team once with every runner, linking those with a profile
 	await expect(relay.getByRole('link', { name: /Ansah-Peprah/ })).toHaveCount(0);
 });
 
+test('lists a relay team’s runners one per line, with the heat runner’s info', async ({ page }) => {
+	await page.goto(EDITION);
+	const relay = page.locator('article', { has: page.getByRole('heading', { name: '4x100m' }) });
+	const germany = relay.locator('.grid', { hasText: 'Germany' });
+
+	await expect(germany.getByRole('listitem')).toHaveText([
+		'Kevin Kranz',
+		'Marvin Schulte',
+		'Heiko Gussmann',
+		'Lucas Ansah-Peprah',
+		/^Owen Ansah\s*Heat$/,
+		'Joshua Hartmann'
+	]);
+	await expect(germany).toContainText('38.64');
+	await expect(
+		relay.locator('.grid', { hasText: 'Great Britain' }).getByRole('listitem')
+	).toHaveCount(4);
+});
+
 test('shows places 4–8 with the podium, without a toggle', async ({ page }) => {
 	await page.goto(EDITION);
 	const sprint = page.locator('article', {

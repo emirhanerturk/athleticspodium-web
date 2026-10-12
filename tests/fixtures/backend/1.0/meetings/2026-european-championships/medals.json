@@ -493,6 +493,88 @@
 							"code": "GER",
 							"name": "Germany"
 						}
+					},
+					{
+						"mark_display": null,
+						"id": 395135,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 60,
+						"medal": 2,
+						"athlete_id": 52697,
+						"athlete_name": null,
+						"country_code": "GER",
+						"gender": 0,
+						"mark": null,
+						"mark_format": null,
+						"order": "5",
+						"wind": null,
+						"info": "Heat",
+						"records": null,
+						"is_team": true,
+						"is_canceled": false,
+						"notes": null,
+						"created_date": "2026-08-16T10:02:33.514Z",
+						"updated_date": "2026-08-17T20:23:53.686Z",
+						"event": {
+							"id": 60,
+							"name": "4x100m",
+							"rank": 160
+						},
+						"athlete": {
+							"id": 52697,
+							"first_name": "Owen",
+							"last_name": "Ansah",
+							"slug": "owen-ansah",
+							"gender": true,
+							"olympic_mark": false,
+							"date_of_birth": "2000-11-28"
+						},
+						"country": {
+							"code": "GER",
+							"name": "Germany"
+						}
+					},
+					{
+						"mark_display": null,
+						"id": 395136,
+						"champ_id": 18,
+						"meeting_id": 2219,
+						"event_id": 60,
+						"medal": 2,
+						"athlete_id": 73452,
+						"athlete_name": null,
+						"country_code": "GER",
+						"gender": 0,
+						"mark": null,
+						"mark_format": null,
+						"order": "u",
+						"wind": null,
+						"info": null,
+						"records": null,
+						"is_team": true,
+						"is_canceled": false,
+						"notes": null,
+						"created_date": "2026-08-16T10:02:33.515Z",
+						"updated_date": "2026-08-17T20:23:53.686Z",
+						"event": {
+							"id": 60,
+							"name": "4x100m",
+							"rank": 160
+						},
+						"athlete": {
+							"id": 73452,
+							"first_name": "Joshua",
+							"last_name": "Hartmann",
+							"slug": "joshua-hartmann",
+							"gender": true,
+							"olympic_mark": false,
+							"date_of_birth": "1999-03-19"
+						},
+						"country": {
+							"code": "GER",
+							"name": "Germany"
+						}
 					}
 				]
 			}
