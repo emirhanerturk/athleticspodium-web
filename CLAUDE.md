@@ -67,8 +67,9 @@ Railway, in project `athletics-podium` next to the backend:
   - Rollback: turn the Cloudflare proxy off, then point the apex back to A `199.36.158.100` and `www` to CNAME `athletics-podium.web.app`. The Firebase site stays deployable for that.
 - **Cloudflare:** both records are proxied (orange cloud) since 2026-10-09, to stop bot traffic from Singapore cloud networks (Tencent, Alibaba).
   - A WAF custom rule gives a Non-Interactive Challenge to requests from Singapore and China.
-  - AI Crawl Control → Security blocks AI training crawlers (ClaudeBot, GPTBot, CCBot, Bytespider…) with a 403 and prepends a Cloudflare-managed block to `robots.txt`.
-  - Search engine crawlers (Googlebot, BingBot, Applebot) must stay unblocked there. In October 2026 their toggles were on: Google could not crawl any page and Search Console reported the sitemap as 403. Google's and Apple's AI-training opt-outs are the `Google-Extended` and `Applebot-Extended` rules of the managed `robots.txt`, not these toggles.
+  - AI Crawl Control → Security blocks AI crawlers (ClaudeBot, GPTBot, CCBot, Bytespider…) one by one with a 403. Googlebot, BingBot and Applebot must stay unblocked there.
+  - Keep **Training** at "Allow" in the AI bot access settings (opened from those toggles). Cloudflare counts Googlebot, Bingbot and Applebot as training crawlers too, so "Block" there blocks them and locks their toggles. That happened from 2026-10-09 to 2026-10-15: Google could not crawl any page and Search Console reported the sitemap as 403.
+  - The AI-training opt-outs, including `Google-Extended` and `Applebot-Extended`, are in our own `robots.txt` (`lib/seo/robots.ts`); Cloudflare's managed `robots.txt` block disappears once Training is allowed.
   - Blocked requests never reach Railway; find them under Security → Analytics → Events, filtered by user agent. Railway still logs the visitor's real IP.
 - **CDN:** Railway's CDN is on (`railway cdn status`): HTML caching follows `Cache-Control`, stale-while-revalidate is honoured and every deploy purges everything.
   - Its revalidations reach the service from CDN77 addresses with an empty User-Agent (about a third of origin traffic), so never block empty User-Agents.
