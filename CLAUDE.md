@@ -62,9 +62,14 @@ Railway, in project `athletics-podium` next to the backend:
 - **Variables:** `BACKEND_URL` reaches the backend over the private network (`http://${{athleticspodium-backend.RAILWAY_PRIVATE_DOMAIN}}:8080/1.0`). `PROTOCOL_HEADER=x-forwarded-proto` makes request URLs https behind Railway's proxy.
 - **Production since 2026-10-09** (it replaced the Angular site on Firebase):
   - `PUBLIC_SITE_ENV=production` and `PUBLIC_SITE_URL=https://athleticspodium.com`.
-  - Domains: `athleticspodium.com` and `www.athleticspodium.com`, as Cloudflare CNAMEs to Railway, DNS only, verified by `_railway-verify` TXT records. Any other host, including `athleticspodium-web-production.up.railway.app`, redirects to the apex.
+  - Domains: `athleticspodium.com` and `www.athleticspodium.com`, as Cloudflare CNAMEs to Railway, verified by `_railway-verify` TXT records. Any other host, including `athleticspodium-web-production.up.railway.app`, redirects to the apex.
   - The plan allows two custom domains per service, so there is no staging domain any more.
-  - Rollback: point the apex back to A `199.36.158.100` and `www` to CNAME `athletics-podium.web.app`. The Firebase site stays deployable for that.
+  - Rollback: turn the Cloudflare proxy off, then point the apex back to A `199.36.158.100` and `www` to CNAME `athletics-podium.web.app`. The Firebase site stays deployable for that.
+- **Cloudflare:** both records are proxied (orange cloud) since 2026-10-09, to stop bot traffic from Singapore cloud networks (Tencent, Alibaba).
+  - A WAF custom rule gives a Non-Interactive Challenge to requests from Singapore and China.
+  - AI Crawl Control → Security blocks AI training crawlers (ClaudeBot, GPTBot, CCBot, Bytespider…) with a 403 and prepends a Cloudflare-managed block to `robots.txt`.
+  - Search engine crawlers (Googlebot, BingBot, Applebot) must stay unblocked there. In October 2026 their toggles were on: Google could not crawl any page and Search Console reported the sitemap as 403. Google's and Apple's AI-training opt-outs are the `Google-Extended` and `Applebot-Extended` rules of the managed `robots.txt`, not these toggles.
+  - Blocked requests never reach Railway; find them under Security → Analytics → Events, filtered by user agent. Railway still logs the visitor's real IP.
 - **CDN:** Railway's CDN is on (`railway cdn status`): HTML caching follows `Cache-Control`, stale-while-revalidate is honoured and every deploy purges everything.
   - Its revalidations reach the service from CDN77 addresses with an empty User-Agent (about a third of origin traffic), so never block empty User-Agents.
   - Cache hits never reach the service and do not show in `railway logs --http`.
