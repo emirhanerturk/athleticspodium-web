@@ -80,6 +80,21 @@ test('switches to the women’s podiums', async ({ page }) => {
 	await expect(page.getByRole('heading', { name: '100m' })).toBeHidden();
 });
 
+test('shows the name a medal was won under, linked to the athlete’s profile', async ({ page }) => {
+	await page.goto(EDITION, { waitUntil: 'networkidle' });
+
+	await page.getByRole('button', { name: /Women/ }).click();
+	const highJump = page.locator('article', {
+		has: page.getByRole('heading', { name: 'High jump' })
+	});
+
+	await expect(highJump.getByRole('link', { name: 'Maria Żodzik', exact: true })).toHaveAttribute(
+		'href',
+		'/athlete/79300/maria-zodzik'
+	);
+	await expect(highJump.getByText('Maria Zodzik')).toHaveCount(0);
+});
+
 test('opens the athlete card at once and fills it when the summary arrives', async ({ page }) => {
 	let releaseSummary = () => {};
 	const summaryHeld = new Promise<void>((resolve) => (releaseSummary = resolve));

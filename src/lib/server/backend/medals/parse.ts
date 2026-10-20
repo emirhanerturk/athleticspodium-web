@@ -60,7 +60,7 @@ function parseMedalRecord(dto: MedalRowDto): MedalRecord | null {
 			olympicChampion: athlete.olympic_mark,
 			birthYear: athlete.date_of_birth ? Number(athlete.date_of_birth.slice(0, 4)) : null
 		},
-		athleteName: dto.athlete_name,
+		athleteName: dto.athlete_name?.trim() || null,
 		country: dto.country,
 		mark: parseMark(dto.mark_display),
 		markNote: dto.info,

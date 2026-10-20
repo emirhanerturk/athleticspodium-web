@@ -27,6 +27,7 @@ export interface MedalRecord {
 	place: number | null;
 	canceled: boolean;
 	athlete: (AthleteRef & { olympicChampion: boolean; birthYear: number | null }) | null;
+	/** The name the medal was won under, shown instead of the athlete’s profile name. */
 	athleteName: string | null;
 	country: { code: string; name: string } | null;
 	mark: string | null;

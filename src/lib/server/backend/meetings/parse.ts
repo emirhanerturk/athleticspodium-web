@@ -1,3 +1,4 @@
+import { fullName } from '#lib/domain/athlete.js';
 import type { CalendarMeeting } from '#lib/domain/calendar.js';
 import type { HostedMeeting } from '#lib/domain/country.js';
 import type { EditionEntry, EditionEvent, EditionMeeting, Gender } from '#lib/domain/edition.js';
@@ -89,9 +90,7 @@ export function parseResultsDesk(dtos: RecentResultDto[]): ResultsDeskEntry[] {
 			};
 			return {
 				athlete,
-				name: athlete
-					? `${athlete.firstName} ${athlete.lastName}`.trim()
-					: (winner.athlete_name ?? ''),
+				name: winner.athlete_name?.trim() || (athlete ? fullName(athlete) : ''),
 				countryCode: winner.country_code,
 				event: describeEvent(winner.event?.name ?? '').longName,
 				mark: parseMark(winner.mark_display)
@@ -157,6 +156,6 @@ function parseEditionEntry(dto: EditionEntryDto): EditionEntry {
 			countryCode: dto.country?.code ?? null,
 			birthDate: dto.athlete.date_of_birth
 		},
-		athleteName: dto.athlete_name
+		athleteName: dto.athlete_name?.trim() || null
 	};
 }
