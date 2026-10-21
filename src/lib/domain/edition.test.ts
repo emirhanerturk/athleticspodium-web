@@ -71,6 +71,20 @@ describe('podiumLines', () => {
 		expect(podiumLines([entry(1, 'ITA'), entry(2, 'ITA')])).toHaveLength(2);
 	});
 
+	it('shows the name a result was won under, still linked to the athlete’s profile', () => {
+		const [line] = podiumLines([entry(2, 'POL', { athleteName: 'Maria Żodzik' })]);
+		const [team] = podiumLines([
+			entry(1, 'GBR', { isTeam: true, athleteName: 'Ann Smith-Jones' }),
+			entry(1, 'GBR', { isTeam: true })
+		]);
+
+		expect(line.athleteName).toBe('Maria Żodzik');
+		expect(line.athlete).not.toBeNull();
+		expect(team.members[0].name).toBe('Ann Smith-Jones');
+		expect(team.members[0].athlete).not.toBeNull();
+		expect(team.members[1].name).toMatch(/^First Last\d+$/);
+	});
+
 	it('takes the team mark from its finalists and keeps each runner’s own info and note', () => {
 		const runner = (extra: Partial<EditionEntry>) =>
 			entry(3, 'TUR', { isTeam: true, mark: '3:17.54', records: ['NR'], ...extra });

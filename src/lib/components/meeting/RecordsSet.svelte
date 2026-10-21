@@ -1,6 +1,5 @@
 <script lang="ts">
 	import RecordBadge from '#lib/components/ui/RecordBadge.svelte';
-	import { fullName } from '#lib/domain/athlete.js';
 	import { GENDER_LABELS, recordSummary, type RecordMark } from '#lib/domain/edition.js';
 	import { athleteUrl } from '#lib/routing/urls.js';
 
@@ -24,7 +23,7 @@
 							href={athleteUrl(line.athlete)}
 							class="truncate text-[14.5px] font-semibold hover:text-brand-ink"
 						>
-							{fullName(line.athlete)}
+							{line.athleteName}
 						</a>
 					{:else}
 						<strong class="truncate text-[14.5px] font-semibold">

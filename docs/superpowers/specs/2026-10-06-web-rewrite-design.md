@@ -379,6 +379,7 @@ These live in `lib/domain` and match the backend:
   | 7     | National    |
   | 8     | Road        |
 
+- **Names on results.** A medal row's `athlete_name` is the name it was won under: a runner without a profile, or a linked athlete's maiden or married name. Results (edition, medal search, countdown, compare, the home results desk) show it instead of the profile's name and still link the profile; a blank name counts as none. Lists of athletes (most decorated, leaders, cards) keep the profile's name.
 - **OG badge** (Olympic champion) comes from `athlete.olympic_mark`. **"Olympian"** (took part in the Olympics) comes from `olympian_athlete`, via B16.
 - **Today** is the UTC date. Ages and countdowns are computed from it.
 - **Events.** Long names and disciplines come from `lib/domain/event.ts`, a map of all 168 events in the database. A unit test fails when that list changes without the map.

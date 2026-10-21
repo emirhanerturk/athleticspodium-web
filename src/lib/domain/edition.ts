@@ -1,4 +1,4 @@
-import type { AthleteRef } from './athlete.js';
+import { fullName, type AthleteRef } from './athlete.js';
 import type { ChampRef } from './championship.js';
 import type { IsoDate } from './date.js';
 import type { Discipline } from './event.js';
@@ -38,6 +38,7 @@ export interface EditionEntry {
 	isTeam: boolean;
 	country: Country | null;
 	athlete: (AthleteRef & { birthDate: IsoDate | null }) | null;
+	/** The name the entry was won under, shown instead of the athlete’s profile name. */
 	athleteName: string | null;
 }
 
@@ -100,9 +101,7 @@ export interface RecordMark {
 const TIER_ORDER: RecordTier[] = ['world', 'major', 'other'];
 
 export function memberName(entry: EditionEntry): string {
-	return entry.athlete
-		? `${entry.athlete.firstName} ${entry.athlete.lastName}`.trim()
-		: (entry.athleteName ?? '');
+	return entry.athleteName ?? (entry.athlete ? fullName(entry.athlete) : '');
 }
 
 export function podiumLines(entries: EditionEntry[]): PodiumLine[] {
