@@ -210,7 +210,7 @@ athleticspodium-web/
 │   ├── env.ts                   environment variables (defineEnvVars)
 │   ├── hooks.server.ts          redirects, cache headers, locals.backend, error mapping
 │   └── app.html
-├── static/                      ngsw-worker.js, og/ (logos and favicon are hashed imports from lib/assets; flags come from the media URL)
+├── static/                      ngsw-worker.js, og/, favicons (logos are hashed imports from lib/assets; flags come from the media URL)
 └── tests/
     ├── e2e/                     Playwright specs
     └── fixtures/backend/        JSON responses for the stub backend
