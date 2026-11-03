@@ -4,7 +4,6 @@
 	import { PUBLIC_GA_MEASUREMENT_ID, PUBLIC_SITE_ENV } from '$app/env/public';
 	import { onNavigate, type OnNavigate } from '$app/navigation';
 	import GoogleAnalytics from '#lib/components/analytics/GoogleAnalytics.svelte';
-	import favicon from '#lib/assets/favicon.svg';
 	import Footer from '#lib/components/layout/Footer.svelte';
 	import Header from '#lib/components/layout/Header.svelte';
 	import NavigationProgress from '#lib/components/layout/NavigationProgress.svelte';
@@ -57,10 +56,6 @@
 </script>
 
 <svelte:window onkeydown={openSearchFromKeyboard} />
-
-<svelte:head>
-	<link rel="icon" href={favicon} type="image/svg+xml" />
-</svelte:head>
 
 <NavigationProgress />
 
