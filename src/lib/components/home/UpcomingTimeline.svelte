@@ -74,7 +74,7 @@
 				<li class="group">
 					<a
 						href={meetingUrl(meeting.champ.slug, meeting.slug)}
-						class="absolute w-[190px] group-hover:z-10 group-hover:border-ink group-hover:shadow-[0_1px_2px_rgba(18,19,22,.05),0_8px_24px_rgba(18,19,22,.12)] focus-visible:z-10 {CARD}"
+						class="absolute w-[190px] transition duration-150 ease-out group-hover:z-10 group-hover:-translate-y-0.5 group-hover:border-ink group-hover:shadow-[0_1px_2px_rgba(18,19,22,.05),0_8px_24px_rgba(18,19,22,.12)] focus-visible:z-10 motion-reduce:transition-none {CARD}"
 						style:left="clamp(0px, calc({percent(offset)} - 20px), calc(100% - 190px))"
 						style:top={row === 0 ? '0px' : '150px'}
 					>
