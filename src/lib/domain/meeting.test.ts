@@ -50,6 +50,22 @@ describe('timelinePlacement and monthTicks', () => {
 		]);
 	});
 
+	it('labels the first meeting of each month, counting running meetings in the current month', () => {
+		const placed = timelinePlacement(
+			[
+				{ startDate: '2026-09-30' },
+				{ startDate: '2026-10-20' },
+				{ startDate: '2026-11-02' },
+				{ startDate: '2026-11-28' },
+				{ startDate: '2027-01-05' }
+			],
+			'2026-10-07',
+			183
+		);
+
+		expect(placed.map(({ opensMonth }) => opensMonth)).toEqual(['Oct', null, 'Nov', null, 'Jan']);
+	});
+
 	it('marks the start of each month inside the span', () => {
 		expect(monthTicks('2026-10-20', 60)).toEqual([
 			{ label: 'Oct', offset: 0 },
