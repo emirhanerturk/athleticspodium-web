@@ -6,6 +6,10 @@ Guidance for Claude Code in this repository.
 
 `athleticspodium-web` is the new public site of athleticspodium.com. It replaces the legacy Angular app in `athleticspodium-frontend`, which gets no further changes. The site is server-rendered with SvelteKit and reads everything from `athleticspodium-backend`. The design source, decisions, phases and backend prerequisites are in `docs/superpowers/specs/2026-10-06-web-rewrite-design.md`; read it before larger changes.
 
+## Branches
+
+`main` is production. `migration` holds the changes that need the rewritten backend (the `migration` branch of `athleticspodium-backend`): a feature branch for such a change starts from `migration` and merges back into it, and `migration` merges into `main` at the backend cutover, after the backend's own merge. Merge `main` into it regularly.
+
 ## Commands
 
 ```bash
