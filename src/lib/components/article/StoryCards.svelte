@@ -5,9 +5,16 @@
 	import { articleUrl } from '#lib/routing/urls.js';
 
 	let { stories }: { stories: ArticleSummary[] } = $props();
+
+	// The columns share the row's width, so one or two cards alone would stretch across it; three fill the widest page
+	const WIDEST_CARD = 420;
+	const GAP = 16;
 </script>
 
-<div class="grid grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-4">
+<div
+	class="grid grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-4"
+	style:max-width="{stories.length * (WIDEST_CARD + GAP) - GAP}px"
+>
 	{#each stories as story (story.id)}
 		<a
 			href={articleUrl(story)}
