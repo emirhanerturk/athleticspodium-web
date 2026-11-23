@@ -17,4 +17,4 @@ The text of a story names the athletes the editors related to it, as plain text.
 
 ## Share buttons
 
-`ShareStory.svelte` sits under the text, where a reader finishes: "Copy link" writes the story's address to the clipboard and says so for two seconds, and "Share" opens the device's share sheet where the browser has one. No network buttons and no package.
+`ShareStory.svelte` sits at the right of the byline row, in line with the photo's edge, as two round icon buttons: "Copy link" writes the story's address to the clipboard, turns to a check on the brand colour and says "Link copied" for two seconds, and "Share" opens the device's share sheet where the browser has one. No network buttons and no package.

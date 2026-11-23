@@ -27,14 +27,23 @@
 	}
 
 	const button =
-		'inline-flex h-9 items-center gap-2 rounded-full border border-line-2 bg-surface px-3.5 text-[13.5px] font-semibold hover:border-ink';
+		'grid size-9 place-items-center rounded-full border border-line-2 text-ink-2 hover:border-brand hover:bg-brand hover:text-ink';
 </script>
 
-<div class="flex flex-wrap gap-2">
-	<button type="button" class={button} onclick={copy}>
-		{#if copied}<CheckIcon />Link copied{:else}<LinkIcon />Copy link{/if}
+<div class="flex items-center gap-2">
+	<span class="font-data text-xs text-ink-3" aria-live="polite">{copied ? 'Link copied' : ''}</span>
+	<button
+		type="button"
+		class="{button} {copied ? 'border-brand bg-brand text-ink' : ''}"
+		aria-label="Copy link"
+		title="Copy link"
+		onclick={copy}
+	>
+		{#if copied}<CheckIcon />{:else}<LinkIcon />{/if}
 	</button>
 	{#if canShare}
-		<button type="button" class={button} onclick={share}><ShareIcon />Share</button>
+		<button type="button" class={button} aria-label="Share" title="Share" onclick={share}>
+			<ShareIcon />
+		</button>
 	{/if}
 </div>

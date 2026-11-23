@@ -46,33 +46,40 @@
 />
 
 <article class="page-container pt-8 pb-14">
-	<header class="flex max-w-[880px] flex-col gap-4">
+	<header class="flex flex-col gap-4">
 		{#if kicker}
 			<span class="font-data text-xs tracking-[0.12em] text-ink-3 uppercase">{kicker}</span>
 		{/if}
-		<h1 class="font-display text-[44px] leading-[0.94] font-bold text-balance sm:text-[72px]">
+		<h1
+			class="max-w-[880px] font-display text-[44px] leading-[0.94] font-bold text-balance sm:text-[72px]"
+		>
 			{article.title}
 		</h1>
 		{#if article.standfirst ?? article.description}
-			<p class="text-xl leading-normal text-ink">{article.standfirst ?? article.description}</p>
+			<p class="max-w-[880px] text-xl leading-normal text-ink">
+				{article.standfirst ?? article.description}
+			</p>
 		{/if}
-		<p class="flex flex-wrap items-center gap-x-2 font-data text-[13.5px] text-ink-3">
-			{#if article.byline}
-				<span class="font-semibold text-ink-2">By {article.byline}</span>
-				<span aria-hidden="true">·</span>
-			{/if}
-			<time datetime={article.publishedOn}>{formatDate(article.publishedOn)}</time>
-			{#if article.updatedOn && article.updatedOn !== article.publishedOn}
-				<span aria-hidden="true">·</span>
-				<span>
-					updated <time datetime={article.updatedOn}>{formatDate(article.updatedOn)}</time>
-				</span>
-			{/if}
-			{#if article.readingMinutes}
-				<span aria-hidden="true">·</span>
-				<span>{article.readingMinutes} min read</span>
-			{/if}
-		</p>
+		<div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+			<p class="flex flex-wrap items-center gap-x-2 font-data text-[13.5px] text-ink-3">
+				{#if article.byline}
+					<span class="font-semibold text-ink-2">By {article.byline}</span>
+					<span aria-hidden="true">·</span>
+				{/if}
+				<time datetime={article.publishedOn}>{formatDate(article.publishedOn)}</time>
+				{#if article.updatedOn && article.updatedOn !== article.publishedOn}
+					<span aria-hidden="true">·</span>
+					<span>
+						updated <time datetime={article.updatedOn}>{formatDate(article.updatedOn)}</time>
+					</span>
+				{/if}
+				{#if article.readingMinutes}
+					<span aria-hidden="true">·</span>
+					<span>{article.readingMinutes} min read</span>
+				{/if}
+			</p>
+			<ShareStory url={PUBLIC_SITE_URL + path} title={article.title} />
+		</div>
 	</header>
 
 	{#if article.image}
@@ -96,10 +103,7 @@
 	{/if}
 
 	<div class="mt-10 grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,1fr)_340px]">
-		<div class="flex flex-col gap-8">
-			{#if article.content}<ArticleBody html={article.content} />{/if}
-			<ShareStory url={PUBLIC_SITE_URL + path} title={article.title} />
-		</div>
+		{#if article.content}<ArticleBody html={article.content} />{:else}<div></div>{/if}
 		<aside class="flex flex-col gap-4 lg:sticky lg:top-6">
 			<RelatedTopics related={article.related} />
 		</aside>
