@@ -30,7 +30,14 @@ export interface ArticleDetailDto extends ArticleRowDto {
 	content: string | null;
 	updated_date: string | null;
 	related_champs_map: { name: string; slug: string }[] | null;
-	related_meetings_map: { name: string; slug: string; champ: { slug: string } | null }[] | null;
+	related_meetings_map:
+		| {
+				name: string;
+				slug: string;
+				city: string | null;
+				champ: { slug: string } | null;
+		  }[]
+		| null;
 	related_countries_map: { code: string; name: string }[] | null;
 	related_athletes_map:
 		| {
@@ -38,7 +45,9 @@ export interface ArticleDetailDto extends ArticleRowDto {
 				slug: string;
 				first_name: string | null;
 				last_name: string | null;
-				country_code: string | null;
+				country_code?: string | null;
+				image?: { uri: string; caption?: string | null; credit?: string | null } | null;
+				medals?: { medal: number; event: { name: string } }[];
 		  }[]
 		| null;
 }

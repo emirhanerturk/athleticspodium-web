@@ -50,8 +50,8 @@ export function parseArticleDetail(dto: ArticleDetailDto): ArticleDetail {
 		updatedAt: dto.updated_date ?? null,
 		related: {
 			champs: (dto.related_champs_map ?? []).map(({ name, slug }) => ({ name, slug })),
-			meetings: (dto.related_meetings_map ?? []).flatMap(({ name, slug, champ }) =>
-				champ ? [{ name, slug, champSlug: champ.slug }] : []
+			meetings: (dto.related_meetings_map ?? []).flatMap(({ name, slug, city, champ }) =>
+				champ ? [{ name, slug, champSlug: champ.slug, city: city?.trim() || null }] : []
 			),
 			countries: (dto.related_countries_map ?? []).map(({ code, name }) => ({ code, name })),
 			athletes: (dto.related_athletes_map ?? []).map((athlete) => ({
@@ -59,7 +59,18 @@ export function parseArticleDetail(dto: ArticleDetailDto): ArticleDetail {
 				slug: athlete.slug,
 				firstName: athlete.first_name ?? '',
 				lastName: athlete.last_name ?? '',
-				countryCode: athlete.country_code
+				countryCode: athlete.country_code ?? null,
+				image: athlete.image
+					? {
+							path: `athletes/${athlete.id}/${athlete.image.uri}`,
+							caption: athlete.image.caption?.trim() || null,
+							credit: athlete.image.credit?.trim() || null
+						}
+					: null,
+				medals: (athlete.medals ?? []).map(({ medal, event }) => ({
+					place: medal,
+					event: event.name
+				}))
 			}))
 		}
 	};
