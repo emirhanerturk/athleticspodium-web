@@ -55,11 +55,23 @@
 		{#if article.standfirst ?? article.description}
 			<p class="text-xl leading-normal text-ink">{article.standfirst ?? article.description}</p>
 		{/if}
-		<span class="font-data text-[13.5px] text-ink-3">
-			<time datetime={article.publishedOn}>{formatDate(article.publishedOn)}</time
-			>{#if article.updatedOn && article.updatedOn !== article.publishedOn}&nbsp;· updated
-				<time datetime={article.updatedOn}>{formatDate(article.updatedOn)}</time>{/if}
-		</span>
+		<p class="flex flex-wrap items-center gap-x-2 font-data text-[13.5px] text-ink-3">
+			{#if article.byline}
+				<span class="font-semibold text-ink-2">By {article.byline}</span>
+				<span aria-hidden="true">·</span>
+			{/if}
+			<time datetime={article.publishedOn}>{formatDate(article.publishedOn)}</time>
+			{#if article.updatedOn && article.updatedOn !== article.publishedOn}
+				<span aria-hidden="true">·</span>
+				<span>
+					updated <time datetime={article.updatedOn}>{formatDate(article.updatedOn)}</time>
+				</span>
+			{/if}
+			{#if article.readingMinutes}
+				<span aria-hidden="true">·</span>
+				<span>{article.readingMinutes} min read</span>
+			{/if}
+		</p>
 	</header>
 
 	{#if article.image}

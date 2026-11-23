@@ -1,8 +1,10 @@
-import type {
-	ArticleContext,
-	ArticleDetail,
-	ArticleSummary,
-	ArticleTeaser
+import {
+	readingMinutes,
+	splitByline,
+	type ArticleContext,
+	type ArticleDetail,
+	type ArticleSummary,
+	type ArticleTeaser
 } from '#lib/domain/article.js';
 import type {
 	ArticleContextDto,
@@ -41,10 +43,13 @@ function parseContext(dto: ArticleContextDto): ArticleContext | null {
 }
 
 export function parseArticleDetail(dto: ArticleDetailDto): ArticleDetail {
+	const { byline, body } = splitByline(dto.content?.trim() ?? '');
 	return {
 		...parseArticleSummary(dto),
 		standfirst: dto.spot?.trim() || null,
-		content: dto.content?.trim() || null,
+		byline,
+		content: body || null,
+		readingMinutes: body ? readingMinutes(body) : null,
 		updatedOn: dto.updated_date?.slice(0, 10) ?? null,
 		publishedAt: dto.created_date,
 		updatedAt: dto.updated_date ?? null,

@@ -10,7 +10,7 @@ const story: ArticleDetailDto = {
 	created_date: '2026-11-22T10:28:38.680Z',
 	image: null,
 	spot: null,
-	content: null,
+	content: '<p><strong>By Athleticspodium - Editorial</strong></p><p>Seventy years ago today.</p>',
 	updated_date: null,
 	related_champs_map: [],
 	related_countries_map: [],
@@ -41,6 +41,19 @@ const story: ArticleDetailDto = {
 
 describe('parseArticleDetail', () => {
 	const { related } = parseArticleDetail(story);
+
+	it('reads the author out of the text, and how long the rest takes to read', () => {
+		expect(parseArticleDetail(story)).toMatchObject({
+			byline: 'Athleticspodium - Editorial',
+			content: '<p>Seventy years ago today.</p>',
+			readingMinutes: 1
+		});
+		expect(parseArticleDetail({ ...story, content: null })).toMatchObject({
+			byline: null,
+			content: null,
+			readingMinutes: null
+		});
+	});
 
 	it('reads an edition with its city', () => {
 		expect(related.meetings).toEqual([

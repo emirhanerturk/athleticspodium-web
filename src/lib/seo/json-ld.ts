@@ -1,4 +1,4 @@
-import type { ArticleDetail } from '#lib/domain/article.js';
+import { isDeskByline, type ArticleDetail } from '#lib/domain/article.js';
 import { fullName, type AthleteProfile } from '#lib/domain/athlete.js';
 import type { EditionMeeting } from '#lib/domain/edition.js';
 
@@ -81,7 +81,10 @@ export function articleJsonLd(
 		datePublished: article.publishedAt,
 		dateModified: article.updatedAt ?? undefined,
 		url: siteUrl + path,
-		author: { '@type': 'Organization', name: SITE_NAME, url: `${siteUrl}/` },
+		author:
+			article.byline && !isDeskByline(article.byline)
+				? { '@type': 'Person', name: article.byline }
+				: { '@type': 'Organization', name: SITE_NAME, url: `${siteUrl}/` },
 		publisher: { '@type': 'Organization', name: SITE_NAME, url: `${siteUrl}/` }
 	});
 }
