@@ -10,7 +10,8 @@ const story: ArticleDetailDto = {
 	created_date: '2026-11-22T10:28:38.680Z',
 	image: null,
 	spot: null,
-	content: '<p><strong>By Athleticspodium - Editorial</strong></p><p>Seventy years ago today.</p>',
+	content:
+		'<p><strong>By Athleticspodium - Editorial</strong></p><p>Seventy years ago today, Bobby Morrow won.</p>',
 	updated_date: null,
 	related_champs_map: [],
 	related_countries_map: [],
@@ -42,10 +43,11 @@ const story: ArticleDetailDto = {
 describe('parseArticleDetail', () => {
 	const { related } = parseArticleDetail(story);
 
-	it('reads the author out of the text, and how long the rest takes to read', () => {
+	it('reads the author out of the text, links its athletes and tells how long it takes to read', () => {
 		expect(parseArticleDetail(story)).toMatchObject({
 			byline: 'Athleticspodium - Editorial',
-			content: '<p>Seventy years ago today.</p>',
+			content:
+				'<p>Seventy years ago today, <a href="/athlete/18538/bobby-morrow">Bobby Morrow</a> won.</p>',
 			readingMinutes: 1
 		});
 		expect(parseArticleDetail({ ...story, content: null })).toMatchObject({

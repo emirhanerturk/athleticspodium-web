@@ -4,8 +4,12 @@ import {
 	type ArticleContext,
 	type ArticleDetail,
 	type ArticleSummary,
-	type ArticleTeaser
+	type ArticleTeaser,
+	type StoryAthlete
 } from '#lib/domain/article.js';
+import { fullName } from '#lib/domain/athlete.js';
+import { athleteUrl } from '#lib/routing/urls.js';
+import { linkNames } from '#lib/utils/link-names.js';
 import type {
 	ArticleContextDto,
 	ArticleDetailDto,
@@ -44,11 +48,16 @@ function parseContext(dto: ArticleContextDto): ArticleContext | null {
 
 export function parseArticleDetail(dto: ArticleDetailDto): ArticleDetail {
 	const { byline, body } = splitByline(dto.content?.trim() ?? '');
+	const athletes = (dto.related_athletes_map ?? []).map(parseStoryAthlete);
+	const linked = linkNames(
+		body,
+		athletes.map((athlete) => ({ name: fullName(athlete), href: athleteUrl(athlete) }))
+	);
 	return {
 		...parseArticleSummary(dto),
 		standfirst: dto.spot?.trim() || null,
 		byline,
-		content: body || null,
+		content: linked || null,
 		readingMinutes: body ? readingMinutes(body) : null,
 		updatedOn: dto.updated_date?.slice(0, 10) ?? null,
 		publishedAt: dto.created_date,
@@ -59,24 +68,30 @@ export function parseArticleDetail(dto: ArticleDetailDto): ArticleDetail {
 				champ ? [{ name, slug, champSlug: champ.slug, city: city?.trim() || null }] : []
 			),
 			countries: (dto.related_countries_map ?? []).map(({ code, name }) => ({ code, name })),
-			athletes: (dto.related_athletes_map ?? []).map((athlete) => ({
-				id: athlete.id,
-				slug: athlete.slug,
-				firstName: athlete.first_name ?? '',
-				lastName: athlete.last_name ?? '',
-				countryCode: athlete.country_code ?? null,
-				image: athlete.image
-					? {
-							path: `athletes/${athlete.id}/${athlete.image.uri}`,
-							caption: athlete.image.caption?.trim() || null,
-							credit: athlete.image.credit?.trim() || null
-						}
-					: null,
-				medals: (athlete.medals ?? []).map(({ medal, event }) => ({
-					place: medal,
-					event: event.name
-				}))
-			}))
+			athletes
 		}
+	};
+}
+
+function parseStoryAthlete(
+	athlete: NonNullable<ArticleDetailDto['related_athletes_map']>[number]
+): StoryAthlete {
+	return {
+		id: athlete.id,
+		slug: athlete.slug,
+		firstName: athlete.first_name ?? '',
+		lastName: athlete.last_name ?? '',
+		countryCode: athlete.country_code ?? null,
+		image: athlete.image
+			? {
+					path: `athletes/${athlete.id}/${athlete.image.uri}`,
+					caption: athlete.image.caption?.trim() || null,
+					credit: athlete.image.credit?.trim() || null
+				}
+			: null,
+		medals: (athlete.medals ?? []).map(({ medal, event }) => ({
+			place: medal,
+			event: event.name
+		}))
 	};
 }

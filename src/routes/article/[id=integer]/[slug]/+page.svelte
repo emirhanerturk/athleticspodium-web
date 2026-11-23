@@ -2,6 +2,7 @@
 	import { PUBLIC_MEDIA_URL, PUBLIC_SITE_URL } from '$app/env/public';
 	import ArticleBody from '#lib/components/article/ArticleBody.svelte';
 	import RelatedTopics from '#lib/components/article/RelatedTopics.svelte';
+	import ShareStory from '#lib/components/article/ShareStory.svelte';
 	import StoryCards from '#lib/components/article/StoryCards.svelte';
 	import Breadcrumb from '#lib/components/layout/Breadcrumb.svelte';
 	import JsonLd from '#lib/components/seo/JsonLd.svelte';
@@ -95,7 +96,10 @@
 	{/if}
 
 	<div class="mt-10 grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,1fr)_340px]">
-		{#if article.content}<ArticleBody html={article.content} />{:else}<div></div>{/if}
+		<div class="flex flex-col gap-8">
+			{#if article.content}<ArticleBody html={article.content} />{/if}
+			<ShareStory url={PUBLIC_SITE_URL + path} title={article.title} />
+		</div>
 		<aside class="flex flex-col gap-4 lg:sticky lg:top-6">
 			<RelatedTopics related={article.related} />
 		</aside>
