@@ -18,6 +18,19 @@ export function createArticles(client: BackendClient) {
 			return list.rows.map(parseArticleSummary);
 		},
 
+		/** The stories that share the most with a story, the latest where none does. */
+		async related(id: number, limit: number) {
+			const list = await client.get<ArticleListDto>('/articles', {
+				related_to: id,
+				limit: limit + 1,
+				fields: SUMMARY_FIELDS
+			});
+			return list.rows
+				.filter((story) => story.id !== id)
+				.slice(0, limit)
+				.map(parseArticleSummary);
+		},
+
 		async page(page: number, size: number) {
 			const list = await client.get<ArticleListDto>('/articles', {
 				limit: size,

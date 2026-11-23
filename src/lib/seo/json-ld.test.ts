@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import type { ArticleDetail } from '#lib/domain/article.js';
 import {
 	articleJsonLd,
 	breadcrumbJsonLd,
@@ -162,25 +163,34 @@ describe('websiteJsonLd and organizationJsonLd', () => {
 });
 
 describe('articleJsonLd', () => {
+	const story: ArticleDetail = {
+		id: 362,
+		slug: 'the-numbers-asian-games',
+		title: 'The numbers: Asian Games',
+		description: null,
+		publishedOn: '2026-09-29',
+		image: { path: 'articles/2026/09/a.jpeg', caption: null, credit: null },
+		standfirst: null,
+		byline: null,
+		content: null,
+		readingMinutes: null,
+		updatedOn: null,
+		publishedAt: '2026-09-29T08:30:00.000Z',
+		updatedAt: null,
+		related: { champs: [], meetings: [], countries: [], athletes: [] }
+	};
+	const path = '/article/362/the-numbers-asian-games';
+
+	it('names the writer of a signed story, and the site for its desk or no byline', () => {
+		const authorOf = (byline: string | null) =>
+			articleJsonLd(SITE, { ...story, byline }, path).author;
+		expect(authorOf('Yavuz YAVUZ')).toEqual({ '@type': 'Person', name: 'Yavuz YAVUZ' });
+		expect(authorOf('Athleticspodium.com')).toMatchObject({ '@type': 'Organization' });
+		expect(authorOf(null)).toMatchObject({ '@type': 'Organization' });
+	});
+
 	it('describes the story and leaves unknown facts out', () => {
-		const article = articleJsonLd(
-			SITE,
-			{
-				id: 362,
-				slug: 'the-numbers-asian-games',
-				title: 'The numbers: Asian Games',
-				description: null,
-				publishedOn: '2026-09-29',
-				image: { path: 'articles/2026/09/a.jpeg', caption: null, credit: null },
-				standfirst: null,
-				content: null,
-				updatedOn: null,
-				publishedAt: '2026-09-29T08:30:00.000Z',
-				updatedAt: null,
-				related: { champs: [], meetings: [], countries: [], athletes: [] }
-			},
-			'/article/362/the-numbers-asian-games'
-		);
+		const article = articleJsonLd(SITE, story, path);
 
 		expect(article).toMatchObject({
 			'@type': 'Article',
