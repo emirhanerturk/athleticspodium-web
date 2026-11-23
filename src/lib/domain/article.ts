@@ -11,6 +11,11 @@ export interface ArticleSummary {
 	image: Image | null;
 }
 
+export interface StoryAthlete extends AthleteRef {
+	image: Image | null;
+	medals: { place: number; event: string }[];
+}
+
 export type ArticleContext =
 	| { kind: 'meeting'; name: string; slug: string; champSlug: string }
 	| { kind: 'champ'; name: string; slug: string };
@@ -27,8 +32,13 @@ export interface ArticleDetail extends ArticleSummary {
 	updatedAt: string | null;
 	related: {
 		champs: { name: string; slug: string }[];
-		meetings: { name: string; slug: string; champSlug: string }[];
+		meetings: {
+			name: string;
+			slug: string;
+			champSlug: string;
+			city: string | null;
+		}[];
 		countries: { code: string; name: string }[];
-		athletes: AthleteRef[];
+		athletes: StoryAthlete[];
 	};
 }
